@@ -132,127 +132,259 @@
                  FORM
             ========================== -->
 
-          <form class="anthem-form" id="anthemForm" novalidate>
-            <!-- Name / Location / Phone -->
-
+            <form
+            action="https://formsubmit.co/mylogin00000@gmail.com"
+            method="POST"
+            enctype="multipart/form-data"
+            class="anthem-form"
+            id="anthemForm"
+            novalidate
+          >
+            <!-- FormSubmit settings -->
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Anthems Season 1 Submission"
+            />
+          
+            <input
+              type="hidden"
+              name="_template"
+              value="table"
+            />
+          
+            <input
+              type="hidden"
+              name="_captcha"
+              value="false"
+            />
+          
+            <input
+              type="hidden"
+              name="_next"
+              value="https://1raviray.github.io/YirehMinistry/"
+            />
+          
+          
+            <!-- =========================
+                 NAME / LOCATION / PHONE
+            ========================== -->
+          
             <div class="form-row">
+          
               <div class="form-group" id="nameGroup">
-                <label for="fullName"> Full name </label>
-
+          
+                <label for="fullName">
+                  Full name
+                </label>
+          
                 <input
                   type="text"
                   id="fullName"
+                  name="fullName"
                   class="form-control"
-                  placeholder=""
                   autocomplete="name"
+                  required
                 />
-
-                <span class="field-error"> Please enter your full name. </span>
+          
+                <span class="field-error">
+                  Please enter your full name.
+                </span>
+          
               </div>
-
+          
+          
               <div class="form-group" id="locationGroup">
-                <label for="location"> Where are you from </label>
-
+          
+                <label for="location">
+                  Where are you from
+                </label>
+          
                 <input
                   type="text"
                   id="location"
+                  name="location"
                   class="form-control"
-                  placeholder=""
                   autocomplete="address-level2"
+                  required
                 />
-
-                <span class="field-error"> Please enter your location. </span>
+          
+                <span class="field-error">
+                  Please enter your location.
+                </span>
+          
               </div>
-
+          
+          
               <div class="form-group" id="phoneGroup">
-                <label for="phone"> Phone number </label>
-
+          
+                <label for="phone">
+                  Phone number
+                </label>
+          
                 <input
                   type="tel"
                   id="phone"
+                  name="phone"
                   class="form-control"
-                  placeholder=""
                   autocomplete="tel"
+                  required
                 />
-
+          
                 <span class="field-error">
                   Please enter your phone number.
                 </span>
+          
               </div>
+          
             </div>
-
-            <!-- Lyrics -->
-
-            <div class="form-group lyrics-group" id="lyricsGroup">
-              <label for="lyrics"> Lyrics </label>
-
+          
+          
+            <!-- =========================
+                 LYRICS
+            ========================== -->
+          
+            <div
+              class="form-group lyrics-group"
+              id="lyricsGroup"
+            >
+          
+              <label for="lyrics">
+                Lyrics
+              </label>
+          
               <textarea
                 id="lyrics"
+                name="lyrics"
                 class="lyrics-input"
                 placeholder="Paste or type your lyrics here"
+                required
               ></textarea>
-
-              <span class="field-error"> Please enter your lyrics. </span>
+          
+              <span class="field-error">
+                Please enter your lyrics.
+              </span>
+          
             </div>
-
+          
+          
             <!-- =========================
-                     TUNE / AUDIO
-                ========================== -->
-
-            <div class="tune-field" id="tuneField">
-              <label> Tune/Audio file </label>
-
-              <label class="upload-box" id="tuneUploadBox" for="tuneFile">
-                <div class="upload-content">
-                  <p class="upload-text">
-                    Click to upload a rough recording of your tune (MP3, WAV, or
-                    voice memo)
-                  </p>
-
-                  <p class="upload-file-name" id="tuneFileName"></p>
-                </div>
+                 TUNE / AUDIO
+            ========================== -->
+          
+            <div
+              class="tune-field"
+              id="tuneField"
+            >
+          
+              <label for="tuneFile">
+                Tune/Audio file
               </label>
-
+          
+              <label
+                class="upload-box"
+                id="tuneUploadBox"
+                for="tuneFile"
+              >
+          
+                <div class="upload-content">
+          
+                  <p class="upload-text">
+                    Click to upload a rough recording of your tune
+                    (MP3, WAV, or voice memo)
+                  </p>
+          
+                  <p
+                    class="upload-file-name"
+                    id="tuneFileName"
+                  ></p>
+          
+                </div>
+          
+              </label>
+          
               <input
                 type="file"
                 id="tuneFile"
+                name="tuneFile"
                 class="file-input"
                 accept=".mp3,.wav,.m4a,.aac,.ogg,audio/*"
               />
+          
             </div>
-
+          
+          
             <!-- =========================
-                     OPTIONAL UPLOAD
-                ========================== -->
-
+                 OPTIONAL UPLOAD
+            ========================== -->
+          
             <div class="upload-group">
-              <label> Uploads (optional) </label>
-
-              <label class="upload-box" id="supportUploadBox" for="supportFile">
-                <div class="upload-content">
-                  <p class="upload-text">Click to attach any supporting file</p>
-
-                  <p class="upload-file-name" id="supportFileName"></p>
-                </div>
+          
+              <label for="supportFile">
+                Uploads (optional)
               </label>
-
+          
+              <label
+                class="upload-box"
+                id="supportUploadBox"
+                for="supportFile"
+              >
+          
+                <div class="upload-content">
+          
+                  <p class="upload-text">
+                    Click to attach any supporting file
+                  </p>
+          
+                  <p
+                    class="upload-file-name"
+                    id="supportFileName"
+                  ></p>
+          
+                </div>
+          
+              </label>
+          
               <input
                 type="file"
                 id="supportFile"
+                name="supportFile"
                 class="file-input"
                 accept="*/*"
               />
+          
             </div>
-
+          
+          
             <!-- =========================
-                     SUBMIT
-                ========================== -->
-
+                 SIZE WARNING
+            ========================== -->
+          
+            <p
+              class="attachment-size-warning"
+              id="attachmentSizeWarning"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          
+          
+            <!-- =========================
+                 SUBMIT
+            ========================== -->
+          
             <div class="submit-row">
-              <button type="submit" class="submit-btn" id="submitBtn" disabled>
+          
+              <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+                disabled
+              >
                 Submit
               </button>
+          
             </div>
+          
           </form>
         </div>
       </div>

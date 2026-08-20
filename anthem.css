@@ -218,6 +218,27 @@ body {
   cursor: pointer;
 }
 
+.attachment-size-warning {
+  display: none;
+  margin: 14px 0 0;
+  color: #d83e1d;
+  font-family: "Gabarito", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.attachment-size-warning.show {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .attachment-size-warning {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+}
+
 /* =========================
            FORM
         ========================= */

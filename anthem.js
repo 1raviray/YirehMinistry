@@ -1,52 +1,87 @@
 /* =========================
-       ELEMENTS
-    ========================= */
+   ELEMENTS
+========================= */
 
 const form = document.getElementById("anthemForm");
 
-const lyricsOnlyBtn = document.getElementById("lyricsOnlyBtn");
+const lyricsOnlyBtn =
+  document.getElementById("lyricsOnlyBtn");
 
-const lyricsTuneBtn = document.getElementById("lyricsTuneBtn");
+const lyricsTuneBtn =
+  document.getElementById("lyricsTuneBtn");
 
-const tuneField = document.getElementById("tuneField");
+const tuneField =
+  document.getElementById("tuneField");
 
-const tuneFile = document.getElementById("tuneFile");
+const tuneFile =
+  document.getElementById("tuneFile");
 
-const tuneFileName = document.getElementById("tuneFileName");
+const tuneFileName =
+  document.getElementById("tuneFileName");
 
-const supportFile = document.getElementById("supportFile");
+const supportFile =
+  document.getElementById("supportFile");
 
-const supportFileName = document.getElementById("supportFileName");
+const supportFileName =
+  document.getElementById("supportFileName");
 
-const agreement = document.getElementById("agreement");
+const tuneUploadBox =
+  document.getElementById("tuneUploadBox");
 
-const submitBtn = document.getElementById("submitBtn");
+const supportUploadBox =
+  document.getElementById("supportUploadBox");
 
-const fullName = document.getElementById("fullName");
+const agreement =
+  document.getElementById("agreement");
 
-const locationInput = document.getElementById("location");
+const submitBtn =
+  document.getElementById("submitBtn");
 
-const phone = document.getElementById("phone");
+const fullName =
+  document.getElementById("fullName");
 
-const lyrics = document.getElementById("lyrics");
+const locationInput =
+  document.getElementById("location");
+
+const phone =
+  document.getElementById("phone");
+
+const lyrics =
+  document.getElementById("lyrics");
+
+const attachmentSizeWarning =
+  document.getElementById("attachmentSizeWarning");
+
 
 /* =========================
-       SUBMISSION TYPE
-    ========================== */
+   SETTINGS
+========================= */
+
+const MAX_TOTAL_FILE_SIZE =
+  10 * 1024 * 1024;
 
 let submissionType = "lyrics";
 
+
+/* =========================
+   OUTSIDE SUBMISSION BUTTONS
+========================= */
+
 function setSubmissionType(type) {
+
   submissionType = type;
 
   if (type === "lyrics") {
+
     lyricsOnlyBtn.classList.add("active");
     lyricsTuneBtn.classList.remove("active");
 
     tuneField.classList.remove("show");
 
     tuneFile.required = false;
+
   } else {
+
     lyricsOnlyBtn.classList.remove("active");
     lyricsTuneBtn.classList.add("active");
 
@@ -58,173 +93,332 @@ function setSubmissionType(type) {
   updateSubmitState();
 }
 
+
 lyricsOnlyBtn.addEventListener("click", () => {
   setSubmissionType("lyrics");
 });
+
 
 lyricsTuneBtn.addEventListener("click", () => {
   setSubmissionType("tune");
 });
 
+
 /* =========================
-       FILE DISPLAY
-    ========================== */
+   FILE DISPLAY
+========================= */
 
 tuneFile.addEventListener("change", () => {
-  if (tuneFile.files.length > 0) {
-    tuneFileName.textContent = `Selected: ${tuneFile.files[0].name}`;
 
-    document.getElementById("tuneUploadBox").classList.add("has-file");
+  if (tuneFile.files.length > 0) {
+
+    tuneFileName.textContent =
+      `Selected: ${tuneFile.files[0].name}`;
+
+    tuneUploadBox.classList.add("has-file");
+
   } else {
+
     tuneFileName.textContent = "";
 
-    document.getElementById("tuneUploadBox").classList.remove("has-file");
+    tuneUploadBox.classList.remove("has-file");
   }
+
+  checkAttachmentSize();
+  updateSubmitState();
+});
+
+
+supportFile.addEventListener("change", () => {
+
+  if (supportFile.files.length > 0) {
+
+    supportFileName.textContent =
+      `Selected: ${supportFile.files[0].name}`;
+
+    supportUploadBox.classList.add("has-file");
+
+  } else {
+
+    supportFileName.textContent = "";
+
+    supportUploadBox.classList.remove("has-file");
+  }
+
+  checkAttachmentSize();
+  updateSubmitState();
+});
+
+
+/* =========================
+   TOTAL FILE SIZE
+========================= */
+
+function getTotalFileSize() {
+
+  let totalSize = 0;
+
+  if (tuneFile.files.length > 0) {
+    totalSize += tuneFile.files[0].size;
+  }
+
+  if (supportFile.files.length > 0) {
+    totalSize += supportFile.files[0].size;
+  }
+
+  return totalSize;
+}
+
+
+/* =========================
+   FORMAT SIZE
+========================= */
+
+function formatFileSize(bytes) {
+
+  return (
+    bytes / (1024 * 1024)
+  ).toFixed(2);
+}
+
+
+/* =========================
+   CHECK ATTACHMENT SIZE
+========================= */
+
+function checkAttachmentSize() {
+
+  const totalSize =
+    getTotalFileSize();
+
+  if (totalSize > MAX_TOTAL_FILE_SIZE) {
+
+    attachmentSizeWarning.textContent =
+      `Total attachment size is ` +
+      `${formatFileSize(totalSize)} MB. ` +
+      `Maximum allowed is 10 MB. ` +
+      `Please remove or replace a file.`;
+
+    attachmentSizeWarning.classList.add("show");
+
+    return false;
+  }
+
+  attachmentSizeWarning.textContent = "";
+
+  attachmentSizeWarning.classList.remove("show");
+
+  return true;
+}
+
+
+/* =========================
+   FIELD VALIDATION
+========================= */
+
+function validateField(
+  element,
+  groupId
+) {
+
+  const group =
+    document.getElementById(groupId);
+
+  const valid =
+    element.value.trim() !== "";
+
+  group.classList.toggle(
+    "invalid",
+    !valid
+  );
+
+  return valid;
+}
+
+
+/* =========================
+   FORM VALIDATION
+========================= */
+
+function isFormValid() {
+
+  const nameValid =
+    fullName.value.trim() !== "";
+
+  const locationValid =
+    locationInput.value.trim() !== "";
+
+  const phoneValid =
+    phone.value.trim() !== "";
+
+  const lyricsValid =
+    lyrics.value.trim() !== "";
+
+  const agreementValid =
+    agreement.checked;
+
+  const tuneValid =
+    submissionType === "lyrics" ||
+    tuneFile.files.length > 0;
+
+  const attachmentsValid =
+    checkAttachmentSize();
+
+  return (
+    nameValid &&
+    locationValid &&
+    phoneValid &&
+    lyricsValid &&
+    agreementValid &&
+    tuneValid &&
+    attachmentsValid
+  );
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+function updateSubmitState() {
+
+  submitBtn.disabled =
+    !isFormValid();
+}
+
+
+/* =========================
+   LIVE VALIDATION
+========================= */
+
+fullName.addEventListener("input", () => {
+
+  validateField(
+    fullName,
+    "nameGroup"
+  );
 
   updateSubmitState();
 });
 
-supportFile.addEventListener("change", () => {
-  if (supportFile.files.length > 0) {
-    supportFileName.textContent = `Selected: ${supportFile.files[0].name}`;
 
-    document.getElementById("supportUploadBox").classList.add("has-file");
-  } else {
-    supportFileName.textContent = "";
+locationInput.addEventListener("input", () => {
 
-    document.getElementById("supportUploadBox").classList.remove("has-file");
-  }
+  validateField(
+    locationInput,
+    "locationGroup"
+  );
+
+  updateSubmitState();
 });
 
-/* =========================
-       VALIDATION
-    ========================== */
 
-function isFormValid() {
-  const baseFieldsFilled =
-    fullName.value.trim() !== "" &&
-    locationInput.value.trim() !== "" &&
-    phone.value.trim() !== "" &&
-    lyrics.value.trim() !== "";
+phone.addEventListener("input", () => {
 
-  const agreementChecked = agreement.checked;
+  validateField(
+    phone,
+    "phoneGroup"
+  );
 
-  const tuneValid = submissionType === "lyrics" || tuneFile.files.length > 0;
-
-  return baseFieldsFilled && agreementChecked && tuneValid;
-}
-
-function updateSubmitState() {
-  submitBtn.disabled = !isFormValid();
-}
-
-/* =========================
-       LIVE VALIDATION
-    ========================== */
-
-[fullName, locationInput, phone, lyrics, agreement].forEach((element) => {
-  element.addEventListener("input", updateSubmitState);
-
-  element.addEventListener("change", updateSubmitState);
+  updateSubmitState();
 });
 
-/* =========================
-       EMAIL BODY
-    ========================== */
 
-function buildEmailBody() {
-  const name = fullName.value.trim();
+lyrics.addEventListener("input", () => {
 
-  const from = locationInput.value.trim();
+  validateField(
+    lyrics,
+    "lyricsGroup"
+  );
 
-  const phoneNumber = phone.value.trim();
+  updateSubmitState();
+});
 
-  const lyricText = lyrics.value.trim();
 
-  const tune =
-    submissionType === "tune"
-      ? tuneFile.files.length > 0
-        ? tuneFile.files[0].name
-        : "Not attached"
-      : "Lyrics Only";
+agreement.addEventListener(
+  "change",
+  updateSubmitState
+);
 
-  const supportingFile =
-    supportFile.files.length > 0 ? supportFile.files[0].name : "None";
-
-  return `
-Anthems Season 1 Submission
-
-----------------------------------------
-
-Submission Type:
-${submissionType === "tune" ? "Lyrics & Tune" : "Lyrics Only"}
-
-Full Name:
-${name}
-
-Where are you from:
-${from}
-
-Phone Number:
-${phoneNumber}
-
-----------------------------------------
-
-Lyrics:
-
-${lyricText}
-
-----------------------------------------
-
-Tune / Audio File:
-${tune}
-
-Supporting File:
-${supportingFile}
-
-----------------------------------------
-
-Submission Agreement:
-The submitter agrees that this work is their own and gives Yireh Ministry permission to review it for possible use.
-        `.trim();
-}
 
 /* =========================
-       SUBMIT
-    ========================== */
+   FORM SUBMIT
+========================= */
 
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
 
-  if (!isFormValid()) {
-    updateSubmitState();
+  if (!checkAttachmentSize()) {
+
+    event.preventDefault();
+
     return;
   }
 
-  const recipient = "raviray66667@gmail.com";
+  const nameValid =
+    validateField(
+      fullName,
+      "nameGroup"
+    );
 
-  const subject =
-    submissionType === "tune"
-      ? `Anthems Season 1 - Lyrics & Tune Submission - ${fullName.value.trim()}`
-      : `Anthems Season 1 - Lyrics Submission - ${fullName.value.trim()}`;
+  const locationValid =
+    validateField(
+      locationInput,
+      "locationGroup"
+    );
 
-  const body = buildEmailBody();
+  const phoneValid =
+    validateField(
+      phone,
+      "phoneGroup"
+    );
 
-  const gmailUrl =
-    "https://mail.google.com/mail/?view=cm&fs=1" +
-    "&to=" +
-    encodeURIComponent(recipient) +
-    "&su=" +
-    encodeURIComponent(subject) +
-    "&body=" +
-    encodeURIComponent(body);
+  const lyricsValid =
+    validateField(
+      lyrics,
+      "lyricsGroup"
+    );
 
-  window.open(gmailUrl, "_blank", "noopener,noreferrer");
+  const tuneValid =
+    submissionType === "lyrics" ||
+    tuneFile.files.length > 0;
+
+  const agreementValid =
+    agreement.checked;
+
+
+  if (
+    !nameValid ||
+    !locationValid ||
+    !phoneValid ||
+    !lyricsValid ||
+    !tuneValid ||
+    !agreementValid
+  ) {
+
+    event.preventDefault();
+
+    updateSubmitState();
+
+    return;
+  }
+
+
+  /*
+    Valid:
+    allow FormSubmit to submit normally.
+  */
+
+  submitBtn.disabled = true;
+
+  submitBtn.textContent =
+    "Submitting...";
 });
 
+
 /* =========================
-       INITIAL STATE
-    ========================== */
+   INITIAL STATE
+========================= */
 
 setSubmissionType("lyrics");
+
 updateSubmitState();
