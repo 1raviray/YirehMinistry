@@ -1,0 +1,1071 @@
+/* =========================
+   GIVE - INTRO SECTION
+========================= */
+
+.give-intro {
+    width: 100%;
+    background: #ededed;
+
+    padding-top: 75px;
+    padding-bottom: 58px;
+}
+
+.give-intro-container {
+    width: 1160px;
+    max-width: calc(100% - 80px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.give-heading {
+    margin: 0;
+    padding: 0;
+}
+
+.give-eyebrow {
+    display: block;
+
+    margin: 0 0 6px;
+
+    color: #303030;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 38px;
+    font-weight: 700;
+
+    font-style: italic;
+    letter-spacing: -1.66px;
+    line-height: 1;
+}
+
+.give-heading h1 {
+    margin: 0;
+    padding: 0;
+
+    color: #f26622;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 35px;
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+
+    line-height: 1.05;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.give-description {
+    width: 100%;
+    max-width: 1365px;
+
+    margin: 45px 0 0;
+    padding: 0;
+
+    color: #303030;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size: 31px;
+    font-weight: 400;
+
+    line-height: 1.31;
+
+    letter-spacing: -1.5px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1200px) {
+
+    .give-intro {
+        padding-top: 140px;
+        padding-bottom: 55px;
+    }
+
+    .give-intro-container {
+        width: calc(100% - 70px);
+        max-width: 1365px;
+    }
+
+    .give-eyebrow {
+        font-size: 35px;
+    }
+
+    .give-heading h1 {
+        font-size: 39px;
+    }
+
+    .give-description {
+        margin-top: 38px;
+        font-size: 27px;
+        line-height: 1.3;
+    }
+}
+
+
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .give-intro {
+        padding-top: 105px;
+        padding-bottom: 50px;
+    }
+
+    .give-intro-container {
+        width: calc(100% - 60px);
+    }
+
+    .give-eyebrow {
+        font-size: 31px;
+    }
+
+    .give-heading h1 {
+        font-size: 35px;
+        letter-spacing: -1.5px;
+    }
+
+    .give-description {
+        margin-top: 32px;
+
+        font-size: 23px;
+        line-height: 1.32;
+
+        letter-spacing: -0.8px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .give-intro {
+        padding-top: 70px;
+        padding-bottom: 42px;
+    }
+
+    .give-intro-container {
+        width: 100%;
+        max-width: none;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .give-eyebrow {
+        margin-bottom: 7px;
+
+        font-size: 29px;
+    }
+
+    .give-heading h1 {
+        font-size: 32px;
+        letter-spacing: -1px;
+    }
+
+    .give-description {
+        margin-top: 28px;
+
+        font-size: 18px;
+        line-height: 1.45;
+
+        letter-spacing: -0.3px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .give-intro {
+        padding-top: 55px;
+        padding-bottom: 35px;
+    }
+
+    .give-eyebrow {
+        font-size: 26px;
+    }
+
+    .give-heading h1 {
+        font-size: 29px;
+    }
+
+    .give-description {
+        font-size: 16px;
+        line-height: 1.45;
+    }
+}
+
+
+/* =========================
+   SPONSORSHIP SECTION
+========================= */
+
+.sponsorship-section {
+    width: 100%;
+    background: #ededed;
+
+    padding-top: 55px;
+    padding-bottom: 45px;
+}
+
+.sponsorship-container {
+    width: 1160px;
+    max-width: calc(100% - 80px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.sponsorship-title {
+    margin: 0;
+
+    text-align: center;
+
+    color: #f26622;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 33px;
+    font-weight: 700;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    letter-spacing: -2.47px;
+}
+
+
+/* =========================
+   LIST
+========================= */
+
+.sponsorship-list {
+    margin: 76px 0 0;
+    padding: 0 0 0 37px;
+
+    color: #303030;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size: 28px;
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    letter-spacing: -1px;
+}
+
+.sponsorship-list li {
+    padding-left: 0;
+
+    margin: 0 0 42px;
+}
+
+.sponsorship-list li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1200px) {
+
+    .sponsorship-section {
+        padding-top: 50px;
+    }
+
+    .sponsorship-container {
+        width: calc(100% - 70px);
+        max-width: 1365px;
+    }
+
+    .sponsorship-title {
+        font-size: 35px;
+    }
+
+    .sponsorship-list {
+        margin-top: 60px;
+        padding-left: 34px;
+
+        font-size: 27px;
+        line-height: 1.25;
+    }
+
+    .sponsorship-list li {
+        margin-bottom: 35px;
+    }
+}
+
+
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .sponsorship-section {
+        padding-top: 45px;
+        padding-bottom: 40px;
+    }
+
+    .sponsorship-container {
+        width: calc(100% - 60px);
+    }
+
+    .sponsorship-title {
+        font-size: 32px;
+    }
+
+    .sponsorship-list {
+        margin-top: 50px;
+        padding-left: 30px;
+
+        font-size: 23px;
+        line-height: 1.3;
+
+        letter-spacing: -0.7px;
+    }
+
+    .sponsorship-list li {
+        margin-bottom: 30px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .sponsorship-section {
+        padding-top: 38px;
+        padding-bottom: 35px;
+    }
+
+    .sponsorship-container {
+        width: 100%;
+        max-width: none;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .sponsorship-title {
+        font-size: 28px;
+        letter-spacing: -0.8px;
+    }
+
+    .sponsorship-list {
+        margin-top: 40px;
+        padding-left: 25px;
+
+        font-size: 18px;
+        line-height: 1.4;
+
+        letter-spacing: -0.2px;
+    }
+
+    .sponsorship-list li {
+        margin-bottom: 24px;
+
+        padding-left: 3px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .sponsorship-title {
+        font-size: 25px;
+    }
+
+    .sponsorship-list {
+        margin-top: 32px;
+
+        font-size: 16px;
+        line-height: 1.45;
+
+        padding-left: 22px;
+    }
+
+    .sponsorship-list li {
+        margin-bottom: 20px;
+    }
+}
+
+/* =========================
+   WAYS TO GIVE
+========================= */
+
+.ways-give-section {
+    width: 100%;
+    background: #ededed;
+
+    padding-top: 58px;
+    padding-bottom: 88px;
+}
+
+.ways-give-container {
+    width: 1400px;
+    max-width: calc(100% - 80px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.ways-give-title {
+    margin: 0;
+
+    text-align: center;
+
+    color: #f26622;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 33px;
+    font-weight: 700;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    letter-spacing: -2.47px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.giving-cards {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 68px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.giving-card {
+    min-height: 415px;
+
+    padding: 57px 30px 51px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: #151515;
+}
+
+
+/* =========================
+   CARD TITLE
+========================= */
+
+.giving-card h3 {
+    margin: 0 0 8px;
+
+    color: #f26622;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 33px;
+    font-weight: 600;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    letter-spacing: -2.47px;
+}
+
+
+/* =========================
+   CARD TEXT
+========================= */
+
+.giving-card p {
+    width: 100%;
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #fff;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size: 22px;
+    font-weight: 400;
+
+    line-height: 1.85;
+
+    letter-spacing: 0px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.giving-button {
+    width: 290px;
+    height: 50px;
+
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f77a3b;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size: 23px;
+    font-weight: 400;
+
+    line-height: 1;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.giving-button:hover {
+    background: #e96529;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   1200px
+========================= */
+
+@media (max-width: 1200px) {
+
+    .ways-give-container {
+        width: calc(100% - 70px);
+        max-width: 1640px;
+    }
+
+    .giving-cards {
+        gap: 20px;
+    }
+
+    .giving-card {
+        min-height: 390px;
+        padding: 48px 28px 42px;
+    }
+
+    .giving-card h3 {
+        font-size: 32px;
+    }
+
+    .giving-card p {
+        font-size: 23px;
+        line-height: 1.65;
+    }
+
+    .giving-button {
+        width: 260px;
+        height: 58px;
+        font-size: 27px;
+    }
+}
+
+
+/* =========================
+   900px
+========================= */
+
+@media (max-width: 900px) {
+
+    .ways-give-section {
+        padding-top: 48px;
+        padding-bottom: 65px;
+    }
+
+    .ways-give-container {
+        width: calc(100% - 60px);
+    }
+
+    .ways-give-title {
+        font-size: 34px;
+    }
+
+    .giving-cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+
+        margin-top: 50px;
+    }
+
+    .giving-card {
+        min-height: auto;
+
+        padding: 38px 30px;
+    }
+
+    .giving-card h3 {
+        font-size: 31px;
+    }
+
+    .giving-card p {
+        max-width: 650px;
+
+        font-size: 21px;
+        line-height: 1.5;
+    }
+
+    .giving-button {
+        width: 245px;
+        height: 54px;
+
+        margin-top: 35px;
+
+        font-size: 25px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .ways-give-section {
+        padding-top: 40px;
+        padding-bottom: 50px;
+    }
+
+    .ways-give-container {
+        width: 100%;
+        max-width: none;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .ways-give-title {
+        font-size: 30px;
+    }
+
+    .giving-cards {
+        margin-top: 38px;
+        gap: 15px;
+    }
+
+    .giving-card {
+        padding: 30px 24px;
+    }
+
+    .giving-card h3 {
+        font-size: 28px;
+    }
+
+    .giving-card p {
+        font-size: 18px;
+        line-height: 1.55;
+        letter-spacing: -0.2px;
+    }
+
+    .giving-button {
+        width: 210px;
+        height: 50px;
+
+        margin-top: 28px;
+
+        font-size: 23px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .ways-give-title {
+        font-size: 27px;
+    }
+
+    .giving-card {
+        padding: 26px 20px;
+    }
+
+    .giving-card h3 {
+        font-size: 25px;
+    }
+
+    .giving-card p {
+        font-size: 16px;
+    }
+
+    .giving-button {
+        width: 190px;
+        height: 46px;
+        font-size: 21px;
+    }
+}
+
+
+/* =========================
+   WHY IT MATTERS
+========================= */
+
+.why-matters-section{
+    width:100%;
+    background:#ededed;
+    padding-top:57px;
+    padding-bottom:80px;
+}
+
+.why-matters-container{
+    width:1160px;
+    max-width:calc(100% - 80px);
+    margin:0 auto;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.why-matters-title{
+    margin:0;
+    text-align:center;
+    color:#f26622;
+    font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:33px;
+    font-weight:700;
+    font-style:italic;
+    line-height:1;
+    letter-spacing:-2.47px;
+}
+
+
+/* =========================
+   LIST
+========================= */
+
+.why-matters-list{
+    margin:68px 0 0;
+    padding:0 0 0 37px;
+    color:#303030;
+    font-family:"Gabarito",sans-serif;
+    font-size:28px;
+    font-weight:400;
+    line-height:1.2;
+    letter-spacing:-1px;
+}
+
+.why-matters-list li{
+    margin:0 0 35px;
+    padding-left:0;
+}
+
+.why-matters-list li:last-child{
+    margin-bottom:0;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.why-matters-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:359px;
+    height:63px;
+
+    margin-top:76px;
+
+    background:#f77a3b;
+    border:1px solid #8d8d8d;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-family:"Gowun Batang",Georgia,serif;
+    font-size:28.75px;
+    font-weight:400;
+    line-height:1;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.why-matters-button:hover{
+    background:#e96529;
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   NOTE
+========================= */
+
+.why-matters-note{
+    margin:21px 0 0;
+    padding:0;
+
+    color:#fff;
+
+    font-family:"Gabarito",sans-serif;
+    font-size:20px;
+    font-weight:400;
+
+    line-height:1.3;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1200px){
+
+    .why-matters-section{
+        padding-top:50px;
+        padding-bottom:65px;
+    }
+
+    .why-matters-container{
+        width:calc(100% - 70px);
+        max-width:1365px;
+    }
+
+    .why-matters-title{
+        font-size:35px;
+    }
+
+    .why-matters-list{
+        margin-top:60px;
+        padding-left:34px;
+        font-size:27px;
+        line-height:1.25;
+    }
+
+    .why-matters-list li{
+        margin-bottom:35px;
+    }
+
+    .why-matters-button{
+        width:320px;
+        height:68px;
+        margin-top:62px;
+        font-size:28px;
+    }
+
+    .why-matters-note{
+        font-size:18px;
+    }
+}
+
+
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media(max-width:900px){
+
+    .why-matters-section{
+        padding-top:45px;
+        padding-bottom:55px;
+    }
+
+    .why-matters-container{
+        width:calc(100% - 60px);
+    }
+
+    .why-matters-title{
+        font-size:32px;
+    }
+
+    .why-matters-list{
+        margin-top:50px;
+        padding-left:30px;
+        font-size:23px;
+        line-height:1.3;
+        letter-spacing:-.7px;
+    }
+
+    .why-matters-list li{
+        margin-bottom:30px;
+    }
+
+    .why-matters-button{
+        width:280px;
+        height:60px;
+        margin-top:50px;
+        font-size:25px;
+    }
+
+    .why-matters-note{
+        font-size:16px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
+
+    .why-matters-section{
+        padding-top:38px;
+        padding-bottom:45px;
+    }
+
+    .why-matters-container{
+        width:100%;
+        max-width:none;
+        padding:0 20px;
+    }
+
+    .why-matters-title{
+        font-size:28px;
+        letter-spacing:-.8px;
+    }
+
+    .why-matters-list{
+        margin-top:40px;
+        padding-left:25px;
+        font-size:18px;
+        line-height:1.4;
+        letter-spacing:-.2px;
+    }
+
+    .why-matters-list li{
+        margin-bottom:24px;
+        padding-left:3px;
+    }
+
+    .why-matters-button{
+        width:100%;
+        max-width:270px;
+        height:52px;
+        margin-top:38px;
+        font-size:23px;
+    }
+
+    .why-matters-note{
+        margin-top:16px;
+        font-size:14px;
+        line-height:1.45;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .why-matters-title{
+        font-size:25px;
+    }
+
+    .why-matters-list{
+        margin-top:32px;
+        padding-left:22px;
+        font-size:16px;
+        line-height:1.45;
+    }
+
+    .why-matters-list li{
+        margin-bottom:20px;
+    }
+
+    .why-matters-button{
+        max-width:240px;
+        height:48px;
+        font-size:21px;
+    }
+
+    .why-matters-note{
+        font-size:13px;
+    }
+}

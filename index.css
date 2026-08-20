@@ -1,0 +1,2625 @@
+/* =========================
+   HOME HERO
+========================= */
+
+.home-hero{
+    position:relative;
+
+    width:100%;
+    min-height:600px;
+
+    /* overflow:hidden; */
+    margin-bottom: 85px;
+    background:#ededed;
+}
+
+
+/* =========================
+   ORIGINAL BACKGROUND IMAGE
+========================= */
+
+.home-bg{
+    position:absolute;
+    inset:0;
+
+    z-index:0;
+
+    background-color:#ededed;
+
+    background-image:url("assets/cce5a9a7c4c729d0b10e733416121b6aba9220bd.png");
+
+    /*
+      Original asset ratio:
+      612 / 408 = 1.5
+
+      The reference hero is much wider,
+      therefore use cover.
+    */
+    background-size:cover;
+
+    /*
+      Keeps the mountain/tree horizon
+      in approximately the same vertical
+      position as the reference.
+    */
+    background-position:bottom;
+
+    background-repeat:no-repeat;
+
+    /*
+      Makes the original illustration subtle
+      while preserving the exact artwork.
+    */
+    opacity:.4;
+}
+
+
+/* =========================
+   ADDITIONAL COLOR LAYER
+========================= */
+
+.home-hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    z-index:1;
+
+    background:#ededed;
+
+    opacity:.46;
+
+    pointer-events:none;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.home-content{
+    position:relative;
+
+    z-index:3;
+
+    width:100%;
+    max-width:1920px;
+
+    min-height:720px;
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding-top:45px;
+
+    text-align:center;
+}
+
+
+/* =========================
+   PROMISE
+========================= */
+
+.home-promise{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+}
+
+.home-promise-logo{
+    width:45px;
+    height:45px;
+
+    display:block;
+
+    object-fit:contain;
+
+    margin-bottom:8px;
+}
+
+.home-promise h2{
+    margin:0;
+
+    color:#f56622;
+
+    font-family:
+        "Mate SC",
+        Georgia,
+        serif;
+
+    font-size:36.32px;
+
+    font-weight:400;
+
+    line-height:100%;
+}
+
+.home-promise p{
+    margin:8px 0 0;
+
+    color:#333;
+
+    font-family:
+        "Mate SC",
+        Georgia,
+        serif;
+
+    font-size:12.7px;
+
+    font-weight:400;
+
+    line-height:1;
+
+    letter-spacing:.2px;
+}
+
+
+/* =========================
+   MAIN MESSAGE
+========================= */
+
+.home-message{
+    width:720px;
+
+    max-width:calc(100% - 40px);
+
+    margin-top:70px;
+
+    text-align:center;
+}
+
+.home-message h1{
+    margin:0;
+
+    color:#242424;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:38px;
+    
+    font-weight:700;
+    
+    line-height:1.08;
+    
+    letter-spacing:-1px;
+}
+
+.home-message h1 em{
+    font-weight:400;
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+    
+    font-size:38px;
+    font-style:italic;
+
+    font-weight:400;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.home-description{
+    width:630px;
+
+    max-width:100%;
+
+    margin:24px auto 0;
+
+    color:#303030;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size:18px;
+
+    font-weight:400;
+
+    line-height:120%;
+
+    letter-spacing:3%;
+}
+
+
+/* =========================
+   FOUNDERS
+========================= */
+
+.home-founders{
+    margin:25px 0 0;
+
+    color:#262626;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:16px;
+
+    font-weight:400;
+
+    line-height:37.5px;
+}
+
+
+/* =========================
+   STORY BUTTON
+========================= */
+
+.home-story-btn{
+    width:365px;
+    height:63px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:35px auto 0;
+
+    background:#f56622;
+
+    border:1px solid #999;
+
+    color:#252525;
+
+    text-decoration:none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:29px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.home-story-btn:hover{
+    background:#e75a15;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   FOREGROUND ROCK / WOOD
+========================= */
+
+.home-foreground{
+    position:absolute;
+
+    z-index:4;
+
+    right:1px;
+    bottom:-30px;
+
+    width:502px;
+    height:382px;
+
+    display:block;
+
+    object-fit:contain;
+
+    pointer-events:none;
+}
+
+
+/* =========================
+   1200px
+========================= */
+
+@media(max-width:1200px){
+
+    .home-hero{
+        min-height:700px;
+    }
+
+    .home-content{
+        min-height:700px;
+
+        padding-top:70px;
+    }
+
+    .home-message{
+        margin-top:85px;
+    }
+
+    .home-message h1{
+        font-size:40px;
+    }
+
+    .home-description{
+        width:600px;
+    }
+
+    .home-foreground{
+        width:430px;
+        height:auto;
+    }
+}
+
+
+/* =========================
+   900px
+========================= */
+
+@media(max-width:900px){
+
+    .home-hero{
+        min-height:680px;
+    }
+
+    .home-content{
+        min-height:680px;
+
+        padding-top:60px;
+    }
+
+    .home-promise-logo{
+        width:40px;
+        height:40px;
+    }
+
+    .home-promise h2{
+        font-size:27px;
+    }
+
+    .home-promise p{
+        font-size:10px;
+    }
+
+    .home-message{
+        margin-top:75px;
+    }
+
+    .home-message h1{
+        font-size:36px;
+    }
+
+    .home-description{
+        width:570px;
+
+        font-size:16px;
+    }
+
+    .home-founders{
+        font-size:16px;
+    }
+
+    .home-story-btn{
+        width:320px;
+        height:60px;
+
+        font-size:26px;
+    }
+
+    .home-foreground{
+        width:350px;
+        height:auto;
+    }
+}
+
+
+/* =========================
+   600px
+========================= */
+
+@media(max-width:600px){
+
+    .home-hero{
+        min-height:720px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    .home-content{
+        min-height:720px;
+
+        padding:45px 20px 0;
+    }
+
+    /*
+      Slightly stronger background on mobile
+      because the screen is smaller.
+    */
+    .home-bg{
+        background-position:center 40%;
+
+        opacity:.15;
+    }
+
+    .home-hero::before{
+        opacity:.48;
+    }
+
+    .home-promise-logo{
+        width:38px;
+        height:38px;
+
+        margin-bottom:6px;
+    }
+
+    .home-promise h2{
+        max-width:320px;
+
+        font-size:23px;
+
+        line-height:1.05;
+    }
+
+    .home-promise p{
+        max-width:260px;
+
+        margin-top:7px;
+
+        font-size:9px;
+
+        line-height:1.2;
+    }
+
+    .home-message{
+        width:100%;
+        max-width:100%;
+
+        margin-top:75px;
+    }
+
+    .home-message h1{
+        font-size:31px;
+
+        line-height:1.05;
+
+        letter-spacing:-.5px;
+    }
+
+    .home-description{
+        width:100%;
+
+        margin-top:20px;
+
+        font-size:14px;
+
+        line-height:1.42;
+    }
+
+    .home-founders{
+        margin-top:20px;
+
+        font-size:15px;
+
+        line-height:1.2;
+    }
+
+    .home-story-btn{
+        width:270px;
+        height:56px;
+
+        margin-top:28px;
+
+        font-size:24px;
+    }
+
+    .home-foreground{
+        width:280px;
+        height:auto;
+
+        right:-20px;
+        bottom:-4px;
+    }
+}
+
+
+/* =========================
+   400px
+========================= */
+
+@media(max-width:400px){
+
+    .home-hero{
+        min-height:690px;
+    }
+
+    .home-content{
+        min-height:690px;
+
+        padding-top:38px;
+    }
+
+    .home-promise h2{
+        font-size:21px;
+    }
+
+    .home-message{
+        margin-top:65px;
+    }
+
+    .home-message h1{
+        font-size:28px;
+    }
+
+    .home-description{
+        font-size:13px;
+    }
+
+    .home-founders{
+        font-size:14px;
+    }
+
+    .home-story-btn{
+        width:245px;
+        height:52px;
+
+        font-size:22px;
+    }
+
+    .home-foreground{
+        width:240px;
+
+        right:-15px;
+    }
+}
+
+
+/* =========================
+   ABOUT INTRO
+========================= */
+
+.about-intro-section{
+    width:100%;
+
+    background:#ededed;
+
+    padding:62px 0 103px;
+}
+
+.about-intro-container{
+    width:1160px;
+    max-width:calc(100% - 70px);
+
+    margin:0 auto;
+
+    text-align:center;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.about-intro-title{
+    margin:0;
+
+    color:#242424;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:68.8px;
+    font-weight:700;
+
+    font-style:italic;
+
+    line-height:1;
+
+    letter-spacing:-3px;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.about-intro-text{
+    margin-left:auto;
+    margin-right:auto;
+
+    color:#303030;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size:33.2px;
+    font-weight:400;
+
+    line-height:1.38;
+
+    letter-spacing:-1.45px;
+}
+
+.about-intro-text-1{
+    max-width:1080px;
+
+    margin-top:50px;
+}
+
+.about-intro-text-2{
+    max-width:1040px;
+
+    margin-top:43px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.about-intro-btn{
+    width:287px;
+    height:63px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:32px auto 0;
+
+    background:#f57437;
+
+    border:1px solid #888;
+
+    color:#262626;
+
+    text-decoration:none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:28.75px;
+    font-weight:400;
+
+    line-height:1;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.about-intro-btn:hover{
+    background:#e96528;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1200px){
+
+    .about-intro-section{
+        padding-top:80px;
+        padding-bottom:90px;
+    }
+
+    .about-intro-container{
+        max-width:calc(100% - 60px);
+    }
+
+    .about-intro-title{
+        font-size:58px;
+    }
+
+    .about-intro-text{
+        font-size:27px;
+    }
+
+    .about-intro-text-1{
+        margin-top:42px;
+    }
+
+    .about-intro-text-2{
+        margin-top:36px;
+    }
+}
+
+
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media(max-width:900px){
+
+    .about-intro-section{
+        padding-top:68px;
+        padding-bottom:80px;
+    }
+
+    .about-intro-container{
+        max-width:calc(100% - 50px);
+    }
+
+    .about-intro-title{
+        font-size:52px;
+    }
+
+    .about-intro-text{
+        font-size:23px;
+        line-height:1.4;
+        letter-spacing:-.7px;
+    }
+
+    .about-intro-text-1{
+        margin-top:38px;
+    }
+
+    .about-intro-text-2{
+        margin-top:32px;
+    }
+
+    .about-intro-btn{
+        width:280px;
+        height:62px;
+
+        margin-top:28px;
+
+        font-size:27px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .about-intro-section{
+        padding:52px 0 60px;
+    }
+
+    .about-intro-container{
+        width:100%;
+        max-width:none;
+
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .about-intro-title{
+        font-size:43px;
+        letter-spacing:-1px;
+    }
+
+    .about-intro-text{
+        width:100%;
+
+        font-size:17px;
+        line-height:1.48;
+        letter-spacing:-.3px;
+    }
+
+    .about-intro-text-1{
+        margin-top:30px;
+    }
+
+    .about-intro-text-2{
+        margin-top:27px;
+    }
+
+    .about-intro-btn{
+        width:245px;
+        height:56px;
+
+        margin-top:27px;
+
+        font-size:24px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .about-intro-section{
+        padding-top:45px;
+        padding-bottom:52px;
+    }
+
+    .about-intro-title{
+        font-size:39px;
+    }
+
+    .about-intro-text{
+        font-size:15px;
+        line-height:1.5;
+    }
+
+    .about-intro-btn{
+        width:225px;
+        height:52px;
+
+        font-size:22px;
+    }
+}
+
+
+
+
+/* =========================
+   HOME EVENTS SECTION
+========================= */
+
+.home-events-section {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+.home-events-container {
+    width: 1160px;
+    max-width: calc(100% - 70px);
+    margin: 0 auto;
+    padding: 39px 0 63px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.home-events-heading {
+    text-align: center;
+}
+
+.home-events-eyebrow {
+    margin: 0 0 18px;
+    color: #f56622;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: 2.93px;
+}
+
+.home-events-heading h2 {
+    margin: 0;
+    color: #f1f1f1;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.48px;
+}
+
+
+/* =========================
+   EVENTS GRID
+========================= */
+
+.home-events-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 47px;
+}
+
+
+/* =========================
+   EVENT CARD
+========================= */
+
+.home-event-card {
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.home-event-status {
+    width: 100%;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    padding: 0 31px;
+    background: #fb621f;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-size: 12.43px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .39px;
+}
+
+.home-event-content {
+    min-height: 304px;
+    padding: 22px 31px 26px;
+}
+
+.home-event-content h3 {
+    margin: 0 0 22px;
+    color: #f2f2f2;
+    font-family: "Gabarito", sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.home-event-content p {
+    max-width: 500px;
+    margin: 0;
+    color: #f4f4f4;
+    font-family: "Gabarito", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.home-event-register {
+    width: 250px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    background: #fb621f;
+    color: #fff;
+    text-decoration: none;
+    font-family: "Gowun Batang", Georgia, serif;
+    font-size: 22.2px;
+    font-weight: 500;
+    line-height: 1;
+    transition: background .25s ease, transform .25s ease;
+}
+
+.home-event-register:hover {
+    background: #e95415;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   EXPLORE BUTTON
+========================= */
+
+.home-events-explore {
+    width: 287px;
+    height: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 67px auto 0;
+    background: #f57437;
+    border: 1px solid #8f8f8f;
+    color: #303030;
+    text-decoration: none;
+    font-family: "Gowun Batang", Georgia, serif;
+    font-size: 28.7px;
+    font-weight: 400;
+    line-height: 1;
+    transition: background .25s ease, transform .25s ease;
+}
+
+.home-events-explore:hover {
+    background: #e96528;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   TICKER
+========================= */
+
+.home-events-ticker {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #111;
+    margin: 50px 0;
+}
+
+.home-events-ticker-track {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 82px;
+    min-width: max-content;
+    animation: home-events-scroll 7s linear infinite alternate-reverse;
+}
+
+.home-events-ticker-track span {
+    color: #f56622;
+    font-family: "Gabarito", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.home-events-ticker-track b {
+    color: #f7c476;
+    font-size: 14px;
+    line-height: 1;
+}
+
+@keyframes home-events-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* =========================
+   1100px
+========================= */
+
+@media (max-width: 1100px) {
+
+    .home-events-container {
+        width: calc(100% - 60px);
+        max-width: 1200px;
+    }
+
+    .home-events-heading h2 {
+        font-size: 46px;
+    }
+
+    .home-events-eyebrow {
+        font-size: 31px;
+    }
+
+    .home-event-content {
+        padding-left: 26px;
+        padding-right: 26px;
+    }
+
+    .home-event-content h3 {
+        font-size: 32px;
+    }
+
+    .home-event-content p {
+        font-size: 20px;
+    }
+}
+
+
+/* =========================
+   800px
+========================= */
+
+@media (max-width: 800px) {
+
+    .home-events-container {
+        width: calc(100% - 40px);
+        padding-top: 50px;
+        padding-bottom: 55px;
+    }
+
+    .home-events-eyebrow {
+        font-size: 28px;
+    }
+
+    .home-events-heading h2 {
+        font-size: 40px;
+        line-height: 1.05;
+    }
+
+    .home-events-grid {
+        gap: 18px;
+        margin-top: 38px;
+    }
+
+    .home-event-status {
+        height: 47px;
+        padding-left: 23px;
+        font-size: 13px;
+    }
+
+    .home-event-content {
+        min-height: 280px;
+        padding: 20px 23px 24px;
+    }
+
+    .home-event-content h3 {
+        font-size: 29px;
+    }
+
+    .home-event-content p {
+        font-size: 17px;
+        line-height: 1.45;
+    }
+
+    .home-event-register {
+        width: 205px;
+        height: 48px;
+        font-size: 21px;
+    }
+
+    .home-events-explore {
+        width: 280px;
+        height: 61px;
+        margin-top: 50px;
+        font-size: 27px;
+    }
+
+    .home-events-ticker {
+        margin: 30px 0;
+        height: 46px;
+    }
+
+    .home-events-ticker-track {
+        gap: 55px;
+    }
+
+    .home-events-ticker-track span {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================
+   600px
+========================= */
+
+@media (max-width: 600px) {
+
+    .home-events-container {
+        width: 100%;
+        max-width: none;
+        padding: 44px 20px 48px;
+    }
+
+    .home-events-eyebrow {
+        margin-bottom: 14px;
+        font-size: 25px;
+    }
+
+    .home-events-heading h2 {
+        font-size: 34px;
+        letter-spacing: -.5px;
+    }
+
+    .home-events-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 32px;
+    }
+
+    .home-event-card {
+        border-radius: 3px;
+    }
+
+    .home-event-status {
+        height: 45px;
+        padding: 0 20px;
+        font-size: 12px;
+    }
+
+    .home-event-content {
+        min-height: auto;
+        padding: 22px 20px 25px;
+    }
+
+    .home-event-content h3 {
+        margin-bottom: 16px;
+        font-size: 28px;
+    }
+
+    .home-event-content p {
+        font-size: 16px;
+        line-height: 1.45;
+    }
+
+    .home-event-register {
+        width: 190px;
+        height: 46px;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .home-events-explore {
+        width: 260px;
+        height: 56px;
+        margin-top: 40px;
+        font-size: 24px;
+    }
+
+    .home-events-ticker {
+        margin: 20px 0;
+        height: 42px;
+    }
+
+    .home-events-ticker-track {
+        gap: 40px;
+        animation-duration: 18s;
+    }
+
+    .home-events-ticker-track span {
+        font-size: 11px;
+        letter-spacing: 1.4px;
+    }
+
+    .home-events-ticker-track b {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================
+   400px
+========================= */
+
+@media (max-width: 400px) {
+
+    .home-events-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .home-events-eyebrow {
+        font-size: 22px;
+    }
+
+    .home-events-heading h2 {
+        font-size: 30px;
+    }
+
+    .home-event-content h3 {
+        font-size: 26px;
+    }
+
+    .home-event-content p {
+        font-size: 14px;
+    }
+
+    .home-event-register {
+        width: 175px;
+        font-size: 18px;
+    }
+
+    .home-events-explore {
+        width: 235px;
+        font-size: 22px;
+    }
+}
+
+
+
+
+/* =========================
+   ANTHEMS HERO SECTION
+========================= */
+
+.anthems-hero-section {
+    width: 100%;
+
+    background: #ededed;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.anthems-hero-container {
+    position: relative;
+
+    width: 1100px;
+    max-width: calc(100% - 80px);
+
+    min-height: 448px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 400px 1fr;
+
+    column-gap: 80px;
+
+    align-items: start;
+
+    padding: 56px 0 54px;
+}
+
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.anthems-hero-left {
+    display: flex;
+
+    align-items: center;
+
+    padding-top: 69px;
+}
+
+.anthems-hero-left h1 {
+    margin: 0;
+
+    color: #f2763d;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 66.69px;
+
+    font-weight: 700;
+
+    font-style: italic;
+
+    line-height: 0.95;
+
+    letter-spacing: -3.2px;
+
+    white-space: nowrap;
+}
+
+.anthems-hero-left h1 span {
+    color: #6a6a6b;
+
+    font-style: normal;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.anthems-hero-right {
+    width: 100%;
+
+    padding-top: 1px;
+}
+
+
+/* =========================
+   EYEBROW
+========================= */
+
+.anthems-hero-eyebrow {
+    margin: 0 0 26px;
+
+    color: #f2763d;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 400;
+
+    font-style: italic;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.anthems-hero-right h2 {
+    margin: 0 0 23px;
+
+    color: #242424;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 400;
+
+    line-height: 0.98;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.anthems-hero-description {
+    width: 100%;
+
+    max-width: 790px;
+
+    margin: 0;
+
+    color: #6a6a6b;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    line-height: 1.48;
+}
+
+.anthems-hero-description em {
+    color: #f2763d;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   CENTER CTA
+========================= */
+
+.anthems-hero-button {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 54px;
+
+    transform: translateX(-50%);
+
+    width: 287px;
+    height: 63px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f47b3c;
+
+    border: 1px solid #777;
+
+    color: #292929;
+
+    text-decoration: none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size: 28.75px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.anthems-hero-button:hover {
+    background: #e9692b;
+
+    transform: translateX(-50%) translateY(-2px);
+}
+
+
+/* =========================
+   BOTTOM LINE
+========================= */
+
+.anthems-hero-bottom-line {
+    width: calc(100% - 20%);
+
+    height: 1px;
+
+    margin: 0 auto 50px;
+
+    background: #d1d1d1;
+}
+
+
+/* =========================
+   TABLET — 1200px
+========================= */
+
+@media (max-width: 1200px) {
+
+    .anthems-hero-container {
+        width: calc(100% - 60px);
+
+        max-width: 1440px;
+
+        grid-template-columns: 420px 1fr;
+
+        column-gap: 70px;
+
+        min-height: 430px;
+
+        padding-top: 52px;
+        padding-bottom: 50px;
+    }
+
+    .anthems-hero-left {
+        padding-top: 66px;
+    }
+
+    .anthems-hero-left h1 {
+        font-size: 64px;
+    }
+
+    .anthems-hero-right h2 {
+        font-size: 52px;
+    }
+
+    .anthems-hero-description {
+        font-size: 20px;
+
+        line-height: 1.45;
+    }
+
+    .anthems-hero-button {
+        width: 320px;
+        height: 69px;
+
+        bottom: 50px;
+
+        font-size: 30px;
+    }
+
+    .anthems-hero-bottom-line {
+        width: calc(100% - 60px);
+    }
+}
+
+
+/* =========================
+   SMALL DESKTOP / TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .anthems-hero-container {
+        width: calc(100% - 50px);
+
+        max-width: none;
+
+        min-height: auto;
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        row-gap: 39px;
+
+        padding-top: 52px;
+        padding-bottom: 120px;
+
+        text-align: center;
+    }
+
+    .anthems-hero-left {
+        justify-content: center;
+
+        padding-top: 0;
+    }
+
+    .anthems-hero-left h1 {
+        font-size: 61px;
+
+        white-space: normal;
+    }
+
+    .anthems-hero-right {
+        padding-top: 0;
+    }
+
+    .anthems-hero-eyebrow {
+        margin-bottom: 19px;
+
+        font-size: 21px;
+    }
+
+    .anthems-hero-right h2 {
+        margin-bottom: 20px;
+
+        font-size: 49px;
+
+        white-space: normal;
+    }
+
+    .anthems-hero-description {
+        max-width: 700px;
+
+        margin: 0 auto;
+
+        font-size: 19px;
+
+        line-height: 1.45;
+    }
+
+    .anthems-hero-button {
+        width: 300px;
+        height: 65px;
+
+        bottom: 33px;
+
+        font-size: 28px;
+    }
+
+    .anthems-hero-bottom-line {
+        width: calc(100% - 50px);
+    }
+}
+
+
+/* =========================
+   MOBILE — 600px
+========================= */
+
+@media (max-width: 600px) {
+
+    .anthems-hero-container {
+        width: 100%;
+
+        padding: 45px 20px 110px;
+
+        row-gap: 30px;
+    }
+
+    .anthems-hero-left h1 {
+        font-size: 48px;
+
+        letter-spacing: -2px;
+    }
+
+    .anthems-hero-eyebrow {
+        margin-bottom: 16px;
+
+        font-size: 18px;
+    }
+
+    .anthems-hero-right h2 {
+        margin-bottom: 18px;
+
+        font-size: 38px;
+
+        line-height: 1;
+
+        letter-spacing: -1px;
+    }
+
+    .anthems-hero-description {
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+    .anthems-hero-button {
+        width: 250px;
+        height: 57px;
+
+        bottom: 29px;
+
+        font-size: 25px;
+    }
+
+    .anthems-hero-bottom-line {
+        width: calc(100% - 40px);
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE — 400px
+========================= */
+
+@media (max-width: 400px) {
+
+    .anthems-hero-container {
+        padding-left: 16px;
+        padding-right: 16px;
+
+        padding-bottom: 103px;
+    }
+
+    .anthems-hero-left h1 {
+        font-size: 42px;
+    }
+
+    .anthems-hero-eyebrow {
+        font-size: 17px;
+    }
+
+    .anthems-hero-right h2 {
+        font-size: 33px;
+    }
+
+    .anthems-hero-description {
+        font-size: 14px;
+    }
+
+    .anthems-hero-button {
+        width: 225px;
+        height: 53px;
+
+        bottom: 27px;
+
+        font-size: 23px;
+    }
+
+    .anthems-hero-bottom-line {
+        width: calc(100% - 32px);
+    }
+}
+
+
+
+
+/* =========================
+   HOME SONGS SECTION
+========================= */
+
+.home-songs-section{
+    width:100%;
+    background:#ededed;
+}
+
+.home-songs-container{
+    width:1260px;
+    max-width:calc(100% - 80px);
+
+    margin:0 auto;
+
+    padding:68px 0 92px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.home-songs-heading{
+    text-align:center;
+}
+
+.home-songs-eyebrow{
+    margin:0 0 18px;
+
+    color:#f2763d;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:32px;
+    font-weight:600;
+
+    font-style:italic;
+    letter-spacing: 1.2px;
+    line-height:1;
+}
+
+.home-songs-heading h2{
+    margin:0;
+
+    color:#202020;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:48px;
+    font-weight:500;
+
+    line-height:1;
+
+    letter-spacing:-0.48px;
+}
+
+
+/* =========================
+   SONG GRID
+========================= */
+
+.home-songs-grid{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:47px;
+
+    margin-top:79px;
+}
+
+
+/* =========================
+   SONG CARD
+========================= */
+
+.home-song-card{
+    width:100%;
+}
+
+.home-song-image-link{
+    position:relative;
+
+    display:block;
+
+    width:100%;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    line-height:0;
+}
+
+.home-song-image{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    /* aspect-ratio:393 / 265; */
+
+    /* object-fit:cover; */
+
+    transition:
+        transform .3s ease;
+}
+
+.home-song-image-link:hover .home-song-image{
+    transform:scale(1.02);
+}
+
+
+/* =========================
+   SONG META
+========================= */
+
+.home-song-meta{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:28px 6px 0;
+}
+
+.home-song-meta h3{
+    margin:0;
+
+    color:#222;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size:19.78px;
+    font-weight:500;
+
+    line-height:1.1;
+}
+
+.home-song-meta span{
+    flex-shrink:0;
+
+    color:#888;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size:20px;
+    font-weight:400;
+
+    line-height:1;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.home-songs-button{
+    width:287px;
+    height:63px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:76px auto 0;
+
+    background:#f47b3c;
+
+    border:1px solid #777;
+
+    color:#282828;
+
+    text-decoration:none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:28.75px;
+    font-weight:400;
+
+    line-height:1;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.home-songs-button:hover{
+    background:#e9692b;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   1200px
+========================= */
+
+@media(max-width:1200px){
+
+    .home-songs-container{
+        width:1000px;
+
+        max-width:calc(100% - 60px);
+    }
+
+    .home-songs-heading h2{
+        font-size:50px;
+    }
+
+    .home-songs-grid{
+        gap:30px;
+
+        margin-top:65px;
+    }
+
+    .home-song-meta h3{
+        font-size:21px;
+    }
+
+    .home-song-meta span{
+        font-size:18px;
+    }
+}
+
+
+/* =========================
+   900px
+========================= */
+
+@media(max-width:900px){
+
+    .home-songs-container{
+        max-width:calc(100% - 50px);
+
+        padding-top:58px;
+        padding-bottom:75px;
+    }
+
+    .home-songs-eyebrow{
+        font-size:28px;
+    }
+
+    .home-songs-heading h2{
+        font-size:43px;
+    }
+
+    .home-songs-grid{
+        gap:22px;
+
+        margin-top:52px;
+    }
+
+    .home-song-image-link{
+        border-radius:15px;
+    }
+
+    .home-song-meta{
+        padding-top:20px;
+    }
+
+    .home-song-meta h3{
+        font-size:18px;
+    }
+
+    .home-song-meta span{
+        font-size:16px;
+    }
+
+    .home-songs-button{
+        width:300px;
+        height:65px;
+
+        margin-top:60px;
+
+        font-size:29px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .home-songs-container{
+        width:100%;
+
+        max-width:none;
+
+        padding:48px 20px 60px;
+    }
+
+    .home-songs-eyebrow{
+        margin-bottom:14px;
+
+        font-size:24px;
+    }
+
+    .home-songs-heading h2{
+        font-size:34px;
+
+        line-height:1.05;
+
+        letter-spacing:-.8px;
+    }
+
+    .home-songs-grid{
+        grid-template-columns:1fr;
+
+        gap:35px;
+
+        margin-top:36px;
+    }
+
+    .home-song-image-link{
+        border-radius:14px;
+    }
+
+    .home-song-image{
+        aspect-ratio:auto;
+    }
+
+    .home-song-meta{
+        padding:15px 3px 0;
+    }
+
+    .home-song-meta h3{
+        font-size:18px;
+    }
+
+    .home-song-meta span{
+        font-size:15px;
+    }
+
+    .home-songs-button{
+        width:260px;
+        height:57px;
+
+        margin-top:43px;
+
+        font-size:25px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .home-songs-container{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .home-songs-eyebrow{
+        font-size:22px;
+    }
+
+    .home-songs-heading h2{
+        font-size:30px;
+    }
+
+    .home-song-meta h3{
+        font-size:17px;
+    }
+
+    .home-song-meta span{
+        font-size:14px;
+    }
+
+    .home-songs-button{
+        width:235px;
+        height:53px;
+
+        font-size:23px;
+    }
+}
+
+
+/* =========================
+   PRAYER CTA SECTION
+========================= */
+
+.prayer-cta-section{
+    position:relative;
+
+    width:100%;
+
+    min-height:600px;
+
+    overflow:hidden;
+
+    background:#F17C3E0D;
+    margin-bottom: 50px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.prayer-cta-container{
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+    max-width:1180px;
+
+    min-height:600px;
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:100px;
+}
+
+
+/* =========================
+   QUOTE ICON
+========================= */
+
+.prayer-cta-quote{
+    width:42px;
+    height:42px;
+
+    display:block;
+
+    object-fit:contain;
+    opacity: 0.5;
+    margin-bottom:32px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.prayer-cta-title{
+    width:100%;
+
+    margin:0;
+
+    color:#222;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:50.3px;
+
+    font-weight:700;
+
+    font-style:italic;
+
+    line-height:1.02;
+
+    letter-spacing:-0.5px;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.prayer-cta-description{
+    width:850px;
+    max-width:calc(100% - 40px);
+
+    margin:25px 0 0;
+
+    color:#8a8a8a;
+
+    font-family:
+        "Gabarito",
+        sans-serif;
+
+    font-size:22px;
+
+    font-weight:400;
+
+    line-height:1.38;
+
+    letter-spacing:.35px;
+}
+
+
+/* =========================
+   CTA BUTTON
+========================= */
+
+.prayer-cta-button{
+    width:287px;
+    height:63px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-top:67px;
+
+    background:#f47738;
+
+    border:1px solid #777;
+
+    color:#242424;
+
+    text-decoration:none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:28.75px;
+
+    font-weight:400;
+
+    line-height:1;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.prayer-cta-button:hover{
+    background:#e96729;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   HANDS
+========================= */
+
+.prayer-cta-hand{
+    position:absolute;
+
+    z-index:1;
+
+    display:block;
+
+    width:auto;
+
+    height:320px;
+
+    object-fit:contain;
+
+    pointer-events:none;
+}
+
+.prayer-cta-hand-left{
+    left:-1px;
+
+    top:180px;
+}
+
+.prayer-cta-hand-right{
+    right:-1px;
+
+    top:180px;
+}
+
+
+/* =========================
+   1200px
+========================= */
+
+@media(max-width:1200px){
+
+    .prayer-cta-container{
+        max-width:1000px;
+
+        padding-top:125px;
+    }
+
+    .prayer-cta-title{
+        font-size:50px;
+    }
+
+    .prayer-cta-description{
+        width:760px;
+
+        font-size:21px;
+    }
+
+    .prayer-cta-hand{
+        height:275px;
+    }
+
+    .prayer-cta-hand-left{
+        left:-20px;
+        top:190px;
+    }
+
+    .prayer-cta-hand-right{
+        right:-20px;
+        top:190px;
+    }
+
+    .prayer-cta-button{
+        width:300px;
+        height:66px;
+
+        margin-top:57px;
+
+        font-size:28px;
+    }
+}
+
+
+/* =========================
+   900px
+========================= */
+
+@media(max-width:900px){
+
+    .prayer-cta-section,
+    .prayer-cta-container{
+        min-height:600px;
+    }
+
+    .prayer-cta-container{
+        padding-top:105px;
+
+        max-width:820px;
+    }
+
+    .prayer-cta-quote{
+        width:38px;
+        height:38px;
+
+        margin-bottom:25px;
+    }
+
+    .prayer-cta-title{
+        font-size:43px;
+
+        line-height:1.05;
+    }
+
+    .prayer-cta-description{
+        width:650px;
+
+        font-size:18px;
+
+        line-height:1.45;
+    }
+
+    .prayer-cta-button{
+        width:270px;
+        height:61px;
+
+        margin-top:48px;
+
+        font-size:26px;
+    }
+
+    .prayer-cta-hand{
+        height:225px;
+    }
+
+    .prayer-cta-hand-left{
+        left:-35px;
+        top:190px;
+    }
+
+    .prayer-cta-hand-right{
+        right:-35px;
+        top:190px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .prayer-cta-section{
+        min-height:590px;
+    }
+
+    .prayer-cta-container{
+        min-height:590px;
+
+        padding:82px 20px 55px;
+    }
+
+    .prayer-cta-quote{
+        width:34px;
+        height:34px;
+
+        margin-bottom:23px;
+    }
+
+    .prayer-cta-title{
+        font-size:31px;
+
+        line-height:1.08;
+
+        letter-spacing:-.5px;
+    }
+
+    .prayer-cta-description{
+        width:100%;
+        max-width:400px;
+
+        margin-top:20px;
+
+        font-size:15px;
+
+        line-height:1.5;
+    }
+
+    .prayer-cta-button{
+        width:245px;
+        height:57px;
+
+        margin-top:42px;
+
+        font-size:24px;
+    }
+
+    .prayer-cta-hand{
+        height:180px;
+    }
+
+    .prayer-cta-hand-left{
+        left:-52px;
+        top:180px;
+    }
+
+    .prayer-cta-hand-right{
+        right:-52px;
+        top:180px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:400px){
+
+    .prayer-cta-section{
+        min-height:550px;
+    }
+
+    .prayer-cta-container{
+        min-height:550px;
+
+        padding-top:70px;
+    }
+
+    .prayer-cta-title{
+        font-size:27px;
+    }
+
+    .prayer-cta-description{
+        font-size:14px;
+    }
+
+    .prayer-cta-button{
+        width:225px;
+        height:53px;
+
+        margin-top:36px;
+
+        font-size:22px;
+    }
+
+    .prayer-cta-hand{
+        height:155px;
+    }
+
+    .prayer-cta-hand-left{
+        left:-48px;
+        top:175px;
+    }
+
+    .prayer-cta-hand-right{
+        right:-48px;
+        top:175px;
+    }
+}

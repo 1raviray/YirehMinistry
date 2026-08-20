@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Yireh Ministry</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="aboutus.css" />
+    <link rel="stylesheet" href="give.css" />
+    <link rel="stylesheet" href="events.css" />
+    <link rel="stylesheet" href="anthem.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="navbar">
+        <!-- Logo -->
+        <a href="#" class="logo">
+          <img src="assets/Logo.png" alt="Yireh Ministry" />
+        </a>
+
+        <!-- Desktop / Mobile Navigation -->
+        <nav class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="aboutus.html">About</a>
+          <!-- <a href="#">What We Do</a> -->
+          <a href="give.html">Give</a>
+          <a href="events.html">Events</a>
+          <a class="active" href="anthem.html">Anthems</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="anthems-page">
+      <div class="anthems-container">
+        <!-- =========================
+             PAGE TITLE
+        ========================== -->
+
+        <h1 class="anthems-title">Anthems season 1</h1>
+
+        <!-- =========================
+             INTRO
+        ========================== -->
+
+        <div class="anthems-intro">
+          <p class="anthems-intro-subtitle">Songwriters &amp; Worshipers</p>
+
+          <h2 class="anthems-intro-title">Submit your lyrics &amp; Tune</h2>
+
+          <p class="anthems-intro-text">
+            Share what God has given you. Submit lyrics alone, or lyrics with a
+            tune — either way, we'd love to hear it.
+          </p>
+
+          <!-- =========================
+                 SUBMISSION TYPE
+            ========================== -->
+
+          <div class="submission-type">
+            <button
+              type="button"
+              class="type-btn active"
+              data-type="lyrics"
+              id="lyricsOnlyBtn"
+            >
+              LYRICS ONLY
+            </button>
+
+            <button
+              type="button"
+              class="type-btn"
+              data-type="tune"
+              id="lyricsTuneBtn"
+            >
+              LYRICS &amp; TUNE
+            </button>
+          </div>
+
+          <!-- =========================
+                 AGREEMENT
+            ========================== -->
+
+          <div class="agreement-row">
+            <input type="checkbox" id="agreement" />
+
+            <label for="agreement">
+              I agree to the submission terms — this work is my own, and I give
+              Yireh Ministry permission to review it for possible use
+            </label>
+          </div>
+
+          <!-- =========================
+                 FORM
+            ========================== -->
+
+          <form class="anthem-form" id="anthemForm" novalidate>
+            <!-- Name / Location / Phone -->
+
+            <div class="form-row">
+              <div class="form-group" id="nameGroup">
+                <label for="fullName"> Full name </label>
+
+                <input
+                  type="text"
+                  id="fullName"
+                  class="form-control"
+                  placeholder=""
+                  autocomplete="name"
+                />
+
+                <span class="field-error"> Please enter your full name. </span>
+              </div>
+
+              <div class="form-group" id="locationGroup">
+                <label for="location"> Where are you from </label>
+
+                <input
+                  type="text"
+                  id="location"
+                  class="form-control"
+                  placeholder=""
+                  autocomplete="address-level2"
+                />
+
+                <span class="field-error"> Please enter your location. </span>
+              </div>
+
+              <div class="form-group" id="phoneGroup">
+                <label for="phone"> Phone number </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  placeholder=""
+                  autocomplete="tel"
+                />
+
+                <span class="field-error">
+                  Please enter your phone number.
+                </span>
+              </div>
+            </div>
+
+            <!-- Lyrics -->
+
+            <div class="form-group lyrics-group" id="lyricsGroup">
+              <label for="lyrics"> Lyrics </label>
+
+              <textarea
+                id="lyrics"
+                class="lyrics-input"
+                placeholder="Paste or type your lyrics here"
+              ></textarea>
+
+              <span class="field-error"> Please enter your lyrics. </span>
+            </div>
+
+            <!-- =========================
+                     TUNE / AUDIO
+                ========================== -->
+
+            <div class="tune-field" id="tuneField">
+              <label> Tune/Audio file </label>
+
+              <label class="upload-box" id="tuneUploadBox" for="tuneFile">
+                <div class="upload-content">
+                  <p class="upload-text">
+                    Click to upload a rough recording of your tune (MP3, WAV, or
+                    voice memo)
+                  </p>
+
+                  <p class="upload-file-name" id="tuneFileName"></p>
+                </div>
+              </label>
+
+              <input
+                type="file"
+                id="tuneFile"
+                class="file-input"
+                accept=".mp3,.wav,.m4a,.aac,.ogg,audio/*"
+              />
+            </div>
+
+            <!-- =========================
+                     OPTIONAL UPLOAD
+                ========================== -->
+
+            <div class="upload-group">
+              <label> Uploads (optional) </label>
+
+              <label class="upload-box" id="supportUploadBox" for="supportFile">
+                <div class="upload-content">
+                  <p class="upload-text">Click to attach any supporting file</p>
+
+                  <p class="upload-file-name" id="supportFileName"></p>
+                </div>
+              </label>
+
+              <input
+                type="file"
+                id="supportFile"
+                class="file-input"
+                accept="*/*"
+              />
+            </div>
+
+            <!-- =========================
+                     SUBMIT
+                ========================== -->
+
+            <div class="submit-row">
+              <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+     GUIDELINES SECTION
+========================= -->
+
+    <section class="guidelines-section">
+      <div class="guidelines-container">
+        <p class="guidelines-eyebrow">Guidelines</p>
+
+        <h2 class="guidelines-title">Before you submit</h2>
+
+        <div class="guidelines-grid">
+          <!-- Card 1 -->
+          <div class="guideline-card">
+            <h3>Who can apply?</h3>
+
+            <p>
+              Any believer with a heart to worship — no prior release history
+              required.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="guideline-card">
+            <h3>Submission rules</h3>
+
+            <p>
+              Only original work. Songs must be Scripture-rooted and
+              Christ-centered.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="guideline-card">
+            <h3>Copyright notice</h3>
+
+            <p>
+              You retain authorship. Yireh Ministry receives a limited license
+              to review and, if selected, produce and distribute the song.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="guideline-card">
+            <h3>What we review</h3>
+
+            <p>
+              We prayerfully consider lyrics, melody, and theological soundness
+              before selection.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+     FAQ SECTION
+========================= -->
+
+    <section class="faq-section">
+      <div class="faq-container">
+        <p class="faq-eyebrow">FAQ</p>
+
+        <h2 class="faq-title">Frequently asked</h2>
+
+        <div class="faq-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <h3>How long until I hear back?</h3>
+
+            <p>
+              We aim to respond within 4-6 weeks. Selected songs may take
+              longer.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <h3>Can I submit more than one song?</h3>
+
+            <p>Yes — please submit each song separately.</p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <h3>Do I need studio-quality audio?</h3>
+
+            <p>No. A clear voice memo is enough for review.</p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <h3>Will I be credited?</h3>
+
+            <p>Yes — every songwriter is properly credited.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Main footer content -->
+        <div class="footer-main">
+          <!-- Brand -->
+          <div class="footer-brand">
+            <a href="#" class="footer-logo">
+              <img src="assets/Logo.png" alt="Yireh Ministry" />
+            </a>
+
+            <p class="footer-description">
+              A Christ-centered ministry born out of obedience — leading
+              worship, discipling believers, and carrying the Gospel across the
+              nations.
+            </p>
+
+            <!-- Social icons -->
+            <div class="footer-socials">
+              <a href="#" aria-label="Instagram">
+                <span class=""
+                  ><img src="Assets/Footer-instagram.png" alt="" srcset=""
+                /></span>
+              </a>
+
+              <a href="#" aria-label="YouTube">
+                <span class=""
+                  ><img src="Assets/Footer-youTube.png" alt="" srcset=""
+                /></span>
+              </a>
+
+              <a href="#" aria-label="Facebook">
+                <span class=""
+                  ><img src="Assets/Footer-facebook.png" alt="" srcset=""
+                /></span>
+              </a>
+
+              <a href="#" aria-label="Email">
+                <span class=""
+                  ><img src="Assets/Footer-mail.png" alt="" srcset=""
+                /></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Give</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Anthems</a></li>
+            </ul>
+          </div>
+
+          <!-- Ministry -->
+          <div class="footer-column">
+            <h3>Ministry</h3>
+
+            <ul>
+              <li><a href="#">Invite Us</a></li>
+              <li><a href="#">Prayer Requests</a></li>
+              <li><a href="#">Partnerships</a></li>
+              <li><a href="#">Donate</a></li>
+              <li><a href="#">Submit Lyrics</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-column footer-contact">
+            <h3>Contact</h3>
+
+            <ul>
+              <li>
+                <a href="mailto:yirehministryglobal@gmail.com">
+                  Yirehministryglobal@gmail.com
+                </a>
+              </li>
+
+              <li>
+                <a href="tel:+910000000000"> +91 00000 00000 </a>
+              </li>
+
+              <li>Hyderabad, India</li>
+            </ul>
+
+            <a href="#" class="serving-global"> SERVING GLOBALLY </a>
+          </div>
+        </div>
+
+        <!-- Bottom separator -->
+        <div class="footer-divider"></div>
+
+        <!-- Bottom footer -->
+        <div class="footer-bottom">
+          <p>© 2026 Yireh Ministry.</p>
+
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="anthem.js"></script>
+  </body>
+</html>

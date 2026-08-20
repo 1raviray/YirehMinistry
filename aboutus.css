@@ -1,0 +1,1005 @@
+/* ==============================
+   RESET
+================================ */
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#ededed}
+
+/* ==============================
+   HEADER / NAVBAR
+================================ */
+
+.site-header{width:100%;height:100px;background:#ededed}
+.navbar{width:100%;max-width:1312px;height:100px;margin:0 auto;display:flex;align-items:center}
+
+.logo{width:156px;height:60px;display:block;flex-shrink:0}
+.logo img{display:block;width:156px;height:60px;object-fit:contain}
+
+.nav-links{margin-left:auto;height:100%;display:flex;align-items:center;gap:57px}
+.nav-links a{display:inline-flex;align-items:center;height:100%;color:#333;text-decoration:none;white-space:nowrap;font-family:"Gowun Batang",serif;font-size:18px;font-weight:400;letter-spacing:1.15px;transition:color .25s ease,opacity .25s ease}
+.nav-links a:hover{color:#ff641f}
+.nav-links .active{color: #ff641f;}
+.menu-toggle{display:none;width:42px;height:42px;padding:0;border:none;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px}
+.menu-toggle span{width:25px;height:2px;background:#333;display:block;transition:transform .3s ease,opacity .3s ease,background .3s ease}
+
+/* NAV TABLET */
+@media(max-width:1200px){
+  .navbar{padding:0 40px}
+  .nav-links{gap:40px}
+  .nav-links a{font-size:20px}
+}
+
+@media(max-width:950px){
+  .navbar{padding:0 30px}
+  .nav-links{gap:25px}
+  .nav-links a{font-size:18px;letter-spacing:.8px}
+}
+
+/* NAV MOBILE */
+@media(max-width:768px){
+  .site-header{height:auto;min-height:80px}
+  .navbar{position:relative;width:100%;height:80px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+  .logo,.logo img{width:135px;height:52px}
+  .menu-toggle{display:flex}
+  .nav-links{position:absolute;top:80px;left:0;width:100%;height:auto;margin:0;padding:15px 24px 20px;display:flex;flex-direction:column;align-items:stretch;gap:0;background:#ededed;border-top:1px solid rgba(0,0,0,.08);box-shadow:0 8px 20px rgba(0,0,0,.06);opacity:0;visibility:hidden;transform:translateY(-10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease,visibility .25s ease;z-index:1000}
+  .nav-links.active{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+  .nav-links a{width:100%;height:auto;padding:13px 5px;font-size:20px;letter-spacing:.8px;border-bottom:1px solid rgba(0,0,0,.06)}
+  .nav-links a:last-child{border-bottom:none}
+  .menu-toggle.active span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu-toggle.active span:nth-child(2){opacity:0}
+  .menu-toggle.active span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+}
+
+@media(max-width:480px){
+  .navbar{height:72px;padding:0 18px}
+  .site-header{min-height:72px}
+  .logo,.logo img{width:120px;height:48px}
+  .menu-toggle{width:40px;height:40px}
+  .nav-links{top:72px;padding-left:18px;padding-right:18px}
+  .nav-links a{font-size:19px;padding:12px 4px}
+}
+
+/* ==============================
+   VISION
+================================ */
+
+.vision-section{width:100%;background:#ededed;padding-top:77px;padding-bottom:32px}
+.vision-container{width:1160px;max-width:calc(100% - 80px);margin:0 auto}
+
+.vision-title{margin:0 0 8px;padding:0;display:flex;align-items:baseline;gap:3px;color:#f15b24;font-family:"Inter",sans-serif;font-size:29px;font-weight:900;line-height:1}
+.vision-title span{font-style:normal}
+.vision-title em{font-family:"Cormorant Garamond",Georgia,serif;font-size:32px;font-weight:500;font-style:italic;line-height:1}
+
+.vision-content{width:100%;margin:0;padding:0;color:#2e2e2e;font-family:"Gabarito",sans-serif;font-size:27px;font-weight:400;line-height:32.8px}
+.vision-content p{margin:0;padding:0}
+
+@media(max-width:768px){
+  .vision-section{padding-top:55px;padding-bottom:30px}
+  .vision-container{width:100%;max-width:none;padding-left:30px;padding-right:30px}
+  .vision-title{font-size:27px}
+  .vision-title em{font-size:30px}
+  .vision-content{font-size:14px;line-height:20px}
+}
+
+@media(max-width:480px){
+  .vision-section{padding-top:42px;padding-bottom:25px}
+  .vision-container{padding-left:20px;padding-right:20px}
+  .vision-title{margin-bottom:9px;font-size:24px}
+  .vision-title em{font-size:27px}
+  .vision-content{font-size:13px;line-height:19px}
+}
+
+/* ==============================
+   SRIMANTH
+================================ */
+
+.srimanth-section{width:100%;background:#ededed;padding-top:120px;padding-bottom:75px}
+.srimanth-container{width:1160px;max-width:calc(100% - 80px);margin:0 auto}
+
+.section-heading-line{width:100%;display:flex;align-items:center;gap:20px;margin-bottom:72px}
+.section-heading-line span{flex:1;height:1px;background:#bdbdbd}
+.section-heading-line h2{flex-shrink:0;margin:0;padding:0;color:#282828;font-family:"Gabarito",sans-serif;font-size:32px;font-weight:400;line-height:1;letter-spacing:-2.47px}
+
+.srimanth-content{width:100%;display:grid;grid-template-columns:473px 1fr;column-gap:72px;align-items:start}
+.srimanth-image{width:473px;height:474px;overflow:hidden}
+.srimanth-image img{display:block;width:100%;height:100%;object-fit:cover}
+
+.srimanth-text{width:100%;padding-top:9px}
+.srimanth-text h3{margin:0 0 14px;padding:0;color:#f26622;font-family:"Cormorant Garamond",Georgia,serif;font-size:31px;font-weight:700;font-style:italic;line-height:1.05;letter-spacing:-2.5px}
+.srimanth-text p{margin:0 0 8px;padding:0;color:#303030;font-family:"Gabarito",sans-serif;font-size:16px;font-weight:400;line-height:24px}
+
+@media(max-width:1200px){
+  .srimanth-container{width:calc(100% - 70px);max-width:1160px}
+  .srimanth-content{grid-template-columns:42% 1fr;column-gap:55px}
+  .srimanth-image{width:100%;height:auto;aspect-ratio:1/1}
+  .srimanth-text h3{font-size:28px}
+  .srimanth-text p{font-size:15px;line-height:24px}
+}
+
+@media(max-width:900px){
+  .srimanth-section{padding-top:85px}
+  .section-heading-line{margin-bottom:50px}
+  .section-heading-line h2{font-size:29px}
+  .srimanth-content{grid-template-columns:40% 1fr;column-gap:35px}
+  .srimanth-text h3{font-size:25px}
+  .srimanth-text p{font-size:14px;line-height:22px}
+}
+
+@media(max-width:650px){
+  .srimanth-section{padding-top:60px;padding-bottom:45px}
+  .srimanth-container{width:100%;max-width:none;padding-left:20px;padding-right:20px}
+  .section-heading-line{gap:10px;margin-bottom:35px}
+  .section-heading-line h2{font-size:22px;letter-spacing:-.5px}
+  .srimanth-content{display:flex;flex-direction:column;gap:28px}
+  .srimanth-image{width:100%;max-width:473px;height:auto;aspect-ratio:473/474;margin:0 auto}
+  .srimanth-text{padding-top:0}
+  .srimanth-text h3{font-size:25px;line-height:1.1;margin-bottom:12px}
+  .srimanth-text p{font-size:13px;line-height:20px;margin-bottom:7px}
+}
+
+/* ==============================
+   PASTOR
+================================ */
+
+.pastor-section{width:100%;background:#ededed;padding-top:72px;padding-bottom:70px}
+.pastor-container{width:1160px;max-width:calc(100% - 80px);margin:0 auto}
+
+.pastor-heading{width:100%;display:flex;align-items:center;gap:20px;margin-bottom:72px}
+.pastor-heading span{flex:1;height:1px;background:#bdbdbd}
+.pastor-heading h2{flex-shrink:0;margin:0;padding:0;color:#282828;font-family:"Gabarito",sans-serif;font-size:32px;font-weight:400;letter-spacing:-2.47px;line-height:1}
+
+.pastor-content{width:100%;display:grid;grid-template-columns:473px 1fr;column-gap:22px;align-items:start}
+.pastor-image{width:473px;height:474px;overflow:hidden}
+.pastor-image img{display:block;width:100%;height:100%;object-fit:cover}
+
+.pastor-text{padding-top:7px}
+.pastor-text p{margin:0 0 12px;padding:0;color:#292929;font-family:"Gabarito",sans-serif;font-size:18.11px;font-weight:400;line-height:35px;letter-spacing:-1.19px}
+
+@media(max-width:1200px){
+  .pastor-container{width:calc(100% - 70px);max-width:1160px}
+  .pastor-heading{margin-bottom:80px}
+  .pastor-heading h2{font-size:30px}
+  .pastor-content{grid-template-columns:42% 1fr;column-gap:35px}
+  .pastor-image{width:100%;height:auto;aspect-ratio:1/1}
+  .pastor-text p{font-size:16px;line-height:28px}
+}
+
+@media(max-width:900px){
+  .pastor-section{padding-top:60px}
+  .pastor-heading{margin-bottom:55px}
+  .pastor-heading h2{font-size:27px}
+  .pastor-content{grid-template-columns:40% 1fr;column-gap:30px}
+  .pastor-text p{font-size:14px;line-height:23px}
+}
+
+@media(max-width:650px){
+  .pastor-section{padding-top:50px;padding-bottom:45px}
+  .pastor-container{width:100%;max-width:none;padding-left:20px;padding-right:20px}
+  .pastor-heading{gap:10px;margin-bottom:35px}
+  .pastor-heading h2{font-size:21px;letter-spacing:-.5px;text-align:center}
+  .pastor-content{display:flex;flex-direction:column;gap:28px}
+  .pastor-image{width:100%;max-width:473px;height:auto;aspect-ratio:473/474;margin:0 auto}
+  .pastor-text{padding-top:0}
+  .pastor-text p{font-size:13px;line-height:20px;margin-bottom:8px}
+}
+
+/* ==============================
+   MISSION
+================================ */
+
+.mission-section{width:100%;background:#ededed;padding-top:62px;padding-bottom:90px}
+.mission-container{width:1072px;max-width:calc(100% - 50px);margin:0 auto}
+
+.mission-title{margin:0;text-align:center;color:#f26a24;font-family:"Cormorant Garamond",Georgia,serif;font-size:68px;font-weight:700;line-height:1;letter-spacing:-3px}
+.mission-title em{font-style:italic;font-weight:700}
+
+.mission-subtitle{margin:26px 0 70px;text-align:center;color:#292929;font-family:"Gabarito",sans-serif;font-size:32px;font-weight:400;line-height:1.2;letter-spacing:-1.45px}
+
+.mission-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;width:100%}
+.mission-card{width:100%;display:block;overflow:hidden;border-radius:14px;line-height:0;transition:transform .25s ease,box-shadow .25s ease}
+.mission-card img{width:100%;height:auto;display:block}
+.mission-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.12)}
+
+.mission-banner{position:relative;display:block;width:100%;margin-top:47px;overflow:hidden;border-radius:14px;line-height:0}
+.mission-banner img{width:100%;height:auto;display:block}
+
+.banner-content{position:absolute;left:31px;bottom:40px;display:flex;flex-direction:column;align-items:flex-start;gap:15px}
+.banner-label{color:#ff641f;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:700;line-height:1}
+
+.watch-button{display:inline-flex;align-items:center;justify-content:center;min-width:126px;height:37px;padding:0 20px;border-radius:20px;background:#1479f7;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:.2px;line-height:1;transition:background .2s ease}
+.mission-banner:hover .watch-button{background:#0b68df}
+
+.mission-statement{margin:44px auto 0;text-align:center;color:#161616;font-family:"Cormorant Garamond",Georgia,serif;font-size:41px;font-weight:700;font-style:italic;line-height:1.15;letter-spacing:-2.8px;vertical-align:middle}
+.mission-statement strong{color:#f26a24;font-size:30px;font-weight:700;font-style:normal}
+
+.mission-cta{display:flex;width:max-content;margin:76px auto 0;padding:11px 29px 12px;background:#111;color:#fff;text-decoration:none;font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:400;line-height:1;transition:background .25s ease,transform .25s ease}
+.mission-cta:hover{background:#f26a24;transform:translateY(-2px)}
+
+@media(max-width:1200px){
+  .mission-container{width:1000px}
+  .mission-title{font-size:56px}
+  .mission-subtitle{font-size:28px;margin-bottom:60px}
+  .mission-statement{font-size:34px}
+}
+
+@media(max-width:900px){
+  .mission-section{padding-top:50px;padding-bottom:70px}
+  .mission-container{max-width:calc(100% - 40px)}
+  .mission-title{font-size:48px}
+  .mission-subtitle{margin-top:20px;margin-bottom:45px;font-size:23px}
+  .mission-cards{gap:12px}
+  .mission-banner{margin-top:35px}
+  .mission-statement{margin-top:35px;font-size:28px}
+  .mission-cta{margin-top:55px;font-size:22px}
+}
+
+@media(max-width:650px){
+  .mission-section{padding-top:45px;padding-bottom:55px}
+  .mission-container{width:100%;max-width:none;padding-left:20px;padding-right:20px}
+  .mission-title{font-size:42px}
+  .mission-subtitle{margin-top:17px;margin-bottom:30px;font-size:20px;line-height:1.25}
+  .mission-cards{grid-template-columns:repeat(2,1fr);gap:12px}
+  .mission-card{border-radius:10px}
+  .mission-banner{margin-top:22px;border-radius:10px}
+  .banner-content{left:17px;bottom:20px;gap:9px}
+  .banner-label{font-size:14px}
+  .watch-button{min-width:100px;height:30px;padding:0 15px;font-size:10px}
+  .mission-statement{margin-top:28px;font-size:25px;line-height:1.2}
+  .mission-cta{margin-top:42px;padding:10px 22px 11px;font-size:20px}
+}
+
+@media(max-width:420px){
+  .mission-title{font-size:36px}
+  .mission-subtitle{font-size:18px}
+  .mission-statement{font-size:21px}
+  .mission-cards{gap:8px}
+}
+
+/* ==============================
+   WHAT WE DO
+================================ */
+
+.what-we-do-section{width:100%;background:#ededed;padding-top:3px;padding-bottom:60px}
+.what-we-do-container{width:1068px;max-width:calc(100% - 70px);margin:0 auto}
+
+.what-we-do-title{margin:0;text-align:center;color:#222;font-family:"Cormorant Garamond",Georgia,serif;font-size:68px;font-weight:700;font-style:italic;line-height:1;letter-spacing:-3px}
+
+.what-we-do-description{margin:27px auto 65px;max-width:800px;text-align:center;color:#353535;font-family:"Gowun Batang",serif;font-size:20px;font-weight:400;line-height:1.05;letter-spacing:0}
+
+.services-list{width:100%;border-top:1px solid #d0d0d0}
+
+.service-item{position:relative;width:100%;min-height:243px;display:grid;grid-template-columns:334px 1fr 126px;column-gap:25px;align-items:start;padding:26px 0 27px;border-bottom:1px solid #d0d0d0}
+
+.service-image{width:334px;height:188px;overflow:hidden;border-radius:12px}
+.service-image img{width:100%;height:100%;display:block;object-fit:cover}
+
+.service-info{padding-top:5px}
+.service-info h3{margin:0 0 12px;color:#f06424;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;font-weight:700;font-style:italic;line-height:1}
+.service-info p{max-width:455px;margin:0;color:#292929;font-family:"Gabarito",sans-serif;font-size:17px;font-weight:400;line-height:1.22}
+
+.service-button{align-self:center;justify-self:end;width:126px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:#1978f2;color:#fff;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2px;transition:background .2s ease,transform .2s ease}
+.service-button:hover{background:#0966dd;transform:translateY(-1px)}
+
+.what-we-do-cta{display:flex;width:max-content;margin:85px auto 0;padding:10px 24px 11px;background:#f26722;color:#fff;text-decoration:none;border:1px solid #9e9e9e;font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;font-weight:500;line-height:1;transition:background .2s ease,transform .2s ease}
+.what-we-do-cta:hover{background:#db5516;transform:translateY(-2px)}
+
+@media(max-width:1100px){
+  .what-we-do-container{width:calc(100% - 60px);max-width:1068px}
+  .what-we-do-title{font-size:56px}
+  .what-we-do-description{font-size:21px}
+  .service-item{grid-template-columns:300px 1fr 115px;column-gap:22px}
+  .service-image{width:300px;height:169px}
+  .service-info h3{font-size:24px}
+  .service-info p{font-size:15px}
+  .service-button{width:115px}
+}
+
+@media(max-width:800px){
+  .what-we-do-section{padding-top:50px;padding-bottom:100px}
+  .what-we-do-container{width:calc(100% - 40px)}
+  .what-we-do-title{font-size:48px}
+  .what-we-do-description{max-width:600px;margin-top:20px;margin-bottom:45px;font-size:19px;line-height:1.15}
+  .service-item{grid-template-columns:250px 1fr;column-gap:20px;min-height:auto;padding:22px 0}
+  .service-image{width:250px;height:141px}
+  .service-info{padding-top:0}
+  .service-info h3{font-size:22px}
+  .service-info p{font-size:14px;line-height:1.3}
+  .service-button{grid-column:2;justify-self:start;margin-top:15px;width:115px;height:34px}
+  .what-we-do-cta{margin-top:55px;font-size:23px}
+}
+
+@media(max-width:600px){
+  .what-we-do-section{padding-top:40px;padding-bottom:65px}
+  .what-we-do-container{width:100%;padding-left:20px;padding-right:20px}
+  .what-we-do-title{font-size:40px}
+  .what-we-do-description{margin-top:18px;margin-bottom:30px;font-size:17px;line-height:1.2}
+  .service-item{display:flex;flex-direction:column;gap:16px;padding:20px 0}
+  .service-image{width:100%;height:auto;aspect-ratio:334/188;border-radius:10px}
+  .service-info{width:100%}
+  .service-info h3{margin-bottom:8px;font-size:23px}
+  .service-info p{max-width:none;font-size:14px;line-height:1.4}
+  .service-button{align-self:flex-start;margin-top:2px;width:115px;height:34px}
+  .what-we-do-cta{margin-top:45px;font-size:21px}
+}
+
+@media(max-width:400px){
+  .what-we-do-title{font-size:36px}
+  .what-we-do-description{font-size:16px}
+  .service-info h3{font-size:21px}
+  .service-info p{font-size:13px}
+  .what-we-do-cta{font-size:19px}
+}
+/* ==============================
+   FOOTER
+================================ */
+
+.site-footer{
+  width:100%;
+  background:#151515;
+  color:#898584;
+}
+
+.footer-container{
+  width:1324px;
+  max-width:calc(100% - 80px);
+  margin:0 auto;
+  padding-top:61px;
+  padding-bottom:67px;
+}
+
+.footer-main{
+  display:grid;
+  grid-template-columns:300px 270px 270px 1fr;
+  column-gap:42px;
+  align-items:start;
+}
+
+.footer-logo{
+  display:inline-block;
+  width:144px;
+  height:auto;
+  margin-bottom:16px;
+}
+
+.footer-logo img{
+  display:block;
+  width:144px;
+  height:auto;
+  object-fit:contain;
+}
+
+.footer-description{
+  width:290px;
+  margin:0;
+  color:#858585;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:25px;
+}
+
+.footer-socials{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin-top:23px;
+}
+
+.footer-socials a{
+  width:20px;
+  height:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#898989;
+}
+
+.footer-socials span{
+  position:relative;
+  display:block;
+  width:18px;
+  height:18px;
+}
+
+.social-instagram{
+  border:2px solid #888;
+  border-radius:5px;
+}
+
+.social-instagram:before{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:6px;
+  left:4px;
+  top:4px;
+  border:2px solid #888;
+  border-radius:50%;
+}
+
+.social-instagram:after{
+  content:"";
+  position:absolute;
+  width:3px;
+  height:3px;
+  right:2px;
+  top:2px;
+  background:#888;
+  border-radius:50%;
+}
+
+.social-youtube{
+  width:19px!important;
+  height:13px!important;
+  border:2px solid #888;
+  border-radius:4px;
+}
+
+.social-youtube:after{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:2px;
+  border-top:3px solid transparent;
+  border-bottom:3px solid transparent;
+  border-left:5px solid #888;
+}
+
+.social-facebook{
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  font-weight:700;
+  line-height:18px;
+}
+
+.social-mail{
+  width:20px!important;
+  height:14px!important;
+  border:2px solid #888;
+  border-radius:2px;
+}
+
+.social-mail:before,
+.social-mail:after{
+  content:"";
+  position:absolute;
+  top:2px;
+  width:11px;
+  height:2px;
+  background:#888;
+}
+
+.social-mail:before{
+  left:0;
+  transform:rotate(32deg);
+}
+
+.social-mail:after{
+  right:0;
+  transform:rotate(-32deg);
+}
+
+.footer-column h3{
+  margin:8px 0 22px;
+  color:#f26722;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:16px;
+  font-weight:700;
+  line-height:1;
+}
+
+.footer-column ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.footer-column li{
+  margin:0 0 21px;
+  padding:0;
+}
+
+.footer-column li,
+.footer-column a{
+  color:#8b8b8b;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:15px;
+  font-weight:400;
+  line-height:1.2;
+  text-decoration:none;
+}
+
+.footer-column a{
+  transition:color .2s ease;
+}
+
+.footer-column a:hover{
+  color:#f26722;
+}
+
+.footer-contact h3{
+  margin-bottom:23px;
+}
+
+.footer-contact li{
+  margin-bottom:20px;
+  white-space:nowrap;
+}
+
+.serving-global{
+  display:inline-block;
+  margin-top:0;
+  color:#f26722!important;
+  font-weight:500!important;
+}
+
+.footer-divider{
+  width:100%;
+  height:1px;
+  margin-top:29px;
+  background:#292929;
+}
+
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:34px;
+}
+
+.footer-bottom p{
+  margin:0;
+  color:#808080;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  font-weight:400;
+}
+
+.footer-legal{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+
+.footer-legal a{
+  color:#808080;
+  text-decoration:none;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+}
+
+.footer-legal a:hover{
+  color:#f26722;
+}
+
+
+/* ==============================
+   TABLET
+================================ */
+
+@media(max-width:1100px){
+  .footer-container{
+    max-width:calc(100% - 60px);
+  }
+
+  .footer-main{
+    grid-template-columns:1.3fr 1fr 1fr 1.3fr;
+    column-gap:25px;
+  }
+
+  .footer-description{
+    width:auto;
+    max-width:280px;
+  }
+
+  .footer-contact li{
+    white-space:normal;
+  }
+}
+
+
+/* ==============================
+   SMALL TABLET
+================================ */
+
+@media(max-width:800px){
+  .footer-container{
+    max-width:calc(100% - 40px);
+    padding-top:50px;
+    padding-bottom:40px;
+  }
+
+  .footer-main{
+    grid-template-columns:repeat(2,1fr);
+    row-gap:45px;
+    column-gap:40px;
+  }
+
+  .footer-brand{
+    grid-column:1/-1;
+  }
+
+  .footer-description{
+    max-width:350px;
+  }
+}
+
+
+/* ==============================
+   MOBILE — REFERENCE MATCH
+================================ */
+
+@media(max-width:600px){
+
+  .site-footer{
+    background:#080808;
+  }
+
+  .footer-container{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:34px 23px 32px;
+  }
+
+  /*
+    Main mobile arrangement:
+
+    Brand
+    ↓
+    Quick Links | Ministry
+    ↓
+    Divider
+    ↓
+    Contact
+    ↓
+    Serving Globally
+    ↓
+    Copyright
+    ↓
+    Legal
+    ↓
+    Designed...
+  */
+
+  .footer-main{
+    display:grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    column-gap:36px;
+    row-gap:0;
+
+    width:100%;
+  }
+
+
+  /* =========================
+     BRAND
+  ========================== */
+
+  .footer-brand{
+    grid-column:1/-1;
+
+    width:100%;
+
+    margin-bottom:38px;
+  }
+
+  .footer-logo{
+    width:154px;
+    height:auto;
+
+    margin-bottom:17px;
+  }
+
+  .footer-logo img{
+    width:154px;
+    height:auto;
+  }
+
+  .footer-description{
+    width:100%;
+    max-width:305px;
+
+    color:#5d5d5d;
+
+    font-size:14px;
+    line-height:23px;
+  }
+
+  .footer-socials{
+    gap:19px;
+    margin-top:18px;
+  }
+
+  .footer-socials a{
+    width:20px;
+    height:20px;
+  }
+
+
+  /* =========================
+     QUICK LINKS
+  ========================== */
+
+  .footer-column:nth-child(2),
+  .footer-column:nth-child(3){
+    width:100%;
+  }
+
+  .footer-column h3{
+    margin:0 0 18px;
+
+    color:#aaa;
+
+    font-family:
+      "Cormorant Garamond",
+      Georgia,
+      serif;
+
+    font-size:18px;
+    font-weight:400;
+
+    line-height:1;
+  }
+
+  .footer-column li{
+    margin-bottom:17px;
+  }
+
+  .footer-column li,
+  .footer-column a{
+    color:#5d5d5d;
+
+    font-size:14px;
+    line-height:1.15;
+  }
+
+  /*
+    Anthems is highlighted in orange
+    as shown in the reference.
+  */
+  .footer-column:nth-child(2) li:last-child a{
+    color:#f26722;
+  }
+
+
+  /* =========================
+     CONTACT
+  ========================== */
+
+  .footer-contact{
+    grid-column:1/-1;
+
+    width:100%;
+
+    margin-top:16px;
+    padding-top:29px;
+
+    border-top:1px solid #1d1d1d;
+  }
+
+  .footer-contact h3{
+    margin:0 0 17px;
+
+    color:#aaa;
+
+    font-family:
+      "Cormorant Garamond",
+      Georgia,
+      serif;
+
+    font-size:18px;
+    font-weight:400;
+  }
+
+  .footer-contact ul{
+    margin:0;
+    padding:0;
+  }
+
+  .footer-contact li{
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:17px;
+
+    white-space:normal;
+
+    color:#5d5d5d;
+
+    font-size:14px;
+  }
+
+
+  /* Email icon */
+  .footer-contact li:nth-child(1)::before{
+    content:"";
+
+    width:14px;
+    height:10px;
+
+    flex:0 0 14px;
+
+    border:1px solid #f26722;
+    border-radius:1px;
+  }
+
+
+  /* Phone prefix */
+  .footer-contact li:nth-child(2)::before{
+    content:"+91";
+
+    color:#f26722;
+
+    font-weight:500;
+  }
+
+
+  /* Location icon */
+  .footer-contact li:nth-child(3)::before{
+    content:"";
+
+    width:10px;
+    height:10px;
+
+    flex:0 0 10px;
+
+    border:2px solid #f26722;
+    border-radius:50%;
+  }
+
+
+  .serving-global{
+    margin-top:5px;
+
+    color:#8b4d35!important;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+  }
+
+
+  /* =========================
+     DIVIDER
+  ========================== */
+
+  .footer-divider{
+    display:none;
+  }
+
+
+  /* =========================
+     BOTTOM
+  ========================== */
+
+  .footer-bottom{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:flex-start;
+
+    gap:0;
+
+    padding-top:57px;
+  }
+
+  .footer-bottom p{
+    max-width:320px;
+
+    margin:0 0 18px;
+
+    color:#555;
+
+    font-size:12px;
+    line-height:18px;
+  }
+
+  /*
+    Your reference contains:
+    © 2026 Yireh Ministry. Genesis 22:8 —
+    "God Himself will provide..."
+    
+    The existing paragraph needs to contain
+    that text in the HTML.
+  */
+
+  .footer-legal{
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:23px;
+  }
+
+  .footer-legal a{
+    color:#575757;
+
+    font-size:12px;
+  }
+
+
+  /*
+    Add:
+    <p class="footer-designed">
+      Designed with love for God's Kingdom
+    </p>
+  */
+
+  .footer-designed{
+    margin:0;
+
+    color:#666;
+
+    font-family:
+      "Gabarito",
+      sans-serif;
+
+    font-size:12px;
+
+    font-style:italic;
+
+    line-height:1.2;
+  }
+}
+
+
+/* ==============================
+   SMALL MOBILE
+================================ */
+
+@media(max-width:380px){
+
+  .footer-container{
+    padding-left:23px;
+    padding-right:23px;
+  }
+
+  .footer-main{
+    column-gap:28px;
+  }
+
+  .footer-description{
+    max-width:295px;
+
+    font-size:13px;
+    line-height:21px;
+  }
+
+  .footer-column h3{
+    font-size:17px;
+  }
+
+  .footer-column li,
+  .footer-column a{
+    font-size:13px;
+  }
+
+  .footer-bottom{
+    padding-top:50px;
+  }
+
+  .footer-bottom p{
+    font-size:11px;
+    line-height:17px;
+  }
+
+  .footer-legal a,
+  .footer-designed{
+    font-size:11px;
+  }
+}
