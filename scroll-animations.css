@@ -1,100 +1,227 @@
 /* =========================================================
-   PROFESSIONAL SCROLL ANIMATIONS
+   YIREH MINISTRY
+   HOME PAGE SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
 ========================================================= */
 
 
 /* =========================================================
-   WHAT WE DO
+   COMMON REVEAL
 ========================================================= */
 
-.what-we-do-title,
-.what-we-do-description,
-.service-item,
-.what-we-do-cta {
-    will-change: transform, opacity;
+.home-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 35px, 0);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
 /* =========================================================
-   ABOUT
+   LEFT
 ========================================================= */
 
-.about-intro-title,
-.about-intro-text,
-.about-intro-btn {
-    will-change: transform, opacity;
+.home-reveal-left {
+    opacity: 0;
+
+    transform:
+        translate3d(-45px, 0, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
 /* =========================================================
-   EVENTS
+   RIGHT
 ========================================================= */
 
-.home-events-heading,
-.home-event-card,
-.home-events-explore {
-    will-change: transform, opacity;
+.home-reveal-right {
+    opacity: 0;
+
+    transform:
+        translate3d(45px, 0, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
 /* =========================================================
-   ANTHEMS
+   SCALE
 ========================================================= */
 
-.anthems-hero-left,
-.anthems-hero-right,
-.anthems-hero-button,
-.anthems-hero-bottom-line {
-    will-change: transform, opacity;
+.home-reveal-scale {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 18px, 0)
+        scale(0.97);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
 /* =========================================================
-   SONGS
+   ACTIVE
 ========================================================= */
 
-.home-songs-heading,
-.home-song-card,
-.home-songs-button {
-    will-change: transform, opacity;
+.home-reveal.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+.home-reveal-left.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+.home-reveal-right.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+.home-reveal-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
 }
 
 
 /* =========================================================
-   PRAYER
+   STAGGER
 ========================================================= */
 
-.prayer-cta-hand,
-.prayer-cta-quote,
-.prayer-cta-title,
-.prayer-cta-description,
-.prayer-cta-button {
-    will-change: transform, opacity;
+.home-stagger-1 {
+    transition-delay: 0.05s;
+}
+
+.home-stagger-2 {
+    transition-delay: 0.10s;
+}
+
+.home-stagger-3 {
+    transition-delay: 0.15s;
+}
+
+.home-stagger-4 {
+    transition-delay: 0.20s;
 }
 
 
 /* =========================================================
-   CONTACT
+   IMAGE REVEAL
 ========================================================= */
 
-.contact-cta-card,
-.contact-cta-left,
-.contact-divider,
-.contact-cta-right,
-.contact-watermark {
-    will-change: transform, opacity;
+.home-image-reveal {
+    overflow: hidden;
+}
+
+
+.home-image-reveal img {
+    display: block;
+
+    width: 100%;
+
+    transform:
+        scale(1.04);
+
+    transition:
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.home-image-reveal.is-visible img {
+    transform:
+        scale(1);
 }
 
 
 /* =========================================================
-   FOOTER
+   ANTHEMS DIVIDER
 ========================================================= */
 
-.footer-brand,
-.footer-column,
-.footer-divider,
-.footer-bottom {
-    will-change: transform, opacity;
+.home-line-reveal {
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        left center;
+
+    transition:
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.home-line-reveal.is-visible {
+    transform:
+        scaleX(1);
+}
+
+
+/* =========================================================
+   ANTHEMS CENTER BUTTON
+   IMPORTANT:
+   Do NOT combine this with home-reveal-scale.
+========================================================= */
+
+.anthems-hero-button.home-anthems-button-reveal {
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        translateY(18px)
+        scale(0.97);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.anthems-hero-button.home-anthems-button-reveal.is-visible {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   ANTHEMS BUTTON HOVER
+   Keep original centering.
+========================================================= */
+
+.anthems-hero-button:hover {
+    background: #e9692b;
+
+    transform:
+        translateX(-50%)
+        translateY(-2px);
 }
 
 
@@ -104,46 +231,190 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .what-we-do-title,
-    .what-we-do-description,
-    .service-item,
-    .what-we-do-cta,
-
-    .about-intro-title,
-    .about-intro-text,
-    .about-intro-btn,
-
-    .home-events-heading,
-    .home-event-card,
-    .home-events-explore,
-
-    .anthems-hero-left,
-    .anthems-hero-right,
-    .anthems-hero-button,
-    .anthems-hero-bottom-line,
-
-    .home-songs-heading,
-    .home-song-card,
-    .home-songs-button,
-
-    .prayer-cta-hand,
-    .prayer-cta-quote,
-    .prayer-cta-title,
-    .prayer-cta-description,
-    .prayer-cta-button,
-
-    .contact-cta-card,
-    .contact-cta-left,
-    .contact-divider,
-    .contact-cta-right,
-    .contact-watermark,
-
-    .footer-brand,
-    .footer-column,
-    .footer-divider,
-    .footer-bottom {
+    .home-reveal,
+    .home-reveal-left,
+    .home-reveal-right,
+    .home-reveal-scale,
+    .home-image-reveal img,
+    .home-line-reveal {
         opacity: 1 !important;
+
         transform: none !important;
-        filter: none !important;
+
+        transition: none !important;
     }
+
+
+    .anthems-hero-button.home-anthems-button-reveal {
+        opacity: 1 !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .home-reveal {
+        transform:
+            translate3d(0, 25px, 0);
+    }
+
+
+    .home-reveal-left {
+        transform:
+            translate3d(-28px, 0, 0);
+    }
+
+
+    .home-reveal-right {
+        transform:
+            translate3d(28px, 0, 0);
+    }
+
+
+    .home-reveal-scale {
+        transform:
+            translate3d(0, 15px, 0)
+            scale(0.98);
+    }
+
+
+    .home-image-reveal img {
+        transform:
+            scale(1.02);
+    }
+
+
+    /* Center button must retain -50% */
+
+    .anthems-hero-button.home-anthems-button-reveal {
+        transform:
+            translateX(-50%)
+            translateY(15px)
+            scale(0.98);
+    }
+
+
+    .anthems-hero-button.home-anthems-button-reveal.is-visible {
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .home-reveal {
+        transform:
+            translate3d(0, 22px, 0);
+    }
+
+
+    .home-reveal-left,
+    .home-reveal-right {
+        transform:
+            translate3d(0, 22px, 0);
+    }
+
+
+    .home-reveal-scale {
+        transform:
+            translate3d(0, 14px, 0)
+            scale(0.985);
+    }
+
+
+    /*
+       No image zoom on phones.
+    */
+
+    .home-image-reveal img {
+        transform:
+            none;
+    }
+
+
+    .home-image-reveal.is-visible img {
+        transform:
+            none;
+    }
+
+
+    .home-stagger-1 {
+        transition-delay: 0.03s;
+    }
+
+    .home-stagger-2 {
+        transition-delay: 0.06s;
+    }
+
+    .home-stagger-3 {
+        transition-delay: 0.09s;
+    }
+
+    .home-stagger-4 {
+        transition-delay: 0.12s;
+    }
+
+
+    /* ---------------------------------------------
+       CENTER BUTTON
+    --------------------------------------------- */
+
+    .anthems-hero-button.home-anthems-button-reveal {
+        transform:
+            translateX(-50%)
+            translateY(14px)
+            scale(0.985);
+    }
+
+
+    .anthems-hero-button.home-anthems-button-reveal.is-visible {
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* =========================================================
+   ANTHEMS BUTTON SCROLL REVEAL
+   Keeps absolute center positioning
+========================================================= */
+
+.anthems-hero-button.home-anthems-button-reveal {
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        translateY(18px)
+        scale(0.97);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.anthems-hero-button.home-anthems-button-reveal.is-visible {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0)
+        scale(1);
 }

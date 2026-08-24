@@ -1,7 +1,11 @@
 /* =========================================================
    YIREH MINISTRY
-   PROFESSIONAL SCROLL ANIMATIONS
-   GSAP + ScrollTrigger
+   HOME PAGE SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
+
+   IMPORTANT:
+   GSAP remains ONLY in loader.js.
+   This file does NOT use GSAP or ScrollTrigger.
 ========================================================= */
 
 (function () {
@@ -10,118 +14,177 @@
 
 
     /* =====================================================
-       SAFETY CHECK
+       REDUCED MOTION
     ===================================================== */
 
-    if (typeof gsap === "undefined") {
-        return;
-    }
-
-    if (typeof ScrollTrigger === "undefined") {
-        return;
-    }
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
     /* =====================================================
-       REGISTER SCROLLTRIGGER
+       INTERSECTION OBSERVER CHECK
     ===================================================== */
 
-    gsap.registerPlugin(ScrollTrigger);
-
-
-    /* =====================================================
-       GLOBAL GSAP CONFIG
-    ===================================================== */
-
-    gsap.config({
-        nullTargetWarn: false
-    });
-
-
-    /* =====================================================
-       COMMON SCROLL SETTINGS
-    ===================================================== */
-
-    const defaultScroll = {
-        toggleActions: "play none play reverse",
-        once: false
-    };
-
-
-    /* =====================================================
-       HELPER
-       Professional reveal animation
-    ===================================================== */
-
-    function reveal(
-        elements,
-        options = {}
+    if (
+        prefersReducedMotion ||
+        typeof IntersectionObserver ===
+            "undefined"
     ) {
 
-        const targets =
-            gsap.utils.toArray(elements);
+        /*
+           Reveal everything immediately.
+        */
 
-        if (!targets.length) {
+        document
+            .querySelectorAll(
+                `
+                .home-reveal,
+                .home-reveal-left,
+                .home-reveal-right,
+                .home-anthems-button-reveal
+                `
+            )
+            .forEach(
+                function (element) {
+
+                    element.classList.add(
+                        "is-visible"
+                    );
+
+                }
+            );
+
+        return;
+    }
+
+
+    /* =====================================================
+       OBSERVER
+    ===================================================== */
+
+    const observer =
+        new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        const element =
+                            entry.target;
+
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            element.classList.add(
+                                "is-visible"
+                            );
+
+                        } else {
+
+                            /*
+                               Remove when leaving viewport.
+
+                               This allows the animation to
+                               replay when scrolling back up.
+                            */
+
+                            element.classList.remove(
+                                "is-visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12,
+
+                rootMargin:
+                    "0px 0px -8% 0px"
+            }
+        );
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function observe(
+        element,
+        className
+    ) {
+
+        if (!element) {
             return;
         }
 
 
-        gsap.from(
-            targets,
-            {
-                opacity:
-                    options.opacity ?? 0,
+        if (className) {
 
-                y:
-                    options.y ?? 50,
+            element.classList.add(
+                className
+            );
+        }
 
-                x:
-                    options.x ?? 0,
 
-                scale:
-                    options.scale ?? 1,
+        observer.observe(
+            element
+        );
+    }
 
-                filter:
-                    options.filter ?? "blur(0px)",
 
-                duration:
-                    options.duration ?? 0.8,
+    function observeGroup(
+        elements,
+        className
+    ) {
 
-                ease:
-                    options.ease ??
-                    "power3.out",
+        if (
+            !elements ||
+            !elements.length
+        ) {
+            return;
+        }
 
-                stagger:
-                    options.stagger ?? 0,
 
-                scrollTrigger: {
+        elements.forEach(
+            function (
+                element,
+                index
+            ) {
 
-                    trigger:
-                        options.trigger ??
-                        targets[0],
+                if (className) {
 
-                    start:
-                        options.start ??
-                        "top %",
-
-                    end:
-                        options.end ??
-                        "bottom 20%",
-
-                    toggleActions:
-                        options.toggleActions ??
-                        defaultScroll.toggleActions,
-
-                    once:
-                        false
+                    element.classList.add(
+                        className
+                    );
                 }
+
+
+                element.classList.add(
+                    `home-stagger-${Math.min(
+                        index + 1,
+                        4
+                    )}`
+                );
+
+
+                observer.observe(
+                    element
+                );
+
             }
         );
     }
 
 
     /* =====================================================
-       01. WHAT WE DO
+       01. ABOUT / WHAT WE DO
     ===================================================== */
 
     const whatWeDo =
@@ -132,128 +195,84 @@
 
     if (whatWeDo) {
 
-        /* -------------------------------------------------
-           TITLE
-        ------------------------------------------------- */
-
-        reveal(
+        const title =
             whatWeDo.querySelector(
                 ".what-we-do-title"
-            ),
-            {
-                y: 55,
+            );
 
-                duration: 0.8,
-
-                start: "top 82%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           DESCRIPTION
-        ------------------------------------------------- */
-
-        reveal(
+        const description =
             whatWeDo.querySelector(
                 ".what-we-do-description"
-            ),
-            {
-                y: 30,
+            );
 
-                duration: 0.7,
-
-                start: "top 84%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           SERVICE ITEMS
-        ------------------------------------------------- */
-
-        reveal(
+        const services =
             whatWeDo.querySelectorAll(
                 ".service-item"
-            ),
-            {
-                y: 60,
+            );
 
-                duration: 0.7,
+        const images =
+            whatWeDo.querySelectorAll(
+                ".service-image"
+            );
 
-                stagger: 0.16,
+        const button =
+            whatWeDo.querySelector(
+                ".what-we-do-cta"
+            );
 
-                start: "top 82%"
+
+        /* Title */
+
+        observe(
+            title,
+            "home-reveal"
+        );
+
+
+        /* Description */
+
+        observe(
+            description,
+            "home-reveal"
+        );
+
+
+        /* Services */
+
+        observeGroup(
+            services,
+            "home-reveal"
+        );
+
+
+        /* Images */
+
+        images.forEach(
+            function (image) {
+
+                image.classList.add(
+                    "home-image-reveal"
+                );
+
+                observer.observe(
+                    image
+                );
+
             }
         );
 
 
-        /* -------------------------------------------------
-           SERVICE IMAGES
-        ------------------------------------------------- */
+        /* Button */
 
-        const serviceImages =
-            whatWeDo.querySelectorAll(
-                ".service-image img"
-            );
-
-
-        if (serviceImages.length) {
-
-            gsap.from(
-                serviceImages,
-                {
-                    scale: 1.12,
-
-                    duration: 1.1,
-
-                    ease:
-                        "power3.out",
-
-                    stagger: 0.16,
-
-                    scrollTrigger: {
-
-                        trigger:
-                            whatWeDo.querySelector(
-                                ".services-list"
-                            ),
-
-                        start: "top 82%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           CTA
-        ------------------------------------------------- */
-
-        reveal(
-            whatWeDo.querySelector(
-                ".what-we-do-cta"
-            ),
-            {
-                y: 35,
-
-                scale: 0.96,
-
-                duration: 0.7,
-
-                start: "top 88%"
-            }
+        observe(
+            button,
+            "home-anthems-button-reveal"
         );
     }
 
 
     /* =====================================================
-       02. ABOUT US
+       02. ABOUT INTRO
     ===================================================== */
 
     const about =
@@ -264,61 +283,37 @@
 
     if (about) {
 
-        /* -------------------------------------------------
-           TITLE
-        ------------------------------------------------- */
-
-        reveal(
+        const title =
             about.querySelector(
                 ".about-intro-title"
-            ),
-            {
-                y: 65,
+            );
 
-                duration: 0.9,
-
-                start: "top 82%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           TEXT
-        ------------------------------------------------- */
-
-        reveal(
+        const text =
             about.querySelectorAll(
                 ".about-intro-text"
-            ),
-            {
-                y: 35,
+            );
 
-                duration: 0.75,
+        const button =
+            about.querySelector(
+                ".about-intro-btn"
+            );
 
-                stagger: 0.12,
 
-                start: "top 84%"
-            }
+        observe(
+            title,
+            "home-reveal"
         );
 
 
-        /* -------------------------------------------------
-           BUTTON
-        ------------------------------------------------- */
+        observeGroup(
+            text,
+            "home-reveal"
+        );
 
-        reveal(
-            about.querySelector(
-                ".about-intro-btn"
-            ),
-            {
-                y: 25,
 
-                scale: 0.96,
-
-                duration: 0.7,
-
-                start: "top 88%"
-            }
+        observe(
+            button,
+            "home-anthems-button-reveal"
         );
     }
 
@@ -335,105 +330,48 @@
 
     if (events) {
 
-        /* -------------------------------------------------
-           HEADING
-        ------------------------------------------------- */
-
-        reveal(
+        const heading =
             events.querySelector(
                 ".home-events-heading"
-            ),
-            {
-                y: 50,
+            );
 
-                duration: 0.8,
-
-                start: "top 82%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           EVENT CARDS
-        ------------------------------------------------- */
-
-        reveal(
+        const cards =
             events.querySelectorAll(
                 ".home-event-card"
-            ),
-            {
-                y: 65,
+            );
 
-                scale: 0.97,
-
-                duration: 0.8,
-
-                stagger: 0.18,
-
-                start: "top 80%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           EVENT CONTENT
-        ------------------------------------------------- */
-
-        const eventContent =
+        const contents =
             events.querySelectorAll(
                 ".home-event-content"
             );
 
-
-        if (eventContent.length) {
-
-            gsap.from(
-                eventContent,
-                {
-                    opacity: 0,
-
-                    y: 25,
-
-                    duration: 0.7,
-
-                    stagger: 0.18,
-
-                    delay: 0.15,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: events,
-
-                        start: "top 75%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           EXPLORE BUTTON
-        ------------------------------------------------- */
-
-        reveal(
+        const button =
             events.querySelector(
                 ".home-events-explore"
-            ),
-            {
-                y: 30,
+            );
 
-                duration: 0.7,
 
-                start: "top 88%"
-            }
+        observe(
+            heading,
+            "home-reveal"
+        );
+
+
+        observeGroup(
+            cards,
+            "home-anthems-button-reveal"
+        );
+
+
+        observeGroup(
+            contents,
+            "home-reveal"
+        );
+
+
+        observe(
+            button,
+            "home-anthems-button-reveal"
         );
     }
 
@@ -450,30 +388,9 @@
 
     if (ticker) {
 
-        gsap.from(
+        observe(
             ticker,
-            {
-                opacity: 0,
-
-                y: 30,
-
-                duration: 0.7,
-
-                ease:
-                    "power3.out",
-
-                scrollTrigger: {
-
-                    trigger: ticker,
-
-                    start: "top 90%",
-
-                    toggleActions:
-                        "play none play reverse",
-
-                    once: false
-                }
-            }
+            "home-reveal"
         );
     }
 
@@ -511,144 +428,42 @@
             );
 
 
-        /* -------------------------------------------------
-           LEFT CONTENT
-        ------------------------------------------------- */
+        /*
+           Desktop:
+           left and right enter from opposite sides.
 
-        if (left) {
+           Mobile:
+           CSS automatically changes them into
+           vertical reveals.
+        */
 
-            gsap.from(
-                left,
-                {
-                    opacity: 0,
-
-                    x: -70,
-
-                    duration: 0.9,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: anthems,
-
-                        start: "top 80%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
+        observe(
+            left,
+            "home-reveal-left"
+        );
 
 
-        /* -------------------------------------------------
-           RIGHT CONTENT
-        ------------------------------------------------- */
-
-        if (right) {
-
-            gsap.from(
-                right,
-                {
-                    opacity: 0,
-
-                    x: 70,
-
-                    duration: 0.9,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: anthems,
-
-                        start: "top 80%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
+        observe(
+            right,
+            "home-reveal-right"
+        );
 
 
-        /* -------------------------------------------------
-           BUTTON
-        ------------------------------------------------- */
+        observe(
+            button,
+            "home-anthems-button-reveal"
+        );
 
-        if (button) {
-
-            gsap.from(
-                button,
-                {
-                    opacity: 0,
-
-                    y: 30,
-
-                    scale: 0.95,
-
-                    duration: 0.7,
-
-                    ease:
-                        "back.out(1.3)",
-
-                    scrollTrigger: {
-
-                        trigger: anthems,
-
-                        start: "top 68%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           BOTTOM LINE
-        ------------------------------------------------- */
 
         if (line) {
 
-            gsap.fromTo(
-                line,
-                {
-                    scaleX: 0,
+            line.classList.add(
+                "home-line-reveal"
+            );
 
-                    transformOrigin:
-                        "left center"
-                },
-                {
-                    scaleX: 1,
 
-                    duration: 1.1,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: line,
-
-                        start: "top 90%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
+            observer.observe(
+                line
             );
         }
     }
@@ -666,104 +481,64 @@
 
     if (songs) {
 
-        /* -------------------------------------------------
-           HEADING
-        ------------------------------------------------- */
-
-        reveal(
+        const heading =
             songs.querySelector(
                 ".home-songs-heading"
-            ),
-            {
-                y: 50,
+            );
 
-                duration: 0.8,
-
-                start: "top 82%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           SONG CARDS
-        ------------------------------------------------- */
-
-        reveal(
+        const cards =
             songs.querySelectorAll(
                 ".home-song-card"
-            ),
-            {
-                y: 65,
+            );
 
-                duration: 0.75,
-
-                stagger: 0.14,
-
-                start: "top 82%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           SONG IMAGES
-        ------------------------------------------------- */
-
-        const songImages =
+        const images =
             songs.querySelectorAll(
                 ".home-song-image"
             );
 
-
-        if (songImages.length) {
-
-            gsap.from(
-                songImages,
-                {
-                    scale: 1.08,
-
-                    duration: 1,
-
-                    ease:
-                        "power3.out",
-
-                    stagger: 0.14,
-
-                    scrollTrigger: {
-
-                        trigger:
-                            songs.querySelector(
-                                ".home-songs-grid"
-                            ),
-
-                        start: "top 82%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           BUTTON
-        ------------------------------------------------- */
-
-        reveal(
+        const button =
             songs.querySelector(
                 ".home-songs-button"
-            ),
-            {
-                y: 30,
+            );
 
-                scale: 0.96,
 
-                duration: 0.7,
+        observe(
+            heading,
+            "home-reveal"
+        );
 
-                start: "top 88%"
+
+        observeGroup(
+            cards,
+            "home-reveal"
+        );
+
+
+        /*
+           Image class only.
+           No IntersectionObserver needed if the card
+           itself controls visibility, but we keep it
+           lightweight.
+        */
+
+        images.forEach(
+            function (image) {
+
+                image.classList.add(
+                    "home-image-reveal"
+                );
+
+                observer.observe(
+                    image
+                );
+
             }
+        );
+
+
+        observe(
+            button,
+            "home-anthems-button-reveal"
         );
     }
 
@@ -780,163 +555,76 @@
 
     if (prayer) {
 
-        /* -------------------------------------------------
-           LEFT HAND
-        ------------------------------------------------- */
-
         const leftHand =
             prayer.querySelector(
                 ".prayer-cta-hand-left"
             );
-
-
-        if (leftHand) {
-
-            gsap.from(
-                leftHand,
-                {
-                    opacity: 0,
-
-                    x: -100,
-
-                    duration: 1,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: prayer,
-
-                        start: "top 72%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           RIGHT HAND
-        ------------------------------------------------- */
 
         const rightHand =
             prayer.querySelector(
                 ".prayer-cta-hand-right"
             );
 
-
-        if (rightHand) {
-
-            gsap.from(
-                rightHand,
-                {
-                    opacity: 0,
-
-                    x: 100,
-
-                    duration: 1,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: prayer,
-
-                        start: "top 72%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           QUOTE ICON
-        ------------------------------------------------- */
-
-        reveal(
+        const quote =
             prayer.querySelector(
                 ".prayer-cta-quote"
-            ),
-            {
-                y: 30,
+            );
 
-                duration: 0.6,
-
-                start: "top 78%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           TITLE
-        ------------------------------------------------- */
-
-        reveal(
+        const title =
             prayer.querySelector(
                 ".prayer-cta-title"
-            ),
-            {
-                y: 45,
+            );
 
-                duration: 0.8,
-
-                start: "top 80%"
-            }
-        );
-
-
-        /* -------------------------------------------------
-           DESCRIPTION
-        ------------------------------------------------- */
-
-        reveal(
+        const description =
             prayer.querySelector(
                 ".prayer-cta-description"
-            ),
-            {
-                y: 25,
+            );
 
-                duration: 0.65,
+        const button =
+            prayer.querySelector(
+                ".prayer-cta-button"
+            );
 
-                start: "top 84%"
-            }
+
+        observe(
+            leftHand,
+            "home-reveal-left"
         );
 
 
-        /* -------------------------------------------------
-           BUTTON
-        ------------------------------------------------- */
+        observe(
+            rightHand,
+            "home-reveal-right"
+        );
 
-        reveal(
-            prayer.querySelector(
-                ".prayer-cta-button"
-            ),
-            {
-                y: 25,
 
-                scale: 0.95,
+        observe(
+            quote,
+            "home-reveal"
+        );
 
-                duration: 0.7,
 
-                start: "top 88%"
-            }
+        observe(
+            title,
+            "home-reveal"
+        );
+
+
+        observe(
+            description,
+            "home-reveal"
+        );
+
+
+        observe(
+            button,
+            "home-anthems-button-reveal"
         );
     }
 
 
     /* =====================================================
-       08. CONTACT
+       08. CONTACT CTA
     ===================================================== */
 
     const contact =
@@ -947,212 +635,55 @@
 
     if (contact) {
 
-        /* -------------------------------------------------
-           CARD
-        ------------------------------------------------- */
-
         const card =
             contact.querySelector(
                 ".contact-cta-card"
             );
 
-
-        if (card) {
-
-            gsap.from(
-                card,
-                {
-                    opacity: 0,
-
-                    y: 60,
-
-                    scale: 0.98,
-
-                    duration: 0.9,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: contact,
-
-                        start: "top 80%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           LEFT CONTENT
-        ------------------------------------------------- */
-
-        const contactLeft =
+        const left =
             contact.querySelector(
                 ".contact-cta-left"
             );
 
-
-        if (contactLeft) {
-
-            gsap.from(
-                contactLeft,
-                {
-                    opacity: 0,
-
-                    x: -50,
-
-                    duration: 0.75,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: contact,
-
-                        start: "top 75%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           DIVIDER
-        ------------------------------------------------- */
-
-        const divider =
+        const right =
             contact.querySelector(
-                ".contact-divider"
+                ".contact-cta-right"
             );
 
-
-        if (divider) {
-
-            gsap.fromTo(
-                divider,
-                {
-                    scaleY: 0,
-
-                    transformOrigin:
-                        "top center"
-                },
-                {
-                    scaleY: 1,
-
-                    duration: 0.8,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: contact,
-
-                        start: "top 72%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           RIGHT INFO
-        ------------------------------------------------- */
-
-        const contactItems =
+        const items =
             contact.querySelectorAll(
                 ".contact-info-item"
             );
 
 
-        if (contactItems.length) {
-
-            gsap.from(
-                contactItems,
-                {
-                    opacity: 0,
-
-                    x: 50,
-
-                    duration: 0.7,
-
-                    stagger: 0.13,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: contact,
-
-                        start: "top 78%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
+        /*
+           IMPORTANT:
+           contact-watermark is completely untouched.
+        */
 
 
-        /* -------------------------------------------------
-           WATERMARK
-        ------------------------------------------------- */
-
-        const watermark =
-            contact.querySelector(
-                ".contact-watermark"
-            );
+        observe(
+            card,
+            "home-reveal"
+        );
 
 
-        if (watermark) {
+        observe(
+            left,
+            "home-reveal-left"
+        );
 
-            gsap.from(
-                watermark,
-                {
-                    opacity: 0,
 
-                    x: 80,
+        observe(
+            right,
+            "home-reveal-right"
+        );
 
-                    duration: 1,
 
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: contact,
-
-                        start: "top 82%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
+        observeGroup(
+            items,
+            "home-reveal"
+        );
     }
 
 
@@ -1168,211 +699,125 @@
 
     if (footer) {
 
-        /* -------------------------------------------------
-           BRAND
-        ------------------------------------------------- */
-
         const brand =
             footer.querySelector(
                 ".footer-brand"
             );
-
-
-        if (brand) {
-
-            gsap.from(
-                brand,
-                {
-                    opacity: 0,
-
-                    y: 40,
-
-                    duration: 0.8,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: footer,
-
-                        start: "top 84%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           FOOTER COLUMNS
-        ------------------------------------------------- */
 
         const columns =
             footer.querySelectorAll(
                 ".footer-column"
             );
 
-
-        if (columns.length) {
-
-            gsap.from(
-                columns,
-                {
-                    opacity: 0,
-
-                    y: 40,
-
-                    duration: 0.7,
-
-                    stagger: 0.12,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: footer,
-
-                        start: "top 80%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           FOOTER DIVIDER
-        ------------------------------------------------- */
-
         const divider =
             footer.querySelector(
                 ".footer-divider"
             );
 
-
-        if (divider) {
-
-            gsap.fromTo(
-                divider,
-                {
-                    scaleX: 0,
-
-                    transformOrigin:
-                        "left center"
-                },
-                {
-                    scaleX: 1,
-
-                    duration: 0.9,
-
-                    ease:
-                        "power3.out",
-
-                    scrollTrigger: {
-
-                        trigger: divider,
-
-                        start: "top 92%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
-            );
-        }
-
-
-        /* -------------------------------------------------
-           FOOTER BOTTOM
-        ------------------------------------------------- */
-
-        const footerBottom =
+        const bottom =
             footer.querySelector(
                 ".footer-bottom"
             );
 
 
-        if (footerBottom) {
+        observe(
+            brand,
+            "home-reveal"
+        );
 
-            gsap.from(
-                footerBottom,
-                {
-                    opacity: 0,
 
-                    y: 20,
+        observeGroup(
+            columns,
+            "home-reveal"
+        );
 
-                    duration: 0.6,
 
-                    ease:
-                        "power3.out",
+        if (divider) {
 
-                    scrollTrigger: {
+            divider.classList.add(
+                "home-line-reveal"
+            );
 
-                        trigger: footerBottom,
 
-                        start: "top 94%",
-
-                        toggleActions:
-                            "play none play reverse",
-
-                        once: false
-                    }
-                }
+            observer.observe(
+                divider
             );
         }
+
+
+        observe(
+            bottom,
+            "home-reveal"
+        );
     }
 
 
     /* =====================================================
-       REFRESH AFTER PAGE LOAD
+       LOADER COMPATIBILITY
     ===================================================== */
 
-    window.addEventListener(
-        "load",
-        function () {
-
-            ScrollTrigger.refresh();
-
-        }
-    );
+    const loader =
+        document.getElementById(
+            "ymLoader"
+        );
 
 
-    /* =====================================================
-       REFRESH AFTER RESIZE
-    ===================================================== */
+    if (loader) {
 
-    let resizeTimer;
+        /*
+           We do not control the loader.
 
-    window.addEventListener(
-        "resize",
-        function () {
+           loader.js remains completely responsible
+           for GSAP and the intro sequence.
+        */
 
-            clearTimeout(
-                resizeTimer
+        const loaderObserver =
+            new MutationObserver(
+                function () {
+
+                    if (
+                        !document.body.classList
+                            .contains(
+                                "ym-loading"
+                            )
+                    ) {
+
+                        /*
+                           Give the browser one frame
+                           after the loader disappears.
+                        */
+
+                        requestAnimationFrame(
+                            function () {
+
+                                document.body
+                                    .classList
+                                    .add(
+                                        "ym-content-ready"
+                                    );
+
+                            }
+                        );
+
+
+                        loaderObserver.disconnect();
+                    }
+
+                }
             );
 
-            resizeTimer =
-                setTimeout(
-                    function () {
 
-                        ScrollTrigger.refresh();
+        loaderObserver.observe(
+            document.body,
+            {
+                attributes: true,
 
-                    },
-                    250
-                );
-        }
-    );
+                attributeFilter: [
+                    "class"
+                ]
+            }
+        );
+    }
+
 
 })();
