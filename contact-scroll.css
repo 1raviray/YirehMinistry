@@ -1,0 +1,464 @@
+/* =========================================================
+   YIREH MINISTRY
+   CONTACT PAGE SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
+========================================================= */
+
+
+/* =========================================================
+   INTRO REVEAL
+========================================================= */
+
+.contact-intro-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 30px, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   INTRO SCALE
+========================================================= */
+
+.contact-intro-scale {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 18px, 0)
+        scale(0.97);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   INTRO ACTIVE
+========================================================= */
+
+.contact-intro-reveal.is-visible,
+.contact-intro-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   INTRO TYPEWRITER
+========================================================= */
+
+.contact-intro-type-lines {
+    display: block;
+
+    width: 100%;
+}
+
+
+.contact-intro-type-line {
+    display: block;
+
+    width: max-content;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    opacity: 0;
+
+    transition:
+        clip-path 0.55s ease,
+        opacity 0.2s ease;
+}
+
+
+.contact-intro-type-line.is-visible {
+    clip-path:
+        inset(0 0 0 0);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   CONTACT DETAILS
+========================================================= */
+
+.contact-details-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 28px, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-details-left {
+    opacity: 0;
+
+    transform:
+        translate3d(-35px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-details-right {
+    opacity: 0;
+
+    transform:
+        translate3d(35px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-details-reveal.is-visible,
+.contact-details-left.is-visible,
+.contact-details-right.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+}
+
+
+/* =========================================================
+   CONTACT CTA
+========================================================= */
+
+.contact-cta-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 35px, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-cta-left-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(-45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-cta-right-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-cta-item-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 22px, 0);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-cta-scale {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 18px, 0)
+        scale(0.97);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   CONTACT CTA ACTIVE
+========================================================= */
+
+.contact-cta-reveal.is-visible,
+.contact-cta-left-reveal.is-visible,
+.contact-cta-right-reveal.is-visible,
+.contact-cta-item-reveal.is-visible,
+.contact-cta-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   CTA DIVIDER
+========================================================= */
+
+.contact-divider-reveal {
+    opacity: 0;
+
+    transform:
+        scaleY(0);
+
+    transform-origin:
+        top center;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-divider-reveal.is-visible {
+    opacity: 1;
+
+    transform:
+        scaleY(1);
+}
+
+
+/* =========================================================
+   IMPORTANT
+   WATERMARK IS NEVER ANIMATED.
+========================================================= */
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.contact-footer-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 25px, 0);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.contact-footer-reveal.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+}
+
+
+/* =========================================================
+   STAGGER
+========================================================= */
+
+.contact-stagger-1 {
+    transition-delay: 0.06s;
+}
+
+.contact-stagger-2 {
+    transition-delay: 0.12s;
+}
+
+.contact-stagger-3 {
+    transition-delay: 0.18s;
+}
+
+.contact-stagger-4 {
+    transition-delay: 0.24s;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contact-intro-reveal,
+    .contact-intro-scale,
+
+    .contact-details-reveal,
+    .contact-details-left,
+    .contact-details-right,
+
+    .contact-cta-reveal,
+    .contact-cta-left-reveal,
+    .contact-cta-right-reveal,
+    .contact-cta-item-reveal,
+    .contact-cta-scale,
+
+    .contact-divider-reveal,
+
+    .contact-footer-reveal,
+
+    .contact-intro-type-line {
+        opacity: 1 !important;
+
+        transform: none !important;
+
+        clip-path: none !important;
+
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .contact-intro-reveal {
+        transform:
+            translate3d(0, 24px, 0);
+    }
+
+
+    .contact-intro-scale {
+        transform:
+            translate3d(0, 15px, 0)
+            scale(0.98);
+    }
+
+
+    .contact-details-left {
+        transform:
+            translate3d(-25px, 0, 0);
+    }
+
+
+    .contact-details-right {
+        transform:
+            translate3d(25px, 0, 0);
+    }
+
+
+    .contact-cta-left-reveal {
+        transform:
+            translate3d(-25px, 0, 0);
+    }
+
+
+    .contact-cta-right-reveal {
+        transform:
+            translate3d(25px, 0, 0);
+    }
+
+
+    .contact-cta-reveal,
+    .contact-cta-item-reveal {
+        transform:
+            translate3d(0, 22px, 0);
+    }
+
+
+    .contact-cta-scale {
+        transform:
+            translate3d(0, 15px, 0)
+            scale(0.98);
+    }
+
+
+    .contact-stagger-1 {
+        transition-delay: 0.04s;
+    }
+
+    .contact-stagger-2 {
+        transition-delay: 0.08s;
+    }
+
+    .contact-stagger-3 {
+        transition-delay: 0.12s;
+    }
+
+    .contact-stagger-4 {
+        transition-delay: 0.16s;
+    }
+
+
+    .contact-intro-type-line {
+        max-width: 100%;
+    }
+}

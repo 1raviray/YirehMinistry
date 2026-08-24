@@ -1,0 +1,257 @@
+/* =========================================================
+   YIREH MINISTRY
+   ANTHEMS PAGE SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
+========================================================= */
+
+
+/* =========================================================
+   BASE REVEAL
+========================================================= */
+
+.anthem-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 32px, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   LEFT / RIGHT
+========================================================= */
+
+.anthem-reveal-left {
+    opacity: 0;
+
+    transform:
+        translate3d(-45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.anthem-reveal-right {
+    opacity: 0;
+
+    transform:
+        translate3d(45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   SCALE REVEAL
+========================================================= */
+
+.anthem-reveal-scale {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 18px, 0)
+        scale(0.97);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.anthem-reveal.is-visible,
+.anthem-reveal-left.is-visible,
+.anthem-reveal-right.is-visible,
+.anthem-reveal-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   STAGGER
+========================================================= */
+
+.anthem-stagger-1 {
+    transition-delay: 0.06s;
+}
+
+.anthem-stagger-2 {
+    transition-delay: 0.12s;
+}
+
+.anthem-stagger-3 {
+    transition-delay: 0.18s;
+}
+
+.anthem-stagger-4 {
+    transition-delay: 0.24s;
+}
+
+
+/* =========================================================
+   TYPEWRITER
+   Intro text only
+========================================================= */
+
+.anthem-type-lines {
+    display: block;
+
+    width: 100%;
+}
+
+
+.anthem-type-line {
+    display: block;
+
+    width: max-content;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    opacity: 0;
+
+    transition:
+        clip-path 0.55s ease,
+        opacity 0.2s ease;
+}
+
+
+.anthem-type-line.is-visible {
+    clip-path:
+        inset(0 0 0 0);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   FORM
+   Form controls are deliberately not animated.
+========================================================= */
+
+.anthem-form {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* =========================================================
+   GUIDELINE / FAQ CARDS
+========================================================= */
+
+.guideline-card,
+.faq-item {
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .anthem-reveal,
+    .anthem-reveal-left,
+    .anthem-reveal-right,
+    .anthem-reveal-scale,
+    .anthem-type-line {
+        opacity: 1 !important;
+
+        transform: none !important;
+
+        clip-path: none !important;
+
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .anthem-reveal {
+        transform:
+            translate3d(0, 24px, 0);
+    }
+
+
+    .anthem-reveal-left {
+        transform:
+            translate3d(-25px, 0, 0);
+    }
+
+
+    .anthem-reveal-right {
+        transform:
+            translate3d(25px, 0, 0);
+    }
+
+
+    .anthem-reveal-scale {
+        transform:
+            translate3d(0, 16px, 0)
+            scale(0.98);
+    }
+
+
+    .anthem-stagger-1 {
+        transition-delay: 0.04s;
+    }
+
+    .anthem-stagger-2 {
+        transition-delay: 0.08s;
+    }
+
+    .anthem-stagger-3 {
+        transition-delay: 0.12s;
+    }
+
+    .anthem-stagger-4 {
+        transition-delay: 0.16s;
+    }
+
+
+    .anthem-type-line {
+        max-width: 100%;
+    }
+}

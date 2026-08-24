@@ -1,0 +1,260 @@
+/* =========================================================
+   ABOUT PAGE
+   LIGHTWEIGHT SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
+========================================================= */
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+.about-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 40px, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   DIRECTIONS
+========================================================= */
+
+.about-reveal-left {
+    opacity: 0;
+
+    transform:
+        translate3d(-55px, 0, 0);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.about-reveal-right {
+    opacity: 0;
+
+    transform:
+        translate3d(55px, 0, 0);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.about-reveal-scale {
+    opacity: 0;
+
+    transform:
+        scale(0.96);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.about-reveal.is-visible,
+.about-reveal-left.is-visible,
+.about-reveal-right.is-visible,
+.about-reveal-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   STAGGER
+========================================================= */
+
+.about-stagger-1 {
+    transition-delay: 0.08s;
+}
+
+.about-stagger-2 {
+    transition-delay: 0.16s;
+}
+
+.about-stagger-3 {
+    transition-delay: 0.24s;
+}
+
+.about-stagger-4 {
+    transition-delay: 0.32s;
+}
+
+
+/* =========================================================
+   IMAGE REVEAL
+========================================================= */
+
+.about-image-reveal {
+    overflow: hidden;
+}
+
+.about-image-reveal img {
+    display: block;
+
+    width: 100%;
+
+    transform:
+        scale(1.05);
+
+    transition:
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-image-reveal.is-visible img {
+    transform:
+        scale(1);
+}
+
+
+/* =========================================================
+   TYPEWRITER
+   Vision only
+========================================================= */
+
+.vision-type-lines {
+    display: block;
+    width: 100%;
+}
+
+.vision-type-line {
+    display: block;
+
+    overflow: hidden;
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    opacity: 0;
+
+    transition:
+        clip-path 0.55s ease,
+        opacity 0.25s ease;
+}
+
+.vision-type-line.is-visible {
+    clip-path:
+        inset(0 0 0 0);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   MISSION CARDS
+========================================================= */
+
+.mission-card.about-reveal-scale {
+    transform:
+        translate3d(0, 25px, 0)
+        scale(0.96);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .about-reveal,
+    .about-reveal-left,
+    .about-reveal-right,
+    .about-reveal-scale,
+    .vision-type-line {
+        opacity: 1 !important;
+
+        transform: none !important;
+
+        clip-path: none !important;
+
+        transition: none !important;
+    }
+
+    .about-image-reveal img {
+        transform: none !important;
+
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .about-reveal-left {
+        transform:
+            translate3d(-30px, 0, 0);
+    }
+
+    .about-reveal-right {
+        transform:
+            translate3d(30px, 0, 0);
+    }
+
+    .about-reveal {
+        transform:
+            translate3d(0, 25px, 0);
+    }
+
+
+    .about-reveal-left,
+    .about-reveal-right,
+    .about-reveal,
+    .about-reveal-scale {
+        transition-duration: 0.6s;
+    }
+
+
+    .about-stagger-1 {
+        transition-delay: 0.05s;
+    }
+
+    .about-stagger-2 {
+        transition-delay: 0.10s;
+    }
+
+    .about-stagger-3 {
+        transition-delay: 0.15s;
+    }
+
+    .about-stagger-4 {
+        transition-delay: 0.20s;
+    }
+}

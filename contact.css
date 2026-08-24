@@ -1,3 +1,236 @@
+/* =========================================================
+   CONTACT INTRO SECTION
+========================================================= */
+
+.contact-intro-section {
+    width: 100%;
+
+    background: #ededed;
+
+    padding: 56px 0 82px;
+}
+
+
+.contact-intro-container {
+    width: 1160px;
+    max-width: calc(100% - 70px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.contact-intro-eyebrow {
+    margin: 0 0 19px;
+
+    color: #242424;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    letter-spacing: -1.66px;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.contact-intro-title {
+    margin: 0 0 20px;
+
+    color: #f56622;
+
+    font-family:
+        "Gabarito",
+        Arial,
+        sans-serif;
+
+    font-size: 34.97px;
+
+    font-weight: 700;
+
+    line-height: 1.08;
+
+    letter-spacing: -1.52px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.contact-intro-description {
+    max-width: 1450px;
+
+    margin: 0;
+
+    color: #353535;
+
+    font-family:
+        "Gabarito",
+        Arial,
+        sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    line-height: 1.35;
+
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .contact-intro-section {
+        padding: 52px 0 70px;
+    }
+
+    .contact-intro-container {
+        width: calc(100% - 60px);
+        max-width: none;
+    }
+
+    .contact-intro-eyebrow {
+        font-size: 39px;
+    }
+
+    .contact-intro-title {
+        font-size: 38px;
+    }
+
+    .contact-intro-description {
+        font-size: 23px;
+        max-width: 1100px;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .contact-intro-section {
+        padding: 48px 0 62px;
+    }
+
+    .contact-intro-container {
+        width: calc(100% - 40px);
+    }
+
+    .contact-intro-eyebrow {
+        margin-bottom: 16px;
+
+        font-size: 36px;
+    }
+
+    .contact-intro-title {
+        margin-bottom: 18px;
+
+        font-size: 34px;
+    }
+
+    .contact-intro-description {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .contact-intro-section {
+        padding: 40px 0 50px;
+    }
+
+    .contact-intro-container {
+        width: 100%;
+        max-width: none;
+
+        padding:
+            0 20px;
+    }
+
+    .contact-intro-eyebrow {
+        margin-bottom: 13px;
+
+        font-size: 31px;
+
+        letter-spacing: -0.4px;
+    }
+
+    .contact-intro-title {
+        margin-bottom: 16px;
+
+        font-size: 28px;
+
+        line-height: 1.12;
+
+        letter-spacing: -0.6px;
+    }
+
+    .contact-intro-description {
+        font-size: 17px;
+
+        line-height: 1.45;
+
+        letter-spacing: -0.15px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .contact-intro-section {
+        padding: 36px 0 44px;
+    }
+
+    .contact-intro-container {
+        padding:
+            0 17px;
+    }
+
+    .contact-intro-eyebrow {
+        font-size: 28px;
+    }
+
+    .contact-intro-title {
+        font-size: 25px;
+    }
+
+    .contact-intro-description {
+        font-size: 16px;
+    }
+}
+
+
 /* =========================
    CONTACT DETAILS SECTION
 ========================= */

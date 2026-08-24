@@ -1003,3 +1003,27 @@ body{background:#ededed}
     font-size:11px;
   }
 }
+
+
+
+
+/* =========================================================
+   VISION TYPEWRITER
+========================================================= */
+
+.vision-type-lines {
+  display: block;
+  width: 100%;
+}
+
+.vision-type-line {
+  display: block;
+
+  width: max-content;
+  max-width: 100%;
+
+  opacity: 0;
+
+  clip-path:
+      inset(0 100% 0 0);
+}

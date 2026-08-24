@@ -1,0 +1,268 @@
+/* =========================================================
+   YIREH MINISTRY
+   GIVE PAGE SCROLL ANIMATIONS
+   CSS + INTERSECTION OBSERVER
+========================================================= */
+
+
+/* =========================================================
+   BASE REVEAL
+========================================================= */
+
+.give-reveal {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 35px, 0);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   LEFT / RIGHT
+========================================================= */
+
+.give-reveal-left {
+    opacity: 0;
+
+    transform:
+        translate3d(-45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.give-reveal-right {
+    opacity: 0;
+
+    transform:
+        translate3d(45px, 0, 0);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   SCALE
+========================================================= */
+
+.give-reveal-scale {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 20px, 0)
+        scale(0.97);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.give-reveal.is-visible,
+.give-reveal-left.is-visible,
+.give-reveal-right.is-visible,
+.give-reveal-scale.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   STAGGER
+========================================================= */
+
+.give-stagger-1 {
+    transition-delay: 0.06s;
+}
+
+.give-stagger-2 {
+    transition-delay: 0.12s;
+}
+
+.give-stagger-3 {
+    transition-delay: 0.18s;
+}
+
+.give-stagger-4 {
+    transition-delay: 0.24s;
+}
+
+.give-stagger-5 {
+    transition-delay: 0.30s;
+}
+
+
+/* =========================================================
+   LIST ITEMS
+========================================================= */
+
+.sponsorship-list li,
+.why-matters-list li {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 18px, 0);
+
+    transition:
+        opacity 0.55s ease,
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.sponsorship-list li.is-visible,
+.why-matters-list li.is-visible {
+    opacity: 1;
+
+    transform:
+        translate3d(0, 0, 0);
+}
+
+
+/* =========================================================
+   MISSION CARDS
+========================================================= */
+
+.giving-card,
+.mission-card {
+    will-change:
+        opacity,
+        transform;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .give-reveal,
+    .give-reveal-left,
+    .give-reveal-right,
+    .give-reveal-scale,
+    .sponsorship-list li,
+    .why-matters-list li {
+        opacity: 1 !important;
+
+        transform: none !important;
+
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .give-reveal {
+        transform:
+            translate3d(0, 25px, 0);
+    }
+
+    .give-reveal-left {
+        transform:
+            translate3d(-25px, 0, 0);
+    }
+
+    .give-reveal-right {
+        transform:
+            translate3d(25px, 0, 0);
+    }
+
+    .give-reveal-scale {
+        transform:
+            translate3d(0, 18px, 0)
+            scale(0.98);
+    }
+
+    .give-stagger-1 {
+        transition-delay: 0.04s;
+    }
+
+    .give-stagger-2 {
+        transition-delay: 0.08s;
+    }
+
+    .give-stagger-3 {
+        transition-delay: 0.12s;
+    }
+
+    .give-stagger-4 {
+        transition-delay: 0.16s;
+    }
+
+    .give-stagger-5 {
+        transition-delay: 0.20s;
+    }
+}
+
+/* =========================================================
+   GIVE INTRO TYPEWRITER
+========================================================= */
+
+.give-type-lines {
+    display: block;
+
+    width: 100%;
+}
+
+
+.give-type-line {
+    display: block;
+
+    width: max-content;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    opacity: 0;
+
+    transition:
+        clip-path 0.55s ease,
+        opacity 0.2s ease;
+}
+
+
+.give-type-line.is-visible {
+    clip-path:
+        inset(0 0 0 0);
+
+    opacity: 1;
+}

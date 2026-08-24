@@ -1,0 +1,149 @@
+/* =========================================================
+   PROFESSIONAL SCROLL ANIMATIONS
+========================================================= */
+
+
+/* =========================================================
+   WHAT WE DO
+========================================================= */
+
+.what-we-do-title,
+.what-we-do-description,
+.service-item,
+.what-we-do-cta {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-intro-title,
+.about-intro-text,
+.about-intro-btn {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+.home-events-heading,
+.home-event-card,
+.home-events-explore {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   ANTHEMS
+========================================================= */
+
+.anthems-hero-left,
+.anthems-hero-right,
+.anthems-hero-button,
+.anthems-hero-bottom-line {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   SONGS
+========================================================= */
+
+.home-songs-heading,
+.home-song-card,
+.home-songs-button {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   PRAYER
+========================================================= */
+
+.prayer-cta-hand,
+.prayer-cta-quote,
+.prayer-cta-title,
+.prayer-cta-description,
+.prayer-cta-button {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-cta-card,
+.contact-cta-left,
+.contact-divider,
+.contact-cta-right,
+.contact-watermark {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-brand,
+.footer-column,
+.footer-divider,
+.footer-bottom {
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .what-we-do-title,
+    .what-we-do-description,
+    .service-item,
+    .what-we-do-cta,
+
+    .about-intro-title,
+    .about-intro-text,
+    .about-intro-btn,
+
+    .home-events-heading,
+    .home-event-card,
+    .home-events-explore,
+
+    .anthems-hero-left,
+    .anthems-hero-right,
+    .anthems-hero-button,
+    .anthems-hero-bottom-line,
+
+    .home-songs-heading,
+    .home-song-card,
+    .home-songs-button,
+
+    .prayer-cta-hand,
+    .prayer-cta-quote,
+    .prayer-cta-title,
+    .prayer-cta-description,
+    .prayer-cta-button,
+
+    .contact-cta-card,
+    .contact-cta-left,
+    .contact-divider,
+    .contact-cta-right,
+    .contact-watermark,
+
+    .footer-brand,
+    .footer-column,
+    .footer-divider,
+    .footer-bottom {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+}

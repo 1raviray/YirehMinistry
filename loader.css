@@ -1,0 +1,463 @@
+/* =========================================================
+   YIREH MINISTRY INTRO LOADER
+========================================================= */
+
+html.ym-loading,
+body.ym-loading {
+    overflow: hidden !important;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.ym-loader {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    background: #ededed;
+
+    z-index: 999999;
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: all;
+
+    will-change:
+        opacity,
+        filter,
+        background-color;
+}
+
+
+/* =========================================================
+   MOUNTAINS
+========================================================= */
+
+.ym-loader-mountains {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 1;
+
+    opacity: 1;
+
+    pointer-events: none;
+}
+
+.ym-loader-mountains img {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center bottom;
+
+    transform: translateY(-100%);
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* =========================================================
+   WHITE LAYER
+========================================================= */
+
+.ym-loader-wash {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    background: #edededc3;
+
+    opacity: 1;
+
+    pointer-events: none;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* =========================================================
+   LOADER CONTENT
+========================================================= */
+
+.ym-loader-content {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 20px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOADER LOGO
+========================================================= */
+
+.ym-loader-logo {
+    width: 170px;
+    height: 170px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+    opacity: 0;
+
+    transform: scale(0.84);
+
+    will-change:
+        transform,
+        opacity;
+}
+
+.ym-loader-logo img {
+    width: 145px;
+    height: 145px;
+
+    display: block;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform: scale(0.75);
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+}
+
+
+/* =========================================================
+   WELCOME TO
+========================================================= */
+
+.ym-loader-welcome {
+    color: #f56622;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(30px, 3.2vw, 50px);
+
+    font-weight: 500;
+
+    font-style: italic;
+
+    line-height: 1;
+
+    letter-spacing: 0.93px;
+
+    margin-bottom: 18px;
+
+    white-space: nowrap;
+
+    will-change:
+        opacity;
+}
+
+
+/* Individual letters */
+.ym-loader-welcome span {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform: scale(2.5);
+
+    transform-origin: center center;
+
+    filter: blur(7px);
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+}
+
+
+/* =========================================================
+   YIREH MINISTRY
+========================================================= */
+
+.ym-loader-title {
+    color: #f56622;
+
+    font-family:
+        "Mate SC",
+        Georgia,
+        serif;
+
+    font-size: clamp(52px, 7vw, 115px);
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    white-space: nowrap;
+
+    will-change:
+        opacity;
+}
+
+
+/* Individual letters */
+.ym-loader-title span {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform: scale(2.5);
+
+    transform-origin: center center;
+
+    filter: blur(8px);
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+}
+
+
+/* Word space */
+.ym-loader-title .ym-loader-space {
+    width: 0.25em;
+
+    opacity: 1;
+
+    transform: none;
+
+    filter: none;
+}
+
+
+/* =========================================================
+   HEADER INITIAL STATE
+========================================================= */
+
+body.ym-loading .site-header .logo {
+    opacity: 0;
+}
+
+body.ym-loading .site-header .nav-links {
+    opacity: 0;
+
+    transform:
+        translateY(-18px);
+}
+
+
+/* =========================================================
+   HOMEPAGE INITIAL STATE
+========================================================= */
+
+/* Homepage mountain is controlled by GSAP */
+body.ym-loading .home-bg {
+    opacity: 0;
+}
+
+
+/* Promise */
+body.ym-loading .home-promise {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+}
+
+
+/* Main message */
+body.ym-loading .home-message {
+    opacity: 1;
+    transform: none;
+}
+
+body.ym-loading .home-message h1 {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+body.ym-loading .home-description {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.ym-loading .home-founders {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+body.ym-loading .home-story-btn {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.ym-loading .home-foreground {
+    opacity: 0;
+    transform: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .ym-loader-logo {
+        width: 135px;
+        height: 135px;
+    }
+
+    .ym-loader-logo img {
+        width: 115px;
+        height: 115px;
+    }
+
+    .ym-loader-welcome {
+        font-size: 28px;
+    }
+
+    .ym-loader-title {
+        font-size: 9vw;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .ym-loader-content {
+        padding: 20px;
+    }
+
+    .ym-loader-logo {
+        width: 115px;
+        height: 115px;
+
+        margin-bottom: 23px;
+    }
+
+    .ym-loader-logo img {
+        width: 98px;
+        height: 98px;
+    }
+
+    .ym-loader-welcome {
+        font-size: 24px;
+    }
+
+    .ym-loader-title {
+        font-size: 10vw;
+
+        letter-spacing: -1px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .ym-loader-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ym-loader-logo img {
+        width: 84px;
+        height: 84px;
+    }
+
+    .ym-loader-welcome {
+        font-size: 22px;
+    }
+
+    .ym-loader-title {
+        font-size: 10.2vw;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ym-loader {
+        display: none;
+    }
+
+    body.ym-loading .site-header .logo,
+    body.ym-loading .site-header .nav-links,
+    body.ym-loading .home-bg,
+    body.ym-loading .home-promise,
+    body.ym-loading .home-message,
+    body.ym-loading .home-message h1,
+    body.ym-loading .home-description,
+    body.ym-loading .home-founders,
+    body.ym-loading .home-story-btn,
+    body.ym-loading .home-foreground {
+        opacity: 1;
+
+        transform: none;
+    }
+
+    html.ym-loading,
+    body.ym-loading {
+        overflow: auto !important;
+    }
+}
+
