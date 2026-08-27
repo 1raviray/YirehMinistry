@@ -463,7 +463,7 @@ form.addEventListener(
 
           const response =
               await fetch(
-                  "http://localhost:10000/api/anthems",
+                  "https://yirehministry.onrender.com/api/anthems",
                   {
                       method:
                           "POST",
