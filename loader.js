@@ -379,34 +379,34 @@
 
     /* Loader mountain */
 
-    gsap.set(
-        mountains,
-        {
-            y: 1000,
-            opacity: 1
-        }
-    );
+    // gsap.set(
+    //     mountains,
+    //     {
+    //         y: 1000,
+    //         opacity: 1
+    //     }
+    // );
 
 
     /* Homepage mountain */
 
-    gsap.set(
-        homeBackground,
-        {
-            opacity: 0
-        }
-    );
+    // gsap.set(
+    //     homeBackground,
+    //     {
+    //         opacity: 0
+    //     }
+    // );
 
 
     /* White wash */
 
-    gsap.set(
-        wash,
-        {
-            y: -1000,
-            opacity: 1
-        }
-    );
+    // gsap.set(
+    //     wash,
+    //     {
+    //         y: -1000,
+    //         opacity: 1
+    //     }
+    // );
 
 
     /* Loader logo */
@@ -487,7 +487,7 @@
         {
             y: 0,
 
-            duration: 0.95,
+            duration: 0.01,
 
             ease:
                 "power4.out"
@@ -504,7 +504,7 @@
         {
             y: 0,
 
-            duration: 0.55,
+            duration: 0.01,
 
             ease:
                 "power3.out"

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Donate - Yireh Ministry</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0;
+
+            background: #f5f5f5;
+        }
+
+
+        .donation-box {
+
+            width: 320px;
+
+            padding: 30px;
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        h2 {
+
+            margin-top: 0;
+
+            margin-bottom: 20px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        #donationAmount {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 12px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+        }
+
+
+        #donateButton {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #f56622;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        #donateButton:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="donation-box">
+
+        <h2>Support Yireh Ministry</h2>
+    
+    
+        <label for="donorName">
+            Name
+        </label>
+    
+        <input
+            type="text"
+            id="donorName"
+            placeholder="Your name"
+        >
+    
+    
+        <label for="donorEmail">
+            Email
+        </label>
+    
+        <input
+            type="email"
+            id="donorEmail"
+            placeholder="Your email address"
+            required
+        >
+    
+    
+        <label for="donorPhone">
+            Phone
+        </label>
+    
+        <input
+            type="tel"
+            id="donorPhone"
+            placeholder="Phone number"
+        >
+    
+    
+        <label for="donationAmount">
+            Donation Amount (₹)
+        </label>
+    
+        <input
+            type="number"
+            id="donationAmount"
+            min="10"
+            step="1"
+            placeholder="Enter amount"
+        >
+    
+    
+        <button
+            type="button"
+            id="donateButton"
+        >
+            Checkout
+        </button>
+    
+    </div>
+
+
+    <!-- =====================================================
+         RAZORPAY CHECKOUT
+    ====================================================== -->
+
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js">
+    </script>
+
+
+<script
+src="https://checkout.razorpay.com/v1/checkout.js">
+</script>
+
+
+<script>
+
+"use strict";
+
+
+const donateButton =
+document.getElementById(
+    "donateButton"
+);
+
+
+const amountInput =
+document.getElementById(
+    "donationAmount"
+);
+
+
+const nameInput =
+document.getElementById(
+    "donorName"
+);
+
+
+const emailInput =
+document.getElementById(
+    "donorEmail"
+);
+
+
+const phoneInput =
+document.getElementById(
+    "donorPhone"
+);
+
+
+donateButton.addEventListener(
+"click",
+async function () {
+
+    try {
+
+        const amount =
+            Number(
+                amountInput.value
+            );
+
+
+        const name =
+            nameInput.value.trim();
+
+
+        const email =
+            emailInput.value.trim();
+
+
+        const phone =
+            phoneInput.value.trim();
+
+
+        /* -----------------------------------------
+           VALIDATE AMOUNT
+        ----------------------------------------- */
+
+        if (
+            !Number.isFinite(amount) ||
+            amount < 10
+        ) {
+
+            alert(
+                "Please enter a valid donation amount of at least ₹10."
+            );
+
+            return;
+        }
+
+
+        /* -----------------------------------------
+           VALIDATE EMAIL
+        ----------------------------------------- */
+
+        if (
+            !email ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(email)
+        ) {
+
+            alert(
+                "Please enter a valid email address."
+            );
+
+            return;
+        }
+
+
+        donateButton.disabled =
+            true;
+
+
+        donateButton.textContent =
+            "Creating order...";
+
+
+        /* -----------------------------------------
+           CREATE ORDER
+        ----------------------------------------- */
+
+        const response =
+            await fetch(
+                "http://localhost:10000/api/donate/create-order",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            amount:
+                                amount,
+
+                            name:
+                                name,
+
+                            email:
+                                email,
+
+                            phone:
+                                phone
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Unable to create donation order."
+            );
+        }
+
+
+        donateButton.textContent =
+            "Opening checkout...";
+
+
+        /* -----------------------------------------
+           RAZORPAY
+        ----------------------------------------- */
+
+        const options = {
+
+            key:
+                data.keyId,
+
+            amount:
+                data.amount,
+
+            currency:
+                data.currency,
+
+            name:
+                "Yireh Ministry",
+
+            description:
+                "Donation to Yireh Ministry",
+
+            order_id:
+                data.orderId,
+
+
+            prefill: {
+
+                name:
+                    name,
+
+                email:
+                    email,
+
+                contact:
+                    phone
+
+            },
+
+
+            theme: {
+
+                color:
+                    "#f56622"
+
+            },
+
+
+            handler:
+                async function (
+                    paymentResponse
+                ) {
+
+                    try {
+
+                        donateButton.textContent =
+                            "Verifying payment...";
+
+
+                        /* ---------------------------------
+                           VERIFY ON SERVER
+                        --------------------------------- */
+
+                        const verifyResponse =
+                            await fetch(
+                                "http://localhost:10000/api/donate/verify",
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json"
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            paymentResponse
+                                        )
+
+                                }
+                            );
+
+
+                        const verifyData =
+                            await verifyResponse.json();
+
+
+                        if (
+                            !verifyResponse.ok ||
+                            !verifyData.success
+                        ) {
+
+                            throw new Error(
+                                verifyData.message ||
+                                "Payment verification failed."
+                            );
+                        }
+
+
+                        /* ---------------------------------
+                           SUCCESS
+                        --------------------------------- */
+
+                        alert(
+                            verifyData.emailSent
+                                ? "Thank you! Your donation was successful. A confirmation email has been sent to you."
+                                : "Thank you! Your donation was successful."
+                        );
+
+
+                        donateButton.disabled =
+                            false;
+
+
+                        donateButton.textContent =
+                            "Checkout";
+
+
+                        amountInput.value =
+                            "";
+
+
+                    } catch (
+                        error
+                    ) {
+
+                        console.error(
+                            "Payment verification error:",
+                            error
+                        );
+
+
+                        alert(
+                            error.message ||
+                            "Unable to verify the payment."
+                        );
+
+
+                        donateButton.disabled =
+                            false;
+
+
+                        donateButton.textContent =
+                            "Checkout";
+                    }
+
+                },
+
+
+            modal: {
+
+                ondismiss:
+                    function () {
+
+                        donateButton.disabled =
+                            false;
+
+                        donateButton.textContent =
+                            "Checkout";
+
+                    }
+
+            }
+
+        };
+
+
+        /* -----------------------------------------
+           OPEN CHECKOUT
+        ----------------------------------------- */
+
+        const checkout =
+            new Razorpay(
+                options
+            );
+
+
+        checkout.on(
+            "payment.failed",
+            function (
+                response
+            ) {
+
+                console.error(
+                    "Razorpay payment failed:",
+                    response.error
+                );
+
+
+                alert(
+                    response.error?.description ||
+                    "Payment failed. Please try again."
+                );
+
+
+                donateButton.disabled =
+                    false;
+
+
+                donateButton.textContent =
+                    "Checkout";
+
+            }
+        );
+
+
+        checkout.open();
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            "Donation error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to start payment."
+        );
+
+
+        donateButton.disabled =
+            false;
+
+
+        donateButton.textContent =
+            "Checkout";
+    }
+
+}
+);
+
+</script>
+
+</body>
+
+</html>

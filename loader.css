@@ -74,7 +74,7 @@ body.ym-loading {
     object-fit: cover;
     object-position: center bottom;
 
-    transform: translateY(-100%);
+    /* transform: translateY(-100%); */
 
     will-change:
         transform,

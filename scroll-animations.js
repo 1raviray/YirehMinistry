@@ -1,11 +1,10 @@
 /* =========================================================
    YIREH MINISTRY
    HOME PAGE SCROLL ANIMATIONS
-   CSS + INTERSECTION OBSERVER
 
-   IMPORTANT:
-   GSAP remains ONLY in loader.js.
-   This file does NOT use GSAP or ScrollTrigger.
+   CSS + IntersectionObserver
+   NO GSAP
+   NO ScrollTrigger
 ========================================================= */
 
 (function () {
@@ -17,44 +16,22 @@
        REDUCED MOTION
     ===================================================== */
 
-    const prefersReducedMotion =
+    const reducedMotion =
         window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         ).matches;
 
 
     /* =====================================================
-       INTERSECTION OBSERVER CHECK
+       OBSERVER CHECK
     ===================================================== */
 
     if (
-        prefersReducedMotion ||
         typeof IntersectionObserver ===
-            "undefined"
+        "undefined"
     ) {
 
-        /*
-           Reveal everything immediately.
-        */
-
-        document
-            .querySelectorAll(
-                `
-                .home-reveal,
-                .home-reveal-left,
-                .home-reveal-right,
-                .home-anthems-button-reveal
-                `
-            )
-            .forEach(
-                function (element) {
-
-                    element.classList.add(
-                        "is-visible"
-                    );
-
-                }
-            );
+        revealAll();
 
         return;
     }
@@ -85,17 +62,9 @@
 
                         } else {
 
-                            /*
-                               Remove when leaving viewport.
-
-                               This allows the animation to
-                               replay when scrolling back up.
-                            */
-
                             element.classList.remove(
                                 "is-visible"
                             );
-
                         }
 
                     }
@@ -103,10 +72,13 @@
 
             },
             {
-                threshold: 0.12,
+
+                threshold:
+                    0.12,
 
                 rootMargin:
                     "0px 0px -8% 0px"
+
             }
         );
 
@@ -117,7 +89,7 @@
 
     function observe(
         element,
-        className
+        animationClass
     ) {
 
         if (!element) {
@@ -125,12 +97,9 @@
         }
 
 
-        if (className) {
-
-            element.classList.add(
-                className
-            );
-        }
+        element.classList.add(
+            animationClass
+        );
 
 
         observer.observe(
@@ -141,13 +110,14 @@
 
     function observeGroup(
         elements,
-        className
+        animationClass
     ) {
 
         if (
             !elements ||
             !elements.length
         ) {
+
             return;
         }
 
@@ -158,12 +128,9 @@
                 index
             ) {
 
-                if (className) {
-
-                    element.classList.add(
-                        className
-                    );
-                }
+                element.classList.add(
+                    animationClass
+                );
 
 
                 element.classList.add(
@@ -184,7 +151,21 @@
 
 
     /* =====================================================
-       01. ABOUT / WHAT WE DO
+       DO NOT OBSERVE HOME HERO
+       
+       Loader.js owns:
+       - Header
+       - Promise
+       - Home heading
+       - Description
+       - Founders
+       - Story button
+       - Foreground
+    ===================================================== */
+
+
+    /* =====================================================
+       01 — WHAT WE DO
     ===================================================== */
 
     const whatWeDo =
@@ -195,84 +176,60 @@
 
     if (whatWeDo) {
 
-        const title =
+        observe(
             whatWeDo.querySelector(
                 ".what-we-do-title"
-            );
+            ),
+            "home-reveal"
+        );
 
-        const description =
+
+        observe(
             whatWeDo.querySelector(
                 ".what-we-do-description"
-            );
-
-        const services =
-            whatWeDo.querySelectorAll(
-                ".service-item"
-            );
-
-        const images =
-            whatWeDo.querySelectorAll(
-                ".service-image"
-            );
-
-        const button =
-            whatWeDo.querySelector(
-                ".what-we-do-cta"
-            );
-
-
-        /* Title */
-
-        observe(
-            title,
+            ),
             "home-reveal"
         );
 
-
-        /* Description */
-
-        observe(
-            description,
-            "home-reveal"
-        );
-
-
-        /* Services */
 
         observeGroup(
-            services,
+            whatWeDo.querySelectorAll(
+                ".service-item"
+            ),
             "home-reveal"
         );
 
 
-        /* Images */
+        whatWeDo
+            .querySelectorAll(
+                ".service-image"
+            )
+            .forEach(
+                function (image) {
 
-        images.forEach(
-            function (image) {
+                    image.classList.add(
+                        "home-image-reveal"
+                    );
 
-                image.classList.add(
-                    "home-image-reveal"
-                );
+                    observer.observe(
+                        image
+                    );
 
-                observer.observe(
-                    image
-                );
+                }
+            );
 
-            }
-        );
-
-
-        /* Button */
 
         observe(
-            button,
-            "home-anthems-button-reveal"
+            whatWeDo.querySelector(
+                ".what-we-do-cta"
+            ),
+            "home-reveal-scale"
         );
     }
 
 
     /* =====================================================
-       02. ABOUT INTRO
+       02 — ABOUT
     ===================================================== */
 
     const about =
@@ -283,43 +240,33 @@
 
     if (about) {
 
-        const title =
+        observe(
             about.querySelector(
                 ".about-intro-title"
-            );
-
-        const text =
-            about.querySelectorAll(
-                ".about-intro-text"
-            );
-
-        const button =
-            about.querySelector(
-                ".about-intro-btn"
-            );
-
-
-        observe(
-            title,
+            ),
             "home-reveal"
         );
 
 
         observeGroup(
-            text,
+            about.querySelectorAll(
+                ".about-intro-text"
+            ),
             "home-reveal"
         );
 
 
         observe(
-            button,
-            "home-anthems-button-reveal"
+            about.querySelector(
+                ".about-intro-btn"
+            ),
+            "home-reveal-scale"
         );
     }
 
 
     /* =====================================================
-       03. EVENTS
+       03 — EVENTS
     ===================================================== */
 
     const events =
@@ -330,54 +277,41 @@
 
     if (events) {
 
-        const heading =
+        observe(
             events.querySelector(
                 ".home-events-heading"
-            );
+            ),
+            "home-reveal"
+        );
 
-        const cards =
+
+        observeGroup(
             events.querySelectorAll(
                 ".home-event-card"
-            );
+            ),
+            "home-reveal-scale"
+        );
 
-        const contents =
+
+        observeGroup(
             events.querySelectorAll(
                 ".home-event-content"
-            );
+            ),
+            "home-reveal"
+        );
 
-        const button =
+
+        observe(
             events.querySelector(
                 ".home-events-explore"
-            );
-
-
-        observe(
-            heading,
-            "home-reveal"
-        );
-
-
-        observeGroup(
-            cards,
-            "home-anthems-button-reveal"
-        );
-
-
-        observeGroup(
-            contents,
-            "home-reveal"
-        );
-
-
-        observe(
-            button,
-            "home-anthems-button-reveal"
+            ),
+            "home-reveal-scale"
         );
     }
 
 
     /* =====================================================
-       04. EVENTS TICKER
+       04 — TICKER
     ===================================================== */
 
     const ticker =
@@ -396,7 +330,7 @@
 
 
     /* =====================================================
-       05. ANTHEMS
+       05 — ANTHEMS
     ===================================================== */
 
     const anthems =
@@ -407,52 +341,40 @@
 
     if (anthems) {
 
-        const left =
+        observe(
             anthems.querySelector(
                 ".anthems-hero-left"
-            );
-
-        const right =
-            anthems.querySelector(
-                ".anthems-hero-right"
-            );
-
-        const button =
-            anthems.querySelector(
-                ".anthems-hero-button"
-            );
-
-        const line =
-            anthems.querySelector(
-                ".anthems-hero-bottom-line"
-            );
-
-
-        /*
-           Desktop:
-           left and right enter from opposite sides.
-
-           Mobile:
-           CSS automatically changes them into
-           vertical reveals.
-        */
-
-        observe(
-            left,
+            ),
             "home-reveal-left"
         );
 
 
         observe(
-            right,
+            anthems.querySelector(
+                ".anthems-hero-right"
+            ),
             "home-reveal-right"
         );
 
 
+        /*
+           IMPORTANT:
+           This special class is ONLY used here.
+           It preserves translateX(-50%).
+        */
+
         observe(
-            button,
+            anthems.querySelector(
+                ".anthems-hero-button"
+            ),
             "home-anthems-button-reveal"
         );
+
+
+        const line =
+            anthems.querySelector(
+                ".anthems-hero-bottom-line"
+            );
 
 
         if (line) {
@@ -470,7 +392,7 @@
 
 
     /* =====================================================
-       06. SONGS
+       06 — SONGS
     ===================================================== */
 
     const songs =
@@ -481,70 +403,52 @@
 
     if (songs) {
 
-        const heading =
+        observe(
             songs.querySelector(
                 ".home-songs-heading"
-            );
-
-        const cards =
-            songs.querySelectorAll(
-                ".home-song-card"
-            );
-
-        const images =
-            songs.querySelectorAll(
-                ".home-song-image"
-            );
-
-        const button =
-            songs.querySelector(
-                ".home-songs-button"
-            );
-
-
-        observe(
-            heading,
+            ),
             "home-reveal"
         );
 
 
         observeGroup(
-            cards,
+            songs.querySelectorAll(
+                ".home-song-card"
+            ),
             "home-reveal"
         );
 
 
-        /*
-           Image class only.
-           No IntersectionObserver needed if the card
-           itself controls visibility, but we keep it
-           lightweight.
-        */
+        songs
+            .querySelectorAll(
+                ".home-song-image"
+            )
+            .forEach(
+                function (image) {
 
-        images.forEach(
-            function (image) {
+                    image.classList.add(
+                        "home-image-reveal"
+                    );
 
-                image.classList.add(
-                    "home-image-reveal"
-                );
+                    observer.observe(
+                        image
+                    );
 
-                observer.observe(
-                    image
-                );
-
-            }
-        );
+                }
+            );
 
 
         observe(
-            button,
-            "home-anthems-button-reveal"
+            songs.querySelector(
+                ".home-songs-button"
+            ),
+            "home-reveal-scale"
         );
     }
 
 
     /* =====================================================
-       07. PRAYER
+       07 — PRAYER
     ===================================================== */
 
     const prayer =
@@ -555,76 +459,57 @@
 
     if (prayer) {
 
-        const leftHand =
+        observe(
             prayer.querySelector(
                 ".prayer-cta-hand-left"
-            );
-
-        const rightHand =
-            prayer.querySelector(
-                ".prayer-cta-hand-right"
-            );
-
-        const quote =
-            prayer.querySelector(
-                ".prayer-cta-quote"
-            );
-
-        const title =
-            prayer.querySelector(
-                ".prayer-cta-title"
-            );
-
-        const description =
-            prayer.querySelector(
-                ".prayer-cta-description"
-            );
-
-        const button =
-            prayer.querySelector(
-                ".prayer-cta-button"
-            );
-
-
-        observe(
-            leftHand,
+            ),
             "home-reveal-left"
         );
 
 
         observe(
-            rightHand,
+            prayer.querySelector(
+                ".prayer-cta-hand-right"
+            ),
             "home-reveal-right"
         );
 
 
         observe(
-            quote,
+            prayer.querySelector(
+                ".prayer-cta-quote"
+            ),
             "home-reveal"
         );
 
 
         observe(
-            title,
+            prayer.querySelector(
+                ".prayer-cta-title"
+            ),
             "home-reveal"
         );
 
 
         observe(
-            description,
+            prayer.querySelector(
+                ".prayer-cta-description"
+            ),
             "home-reveal"
         );
 
 
         observe(
-            button,
-            "home-anthems-button-reveal"
+            prayer.querySelector(
+                ".prayer-cta-button"
+            ),
+            "home-reveal-scale"
         );
     }
 
 
     /* =====================================================
-       08. CONTACT CTA
+       08 — CONTACT CTA
     ===================================================== */
 
     const contact =
@@ -635,60 +520,45 @@
 
     if (contact) {
 
-        const card =
-            contact.querySelector(
-                ".contact-cta-card"
-            );
-
-        const left =
-            contact.querySelector(
-                ".contact-cta-left"
-            );
-
-        const right =
-            contact.querySelector(
-                ".contact-cta-right"
-            );
-
-        const items =
-            contact.querySelectorAll(
-                ".contact-info-item"
-            );
-
-
         /*
-           IMPORTANT:
-           contact-watermark is completely untouched.
+           DO NOT TOUCH .contact-watermark.
         */
 
-
         observe(
-            card,
+            contact.querySelector(
+                ".contact-cta-card"
+            ),
             "home-reveal"
         );
 
 
         observe(
-            left,
+            contact.querySelector(
+                ".contact-cta-left"
+            ),
             "home-reveal-left"
         );
 
 
         observe(
-            right,
+            contact.querySelector(
+                ".contact-cta-right"
+            ),
             "home-reveal-right"
         );
 
 
         observeGroup(
-            items,
+            contact.querySelectorAll(
+                ".contact-info-item"
+            ),
             "home-reveal"
         );
     }
 
 
     /* =====================================================
-       09. FOOTER
+       09 — FOOTER
     ===================================================== */
 
     const footer =
@@ -699,37 +569,26 @@
 
     if (footer) {
 
-        const brand =
+        observe(
             footer.querySelector(
                 ".footer-brand"
-            );
-
-        const columns =
-            footer.querySelectorAll(
-                ".footer-column"
-            );
-
-        const divider =
-            footer.querySelector(
-                ".footer-divider"
-            );
-
-        const bottom =
-            footer.querySelector(
-                ".footer-bottom"
-            );
-
-
-        observe(
-            brand,
+            ),
             "home-reveal"
         );
 
 
         observeGroup(
-            columns,
+            footer.querySelectorAll(
+                ".footer-column"
+            ),
             "home-reveal"
         );
+
+
+        const divider =
+            footer.querySelector(
+                ".footer-divider"
+            );
 
 
         if (divider) {
@@ -746,77 +605,45 @@
 
 
         observe(
-            bottom,
+            footer.querySelector(
+                ".footer-bottom"
+            ),
             "home-reveal"
         );
     }
 
 
     /* =====================================================
-       LOADER COMPATIBILITY
+       REDUCED MOTION
     ===================================================== */
 
-    const loader =
-        document.getElementById(
-            "ymLoader"
-        );
+    if (reducedMotion) {
+
+        revealAll();
+    }
 
 
-    if (loader) {
+    function revealAll() {
 
-        /*
-           We do not control the loader.
+        document
+            .querySelectorAll(
+                `
+                .home-reveal,
+                .home-reveal-left,
+                .home-reveal-right,
+                .home-reveal-scale,
+                .home-anthems-button-reveal
+                `
+            )
+            .forEach(
+                function (element) {
 
-           loader.js remains completely responsible
-           for GSAP and the intro sequence.
-        */
-
-        const loaderObserver =
-            new MutationObserver(
-                function () {
-
-                    if (
-                        !document.body.classList
-                            .contains(
-                                "ym-loading"
-                            )
-                    ) {
-
-                        /*
-                           Give the browser one frame
-                           after the loader disappears.
-                        */
-
-                        requestAnimationFrame(
-                            function () {
-
-                                document.body
-                                    .classList
-                                    .add(
-                                        "ym-content-ready"
-                                    );
-
-                            }
-                        );
-
-
-                        loaderObserver.disconnect();
-                    }
+                    element.classList.add(
+                        "is-visible"
+                    );
 
                 }
             );
-
-
-        loaderObserver.observe(
-            document.body,
-            {
-                attributes: true,
-
-                attributeFilter: [
-                    "class"
-                ]
-            }
-        );
     }
 
 

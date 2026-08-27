@@ -345,74 +345,287 @@ agreement.addEventListener(
    FORM SUBMIT
 ========================= */
 
-form.addEventListener("submit", (event) => {
+/* =========================================================
+   BACKEND SUBMISSION
+========================================================= */
 
-  if (!checkAttachmentSize()) {
+form.addEventListener(
+  "submit",
+  async (event) => {
 
-    event.preventDefault();
+      event.preventDefault();
 
-    return;
+
+      if (!isFormValid()) {
+
+          updateSubmitState();
+
+          return;
+      }
+
+
+      /* ---------------------------------------------
+         FINAL FILE SIZE CHECK
+      --------------------------------------------- */
+
+      const MAX_FILE_SIZE =
+          10 * 1024 * 1024;
+
+
+      const MAX_TOTAL_SIZE =
+          18 * 1024 * 1024;
+
+
+      const tune =
+          tuneFile.files[0] ||
+          null;
+
+      const support =
+          supportFile.files[0] ||
+          null;
+
+
+      if (
+          tune &&
+          tune.size >
+          MAX_FILE_SIZE
+      ) {
+
+          alert(
+              "The tune/audio file must be 10 MB or smaller."
+          );
+
+          return;
+      }
+
+
+      if (
+          support &&
+          support.size >
+          MAX_FILE_SIZE
+      ) {
+
+          alert(
+              "The supporting file must be 10 MB or smaller."
+          );
+
+          return;
+      }
+
+
+      const totalSize =
+          (tune?.size || 0) +
+          (support?.size || 0);
+
+
+      if (
+          totalSize >
+          MAX_TOTAL_SIZE
+      ) {
+
+          alert(
+              "The combined attachment size must not exceed 18 MB."
+          );
+
+          return;
+      }
+
+
+      /* ---------------------------------------------
+         SUBMIT STATE
+      --------------------------------------------- */
+
+      submitBtn.disabled =
+          true;
+
+      submitBtn.textContent =
+          "Sending...";
+
+
+      try {
+
+          const formData =
+              new FormData(
+                  form
+              );
+
+
+          /*
+             Make sure backend receives
+             the submission type.
+          */
+
+          formData.set(
+              "submissionType",
+              submissionType
+          );
+
+
+          const response =
+              await fetch(
+                  "http://localhost:10000/api/anthems",
+                  {
+                      method:
+                          "POST",
+
+                      body:
+                          formData
+                  }
+              );
+
+
+          const result =
+              await response.json();
+
+
+          if (
+              !response.ok ||
+              !result.success
+          ) {
+
+              throw new Error(
+                  result.message ||
+                  "Submission failed."
+              );
+          }
+
+
+          /* -----------------------------------------
+             SUCCESS
+          ----------------------------------------- */
+
+          alert(
+              "Your anthem submission was sent successfully!"
+          );
+
+
+          form.reset();
+
+
+          tuneFileName.textContent =
+              "";
+
+          supportFileName.textContent =
+              "";
+
+
+          document
+              .getElementById(
+                  "tuneUploadBox"
+              )
+              ?.classList
+              .remove(
+                  "has-file"
+              );
+
+
+          document
+              .getElementById(
+                  "supportUploadBox"
+              )
+              ?.classList
+              .remove(
+                  "has-file"
+              );
+
+
+          updateSubmitState();
+
+      } catch (error) {
+
+          console.error(
+              "Submission error:",
+              error
+          );
+
+
+          alert(
+              error.message ||
+              "Unable to submit your anthem."
+          );
+
+      } finally {
+
+          submitBtn.textContent =
+              "Submit";
+
+
+          updateSubmitState();
+      }
+
   }
-
-  const nameValid =
-    validateField(
-      fullName,
-      "nameGroup"
-    );
-
-  const locationValid =
-    validateField(
-      locationInput,
-      "locationGroup"
-    );
-
-  const phoneValid =
-    validateField(
-      phone,
-      "phoneGroup"
-    );
-
-  const lyricsValid =
-    validateField(
-      lyrics,
-      "lyricsGroup"
-    );
-
-  const tuneValid =
-    submissionType === "lyrics" ||
-    tuneFile.files.length > 0;
-
-  const agreementValid =
-    agreement.checked;
+);
 
 
-  if (
-    !nameValid ||
-    !locationValid ||
-    !phoneValid ||
-    !lyricsValid ||
-    !tuneValid ||
-    !agreementValid
-  ) {
 
-    event.preventDefault();
+// form.addEventListener("submit", (event) => {
 
-    updateSubmitState();
+//   if (!checkAttachmentSize()) {
 
-    return;
-  }
+//     event.preventDefault();
+
+//     return;
+//   }
+
+//   const nameValid =
+//     validateField(
+//       fullName,
+//       "nameGroup"
+//     );
+
+//   const locationValid =
+//     validateField(
+//       locationInput,
+//       "locationGroup"
+//     );
+
+//   const phoneValid =
+//     validateField(
+//       phone,
+//       "phoneGroup"
+//     );
+
+//   const lyricsValid =
+//     validateField(
+//       lyrics,
+//       "lyricsGroup"
+//     );
+
+//   const tuneValid =
+//     submissionType === "lyrics" ||
+//     tuneFile.files.length > 0;
+
+//   const agreementValid =
+//     agreement.checked;
 
 
-  /*
-    Valid:
-    allow FormSubmit to submit normally.
-  */
+//   if (
+//     !nameValid ||
+//     !locationValid ||
+//     !phoneValid ||
+//     !lyricsValid ||
+//     !tuneValid ||
+//     !agreementValid
+//   ) {
 
-  submitBtn.disabled = true;
+//     event.preventDefault();
 
-  submitBtn.textContent =
-    "Submitting...";
-});
+//     updateSubmitState();
+
+//     return;
+//   }
+
+
+//   /*
+//     Valid:
+//     allow FormSubmit to submit normally.
+//   */
+
+//   submitBtn.disabled = true;
+
+//   submitBtn.textContent =
+//     "Submitting...";
+// });
 
 
 /* =========================

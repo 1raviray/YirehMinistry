@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="aboutus.css" />
     <link rel="stylesheet" href="give.css" />
     <link rel="stylesheet" href="events.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="anthem.css" />
     <link rel="stylesheet" href="anthem-scroll.css" />
   </head>
@@ -41,7 +42,7 @@
     <header class="site-header">
       <div class="navbar">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <img src="assets/Logo.png" alt="Yireh Ministry" />
         </a>
 
@@ -76,18 +77,18 @@
              PAGE TITLE
         ========================== -->
 
-        <h1 class="anthems-title">Anthems season 1</h1>
+        <h1 class="anthems-title" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="10">Anthems season 1</h1>
 
         <!-- =========================
              INTRO
         ========================== -->
 
         <div class="anthems-intro">
-          <p class="anthems-intro-subtitle">Songwriters &amp; Worshipers</p>
+          <p class="anthems-intro-subtitle" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="50">Songwriters &amp; Worshipers</p>
 
-          <h2 class="anthems-intro-title">Submit your lyrics &amp; Tune</h2>
+          <h2 class="anthems-intro-title" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="100">Submit your lyrics &amp; Tune</h2>
 
-          <p class="anthems-intro-text">
+          <p class="anthems-intro-text" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="150">
             Share what God has given you. Submit lyrics alone, or lyrics with a
             tune — either way, we'd love to hear it.
           </p>
@@ -134,18 +135,26 @@
             ========================== -->
 
             <form
+    action="https://1raviray.github.io/YirehMinistry/"
+    method="POST"
+    enctype="multipart/form-data"
+    class="anthem-form"
+    id="anthemForm"
+    novalidate
+>
+            <!-- <form
             action="https://formsubmit.co/karunanjali.gurram@gmail.com"
             method="POST"
             enctype="multipart/form-data"
             class="anthem-form"
             id="anthemForm"
             novalidate
-          >
+          > -->
             <!-- FormSubmit settings -->
             <input
               type="hidden"
               name="_subject"
-              value="New Anthems Season 1 Submission"
+              value="New Anthems Season 1 Submission" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"     data-aos-delay="10"
             />
           
             <input
@@ -160,11 +169,11 @@
               value="false"
             /> -->
           
-            <input
+            <!-- <input
               type="hidden"
               name="_next"
-              value="https://1raviray.github.io/YirehMinistry/"
-            />
+              value="http://127.0.0.1:5500/anthem.html"
+            /> -->
           
           
             <!-- =========================
@@ -596,7 +605,11 @@
         </div>
       </div>
     </footer>
-    <script src="anthem-scroll.js"></script>
+    <script src="anthem-scroll.js"></script> 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
     <script src="anthem.js"></script>
     <script src="script.js"></script>
   </body>

@@ -1,1088 +1,170 @@
 /* =========================================================
    YIREH MINISTRY
    ABOUT PAGE SCROLL ANIMATIONS
-   IntersectionObserver
+   CSS + INTERSECTION OBSERVER
 ========================================================= */
 
 (function () {
-
     "use strict";
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* =====================================================
-       REDUCED MOTION
-    ===================================================== */
-
-    const reducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-    /* =====================================================
-       HELPERS
-    ===================================================== */
-
-    function addClass(
-        element,
-        className
-    ) {
-
-        if (!element) {
-            return;
-        }
-
-        element.classList.add(
-            className
-        );
-    }
-
-
-    function addClasses(
-        elements,
-        className
-    ) {
-
-        elements.forEach(
-            (element) => {
-
-                element.classList.add(
-                    className
-                );
-
-            }
-        );
-    }
-
-
-    /* =====================================================
-       VISION TYPEWRITER
-    ===================================================== */
-
-    function prepareVisionTypewriter() {
-
-        const vision =
-            document.querySelector(
-                ".vision-section"
-            );
-
-        if (!vision) {
-            return;
-        }
-
-
-        const content =
-            vision.querySelector(
-                ".vision-content"
-            );
-
-        if (!content) {
-            return;
-        }
-
-
-        const paragraphs =
-            Array.from(
-                content.querySelectorAll("p")
-            );
-
-
-        paragraphs.forEach(
-            (paragraph) => {
-
-                if (
-                    paragraph.dataset.typewriterReady ===
-                    "true"
-                ) {
-                    return;
-                }
-
-
-                const text =
-                    paragraph.textContent
-                        .replace(/\s+/g, " ")
-                        .trim();
-
-
-                if (!text) {
-                    return;
-                }
-
-
-                paragraph.dataset.originalText =
-                    text;
-
-
-                paragraph.innerHTML = "";
-
-
-                /*
-                   Build lines according to the
-                   actual paragraph width.
-                */
-
-                const words =
-                    text.split(" ");
-
-
-                const lineWrapper =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                lineWrapper.className =
-                    "vision-type-lines";
-
-
-                paragraph.appendChild(
-                    lineWrapper
-                );
-
-
-                const measure =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                const style =
-                    getComputedStyle(
-                        paragraph
-                    );
-
-
-                measure.style.position =
-                    "absolute";
-
-                measure.style.visibility =
-                    "hidden";
-
-                measure.style.whiteSpace =
-                    "nowrap";
-
-                measure.style.fontFamily =
-                    style.fontFamily;
-
-                measure.style.fontSize =
-                    style.fontSize;
-
-                measure.style.fontWeight =
-                    style.fontWeight;
-
-                measure.style.fontStyle =
-                    style.fontStyle;
-
-                measure.style.letterSpacing =
-                    style.letterSpacing;
-
-
-                document.body.appendChild(
-                    measure
-                );
-
-
-                const availableWidth =
-                    paragraph.clientWidth;
-
-
-                let currentLine = "";
-
-
-                function createLine(
-                    value,
-                    index
-                ) {
-
-                    const line =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    line.className =
-                        "vision-type-line";
-
-
-                    line.dataset.line =
-                        index;
-
-
-                    line.textContent =
-                        value;
-
-
-                    lineWrapper.appendChild(
-                        line
-                    );
-                }
-
-
-                let lineIndex = 0;
-
-
-                words.forEach(
-                    (word) => {
-
-                        const proposed =
-                            currentLine
-                                ? `${currentLine} ${word}`
-                                : word;
-
-
-                        measure.textContent =
-                            proposed;
-
-
-                        if (
-                            currentLine &&
-                            measure.offsetWidth >
-                            availableWidth
-                        ) {
-
-                            createLine(
-                                currentLine,
-                                lineIndex
-                            );
-
-                            lineIndex++;
-
-                            currentLine =
-                                word;
-
-                        } else {
-
-                            currentLine =
-                                proposed;
-                        }
-                    }
-                );
-
-
-                if (currentLine) {
-
-                    createLine(
-                        currentLine,
-                        lineIndex
-                    );
-                }
-
-
-                measure.remove();
-
-
-                paragraph.dataset.typewriterReady =
-                    "true";
-            }
-        );
-    }
-
-
-    /* =====================================================
-       OBSERVER
-    ===================================================== */
-
-    if (
-        typeof IntersectionObserver ===
-        "undefined"
-    ) {
+    if (typeof IntersectionObserver === "undefined") {
+        revealAll();
         return;
     }
 
+    // 1. Record the exact time the script loads
+    const scriptStartTime = Date.now();
 
-    const observer =
-        new IntersectionObserver(
-            (
-                entries
-            ) => {
-
-                entries.forEach(
-                    (entry) => {
-
-                        const target =
-                            entry.target;
-
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            target.classList.add(
-                                "is-visible"
-                            );
-
-
-                            /*
-                               Vision lines
-                               are activated one by one.
-                            */
-
-                            if (
-                                target.classList.contains(
-                                    "vision-type-lines"
-                                )
-                            ) {
-
-                                const lines =
-                                    target.querySelectorAll(
-                                        ".vision-type-line"
-                                    );
-
-
-                                lines.forEach(
-                                    (
-                                        line,
-                                        index
-                                    ) => {
-
-                                        setTimeout(
-                                            () => {
-
-                                                line.classList.add(
-                                                    "is-visible"
-                                                );
-
-                                            },
-                                            index * 160
-                                        );
-
-                                    }
-                                );
-                            }
-
-
-                        } else {
-
-                            /*
-                               Reverse when leaving
-                               the viewport so it
-                               works when scrolling up.
-                            */
-
-                            target.classList.remove(
-                                "is-visible"
-                            );
-
-
-                            if (
-                                target.classList.contains(
-                                    "vision-type-lines"
-                                )
-                            ) {
-
-                                const lines =
-                                    target.querySelectorAll(
-                                        ".vision-type-line"
-                                    );
-
-
-                                lines.forEach(
-                                    (line) => {
-
-                                        line.classList.remove(
-                                            "is-visible"
-                                        );
-
-                                    }
-                                );
-                            }
-
-                        }
-
+    /* =====================================================
+       2. OBSERVER SETUP (With Smart Initial Delay)
+    ===================================================== */
+    const observer = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    
+                    // Check how long it has been since the script started
+                    const timeElapsed = Date.now() - scriptStartTime;
+                    
+                    // If this element is visible right on page load (within the first 500ms),
+                    // force a 300ms delay. This gives the browser time to paint the white screen 
+                    // into your website before the animation starts moving.
+                    if (timeElapsed < 500) {
+                        setTimeout(() => {
+                            entry.target.classList.add("is-visible");
+                        }, 0); 
+                    } else {
+                        // If the user scrolls down to this element later, animate immediately
+                        entry.target.classList.add("is-visible");
                     }
-                );
 
-            },
-
-            {
-                threshold: 0.12,
-
-                rootMargin:
-                    "0px 0px -8% 0px"
-            }
-        );
-
-
-    /* =====================================================
-       VISION
-    ===================================================== */
-
-    prepareVisionTypewriter();
-
-
-    const vision =
-        document.querySelector(
-            ".vision-section"
-        );
-
-
-    if (vision) {
-
-        const title =
-            vision.querySelector(
-                ".vision-title"
-            );
-
-        const typeLines =
-            vision.querySelectorAll(
-                ".vision-type-lines"
-            );
-
-
-        addClass(
-            title,
-            "about-reveal"
-        );
-
-
-        addClasses(
-            typeLines,
-            "vision-type-lines"
-        );
-
-
-        observer.observe(
-            title
-        );
-
-
-        typeLines.forEach(
-            (element) => {
-
-                observer.observe(
-                    element
-                );
-
-            }
-        );
-    }
-
-
-    /* =====================================================
-       SRIMANTH
-    ===================================================== */
-
-    const srimanth =
-        document.querySelector(
-            ".srimanth-section"
-        );
-
-
-    if (srimanth) {
-
-        const heading =
-            srimanth.querySelector(
-                ".section-heading-line"
-            );
-
-        const image =
-            srimanth.querySelector(
-                ".srimanth-image"
-            );
-
-        const text =
-            srimanth.querySelector(
-                ".srimanth-text"
-            );
-
-        const quote =
-            srimanth.querySelector(
-                ".srimanth-text h3"
-            );
-
-        const paragraphs =
-            srimanth.querySelectorAll(
-                ".srimanth-text p"
-            );
-
-
-        addClass(
-            heading,
-            "about-reveal"
-        );
-
-
-        addClass(
-            image,
-            "about-image-reveal"
-        );
-
-        addClass(
-            image,
-            "about-reveal-left"
-        );
-
-
-        addClass(
-            text,
-            "about-reveal-right"
-        );
-
-
-        addClass(
-            quote,
-            "about-reveal"
-        );
-
-
-        paragraphs.forEach(
-            (
-                paragraph,
-                index
-            ) => {
-
-                addClass(
-                    paragraph,
-                    "about-reveal"
-                );
-
-                addClass(
-                    paragraph,
-                    `about-stagger-${Math.min(
-                        index + 1,
-                        4
-                    )}`
-                );
-
-            }
-        );
-
-
-        [
-            heading,
-            image,
-            text,
-            quote,
-            ...paragraphs
-        ]
-            .filter(Boolean)
-            .forEach(
-                (element) => {
-
-                    observer.observe(
-                        element
-                    );
-
+                } else {
+                    // Reverse animation when scrolling out of view
+                    entry.target.classList.remove("is-visible");
                 }
-            );
-    }
-
-
-    /* =====================================================
-       PASTOR
-    ===================================================== */
-
-    const pastor =
-        document.querySelector(
-            ".pastor-section"
-        );
-
-
-    if (pastor) {
-
-        const heading =
-            pastor.querySelector(
-                ".pastor-heading"
-            );
-
-        const image =
-            pastor.querySelector(
-                ".pastor-image"
-            );
-
-        const text =
-            pastor.querySelector(
-                ".pastor-text"
-            );
-
-        const paragraph =
-            pastor.querySelector(
-                ".pastor-text p"
-            );
-
-
-        addClass(
-            heading,
-            "about-reveal"
-        );
-
-
-        addClass(
-            image,
-            "about-image-reveal"
-        );
-
-        addClass(
-            image,
-            "about-reveal-left"
-        );
-
-
-        addClass(
-            text,
-            "about-reveal-right"
-        );
-
-
-        addClass(
-            paragraph,
-            "about-reveal"
-        );
-
-
-        [
-            heading,
-            image,
-            text,
-            paragraph
-        ]
-            .filter(Boolean)
-            .forEach(
-                (element) => {
-
-                    observer.observe(
-                        element
-                    );
-
-                }
-            );
-    }
-
-
-    /* =====================================================
-       OUR MISSION
-    ===================================================== */
-
-    const mission =
-        document.querySelector(
-            ".mission-section"
-        );
-
-
-    if (mission) {
-
-        const title =
-            mission.querySelector(
-                ".mission-title"
-            );
-
-        const subtitle =
-            mission.querySelector(
-                ".mission-subtitle"
-            );
-
-        const cards =
-            mission.querySelectorAll(
-                ".mission-card"
-            );
-
-        const banner =
-            mission.querySelector(
-                ".mission-banner"
-            );
-
-        const bannerContent =
-            mission.querySelector(
-                ".banner-content"
-            );
-
-        const statement =
-            mission.querySelector(
-                ".mission-statement"
-            );
-
-        const button =
-            mission.querySelector(
-                ".mission-cta"
-            );
-
-
-        addClass(
-            title,
-            "about-reveal"
-        );
-
-
-        addClass(
-            subtitle,
-            "about-reveal"
-        );
-
-
-        cards.forEach(
-            (
-                card,
-                index
-            ) => {
-
-                addClass(
-                    card,
-                    "about-reveal-scale"
-                );
-
-
-                addClass(
-                    card,
-                    `about-stagger-${Math.min(
-                        index + 1,
-                        4
-                    )}`
-                );
-
-
-                observer.observe(
-                    card
-                );
-
-            }
-        );
-
-
-        addClass(
-            banner,
-            "about-reveal-scale"
-        );
-
-
-        addClass(
-            bannerContent,
-            "about-reveal"
-        );
-
-
-        addClass(
-            statement,
-            "about-reveal"
-        );
-
-
-        addClass(
-            button,
-            "about-reveal-scale"
-        );
-
-
-        [
-            title,
-            subtitle,
-            banner,
-            bannerContent,
-            statement,
-            button
-        ]
-            .filter(Boolean)
-            .forEach(
-                (element) => {
-
-                    observer.observe(
-                        element
-                    );
-
-                }
-            );
-    }
-
-
-    /* =====================================================
-       WHAT WE DO
-    ===================================================== */
-
-    const whatWeDo =
-        document.querySelector(
-            "#whatwedo.what-we-do-section"
-        );
-
-
-    if (whatWeDo) {
-
-        const title =
-            whatWeDo.querySelector(
-                ".what-we-do-title"
-            );
-
-        const description =
-            whatWeDo.querySelector(
-                ".what-we-do-description"
-            );
-
-        const services =
-            whatWeDo.querySelectorAll(
-                ".service-item"
-            );
-
-        const button =
-            whatWeDo.querySelector(
-                ".what-we-do-cta"
-            );
-
-
-        addClass(
-            title,
-            "about-reveal"
-        );
-
-
-        addClass(
-            description,
-            "about-reveal"
-        );
-
-
-        services.forEach(
-            (
-                service,
-                index
-            ) => {
-
-                addClass(
-                    service,
-                    "about-reveal"
-                );
-
-
-                addClass(
-                    service,
-                    `about-stagger-${Math.min(
-                        index + 1,
-                        4
-                    )}`
-                );
-
-
-                observer.observe(
-                    service
-                );
-
-            }
-        );
-
-
-        addClass(
-            button,
-            "about-reveal-scale"
-        );
-
-
-        [
-            title,
-            description,
-            button
-        ]
-            .filter(Boolean)
-            .forEach(
-                (element) => {
-
-                    observer.observe(
-                        element
-                    );
-
-                }
-            );
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
-
-    const footer =
-        document.querySelector(
-            ".site-footer"
-        );
-
-
-    if (footer) {
-
-        const brand =
-            footer.querySelector(
-                ".footer-brand"
-            );
-
-        const columns =
-            footer.querySelectorAll(
-                ".footer-column"
-            );
-
-        const divider =
-            footer.querySelector(
-                ".footer-divider"
-            );
-
-        const bottom =
-            footer.querySelector(
-                ".footer-bottom"
-            );
-
-
-        addClass(
-            brand,
-            "about-reveal"
-        );
-
-
-        columns.forEach(
-            (
-                column,
-                index
-            ) => {
-
-                addClass(
-                    column,
-                    "about-reveal"
-                );
-
-
-                addClass(
-                    column,
-                    `about-stagger-${Math.min(
-                        index + 1,
-                        4
-                    )}`
-                );
-
-
-                observer.observe(
-                    column
-                );
-
-            }
-        );
-
-
-        addClass(
-            divider,
-            "about-reveal"
-        );
-
-
-        addClass(
-            bottom,
-            "about-reveal"
-        );
-
-
-        [
-            brand,
-            divider,
-            bottom
-        ]
-            .filter(Boolean)
-            .forEach(
-                (element) => {
-
-                    observer.observe(
-                        element
-                    );
-
-                }
-            );
-    }
-
-
-    /* =====================================================
-       INITIAL OBSERVER REGISTRATION
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".about-reveal, " +
-            ".about-reveal-left, " +
-            ".about-reveal-right, " +
-            ".about-reveal-scale"
-        )
-        .forEach(
-            (element) => {
-
-                /*
-                   Avoid observing the same element twice.
-                */
-
-                if (
-                    !element.dataset.aboutObserved
-                ) {
-
-                    observer.observe(
-                        element
-                    );
-
-                    element.dataset.aboutObserved =
-                        "true";
-                }
-
-            }
-        );
-
-
-    /* =====================================================
-       RESPONSIVE VISION REBUILD
-    ===================================================== */
-
-    let resizeTimer = null;
-
-
-    window.addEventListener(
-        "resize",
-        function () {
-
-            clearTimeout(
-                resizeTimer
-            );
-
-
-            resizeTimer =
-                setTimeout(
-                    function () {
-
-                        /*
-                           Rebuild only the Vision
-                           typewriter lines.
-                        */
-
-                        const visionParagraphs =
-                            document.querySelectorAll(
-                                ".vision-content p"
-                            );
-
-
-                        visionParagraphs.forEach(
-                            (paragraph) => {
-
-                                paragraph.dataset.typewriterReady =
-                                    "false";
-
-                            }
-                        );
-
-
-                        prepareVisionTypewriter();
-
-
-                        /*
-                           Re-observe rebuilt
-                           Vision lines.
-                        */
-
-                        const lines =
-                            document.querySelectorAll(
-                                ".vision-type-lines"
-                            );
-
-
-                        lines.forEach(
-                            (line) => {
-
-                                observer.observe(
-                                    line
-                                );
-
-                            }
-                        );
-
-                    },
-                    180
-                );
-
+            });
+        },
+        {
+            threshold: 0.05, 
+            rootMargin: "0px 0px -50px 0px"
         }
     );
+
+    /* =====================================================
+       3. HELPERS
+    ===================================================== */
+    function observe(element) {
+        if (!element || element.dataset.aboutObserved === "true") return;
+        element.dataset.aboutObserved = "true";
+        observer.observe(element);
+    }
+
+    function reveal(element, className) {
+        if (!element) return;
+        element.classList.add(className);
+        observe(element);
+    }
+
+    function revealGroup(elements, className) {
+        if (!elements) return;
+        elements.forEach(function (element, index) {
+            if (!element) return;
+            element.classList.add(className);
+            element.classList.add(`about-stagger-${Math.min(index + 1, 4)}`);
+            observe(element);
+        });
+    }
+
+    /* =====================================================
+       4. ELEMENT TARGETING
+    ===================================================== */
+    function initAnimations() {
+        if (reducedMotion) {
+            revealAll();
+            return;
+        }
+
+        // 01. VISION
+        const vision = document.querySelector(".vision-section");
+        if (vision) {
+            reveal(vision.querySelector(".vision-title"), "about-reveal");
+            revealGroup(vision.querySelectorAll(".vision-content p"), "about-reveal");
+        }
+
+        // 02. SRIMANTH
+        const srimanth = document.querySelector(".srimanth-section");
+        if (srimanth) {
+            reveal(srimanth.querySelector(".section-heading-line"), "about-reveal");
+            const image = srimanth.querySelector(".srimanth-image");
+            if (image) {
+                image.classList.add("about-image-reveal", "about-reveal-left");
+                observe(image);
+            }
+            reveal(srimanth.querySelector(".srimanth-text"), "about-reveal-right");
+            reveal(srimanth.querySelector(".srimanth-text h3"), "about-reveal");
+            revealGroup(srimanth.querySelectorAll(".srimanth-text p"), "about-reveal");
+        }
+
+        // 03. PASTOR
+        const pastor = document.querySelector(".pastor-section");
+        if (pastor) {
+            reveal(pastor.querySelector(".pastor-heading"), "about-reveal");
+            const image = pastor.querySelector(".pastor-image");
+            if (image) {
+                image.classList.add("about-image-reveal", "about-reveal-left");
+                observe(image);
+            }
+            reveal(pastor.querySelector(".pastor-text"), "about-reveal-right");
+            reveal(pastor.querySelector(".pastor-text p"), "about-reveal");
+        }
+
+        // 04. OUR MISSION
+        const mission = document.querySelector(".mission-section");
+        if (mission) {
+            reveal(mission.querySelector(".mission-title"), "about-reveal");
+            reveal(mission.querySelector(".mission-subtitle"), "about-reveal");
+            revealGroup(mission.querySelectorAll(".mission-card"), "about-reveal-scale");
+            reveal(mission.querySelector(".mission-banner"), "about-reveal-scale");
+            reveal(mission.querySelector(".banner-content"), "about-reveal");
+            reveal(mission.querySelector(".mission-statement"), "about-reveal");
+            reveal(mission.querySelector(".mission-cta"), "about-reveal-scale");
+        }
+
+        // 05. WHAT WE DO
+        const whatWeDo = document.querySelector("#whatwedo.what-we-do-section");
+        if (whatWeDo) {
+            reveal(whatWeDo.querySelector(".what-we-do-title"), "about-reveal");
+            reveal(whatWeDo.querySelector(".what-we-do-description"), "about-reveal");
+            revealGroup(whatWeDo.querySelectorAll(".service-item"), "about-reveal");
+            reveal(whatWeDo.querySelector(".what-we-do-cta"), "about-reveal-scale");
+        }
+
+        // 06. FOOTER
+        const footer = document.querySelector(".site-footer");
+        if (footer) {
+            reveal(footer.querySelector(".footer-brand"), "about-reveal");
+            revealGroup(footer.querySelectorAll(".footer-column"), "about-reveal");
+            reveal(footer.querySelector(".footer-divider"), "about-reveal");
+            reveal(footer.querySelector(".footer-bottom"), "about-reveal");
+        }
+
+        // Safety fallback for hardcoded HTML classes
+        const allSelectors = ".about-reveal, .about-reveal-left, .about-reveal-right, .about-reveal-scale";
+        document.querySelectorAll(allSelectors).forEach(function (element) {
+            observe(element);
+        });
+    }
+
+    function revealAll() {
+        const allSelectors = ".about-reveal, .about-reveal-left, .about-reveal-right, .about-reveal-scale";
+        document.querySelectorAll(allSelectors).forEach(function (element) {
+            element.classList.add("is-visible");
+        });
+    }
+
+    // Initialize immediately
+    initAnimations();
 
 })();

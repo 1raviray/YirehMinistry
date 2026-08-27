@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="give.css" />
     <link rel="stylesheet" href="events.css" />
     <link rel="stylesheet" href="anthem.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="contact.css" />
     <link rel="stylesheet" href="contact-scroll.css" />
   </head>
@@ -79,15 +80,15 @@
 
   <div class="contact-intro-container">
 
-      <p class="contact-intro-eyebrow">
+      <p class="contact-intro-eyebrow" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="10">
           Get In Touch
       </p>
 
-      <h1 class="contact-intro-title">
+      <h1 class="contact-intro-title" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="50">
           Invite us, ask us, pray with us
       </h1>
 
-      <p class="contact-intro-description">
+      <p class="contact-intro-description" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="100">
           Whether you want to invite Yireh Ministry to your church,
           submit a prayer request, or just say hello — we'd love to hear from you.
       </p>
@@ -458,6 +459,10 @@
         </div>
       </footer>
     <script src="contact-scroll.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
     <script src="script.js"></script>
   </body>
 </html>

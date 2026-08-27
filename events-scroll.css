@@ -4,26 +4,18 @@
    CSS + INTERSECTION OBSERVER
 ========================================================= */
 
-
 /* =========================================================
    BASE REVEAL
 ========================================================= */
 
 .events-reveal {
     opacity: 0;
-
-    transform:
-        translate3d(0, 35px, 0);
-
+    transform: translate3d(0, 35px, 0);
     transition:
         opacity 0.7s ease,
         transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change:
-        opacity,
-        transform;
+    will-change: opacity, transform;
 }
-
 
 /* =========================================================
    LEFT REVEAL
@@ -31,19 +23,12 @@
 
 .events-reveal-left {
     opacity: 0;
-
-    transform:
-        translate3d(-55px, 0, 0);
-
+    transform: translate3d(-55px, 0, 0);
     transition:
         opacity 0.75s ease,
         transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change:
-        opacity,
-        transform;
+    will-change: opacity, transform;
 }
-
 
 /* =========================================================
    RIGHT REVEAL
@@ -51,19 +36,12 @@
 
 .events-reveal-right {
     opacity: 0;
-
-    transform:
-        translate3d(55px, 0, 0);
-
+    transform: translate3d(55px, 0, 0);
     transition:
         opacity 0.75s ease,
         transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change:
-        opacity,
-        transform;
+    will-change: opacity, transform;
 }
-
 
 /* =========================================================
    SCALE REVEAL
@@ -71,36 +49,38 @@
 
 .events-reveal-scale {
     opacity: 0;
-
-    transform:
-        translate3d(0, 20px, 0)
-        scale(0.97);
-
+    transform: translate3d(0, 20px, 0) scale(0.97);
     transition:
         opacity 0.7s ease,
         transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change:
-        opacity,
-        transform;
+    will-change: opacity, transform;
 }
 
+/* =========================================================
+   CONTACT-SPECIFIC REVEAL
+========================================================= */
+
+.events-contact-card {
+    opacity: 0;
+    transform: translate3d(0, 35px, 0);
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
 
 /* =========================================================
-   ACTIVE STATE
+   ACTIVE STATE (Applied to all)
 ========================================================= */
 
 .events-reveal.is-visible,
 .events-reveal-left.is-visible,
 .events-reveal-right.is-visible,
-.events-reveal-scale.is-visible {
+.events-reveal-scale.is-visible,
+.events-contact-card.is-visible {
     opacity: 1;
-
-    transform:
-        translate3d(0, 0, 0)
-        scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
 }
-
 
 /* =========================================================
    STAGGER
@@ -122,133 +102,47 @@
     transition-delay: 0.24s;
 }
 
-
 /* =========================================================
-   TYPEWRITER
-========================================================= */
-
-.events-type-lines {
-    display: block;
-
-    width: 100%;
-}
-
-
-.events-type-line {
-    display: block;
-
-    width: max-content;
-    max-width: 100%;
-
-    overflow: hidden;
-
-    clip-path:
-        inset(0 100% 0 0);
-
-    opacity: 0;
-
-    transition:
-        clip-path 0.55s ease,
-        opacity 0.2s ease;
-}
-
-
-.events-type-line.is-visible {
-    clip-path:
-        inset(0 0 0 0);
-
-    opacity: 1;
-}
-
-
-/* =========================================================
-   CONTACT-SPECIFIC REVEAL
-========================================================= */
-
-.events-contact-card {
-    opacity: 0;
-
-    transform:
-        translate3d(0, 35px, 0);
-
-    transition:
-        opacity 0.75s ease,
-        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-
-    will-change:
-        opacity,
-        transform;
-}
-
-
-.events-contact-card.is-visible {
-    opacity: 1;
-
-    transform:
-        translate3d(0, 0, 0);
-}
-
-
-/* =========================================================
-   REDUCED MOTION
+   REDUCED MOTION (Accessibility)
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     .events-reveal,
     .events-reveal-left,
     .events-reveal-right,
     .events-reveal-scale,
-    .events-contact-card,
-    .events-type-line {
+    .events-contact-card {
         opacity: 1 !important;
-
         transform: none !important;
-
-        clip-path: none !important;
-
         transition: none !important;
     }
 }
-
 
 /* =========================================================
    TABLET / MOBILE
 ========================================================= */
 
 @media (max-width: 768px) {
-
     .events-reveal {
-        transform:
-            translate3d(0, 25px, 0);
+        transform: translate3d(0, 25px, 0);
     }
-
-
+    
     .events-reveal-left {
-        transform:
-            translate3d(-30px, 0, 0);
+        transform: translate3d(-30px, 0, 0);
     }
-
-
+    
     .events-reveal-right {
-        transform:
-            translate3d(30px, 0, 0);
+        transform: translate3d(30px, 0, 0);
     }
-
-
+    
     .events-reveal-scale {
-        transform:
-            translate3d(0, 18px, 0)
-            scale(0.98);
+        transform: translate3d(0, 18px, 0) scale(0.98);
     }
-
-
+    
     .events-contact-card {
-        transform:
-            translate3d(0, 25px, 0);
+        transform: translate3d(0, 25px, 0);
     }
-
-
+    
     .events-stagger-1 {
         transition-delay: 0.04s;
     }
@@ -263,10 +157,5 @@
 
     .events-stagger-4 {
         transition-delay: 0.16s;
-    }
-
-
-    .events-type-line {
-        max-width: 100%;
     }
 }

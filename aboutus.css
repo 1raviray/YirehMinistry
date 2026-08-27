@@ -210,7 +210,7 @@ body{background:#ededed}
 .watch-button{display:inline-flex;align-items:center;justify-content:center;min-width:126px;height:37px;padding:0 20px;border-radius:20px;background:#1479f7;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:.2px;line-height:1;transition:background .2s ease}
 .mission-banner:hover .watch-button{background:#0b68df}
 
-.mission-statement{margin:44px auto 0;text-align:center;color:#161616;font-family:"Cormorant Garamond",Georgia,serif;font-size:41px;font-weight:700;font-style:italic;line-height:1.15;letter-spacing:-2.8px;vertical-align:middle}
+.mission-statement{margin:44px auto 0;text-align:center;color:#161616;font-family:"Cormorant Garamond",Georgia,serif;font-size:41px;font-weight:700;font-style:italic;line-height:1.15;letter-spacing:-2px;vertical-align:middle}
 .mission-statement strong{color:#f26a24;font-size:30px;font-weight:700;font-style:normal}
 
 .mission-cta{display:flex;width:max-content;margin:76px auto 0;padding:11px 29px 12px;background:#111;color:#fff;text-decoration:none;font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:400;line-height:1;transition:background .25s ease,transform .25s ease}
@@ -252,7 +252,8 @@ body{background:#ededed}
 @media(max-width:420px){
   .mission-title{font-size:36px}
   .mission-subtitle{font-size:18px}
-  .mission-statement{font-size:21px}
+  .mission-statement{font-size:20px}
+  .mission-statement strong{font-size:20px}
   .mission-cards{gap:8px}
 }
 
@@ -330,700 +331,842 @@ body{background:#ededed}
   .service-info p{font-size:13px}
   .what-we-do-cta{font-size:19px}
 }
-/* ==============================
+/* =========================================================
    FOOTER
-================================ */
+========================================================= */
 
-.site-footer{
-  width:100%;
-  background:#151515;
-  color:#898584;
+.site-footer {
+  width: 100%;
+
+  background: #151515;
+
+  color: #898584;
 }
-
-.footer-container{
-  width:1324px;
-  max-width:calc(100% - 80px);
-  margin:0 auto;
-  padding-top:61px;
-  padding-bottom:67px;
-}
-
-.footer-main{
-  display:grid;
-  grid-template-columns:300px 270px 270px 1fr;
-  column-gap:42px;
-  align-items:start;
-}
-
-.footer-logo{
-  display:inline-block;
-  width:144px;
-  height:auto;
-  margin-bottom:16px;
-}
-
-.footer-logo img{
-  display:block;
-  width:144px;
-  height:auto;
-  object-fit:contain;
-}
-
-.footer-description{
-  width:290px;
-  margin:0;
-  color:#858585;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:15px;
-  font-weight:400;
-  line-height:25px;
-}
-
-.footer-socials{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  margin-top:23px;
-}
-
-.footer-socials a{
-  width:20px;
-  height:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  color:#898989;
-}
-
-.footer-socials span{
-  position:relative;
-  display:block;
-  width:18px;
-  height:18px;
-}
-
-.social-instagram{
-  border:2px solid #888;
-  border-radius:5px;
-}
-
-.social-instagram:before{
-  content:"";
-  position:absolute;
-  width:6px;
-  height:6px;
-  left:4px;
-  top:4px;
-  border:2px solid #888;
-  border-radius:50%;
-}
-
-.social-instagram:after{
-  content:"";
-  position:absolute;
-  width:3px;
-  height:3px;
-  right:2px;
-  top:2px;
-  background:#888;
-  border-radius:50%;
-}
-
-.social-youtube{
-  width:19px!important;
-  height:13px!important;
-  border:2px solid #888;
-  border-radius:4px;
-}
-
-.social-youtube:after{
-  content:"";
-  position:absolute;
-  left:6px;
-  top:2px;
-  border-top:3px solid transparent;
-  border-bottom:3px solid transparent;
-  border-left:5px solid #888;
-}
-
-.social-facebook{
-  font-family:Arial,sans-serif;
-  font-size:20px;
-  font-weight:700;
-  line-height:18px;
-}
-
-.social-mail{
-  width:20px!important;
-  height:14px!important;
-  border:2px solid #888;
-  border-radius:2px;
-}
-
-.social-mail:before,
-.social-mail:after{
-  content:"";
-  position:absolute;
-  top:2px;
-  width:11px;
-  height:2px;
-  background:#888;
-}
-
-.social-mail:before{
-  left:0;
-  transform:rotate(32deg);
-}
-
-.social-mail:after{
-  right:0;
-  transform:rotate(-32deg);
-}
-
-.footer-column h3{
-  margin:8px 0 22px;
-  color:#f26722;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:16px;
-  font-weight:700;
-  line-height:1;
-}
-
-.footer-column ul{
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-
-.footer-column li{
-  margin:0 0 21px;
-  padding:0;
-}
-
-.footer-column li,
-.footer-column a{
-  color:#8b8b8b;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:15px;
-  font-weight:400;
-  line-height:1.2;
-  text-decoration:none;
-}
-
-.footer-column a{
-  transition:color .2s ease;
-}
-
-.footer-column a:hover{
-  color:#f26722;
-}
-
-.footer-contact h3{
-  margin-bottom:23px;
-}
-
-.footer-contact li{
-  margin-bottom:20px;
-  white-space:nowrap;
-}
-
-.serving-global{
-  display:inline-block;
-  margin-top:0;
-  color:#f26722!important;
-  font-weight:500!important;
-}
-
-.footer-divider{
-  width:100%;
-  height:1px;
-  margin-top:29px;
-  background:#292929;
-}
-
-.footer-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding-top:34px;
-}
-
-.footer-bottom p{
-  margin:0;
-  color:#808080;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:13px;
-  font-weight:400;
-}
-
-.footer-legal{
-  display:flex;
-  align-items:center;
-  gap:28px;
-}
-
-.footer-legal a{
-  color:#808080;
-  text-decoration:none;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:13px;
-}
-
-.footer-legal a:hover{
-  color:#f26722;
-}
-
-
-/* ==============================
-   TABLET
-================================ */
-
-@media(max-width:1100px){
-  .footer-container{
-    max-width:calc(100% - 60px);
-  }
-
-  .footer-main{
-    grid-template-columns:1.3fr 1fr 1fr 1.3fr;
-    column-gap:25px;
-  }
-
-  .footer-description{
-    width:auto;
-    max-width:280px;
-  }
-
-  .footer-contact li{
-    white-space:normal;
-  }
-}
-
-
-/* ==============================
-   SMALL TABLET
-================================ */
-
-@media(max-width:800px){
-  .footer-container{
-    max-width:calc(100% - 40px);
-    padding-top:50px;
-    padding-bottom:40px;
-  }
-
-  .footer-main{
-    grid-template-columns:repeat(2,1fr);
-    row-gap:45px;
-    column-gap:40px;
-  }
-
-  .footer-brand{
-    grid-column:1/-1;
-  }
-
-  .footer-description{
-    max-width:350px;
-  }
-}
-
-
-/* ==============================
-   MOBILE — REFERENCE MATCH
-================================ */
-
-@media(max-width:600px){
-
-  .site-footer{
-    background:#080808;
-  }
-
-  .footer-container{
-    width:100%;
-    max-width:none;
-    margin:0;
-    padding:34px 23px 32px;
-  }
-
-  /*
-    Main mobile arrangement:
-
-    Brand
-    ↓
-    Quick Links | Ministry
-    ↓
-    Divider
-    ↓
-    Contact
-    ↓
-    Serving Globally
-    ↓
-    Copyright
-    ↓
-    Legal
-    ↓
-    Designed...
-  */
-
-  .footer-main{
-    display:grid;
-
-    grid-template-columns:
-      1fr 1fr;
-
-    column-gap:36px;
-    row-gap:0;
-
-    width:100%;
-  }
-
-
-  /* =========================
-     BRAND
-  ========================== */
-
-  .footer-brand{
-    grid-column:1/-1;
-
-    width:100%;
-
-    margin-bottom:38px;
-  }
-
-  .footer-logo{
-    width:154px;
-    height:auto;
-
-    margin-bottom:17px;
-  }
-
-  .footer-logo img{
-    width:154px;
-    height:auto;
-  }
-
-  .footer-description{
-    width:100%;
-    max-width:305px;
-
-    color:#5d5d5d;
-
-    font-size:14px;
-    line-height:23px;
-  }
-
-  .footer-socials{
-    gap:19px;
-    margin-top:18px;
-  }
-
-  .footer-socials a{
-    width:20px;
-    height:20px;
-  }
-
-
-  /* =========================
-     QUICK LINKS
-  ========================== */
-
-  .footer-column:nth-child(2),
-  .footer-column:nth-child(3){
-    width:100%;
-  }
-
-  .footer-column h3{
-    margin:0 0 18px;
-
-    color:#aaa;
-
-    font-family:
-      "Cormorant Garamond",
-      Georgia,
-      serif;
-
-    font-size:18px;
-    font-weight:400;
-
-    line-height:1;
-  }
-
-  .footer-column li{
-    margin-bottom:17px;
-  }
-
-  .footer-column li,
-  .footer-column a{
-    color:#5d5d5d;
-
-    font-size:14px;
-    line-height:1.15;
-  }
-
-  /*
-    Anthems is highlighted in orange
-    as shown in the reference.
-  */
-  .footer-column:nth-child(2) li:last-child a{
-    color:#f26722;
-  }
-
-
-  /* =========================
-     CONTACT
-  ========================== */
-
-  .footer-contact{
-    grid-column:1/-1;
-
-    width:100%;
-
-    margin-top:16px;
-    padding-top:29px;
-
-    border-top:1px solid #1d1d1d;
-  }
-
-  .footer-contact h3{
-    margin:0 0 17px;
-
-    color:#aaa;
-
-    font-family:
-      "Cormorant Garamond",
-      Georgia,
-      serif;
-
-    font-size:18px;
-    font-weight:400;
-  }
-
-  .footer-contact ul{
-    margin:0;
-    padding:0;
-  }
-
-  .footer-contact li{
-    display:flex;
-    align-items:center;
-
-    gap:8px;
-
-    margin-bottom:17px;
-
-    white-space:normal;
-
-    color:#5d5d5d;
-
-    font-size:14px;
-  }
-
-
-  /* Email icon */
-  .footer-contact li:nth-child(1)::before{
-    content:"";
-
-    width:14px;
-    height:10px;
-
-    flex:0 0 14px;
-
-    border:1px solid #f26722;
-    border-radius:1px;
-  }
-
-
-  /* Phone prefix */
-  .footer-contact li:nth-child(2)::before{
-    content:"+91";
-
-    color:#f26722;
-
-    font-weight:500;
-  }
-
-
-  /* Location icon */
-  .footer-contact li:nth-child(3)::before{
-    content:"";
-
-    width:10px;
-    height:10px;
-
-    flex:0 0 10px;
-
-    border:2px solid #f26722;
-    border-radius:50%;
-  }
-
-
-  .serving-global{
-    margin-top:5px;
-
-    color:#8b4d35!important;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
-  }
-
-
-  /* =========================
-     DIVIDER
-  ========================== */
-
-  .footer-divider{
-    display:none;
-  }
-
-
-  /* =========================
-     BOTTOM
-  ========================== */
-
-  .footer-bottom{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    justify-content:flex-start;
-
-    gap:0;
-
-    padding-top:57px;
-  }
-
-  .footer-bottom p{
-    max-width:320px;
-
-    margin:0 0 18px;
-
-    color:#555;
-
-    font-size:12px;
-    line-height:18px;
-  }
-
-  /*
-    Your reference contains:
-    © 2026 Yireh Ministry. Genesis 22:8 —
-    "God Himself will provide..."
-    
-    The existing paragraph needs to contain
-    that text in the HTML.
-  */
-
-  .footer-legal{
-    display:flex;
-
-    align-items:center;
-
-    gap:25px;
-
-    margin-bottom:23px;
-  }
-
-  .footer-legal a{
-    color:#575757;
-
-    font-size:12px;
-  }
-
-
-  /*
-    Add:
-    <p class="footer-designed">
-      Designed with love for God's Kingdom
-    </p>
-  */
-
-  .footer-designed{
-    margin:0;
-
-    color:#666;
-
-    font-family:
-      "Gabarito",
-      sans-serif;
-
-    font-size:12px;
-
-    font-style:italic;
-
-    line-height:1.2;
-  }
-}
-
-
-/* ==============================
-   SMALL MOBILE
-================================ */
-
-@media(max-width:380px){
-
-  .footer-container{
-    padding-left:23px;
-    padding-right:23px;
-  }
-
-  .footer-main{
-    column-gap:28px;
-  }
-
-  .footer-description{
-    max-width:295px;
-
-    font-size:13px;
-    line-height:21px;
-  }
-
-  .footer-column h3{
-    font-size:17px;
-  }
-
-  .footer-column li,
-  .footer-column a{
-    font-size:13px;
-  }
-
-  .footer-bottom{
-    padding-top:50px;
-  }
-
-  .footer-bottom p{
-    font-size:11px;
-    line-height:17px;
-  }
-
-  .footer-legal a,
-  .footer-designed{
-    font-size:11px;
-  }
-}
-
-
 
 
 /* =========================================================
-   VISION TYPEWRITER
+ CONTAINER
 ========================================================= */
 
-.vision-type-lines {
-  display: block;
-  width: 100%;
+.footer-container {
+  width: 1324px;
+
+  max-width:
+      calc(100% - 80px);
+
+  margin: 0 auto;
+
+  padding-top: 61px;
+  padding-bottom: 67px;
 }
 
-.vision-type-line {
+
+/* =========================================================
+ MAIN FOOTER
+========================================================= */
+
+.footer-main {
+  display: grid;
+
+  grid-template-columns:
+      300px
+      270px
+      270px
+      1fr;
+
+  column-gap: 42px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+ BRAND
+========================================================= */
+
+.footer-logo {
+  display: inline-block;
+
+  width: 144px;
+
+  height: auto;
+
+  margin-bottom: 16px;
+}
+
+
+.footer-logo img {
   display: block;
 
-  width: max-content;
-  max-width: 100%;
+  width: 144px;
 
-  opacity: 0;
+  height: auto;
 
-  clip-path:
-      inset(0 100% 0 0);
+  object-fit: contain;
+}
+
+
+.footer-description {
+  width: 290px;
+
+  margin: 0;
+
+  color: #858585;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  line-height: 25px;
+}
+
+
+/* =========================================================
+ SOCIAL LINKS
+========================================================= */
+
+.footer-socials {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 23px;
+}
+
+
+.footer-socials a {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+
+.footer-socials img {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+ FOOTER COLUMNS
+========================================================= */
+
+.footer-column h3 {
+  margin:
+      8px 0 22px;
+
+  color:
+      #f26722;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size:
+      16px;
+
+  font-weight:
+      700;
+
+  line-height:
+      1;
+}
+
+
+.footer-column ul {
+  list-style: none;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+.footer-column li {
+  margin:
+      0 0 21px;
+
+  padding: 0;
+}
+
+
+.footer-column li,
+.footer-column a {
+  color:
+      #8b8b8b;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size:
+      15px;
+
+  font-weight:
+      400;
+
+  line-height:
+      1.2;
+
+  text-decoration:
+      none;
+}
+
+
+.footer-column a {
+  transition:
+      color 0.2s ease;
+}
+
+
+.footer-column a:hover {
+  color:
+      #f26722;
+}
+
+
+/* =========================================================
+ CONTACT
+========================================================= */
+
+.footer-contact h3 {
+  margin-bottom:
+      23px;
+}
+
+
+.footer-contact li {
+  margin-bottom:
+      20px;
+
+  white-space:
+      nowrap;
+}
+
+
+.serving-global {
+  display:
+      inline-block;
+
+  margin-top:
+      0;
+
+  color:
+      #f26722 !important;
+
+  font-weight:
+      500 !important;
+}
+
+
+/* =========================================================
+ DIVIDER
+========================================================= */
+
+.footer-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin-top: 29px;
+
+  background:
+      #292929;
+}
+
+
+/* =========================================================
+ FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 34px;
+}
+
+
+.footer-bottom p {
+  margin: 0;
+
+  color:
+      #808080;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size:
+      13px;
+
+  font-weight:
+      400;
+}
+
+
+.footer-legal {
+  display: flex;
+
+  align-items: center;
+
+  gap: 28px;
+}
+
+
+.footer-legal a {
+  color:
+      #808080;
+
+  text-decoration:
+      none;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size:
+      13px;
+}
+
+
+.footer-legal a:hover {
+  color:
+      #f26722;
+}
+
+
+/* =========================================================
+ TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .footer-container {
+      max-width:
+          calc(100% - 60px);
+  }
+
+
+  .footer-main {
+      grid-template-columns:
+          1.3fr
+          1fr
+          1fr
+          1.3fr;
+
+      column-gap:
+          25px;
+  }
+
+
+  .footer-description {
+      width:
+          auto;
+
+      max-width:
+          280px;
+  }
+
+
+  .footer-contact li {
+      white-space:
+          normal;
+  }
+
+}
+
+
+/* =========================================================
+ SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .footer-container {
+      max-width:
+          calc(100% - 40px);
+
+      padding-top:
+          50px;
+
+      padding-bottom:
+          40px;
+  }
+
+
+  .footer-main {
+      grid-template-columns:
+          repeat(
+              2,
+              1fr
+          );
+
+      row-gap:
+          45px;
+
+      column-gap:
+          40px;
+  }
+
+
+  .footer-brand {
+      grid-column:
+          1 / -1;
+  }
+
+
+  .footer-description {
+      max-width:
+          350px;
+  }
+
+}
+
+
+/* =========================================================
+ MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .site-footer {
+      background:
+          #080808;
+  }
+
+
+  .footer-container {
+      width:
+          100%;
+
+      max-width:
+          none;
+
+      margin:
+          0;
+
+      padding:
+          34px 23px 32px;
+  }
+
+
+  .footer-main {
+      display:
+          grid;
+
+      grid-template-columns:
+          1fr 1fr;
+
+      column-gap:
+          36px;
+
+      row-gap:
+          0;
+
+      width:
+          100%;
+  }
+
+
+  /* =====================================================
+     BRAND
+  ===================================================== */
+
+  .footer-brand {
+      grid-column:
+          1 / -1;
+
+      width:
+          100%;
+
+      margin-bottom:
+          38px;
+  }
+
+
+  .footer-logo {
+      width:
+          154px;
+
+      height:
+          auto;
+
+      margin-bottom:
+          17px;
+  }
+
+
+  .footer-logo img {
+      width:
+          154px;
+
+      height:
+          auto;
+  }
+
+
+  .footer-description {
+      width:
+          100%;
+
+      max-width:
+          305px;
+
+      color:
+          #5d5d5d;
+
+      font-size:
+          14px;
+
+      line-height:
+          23px;
+  }
+
+
+  .footer-socials {
+      gap:
+          19px;
+
+      margin-top:
+          18px;
+  }
+
+
+  .footer-socials a,
+  .footer-socials img {
+      width:
+          20px;
+
+      height:
+          20px;
+  }
+
+
+  /* =====================================================
+     QUICK LINKS / MINISTRY
+  ===================================================== */
+
+  .footer-column:nth-child(2),
+  .footer-column:nth-child(3) {
+      width:
+          100%;
+  }
+
+
+  .footer-column h3 {
+      margin:
+          0 0 18px;
+
+      color:
+          #aaa;
+
+      font-family:
+          "Cormorant Garamond",
+          Georgia,
+          serif;
+
+      font-size:
+          18px;
+
+      font-weight:
+          400;
+
+      line-height:
+          1;
+  }
+
+
+  .footer-column li {
+      margin-bottom:
+          17px;
+  }
+
+
+  .footer-column li,
+  .footer-column a {
+      color:
+          #5d5d5d;
+
+      font-size:
+          14px;
+
+      line-height:
+          1.15;
+  }
+
+
+  /* Anthems highlight */
+
+  /* .footer-column:nth-child(2)
+  li:last-child
+  a {
+      color:
+          #f26722;
+  } */
+
+
+  /* =====================================================
+     CONTACT
+  ===================================================== */
+
+  .footer-contact {
+      grid-column:
+          1 / -1;
+
+      width:
+          100%;
+
+      margin-top:
+          16px;
+
+      padding-top:
+          29px;
+
+      border-top:
+          1px solid #1d1d1d;
+  }
+
+
+  .footer-contact h3 {
+      margin:
+          0 0 17px;
+
+      color:
+          #aaa;
+
+      font-family:
+          "Cormorant Garamond",
+          Georgia,
+          serif;
+
+      font-size:
+          18px;
+
+      font-weight:
+          400;
+  }
+
+
+  .footer-contact ul {
+      margin:
+          0;
+
+      padding:
+          0;
+  }
+
+
+  .footer-contact li {
+      display:
+          flex;
+
+      align-items:
+          center;
+
+      gap:
+          8px;
+
+      margin-bottom:
+          17px;
+
+      white-space:
+          normal;
+
+      color:
+          #5d5d5d;
+
+      font-size:
+          14px;
+  }
+
+
+
+  .serving-global {
+      margin-top:
+          5px;
+
+      color:
+          #8b4d35 !important;
+
+      font-size:
+          12px;
+
+      letter-spacing:
+          1px;
+
+      text-transform:
+          uppercase;
+  }
+
+
+  /* =====================================================
+     DIVIDER
+  ===================================================== */
+
+  .footer-divider {
+      display:
+          none;
+  }
+
+
+  /* =====================================================
+     BOTTOM
+  ===================================================== */
+
+  .footer-bottom {
+      display:
+          flex;
+
+      flex-direction:
+          column;
+
+      align-items:
+          flex-start;
+
+      justify-content:
+          flex-start;
+
+      gap:
+          0;
+
+      padding-top:
+          57px;
+  }
+
+
+  .footer-bottom p {
+      max-width:
+          320px;
+
+      margin:
+          0 0 18px;
+
+      color:
+          #555;
+
+      font-size:
+          12px;
+
+      line-height:
+          18px;
+  }
+
+
+  .footer-legal {
+      display:
+          flex;
+
+      align-items:
+          center;
+
+      gap:
+          25px;
+
+      margin-bottom:
+          23px;
+  }
+
+
+  .footer-legal a {
+      color:
+          #575757;
+
+      font-size:
+          12px;
+  }
+
+}
+
+
+/* =========================================================
+ SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .footer-container {
+      padding-left:
+          23px;
+
+      padding-right:
+          23px;
+  }
+
+
+  .footer-main {
+      column-gap:
+          28px;
+  }
+
+
+  .footer-description {
+      max-width:
+          295px;
+
+      font-size:
+          13px;
+
+      line-height:
+          21px;
+  }
+
+
+  .footer-column h3 {
+      font-size:
+          17px;
+  }
+
+
+  .footer-column li,
+  .footer-column a {
+      font-size:
+          13px;
+  }
+
+
+  .footer-bottom {
+      padding-top:
+          50px;
+  }
+
+
+  .footer-bottom p {
+      font-size:
+          11px;
+
+      line-height:
+          17px;
+  }
+
+
+  .footer-legal a {
+      font-size:
+          11px;
+  }
+
 }

@@ -29,13 +29,14 @@
     <link rel="stylesheet" href="aboutus.css" />
     <link rel="stylesheet" href="give.css" />
     <link rel="stylesheet" href="events.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="events-scroll.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="navbar">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <img src="assets/Logo.png" alt="Yireh Ministry" />
         </a>
 
@@ -75,10 +76,10 @@
         <!-- Page heading -->
         <div class="events-heading">
 
-            <span>Gather With Us</span>
+            <span data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10"    data-aos-delay="10">Gather With Us</span>
 
-            <h1>Upcoming events &amp; releases</h1>
-            <p>Worship nights, gatherings, and the songs God is birthing through this ministry.</p>
+            <h1 data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10"    data-aos-delay="50">Upcoming events &amp; releases</h1>
+            <p data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"  data-aos-offset="10"   data-aos-delay="100">Worship nights, gatherings, and the songs God is birthing through this ministry.</p>
         </div>
 
 
@@ -385,6 +386,10 @@
   </div>
 </footer>
     <script src="events-scroll.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -26,6 +26,7 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="aboutus.css" />
     <link rel="stylesheet" href="give.css" />
     <link rel="stylesheet" href="give-scroll.css" />
@@ -34,7 +35,7 @@
     <header class="site-header">
       <div class="navbar">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <img src="assets/Logo.png" alt="Yireh Ministry" />
         </a>
 
@@ -70,12 +71,12 @@
     <section class="give-intro">
       <div class="give-intro-container">
         <div class="give-heading">
-          <span class="give-eyebrow"> Partner With Us </span>
+          <span class="give-eyebrow" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"  data-aos-offset="10"   data-aos-delay="10"> Partner With Us </span>
 
-          <h1>Support the vision</h1>
+          <h1 data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"  data-aos-offset="10"   data-aos-delay="50">Support the vision</h1>
         </div>
 
-        <p class="give-description">
+        <p class="give-description" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"  data-aos-offset="10"   data-aos-delay="100">
           Yireh Ministry is committed to spreading God's Word through worship
           music and outreach. Producing quality worship music takes resources —
           from recording, mixing, and mastering to video production and
@@ -114,7 +115,7 @@
      WAYS TO GIVE
 ========================= -->
 
-    <section class="ways-give-section">
+    <section id="way-give-donation" class="ways-give-section">
       <div class="ways-give-container">
         <h2 class="ways-give-title">Ways to Give</h2>
 
@@ -128,7 +129,7 @@
               small, makes a difference.
             </p>
 
-            <a href="#" class="giving-button"> Donate Now </a>
+            <a href="donation.html" class="giving-button"> Donate Now </a>
           </article>
 
           <!-- Sponsorship -->
@@ -152,7 +153,7 @@
               ministry? We'd love to hear from you.
             </p>
 
-            <a href="#" class="giving-button"> Contact </a>
+            <a href="contact.html" class="giving-button"> Contact </a>
           </article>
         </div>
       </div>
@@ -178,7 +179,7 @@
           </li>
         </ul>
 
-        <a href="#" class="why-matters-button"> Donate Now </a>
+        <a href="donation.html" class="why-matters-button"> Donate Now </a>
 
         <p class="why-matters-note">
           We value your trust: sponsors receive regular updates, financial
@@ -231,7 +232,7 @@
 
         <!-- Mission statement -->
         <p class="mission-statement">
-          All under the Banner of<strong> JEHOVAH JIREH — OUR PROVIDER.</strong>
+          All under the Banner of &thinsp;<strong> JEHOVAH JIREH — OUR PROVIDER.</strong>
         </p>
 
         <!-- CTA -->
@@ -344,6 +345,10 @@
 </footer>
 
     <script src="give-scroll.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
     <script src="script.js"></script>
   </body>
 </html>
