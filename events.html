@@ -1,395 +1,1039 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Yireh Ministry</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet" href="aboutus.css" />
-    <link rel="stylesheet" href="give.css" />
-    <link rel="stylesheet" href="events.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="events-scroll.css" />
-  </head>
-  <body>
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         AOS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/aos@next/dist/aos.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="aboutus.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="give.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="events.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="site-header">
-      <div class="navbar">
-        <!-- Logo -->
-        <a href="/" class="logo">
-          <img src="assets/Logo.png" alt="Yireh Ministry" />
-        </a>
 
-        <!-- Desktop / Mobile Navigation -->
-        <nav class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="aboutus.html">About</a>
-          <!-- <a href="#">What We Do</a> -->
-          <a href="give.html">Give</a>
-          <a class="active" href="events.html">Events</a>
-          <a href="anthem.html">Anthems</a>
-          <a href="contact.html">Contact</a>
-        </nav>
+        <div class="navbar">
 
-        <!-- Mobile Menu Button -->
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+
+            <!-- Logo -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <img
+                    src="assets/Logo.png"
+                    alt="Yireh Ministry"
+                >
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav
+                class="nav-links"
+                id="navLinks"
+                data-aos="fade-down"
+                data-aos-duration="600"
+                data-aos-delay="100"
+            >
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="aboutus.html">
+                    About
+                </a>
+
+                <a href="give.html">
+                    Give
+                </a>
+
+                <a
+                    class="active"
+                    href="events.html"
+                >
+                    Events
+                </a>
+
+                <a href="anthem.html">
+                    Anthems
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile menu -->
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
     </header>
 
-<!-- =========================
-     EVENTS - INTRO
-========================= -->
 
-<section class="events-section">
 
-    <div class="events-container">
+    <!-- =====================================================
+         EVENTS INTRO
+    ====================================================== -->
 
-        <!-- Page heading -->
-        <div class="events-heading">
+    <section class="events-section">
 
-            <span data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10"    data-aos-delay="10">Gather With Us</span>
+        <div class="events-container">
 
-            <h1 data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10"    data-aos-delay="50">Upcoming events &amp; releases</h1>
-            <p data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true"  data-aos-offset="10"   data-aos-delay="100">Worship nights, gatherings, and the songs God is birthing through this ministry.</p>
+
+            <!-- Heading -->
+
+            <div class="events-heading">
+
+                <span
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="10"
+                    data-aos-offset="50"
+                    data-aos-mirror="true"
+                >
+
+                    Gather With Us
+
+                </span>
+
+
+                <h1
+                    data-aos="fade-up"
+                    data-aos-duration="700"
+                    data-aos-delay="70"
+                    data-aos-offset="50"
+                    data-aos-mirror="true"
+                >
+
+                    Upcoming events &amp; releases
+
+                </h1>
+
+
+                <p
+                    data-aos="fade-up"
+                    data-aos-duration="700"
+                    data-aos-delay="130"
+                    data-aos-offset="50"
+                    data-aos-mirror="true"
+                >
+
+                    Worship nights, gatherings,
+                    and the songs God is birthing
+                    through this ministry.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 UPCOMING EVENTS
+            ================================================== -->
+
+            <div class="events-grid">
+
+
+                <!-- =================================================
+                     RAW
+                ================================================== -->
+
+                <article
+                    class="event-card"
+                    data-aos="fade-right"
+                    data-aos-duration="700"
+                    data-aos-delay="50"
+                    data-aos-offset="70"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="event-status">
+
+                        COMING SOON
+
+                    </div>
+
+
+                    <div class="event-body">
+
+                        <h2>
+                            RAW
+                        </h2>
+
+
+                        <p>
+
+                            Details on this gathering are on the
+                            way. Register now to be the first to know.
+
+                        </p>
+
+
+                        <a
+                            href="#"
+                            class="event-button"
+                        >
+
+                            Register Interest
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     THE D
+                ================================================== -->
+
+                <article
+                    class="event-card"
+                    data-aos="fade-left"
+                    data-aos-duration="700"
+                    data-aos-delay="120"
+                    data-aos-offset="70"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="event-status">
+
+                        COMING SOON
+
+                    </div>
+
+
+                    <div class="event-body">
+
+                        <h2>
+                            The D
+                        </h2>
+
+
+                        <p>
+
+                            Details on this gathering are on the
+                            way. Register now to be the first to know.
+
+                        </p>
+
+
+                        <a
+                            href="#"
+                            class="event-button"
+                        >
+
+                            Register interest
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANTHEMS
+            ================================================== -->
+
+            <article
+                class="anthem-card"
+                data-aos="fade-up"
+                data-aos-duration="750"
+                data-aos-delay="80"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+                <h2>
+
+                    Anthems season 1
+
+                </h2>
+
+
+                <p>
+
+                    Our upcoming album. If you want to lend your voice
+                    to Season 1, tell us — we'll take it from there.
+                    Share what God has given you. Submit lyrics alone,
+                    or lyrics with a tune — either way, we'd love to
+                    hear it.
+
+                </p>
+
+
+                <a
+                    href="anthem.html"
+                    class="event-button anthem-button"
+                >
+
+                    Know more
+
+                </a>
+
+            </article>
+
         </div>
 
+    </section>
 
-        <!-- Upcoming events -->
-        <div class="events-grid">
 
-            <!-- RAW -->
-            <article class="event-card">
 
-                <div class="event-status">
-                    COMING SOON
+    <!-- =====================================================
+         CONTACT CTA
+    ====================================================== -->
+
+    <section class="contact-cta-section">
+
+        <div
+            class="contact-cta-card"
+            data-aos="fade-up"
+            data-aos-duration="750"
+            data-aos-offset="60"
+            data-aos-mirror="true"
+        >
+
+
+            <!-- =================================================
+                 LEFT CONTENT
+            ================================================== -->
+
+            <div
+                class="contact-cta-left"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+                <p
+                    class="contact-eyebrow"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    get in touch
+
+                </p>
+
+
+                <h2
+                    class="contact-title"
+                    data-aos="fade-up"
+                    data-aos-duration="700"
+                    data-aos-delay="70"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    Invite us, ask us, pray<br>
+                    with us
+
+                </h2>
+
+
+                <p
+                    class="contact-description"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="130"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    Whether you want to invite Yireh Ministry to your
+                    church, submit a prayer request, or just say hello —
+                    we'd love to hear from you.
+
+                </p>
+
+
+                <a
+                    href="contact.html"
+                    class="contact-button"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="190"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <span>
+                        Visit Contact Page
+                    </span>
+
+
+                    <img
+                        src="assets/Chevron right.png"
+                        alt=""
+                    >
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+
+            <div
+                class="contact-divider"
+                data-aos="fade-up"
+                data-aos-duration="700"
+                data-aos-offset="50"
+                data-aos-mirror="true"
+            ></div>
+
+
+
+            <!-- =================================================
+                 RIGHT CONTENT
+            ================================================== -->
+
+            <div
+                class="contact-cta-right"
+                data-aos="fade-left"
+                data-aos-duration="800"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+
+                <!-- Serving globally -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="50"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/users.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Serving globally
+                        </h3>
+
+
+                        <p>
+
+                            Churches across India, UAE, USA, UK &amp;<br>
+                            Australia
+
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="event-body">
 
-                    <h2>RAW</h2>
 
-                    <p>
-                        Details on this gathering are on the
-                        way. Register now to be the first to
-                        know.
+                <!-- Email -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="100"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/mail.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Email us
+                        </h3>
+
+
+                        <p>
+                            Yirehministryglobal@gmail.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Anthems -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="150"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/music.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Anthems Season 1
+                        </h3>
+
+
+                        <em>
+                            Coming Soon
+                        </em>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DECORATIVE WATERMARK
+
+                 IMPORTANT:
+                 NO AOS ATTRIBUTES HERE
+            ================================================== -->
+
+            <div class="contact-watermark">
+
+                <img
+                    src="assets/decorative.png"
+                    alt=""
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-main">
+
+
+                <!-- Brand -->
+
+                <div
+                    class="footer-brand"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <a
+                        href="#"
+                        class="footer-logo"
+                    >
+
+                        <img
+                            src="assets/Logo.png"
+                            alt="Yireh Ministry"
+                        >
+
+                    </a>
+
+
+                    <p class="footer-description">
+
+                        A Christ-centered ministry born out of obedience —
+                        leading worship, discipling believers, and carrying
+                        the Gospel across the nations.
+
                     </p>
 
-                    <a href="#" class="event-button">
-                        Register Interest
+
+                    <div class="footer-socials">
+
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-instagram.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="YouTube"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-youTube.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-facebook.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Email"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-mail.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Links -->
+
+                <div
+                    class="footer-column"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="50"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Events
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Give
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Anthems
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Ministry -->
+
+                <div
+                    class="footer-column"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="100"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Ministry
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Invite Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Prayer Requests
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Partnerships
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Donate
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Submit Lyrics
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Contact -->
+
+                <div
+                    class="footer-column footer-contact"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="150"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Contact
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+
+                            <a
+                                href="mailto:yirehministryglobal@gmail.com"
+                            >
+
+                                Yirehministryglobal@gmail.com
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="tel:+910000000000"
+                            >
+
+                                +91 00000 00000
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+                            Hyderabad, India
+                        </li>
+
+                    </ul>
+
+
+                    <a
+                        href="#"
+                        class="serving-global"
+                    >
+
+                        SERVING GLOBALLY
+
                     </a>
 
                 </div>
 
-            </article>
+            </div>
 
 
-            <!-- The D -->
-            <article class="event-card">
 
-                <div class="event-status">
-                    COMING SOON
-                </div>
+            <!-- Divider -->
 
-                <div class="event-body">
+            <div class="footer-divider"></div>
 
-                    <h2>The D</h2>
 
-                    <p>
-                        Details on this gathering are on the
-                        way. Register now to be the first to
-                        know.
-                    </p>
 
-                    <a href="#" class="event-button">
-                        Register interest
+            <!-- Bottom -->
+
+            <div
+                class="footer-bottom"
+                data-aos="fade-up"
+                data-aos-duration="650"
+                data-aos-offset="30"
+                data-aos-mirror="true"
+            >
+
+                <p>
+                    © 2026 Yireh Ministry.
+                </p>
+
+
+                <div class="footer-legal">
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#">
+                        Terms
                     </a>
 
                 </div>
 
-            </article>
-
-        </div>
-
-
-        <!-- Anthems -->
-        <article class="anthem-card">
-
-            <h2>
-                Anthems season 1
-            </h2>
-
-            <p>
-                Our upcoming album. If you want to lend your voice
-                to Season 1, tell us — we'll take it from there.
-                Share what God has given you. Submit lyrics alone,
-                or lyrics with a tune — either way, we'd love to
-                hear it.
-            </p>
-
-            <a href="#" class="event-button anthem-button">
-                Know more
-            </a>
-
-        </article>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     CONTACT CTA SECTION
-========================= -->
-
-<section class="contact-cta-section">
-
-    <div class="contact-cta-card">
-
-        <!-- =========================
-             LEFT CONTENT
-        ========================== -->
-
-        <div class="contact-cta-left">
-
-            <p class="contact-eyebrow">
-                get in touch
-            </p>
-
-            <h2 class="contact-title">
-                Invite us, ask us, pray<br>
-                with us
-            </h2>
-
-            <p class="contact-description">
-                Whether you want to invite Yireh Ministry to your
-                church, submit a prayer request, or just say hello —
-                we'd love to hear from you.
-            </p>
-
-            <a href="#" class="contact-button">
-                <span>Visit Contact Page  </span>
-                <img src="assets/Chevron right.png" alt="" srcset="">
-            </a>
-
-        </div>
-
-
-        <!-- =========================
-             DIVIDER
-        ========================== -->
-
-        <div class="contact-divider"></div>
-
-
-        <!-- =========================
-             RIGHT CONTENT
-        ========================== -->
-
-        <div class="contact-cta-right">
-
-            <!-- Serving globally -->
-            <div class="contact-info-item">
-
-                <div class="contact-icon">
-                    <img src="assets/users.png" alt="">
-                </div>
-
-                <div class="contact-info-text">
-                    <h3>Serving globally</h3>
-
-                    <p>
-                        Churches across India, UAE, USA, UK &amp;<br>
-                        Australia
-                    </p>
-                </div>
-
-            </div>
-
-
-            <!-- Email -->
-            <div class="contact-info-item">
-
-                <div class="contact-icon">
-                    <img src="assets/mail.png" alt="">
-                </div>
-
-                <div class="contact-info-text">
-                    <h3>Email us</h3>
-
-                    <p>
-                        Yirehministryglobal@gmail.com
-                    </p>
-                </div>
-
-            </div>
-
-
-            <!-- Anthems -->
-            <div class="contact-info-item">
-
-                <div class="contact-icon">
-                    <img src="assets/music.png" alt="">
-                </div>
-
-                <div class="contact-info-text">
-                    <h3>Anthems Season 1</h3>
-
-                    <em>Coming Soon</em>
-                </div>
-
             </div>
 
         </div>
 
+    </footer>
 
-        <!-- =========================
-             DECORATIVE WATERMARK
-        ========================== -->
 
-        <div class="contact-watermark">
-            <img src="assets/decorative.png" alt="">
-        </div>
 
-    </div>
+    <!-- =====================================================
+         AOS
+    ====================================================== -->
 
-</section>
+    <script
+        src="https://unpkg.com/aos@next/dist/aos.js">
+    </script>
 
-    <!-- =========================
-     FOOTER
-========================= -->
 
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Main footer content -->
-    <div class="footer-main">
-      <!-- Brand -->
-      <div class="footer-brand">
-        <a href="#" class="footer-logo">
-          <img src="assets/Logo.png" alt="Yireh Ministry" />
-        </a>
+    <script>
 
-        <p class="footer-description">
-          A Christ-centered ministry born out of obedience — leading
-          worship, discipling believers, and carrying the Gospel across the
-          nations.
-        </p>
+        AOS.init({
 
-        <!-- Social icons -->
-        <div class="footer-socials">
-          <a href="#" aria-label="Instagram">
-            <span class=""><img src="assets/Footer-instagram.png" alt="" srcset=""></span>
-          </a>
+            duration:
+                700,
 
-          <a href="#" aria-label="YouTube">
-            <span class=""><img src="assets/Footer-youTube.png" alt="" srcset=""></span>
-          </a>
+            easing:
+                "ease-out-cubic",
 
-          <a href="#" aria-label="Facebook">
-            <span class=""><img src="assets/Footer-facebook.png" alt="" srcset=""></span>
-          </a>
+            once:
+                false,
 
-          <a href="#" aria-label="Email">
-            <span class=""><img src="assets/Footer-mail.png" alt="" srcset=""></span>
-          </a>
-        </div>
-      </div>
+            mirror:
+                false,
 
-      <!-- Quick Links -->
-      <div class="footer-column">
-        <h3>Quick Links</h3>
+            offset:
+                50,
 
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Give</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Anthems</a></li>
-        </ul>
-      </div>
+            disable:
+                false
 
-      <!-- Ministry -->
-      <div class="footer-column">
-        <h3>Ministry</h3>
+        });
 
-        <ul>
-          <li><a href="#">Invite Us</a></li>
-          <li><a href="#">Prayer Requests</a></li>
-          <li><a href="#">Partnerships</a></li>
-          <li><a href="#">Donate</a></li>
-          <li><a href="#">Submit Lyrics</a></li>
-        </ul>
-      </div>
+    </script>
 
-      <!-- Contact -->
-      <div class="footer-column footer-contact">
-        <h3>Contact</h3>
 
-        <ul>
-          <li>
-            <a href="mailto:yirehministryglobal@gmail.com">
-              Yirehministryglobal@gmail.com
-            </a>
-          </li>
+    <!-- =====================================================
+         MAIN SITE SCRIPT
+    ====================================================== -->
 
-          <li>
-            <a href="tel:+910000000000"> +91 00000 00000 </a>
-          </li>
-
-          <li>Hyderabad, India</li>
-        </ul>
-
-        <a href="#" class="serving-global"> SERVING GLOBALLY </a>
-      </div>
-    </div>
-
-    <!-- Bottom separator -->
-    <div class="footer-divider"></div>
-
-    <!-- Bottom footer -->
-    <div class="footer-bottom">
-      <p>© 2026 Yireh Ministry.</p>
-
-      <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms</a>
-      </div>
-    </div>
-  </div>
-</footer>
-    <script src="events-scroll.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
     <script src="script.js"></script>
-  </body>
+
+
+</body>
+
 </html>

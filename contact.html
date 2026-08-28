@@ -1,468 +1,1276 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Yireh Ministry</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet" href="aboutus.css" />
-    <link rel="stylesheet" href="give.css" />
-    <link rel="stylesheet" href="events.css" />
-    <link rel="stylesheet" href="anthem.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="contact.css" />
-    <link rel="stylesheet" href="contact-scroll.css" />
-  </head>
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
 
-  <body>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         AOS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/aos@next/dist/aos.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="aboutus.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="give.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="events.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="anthem.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="contact.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="site-header">
-      <div class="navbar">
-        <!-- Logo -->
-        <a href="/" class="logo">
-          <img src="assets/Logo.png" alt="Yireh Ministry" />
-        </a>
 
-        <!-- Desktop / Mobile Navigation -->
-        <nav class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="aboutus.html">About</a>
-          <!-- <a href="#">What We Do</a> -->
-          <a href="give.html">Give</a>
-          <a href="events.html">Events</a>
-          <a href="anthem.html">Anthems</a>
-          <a class="active" href="contact.html">Contact</a>
-        </nav>
+        <div class="navbar">
 
-        <!-- Mobile Menu Button -->
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+
+            <!-- Logo -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <img
+                    src="assets/Logo.png"
+                    alt="Yireh Ministry"
+                >
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav
+                class="nav-links"
+                id="navLinks"
+                data-aos="fade-down"
+                data-aos-duration="600"
+                data-aos-delay="100"
+            >
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="aboutus.html">
+                    About
+                </a>
+
+                <a href="give.html">
+                    Give
+                </a>
+
+                <a href="events.html">
+                    Events
+                </a>
+
+                <a href="anthem.html">
+                    Anthems
+                </a>
+
+                <a
+                    class="active"
+                    href="contact.html"
+                >
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile menu -->
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
     </header>
 
-    <!-- =========================================================
-     CONTACT INTRO SECTION
-========================================================= -->
 
-<section class="contact-intro-section">
 
-  <div class="contact-intro-container">
+    <!-- =====================================================
+         CONTACT INTRO
+    ====================================================== -->
 
-      <p class="contact-intro-eyebrow" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="10">
-          Get In Touch
-      </p>
+    <section class="contact-intro-section">
 
-      <h1 class="contact-intro-title" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="50">
-          Invite us, ask us, pray with us
-      </h1>
+        <div class="contact-intro-container">
 
-      <p class="contact-intro-description" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-offset="10" data-aos-delay="100">
-          Whether you want to invite Yireh Ministry to your church,
-          submit a prayer request, or just say hello — we'd love to hear from you.
-      </p>
 
-  </div>
+            <p
+                class="contact-intro-eyebrow"
+                data-aos="fade-up"
+                data-aos-duration="650"
+                data-aos-delay="10"
+                data-aos-offset="50"
+                data-aos-mirror="true"
+            >
 
-</section>
+                Get In Touch
 
-    <!-- =========================
-     CONTACT DETAILS SECTION
-========================= -->
+            </p>
+
+
+            <h1
+                class="contact-intro-title"
+                data-aos="fade-up"
+                data-aos-duration="700"
+                data-aos-delay="80"
+                data-aos-offset="50"
+                data-aos-mirror="true"
+            >
+
+                Invite us, ask us, pray with us
+
+            </h1>
+
+
+            <p
+                class="contact-intro-description"
+                data-aos="fade-up"
+                data-aos-duration="700"
+                data-aos-delay="140"
+                data-aos-offset="50"
+                data-aos-mirror="true"
+            >
+
+                Whether you want to invite Yireh Ministry to your church,
+                submit a prayer request, or just say hello — we'd love
+                to hear from you.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONTACT DETAILS
+    ====================================================== -->
 
     <section class="contact-details-section">
-      <div class="contact-details-container">
-        <!-- =========================
-             CONTACT FORM CARD
-        ========================== -->
 
-        <div class="contact-details-form-card">
-          <form id="contactDetailsForm" action="https://formsubmit.co/mylogin00000@gmail.com"
-          method="POST"
-          enctype="multipart/form-data" class="contact-details-form">
+        <div class="contact-details-container">
 
-          <input
-              type="hidden"
-              name="_subject"
-              value="New Anthems Season 1 Submission"
-            />
-          
-            <input
-              type="hidden"
-              name="_template"
-              value="table"
-            />
-          
-            <input
-              type="hidden"
-              name="_captcha"
-              value="false"
-            />
-          
-            <input
-              type="hidden"
-              name="_next"
-              value="https://1raviray.github.io/YirehMinistry/"
-            />
-            <div class="contact-details-row">
-              <div class="contact-details-field">
-                <label for="detailsName"> FULL NAME </label>
 
-                <input type="text" id="detailsName" name="name" required />
-              </div>
+            <!-- =================================================
+                 FORM CARD
+            ================================================== -->
 
-              <div class="contact-details-field">
-                <label for="detailsLocation"> WHERE ARE YOU FROM? </label>
+            <div
+                class="contact-details-form-card"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-easing="ease-out-cubic"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
 
-                <input
-                  type="text"
-                  id="detailsLocation"
-                  name="location"
-                  required
-                />
-              </div>
+                <form
+                    id="contactDetailsForm"
+                    action="https://formsubmit.co/mylogin00000@gmail.com"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="contact-details-form"
+                >
+
+
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="New Contact Form Submission"
+                    >
+
+
+                    <input
+                        type="hidden"
+                        name="_template"
+                        value="table"
+                    >
+
+
+                    <input
+                        type="hidden"
+                        name="_captcha"
+                        value="false"
+                    >
+
+
+                    <input
+                        type="hidden"
+                        name="_next"
+                        value="https://1raviray.github.io/YirehMinistry/"
+                    >
+
+
+                    <!-- Row -->
+
+                    <div class="contact-details-row">
+
+
+                        <!-- Name -->
+
+                        <div class="contact-details-field">
+
+                            <label for="detailsName">
+                                FULL NAME
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="detailsName"
+                                name="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Location -->
+
+                        <div class="contact-details-field">
+
+                            <label for="detailsLocation">
+                                WHERE ARE YOU FROM?
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="detailsLocation"
+                                name="location"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Contact -->
+
+                    <div class="contact-details-field contact-email-field">
+
+                        <label for="detailsContact">
+                            EMAIL / PHONE NUMBER
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="detailsContact"
+                            name="contact"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div class="contact-details-field contact-message-field">
+
+                        <label for="detailsMessage">
+                            YOUR MESSAGE OR PRAYER REQUEST
+                        </label>
+
+
+                        <textarea
+                            id="detailsMessage"
+                            name="message"
+                            placeholder="Tell us how we can serve you"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="contact-details-submit"
+                    >
+
+                        <span>
+                            Send Message
+                        </span>
+
+
+                        <img
+                            src="assets/Send.png"
+                            alt=""
+                        >
+
+                    </button>
+
+                </form>
+
             </div>
 
-            <div class="contact-details-field contact-email-field">
-              <label for="detailsContact"> EMAIL / PHONE NUMBER </label>
 
-              <input
-                type="text"
-                id="detailsContact"
-                name="contact"
-                placeholder="you@example.com"
-                required
-              />
+
+            <!-- =================================================
+                 CONTACT INFORMATION
+            ================================================== -->
+
+            <div
+                class="contact-information"
+                data-aos="fade-left"
+                data-aos-duration="800"
+                data-aos-easing="ease-out-cubic"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+
+                <!-- Email -->
+
+                <div
+                    class="contact-info-card"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="50"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-info-icon">
+
+                        <img
+                            src="assets/mail.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-content">
+
+                        <span>
+                            EMAIL
+                        </span>
+
+
+                        <p>
+                            hello@yirehministry.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div
+                    class="contact-info-card"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="100"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-info-icon">
+
+                        <img
+                            src="assets/phone.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-content">
+
+                        <span>
+                            PHONE
+                        </span>
+
+
+                        <p>
+                            +91 00000 00000
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div
+                    class="contact-info-card"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="150"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-info-icon">
+
+                        <img
+                            src="assets/map-pin.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-content">
+
+                        <span>
+                            BASED IN
+                        </span>
+
+
+                        <p>
+                            Hyderabad, India
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Office hours -->
+
+                <div
+                    class="contact-info-card"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="200"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <div class="contact-info-icon">
+
+                        <img
+                            src="assets/clock.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-content">
+
+                        <span>
+                            OFFICE HOURS
+                        </span>
+
+
+                        <p>
+                            Mon-Fri · 10:00 AM – 6:00 PM IST
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Social -->
+
+                <div
+                    class="contact-follow"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="250"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <p>
+                        FOLLOW
+                    </p>
+
+
+                    <div class="contact-social-links">
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+
+                            <img
+                                src="assets/Instagram.png"
+                                alt="Instagram"
+                            >
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="YouTube"
+                        >
+
+                            <img
+                                src="assets/YouTube.png"
+                                alt="YouTube"
+                            >
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+
+                            <img
+                                src="assets/Facebook.png"
+                                alt="Facebook"
+                            >
+
+                        </a>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="contact-details-field contact-message-field">
-              <label for="detailsMessage">
-                YOUR MESSAGE OR PRAYER REQUEST
-              </label>
-
-              <textarea
-                id="detailsMessage"
-                name="message"
-                placeholder="Tell us how we can serve you"
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" class="contact-details-submit">
-              <span>Send Message</span>
-
-              <img src="assets/Send.png" alt="" />
-            </button>
-          </form>
         </div>
 
-        <!-- =========================
-             RIGHT INFORMATION
-        ========================== -->
-
-        <div class="contact-information">
-          <!-- EMAIL -->
-          <div class="contact-info-card">
-            <div class="contact-info-icon">
-              <img src="assets/mail.png" alt="" />
-            </div>
-
-            <div class="contact-info-content">
-              <span> EMAIL </span>
-
-              <p>hello@yirehministry.com</p>
-            </div>
-          </div>
-
-          <!-- PHONE -->
-          <div class="contact-info-card">
-            <div class="contact-info-icon">
-              <img src="assets/phone.png" alt="" />
-            </div>
-
-            <div class="contact-info-content">
-              <span> PHONE </span>
-
-              <p>+91 00000 00000</p>
-            </div>
-          </div>
-
-          <!-- LOCATION -->
-          <div class="contact-info-card">
-            <div class="contact-info-icon">
-              <img src="assets/map-pin.png" alt="" />
-            </div>
-
-            <div class="contact-info-content">
-              <span> BASED IN </span>
-
-              <p>Hyderabad, India</p>
-            </div>
-          </div>
-
-          <!-- OFFICE HOURS -->
-          <div class="contact-info-card">
-            <div class="contact-info-icon">
-              <img src="assets/clock.png" alt="" />
-            </div>
-
-            <div class="contact-info-content">
-              <span> OFFICE HOURS </span>
-
-              <p>Mon-Fri · 10:00 AM – 6:00 PM IST</p>
-            </div>
-          </div>
-
-          <!-- SOCIAL -->
-          <div class="contact-follow">
-            <p>FOLLOW</p>
-
-            <div class="contact-social-links">
-              <a href="#" aria-label="Instagram">
-                <img src="assets/Instagram.png" alt="Instagram" />
-              </a>
-
-              <a href="#" aria-label="YouTube">
-                <img src="assets/YouTube.png" alt="YouTube" />
-              </a>
-
-              <a href="#" aria-label="Facebook">
-                <img src="assets/Facebook.png" alt="Facebook" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- =========================
-     CONTACT CTA SECTION
-========================= -->
+
+
+    <!-- =====================================================
+         CONTACT CTA
+    ====================================================== -->
 
     <section class="contact-cta-section">
-      <div class="contact-cta-card">
-        <!-- =========================
-             LEFT CONTENT
-        ========================== -->
 
-        <div class="contact-cta-left">
-          <p class="contact-eyebrow">get in touch</p>
+        <div class="contact-cta-card">
 
-          <h2 class="contact-title">
-            Invite us, ask us, pray<br />
-            with us
-          </h2>
 
-          <p class="contact-description">
-            Whether you want to invite Yireh Ministry to your church, submit a
-            prayer request, or just say hello — we'd love to hear from you.
-          </p>
+            <!-- =================================================
+                 LEFT
+            ================================================== -->
 
-          <a href="#" class="contact-button">
-            <span>Visit Contact Page </span>
-            <img src="assets/Chevron right.png" alt="" srcset="" />
-          </a>
+            <div
+                class="contact-cta-left"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-easing="ease-out-cubic"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+                <p
+                    class="contact-eyebrow"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                >
+
+                    get in touch
+
+                </p>
+
+
+                <h2
+                    class="contact-title"
+                    data-aos="fade-up"
+                    data-aos-delay="80"
+                    data-aos-duration="700"
+                >
+
+                    Invite us, ask us, pray<br>
+                    with us
+
+                </h2>
+
+
+                <p
+                    class="contact-description"
+                    data-aos="fade-up"
+                    data-aos-delay="140"
+                    data-aos-duration="650"
+                >
+
+                    Whether you want to invite Yireh Ministry to your church,
+                    submit a prayer request, or just say hello — we'd love
+                    to hear from you.
+
+                </p>
+
+
+                <a
+                    href="contact.html"
+                    class="contact-button"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    data-aos-duration="650"
+                >
+
+                    <span>
+                        Visit Contact Page
+                    </span>
+
+
+                    <img
+                        src="assets/Chevron right.png"
+                        alt=""
+                    >
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DIVIDER
+            ================================================== -->
+
+            <div
+                class="contact-divider"
+                data-aos="fade-up"
+                data-aos-duration="700"
+                data-aos-offset="50"
+                data-aos-mirror="true"
+            ></div>
+
+
+
+            <!-- =================================================
+                 RIGHT
+            ================================================== -->
+
+            <div
+                class="contact-cta-right"
+                data-aos="fade-left"
+                data-aos-duration="800"
+                data-aos-easing="ease-out-cubic"
+                data-aos-offset="70"
+                data-aos-mirror="true"
+            >
+
+
+                <!-- Serving globally -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="50"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/users.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Serving globally
+                        </h3>
+
+
+                        <p>
+                            Churches across India, UAE, USA, UK &amp;<br>
+                            Australia
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="100"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/mail.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Email us
+                        </h3>
+
+
+                        <p>
+                            Yirehministryglobal@gmail.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Anthems -->
+
+                <div
+                    class="contact-info-item"
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-delay="150"
+                >
+
+                    <div class="contact-icon">
+
+                        <img
+                            src="assets/music.png"
+                            alt=""
+                        >
+
+                    </div>
+
+
+                    <div class="contact-info-text">
+
+                        <h3>
+                            Anthems Season 1
+                        </h3>
+
+
+                        <em>
+                            Coming Soon
+                        </em>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WATERMARK
+
+                 IMPORTANT:
+                 NO animation attributes here.
+                 Existing contact-watermark CSS remains untouched.
+            ================================================== -->
+
+            <div class="contact-watermark">
+
+                <img
+                    src="assets/decorative.png"
+                    alt=""
+                >
+
+            </div>
+
         </div>
 
-        <!-- =========================
-             DIVIDER
-        ========================== -->
-
-        <div class="contact-divider"></div>
-
-        <!-- =========================
-             RIGHT CONTENT
-        ========================== -->
-
-        <div class="contact-cta-right">
-          <!-- Serving globally -->
-          <div class="contact-info-item">
-            <div class="contact-icon">
-              <img src="assets/users.png" alt="" />
-            </div>
-
-            <div class="contact-info-text">
-              <h3>Serving globally</h3>
-
-              <p>
-                Churches across India, UAE, USA, UK &amp;<br />
-                Australia
-              </p>
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div class="contact-info-item">
-            <div class="contact-icon">
-              <img src="assets/mail.png" alt="" />
-            </div>
-
-            <div class="contact-info-text">
-              <h3>Email us</h3>
-
-              <p>Yirehministryglobal@gmail.com</p>
-            </div>
-          </div>
-
-          <!-- Anthems -->
-          <div class="contact-info-item">
-            <div class="contact-icon">
-              <img src="assets/music.png" alt="" />
-            </div>
-
-            <div class="contact-info-text">
-              <h3>Anthems Season 1</h3>
-
-              <em>Coming Soon</em>
-            </div>
-          </div>
-        </div>
-
-        <!-- =========================
-             DECORATIVE WATERMARK
-        ========================== -->
-
-        <div class="contact-watermark">
-          <img src="assets/decorative.png" alt="" />
-        </div>
-      </div>
     </section>
 
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <footer class="site-footer">
+
         <div class="footer-container">
-          <!-- Main footer content -->
-          <div class="footer-main">
-            <!-- Brand -->
-            <div class="footer-brand">
-              <a href="#" class="footer-logo">
-                <img src="assets/Logo.png" alt="Yireh Ministry" />
-              </a>
-  
-              <p class="footer-description">
-                A Christ-centered ministry born out of obedience — leading
-                worship, discipling believers, and carrying the Gospel across the
-                nations.
-              </p>
-  
-              <!-- Social icons -->
-              <div class="footer-socials">
-                <a href="#" aria-label="Instagram">
-                  <span class=""><img src="assets/Footer-instagram.png" alt="" srcset=""></span>
-                </a>
-  
-                <a href="#" aria-label="YouTube">
-                  <span class=""><img src="assets/Footer-youTube.png" alt="" srcset=""></span>
-                </a>
-  
-                <a href="#" aria-label="Facebook">
-                  <span class=""><img src="assets/Footer-facebook.png" alt="" srcset=""></span>
-                </a>
-  
-                <a href="#" aria-label="Email">
-                  <span class=""><img src="assets/Footer-mail.png" alt="" srcset=""></span>
-                </a>
-              </div>
+
+
+            <div class="footer-main">
+
+
+                <!-- Brand -->
+
+                <div
+                    class="footer-brand"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <a
+                        href="#"
+                        class="footer-logo"
+                    >
+
+                        <img
+                            src="assets/Logo.png"
+                            alt="Yireh Ministry"
+                        >
+
+                    </a>
+
+
+                    <p class="footer-description">
+
+                        A Christ-centered ministry born out of obedience —
+                        leading worship, discipling believers, and carrying
+                        the Gospel across the nations.
+
+                    </p>
+
+
+                    <div class="footer-socials">
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-instagram.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="YouTube"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-youTube.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-facebook.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Email"
+                        >
+
+                            <span>
+
+                                <img
+                                    src="assets/Footer-mail.png"
+                                    alt=""
+                                >
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Quick Links -->
+
+                <div
+                    class="footer-column"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="50"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Events
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Give
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Anthems
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Ministry -->
+
+                <div
+                    class="footer-column"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="100"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Ministry
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                Invite Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Prayer Requests
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Partnerships
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Donate
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                Submit Lyrics
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Contact -->
+
+                <div
+                    class="footer-column footer-contact"
+                    data-aos="fade-up"
+                    data-aos-duration="650"
+                    data-aos-delay="150"
+                    data-aos-offset="40"
+                    data-aos-mirror="true"
+                >
+
+                    <h3>
+                        Contact
+                    </h3>
+
+
+                    <ul>
+
+                        <li>
+
+                            <a
+                                href="mailto:yirehministryglobal@gmail.com"
+                            >
+
+                                Yirehministryglobal@gmail.com
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a
+                                href="tel:+910000000000"
+                            >
+
+                                +91 00000 00000
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+                            Hyderabad, India
+                        </li>
+
+                    </ul>
+
+
+                    <a
+                        href="#"
+                        class="serving-global"
+                    >
+
+                        SERVING GLOBALLY
+
+                    </a>
+
+                </div>
+
             </div>
-  
-            <!-- Quick Links -->
-            <div class="footer-column">
-              <h3>Quick Links</h3>
-  
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Give</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Anthems</a></li>
-              </ul>
+
+
+
+            <!-- Divider -->
+
+            <div class="footer-divider"></div>
+
+
+
+            <!-- Bottom -->
+
+            <div
+                class="footer-bottom"
+                data-aos="fade-up"
+                data-aos-duration="650"
+                data-aos-offset="30"
+                data-aos-mirror="true"
+            >
+
+                <p>
+                    © 2026 Yireh Ministry.
+                </p>
+
+
+                <div class="footer-legal">
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#">
+                        Terms
+                    </a>
+
+                </div>
+
             </div>
-  
-            <!-- Ministry -->
-            <div class="footer-column">
-              <h3>Ministry</h3>
-  
-              <ul>
-                <li><a href="#">Invite Us</a></li>
-                <li><a href="#">Prayer Requests</a></li>
-                <li><a href="#">Partnerships</a></li>
-                <li><a href="#">Donate</a></li>
-                <li><a href="#">Submit Lyrics</a></li>
-              </ul>
-            </div>
-  
-            <!-- Contact -->
-            <div class="footer-column footer-contact">
-              <h3>Contact</h3>
-  
-              <ul>
-                <li>
-                  <a href="mailto:yirehministryglobal@gmail.com">
-                    Yirehministryglobal@gmail.com
-                  </a>
-                </li>
-  
-                <li>
-                  <a href="tel:+910000000000"> +91 00000 00000 </a>
-                </li>
-  
-                <li>Hyderabad, India</li>
-              </ul>
-  
-              <a href="#" class="serving-global"> SERVING GLOBALLY </a>
-            </div>
-          </div>
-  
-          <!-- Bottom separator -->
-          <div class="footer-divider"></div>
-  
-          <!-- Bottom footer -->
-          <div class="footer-bottom">
-            <p>© 2026 Yireh Ministry.</p>
-  
-            <div class="footer-legal">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms</a>
-            </div>
-          </div>
+
         </div>
-      </footer>
-    <script src="contact-scroll.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init();
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         AOS
+    ====================================================== -->
+
+    <script
+        src="https://unpkg.com/aos@next/dist/aos.js">
     </script>
+
+
+    <script>
+
+        AOS.init({
+
+            duration:
+                700,
+
+            easing:
+                "ease-out-cubic",
+
+            once:
+                false,
+
+            mirror:
+                false,
+
+            offset:
+                50,
+
+            disable:
+                false
+
+        });
+
+    </script>
+
+
+    <!-- =====================================================
+         MAIN SITE SCRIPT
+    ====================================================== -->
+
     <script src="script.js"></script>
-  </body>
+
+
+</body>
+
 </html>
