@@ -45,6 +45,10 @@ require("dotenv").config();
 
 const app = express();
 
+app.set(
+    "trust proxy",
+    1
+);
 
 /* =========================================================
    PORT
@@ -67,22 +71,43 @@ const GMAIL_USER =
    GOOGLE OAUTH FILES
 ========================================================= */
 
+// const CREDENTIALS_PATH =
+//     path.join(
+//         __dirname,
+//         "credentials.json"
+//     );
+
+
+// const TOKEN_PATH =
+//     path.join(
+//         __dirname,
+//         "token.json"
+//     );
+
 const CREDENTIALS_PATH =
-    path.join(
-        __dirname,
-        "credentials.json"
-    );
+    process.env.RENDER
+        ? "/etc/secrets/credentials.json"
+        : path.join(
+            __dirname,
+            "credentials.json"
+        );
 
 
 const TOKEN_PATH =
-    path.join(
-        __dirname,
-        "token.json"
-    );
+    process.env.RENDER
+        ? "/etc/secrets/token.json"
+        : path.join(
+            __dirname,
+            "token.json"
+        );
 
+// const REDIRECT_URI =
+//     "http://localhost:10000/oauth2callback";
 
 const REDIRECT_URI =
-    "http://localhost:10000/oauth2callback";
+    process.env.RENDER
+        ? "https://yirehministry.onrender.com/oauth2callback"
+        : "http://localhost:10000/oauth2callback";
 
 
 const SCOPES = [
