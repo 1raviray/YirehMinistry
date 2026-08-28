@@ -6,6 +6,61 @@
 html{scroll-behavior:smooth}
 body{background:#ededed;overflow-x: hidden;}
 
+/* =========================================================
+   GLOBAL RESPONSIVE SAFETY
+========================================================= */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+svg,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        overflow-x: hidden !important;
+    }
+
+    .site-header,
+    section,
+    footer {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 /* ==============================
    HEADER / NAVBAR
 ================================ */
@@ -83,6 +138,7 @@ body{background:#ededed;overflow-x: hidden;}
 }
 
 @media(max-width:480px){
+    body{overflow-x: hidden;}
   .vision-section{padding-top:42px;padding-bottom:25px}
   .vision-container{padding-left:20px;padding-right:20px}
   .vision-title{margin-bottom:9px;font-size:24px}
