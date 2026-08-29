@@ -1,20 +1,4 @@
-/* =========================================================
-   YIREH MINISTRY
-   NODE.JS BACKEND
 
-   FEATURES
-   ---------------------------------------------------------
-   - Express server
-   - Helmet security
-   - CORS
-   - Rate limiting
-   - Gmail API OAuth
-   - Gmail API email sending
-   - Anthems submission + attachments
-   - Razorpay donation order creation
-   - Razorpay payment verification
-   - Razorpay webhook verification
-========================================================= */
 
 "use strict";
 
@@ -933,6 +917,201 @@ async function sendGmailMessage({
 
 }
 
+/* =========================================================
+   CONTACT FORM
+   SEND CONTACT MESSAGE THROUGH GMAIL API
+========================================================= */
+
+app.post(
+    "/api/contact",
+    formLimiter,
+    async (req, res) => {
+
+        try {
+
+            /* ---------------------------------------------
+               RECEIVE DATA
+            --------------------------------------------- */
+
+            const name =
+                cleanText(
+                    req.body.name,
+                    100
+                );
+
+
+            const location =
+                cleanText(
+                    req.body.location,
+                    150
+                );
+
+
+            const contact =
+                cleanText(
+                    req.body.contact,
+                    100
+                );
+
+
+            const message =
+                cleanText(
+                    req.body.message,
+                    5000
+                );
+
+
+            /* ---------------------------------------------
+               REQUIRED FIELDS
+            --------------------------------------------- */
+
+            if (
+                !name ||
+                !location ||
+                !contact ||
+                !message
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+                        success: false,
+
+                        message:
+                            "Please complete all required fields."
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               CONTACT VALIDATION
+               Accept email OR phone
+            --------------------------------------------- */
+
+            const contactIsEmail =
+                isEmail(contact);
+
+
+            const phoneDigits =
+                contact.replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            const contactIsPhone =
+                phoneDigits.length >= 10 &&
+                phoneDigits.length <= 15;
+
+
+            if (
+                !contactIsEmail &&
+                !contactIsPhone
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+                        success: false,
+
+                        message:
+                            "Please enter a valid email or phone number."
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               BUILD EMAIL
+            --------------------------------------------- */
+
+            const emailText = `
+YIREH MINISTRY
+CONTACT FORM SUBMISSION
+
+----------------------------------------
+
+Name:
+${name}
+
+Location:
+${location}
+
+Email / Phone:
+${contact}
+
+Message / Prayer Request:
+${message}
+
+----------------------------------------
+
+Submitted through:
+Yireh Ministry Contact Page
+            `.trim();
+
+
+            /* ---------------------------------------------
+               SEND GMAIL
+            --------------------------------------------- */
+
+            await sendGmailMessage({
+
+                subject:
+                    `New Contact Message — ${name}`,
+
+                text:
+                    emailText,
+
+                replyTo:
+                    contactIsEmail
+                        ? contact
+                        : null
+
+            });
+
+
+            /* ---------------------------------------------
+               SUCCESS
+            --------------------------------------------- */
+
+            return res
+                .status(200)
+                .json({
+
+                    success:
+                        true,
+
+                    message:
+                        "Your message has been sent successfully."
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Contact form error:",
+                error
+            );
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to send your message right now. Please try again."
+
+                });
+
+        }
+
+    }
+);
 /* =========================================================
    SEND DONATION RECEIPT
 ========================================================= */

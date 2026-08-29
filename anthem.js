@@ -1,637 +1,898 @@
-/* =========================
-   ELEMENTS
-========================= */
+/* =========================================================
+   YIREH MINISTRY
+   ANTHEMS PAGE
+   FORM SUBMISSION + RENDER WAKE-UP LOADER
+========================================================= */
 
-const form = document.getElementById("anthemForm");
+"use strict";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const form =
+    document.getElementById("anthemForm");
+
 
 const lyricsOnlyBtn =
-  document.getElementById("lyricsOnlyBtn");
+    document.getElementById("lyricsOnlyBtn");
+
 
 const lyricsTuneBtn =
-  document.getElementById("lyricsTuneBtn");
+    document.getElementById("lyricsTuneBtn");
+
 
 const tuneField =
-  document.getElementById("tuneField");
+    document.getElementById("tuneField");
+
 
 const tuneFile =
-  document.getElementById("tuneFile");
+    document.getElementById("tuneFile");
+
 
 const tuneFileName =
-  document.getElementById("tuneFileName");
+    document.getElementById("tuneFileName");
+
 
 const supportFile =
-  document.getElementById("supportFile");
+    document.getElementById("supportFile");
+
 
 const supportFileName =
-  document.getElementById("supportFileName");
+    document.getElementById("supportFileName");
+
 
 const tuneUploadBox =
-  document.getElementById("tuneUploadBox");
+    document.getElementById("tuneUploadBox");
+
 
 const supportUploadBox =
-  document.getElementById("supportUploadBox");
+    document.getElementById("supportUploadBox");
+
 
 const agreement =
-  document.getElementById("agreement");
+    document.getElementById("agreement");
+
 
 const submitBtn =
-  document.getElementById("submitBtn");
+    document.getElementById("submitBtn");
+
 
 const fullName =
-  document.getElementById("fullName");
+    document.getElementById("fullName");
+
 
 const locationInput =
-  document.getElementById("location");
+    document.getElementById("location");
+
 
 const phone =
-  document.getElementById("phone");
+    document.getElementById("phone");
+
 
 const lyrics =
-  document.getElementById("lyrics");
+    document.getElementById("lyrics");
+
 
 const attachmentSizeWarning =
-  document.getElementById("attachmentSizeWarning");
+    document.getElementById("attachmentSizeWarning");
 
 
-/* =========================
+/* =========================================================
+   SUBMISSION LOADER
+========================================================= */
+
+const submissionLoader =
+    document.getElementById("submissionLoader");
+
+
+/* =========================================================
    SETTINGS
-========================= */
+========================================================= */
 
 const MAX_TOTAL_FILE_SIZE =
-  10 * 1024 * 1024;
-
-let submissionType = "lyrics";
+    10 * 1024 * 1024;
 
 
-/* =========================
+let submissionType =
+    "lyrics";
+
+
+/* =========================================================
+   SUBMISSION LOADER FUNCTIONS
+========================================================= */
+
+function showSubmissionLoader() {
+
+    if (!submissionLoader) {
+        return;
+    }
+
+
+    submissionLoader.classList.add(
+        "is-active"
+    );
+
+
+    submissionLoader.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    /*
+       Prevent the user from scrolling
+       while the submission is being processed.
+    */
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function hideSubmissionLoader() {
+
+    if (!submissionLoader) {
+        return;
+    }
+
+
+    submissionLoader.classList.remove(
+        "is-active"
+    );
+
+
+    submissionLoader.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    /*
+       Restore normal page scrolling.
+    */
+
+    document.body.style.overflow =
+        "";
+}
+
+
+/* =========================================================
    OUTSIDE SUBMISSION BUTTONS
-========================= */
+========================================================= */
 
 function setSubmissionType(type) {
 
-  submissionType = type;
+    submissionType =
+        type;
 
-  if (type === "lyrics") {
 
-    lyricsOnlyBtn.classList.add("active");
-    lyricsTuneBtn.classList.remove("active");
+    if (type === "lyrics") {
 
-    tuneField.classList.remove("show");
+        lyricsOnlyBtn.classList.add(
+            "active"
+        );
 
-    tuneFile.required = false;
 
-  } else {
+        lyricsTuneBtn.classList.remove(
+            "active"
+        );
 
-    lyricsOnlyBtn.classList.remove("active");
-    lyricsTuneBtn.classList.add("active");
 
-    tuneField.classList.add("show");
+        tuneField.classList.remove(
+            "show"
+        );
 
-    tuneFile.required = true;
-  }
 
-  updateSubmitState();
+        tuneFile.required =
+            false;
+
+
+    } else {
+
+        lyricsOnlyBtn.classList.remove(
+            "active"
+        );
+
+
+        lyricsTuneBtn.classList.add(
+            "active"
+        );
+
+
+        tuneField.classList.add(
+            "show"
+        );
+
+
+        tuneFile.required =
+            true;
+    }
+
+
+    updateSubmitState();
 }
 
 
-lyricsOnlyBtn.addEventListener("click", () => {
-  setSubmissionType("lyrics");
-});
+/* =========================================================
+   SUBMISSION TYPE BUTTONS
+========================================================= */
+
+lyricsOnlyBtn.addEventListener(
+    "click",
+    () => {
+
+        setSubmissionType(
+            "lyrics"
+        );
+
+    }
+);
 
 
-lyricsTuneBtn.addEventListener("click", () => {
-  setSubmissionType("tune");
-});
+lyricsTuneBtn.addEventListener(
+    "click",
+    () => {
+
+        setSubmissionType(
+            "tune"
+        );
+
+    }
+);
 
 
-/* =========================
+/* =========================================================
    FILE DISPLAY
-========================= */
+========================================================= */
 
-tuneFile.addEventListener("change", () => {
+tuneFile.addEventListener(
+    "change",
+    () => {
 
-  if (tuneFile.files.length > 0) {
+        if (
+            tuneFile.files.length > 0
+        ) {
 
-    tuneFileName.textContent =
-      `Selected: ${tuneFile.files[0].name}`;
-
-    tuneUploadBox.classList.add("has-file");
-
-  } else {
-
-    tuneFileName.textContent = "";
-
-    tuneUploadBox.classList.remove("has-file");
-  }
-
-  checkAttachmentSize();
-  updateSubmitState();
-});
+            tuneFileName.textContent =
+                `Selected: ${tuneFile.files[0].name}`;
 
 
-supportFile.addEventListener("change", () => {
-
-  if (supportFile.files.length > 0) {
-
-    supportFileName.textContent =
-      `Selected: ${supportFile.files[0].name}`;
-
-    supportUploadBox.classList.add("has-file");
-
-  } else {
-
-    supportFileName.textContent = "";
-
-    supportUploadBox.classList.remove("has-file");
-  }
-
-  checkAttachmentSize();
-  updateSubmitState();
-});
+            tuneUploadBox.classList.add(
+                "has-file"
+            );
 
 
-/* =========================
+        } else {
+
+            tuneFileName.textContent =
+                "";
+
+
+            tuneUploadBox.classList.remove(
+                "has-file"
+            );
+
+        }
+
+
+        checkAttachmentSize();
+
+        updateSubmitState();
+
+    }
+);
+
+
+supportFile.addEventListener(
+    "change",
+    () => {
+
+        if (
+            supportFile.files.length > 0
+        ) {
+
+            supportFileName.textContent =
+                `Selected: ${supportFile.files[0].name}`;
+
+
+            supportUploadBox.classList.add(
+                "has-file"
+            );
+
+
+        } else {
+
+            supportFileName.textContent =
+                "";
+
+
+            supportUploadBox.classList.remove(
+                "has-file"
+            );
+
+        }
+
+
+        checkAttachmentSize();
+
+        updateSubmitState();
+
+    }
+);
+
+
+/* =========================================================
    TOTAL FILE SIZE
-========================= */
+========================================================= */
 
 function getTotalFileSize() {
 
-  let totalSize = 0;
+    let totalSize =
+        0;
 
-  if (tuneFile.files.length > 0) {
-    totalSize += tuneFile.files[0].size;
-  }
 
-  if (supportFile.files.length > 0) {
-    totalSize += supportFile.files[0].size;
-  }
+    if (
+        tuneFile.files.length > 0
+    ) {
 
-  return totalSize;
+        totalSize +=
+            tuneFile.files[0].size;
+    }
+
+
+    if (
+        supportFile.files.length > 0
+    ) {
+
+        totalSize +=
+            supportFile.files[0].size;
+    }
+
+
+    return totalSize;
 }
 
 
-/* =========================
-   FORMAT SIZE
-========================= */
+/* =========================================================
+   FORMAT FILE SIZE
+========================================================= */
 
 function formatFileSize(bytes) {
 
-  return (
-    bytes / (1024 * 1024)
-  ).toFixed(2);
+    return (
+        bytes /
+        (1024 * 1024)
+    ).toFixed(2);
 }
 
 
-/* =========================
+/* =========================================================
    CHECK ATTACHMENT SIZE
-========================= */
+========================================================= */
 
 function checkAttachmentSize() {
 
-  const totalSize =
-    getTotalFileSize();
+    const totalSize =
+        getTotalFileSize();
 
-  if (totalSize > MAX_TOTAL_FILE_SIZE) {
+
+    if (
+        totalSize >
+        MAX_TOTAL_FILE_SIZE
+    ) {
+
+        attachmentSizeWarning.textContent =
+            `Total attachment size is ` +
+            `${formatFileSize(totalSize)} MB. ` +
+            `Maximum allowed is 10 MB. ` +
+            `Please remove or replace a file.`;
+
+
+        attachmentSizeWarning.classList.add(
+            "show"
+        );
+
+
+        return false;
+    }
+
 
     attachmentSizeWarning.textContent =
-      `Total attachment size is ` +
-      `${formatFileSize(totalSize)} MB. ` +
-      `Maximum allowed is 10 MB. ` +
-      `Please remove or replace a file.`;
+        "";
 
-    attachmentSizeWarning.classList.add("show");
 
-    return false;
-  }
+    attachmentSizeWarning.classList.remove(
+        "show"
+    );
 
-  attachmentSizeWarning.textContent = "";
 
-  attachmentSizeWarning.classList.remove("show");
-
-  return true;
+    return true;
 }
 
 
-/* =========================
+/* =========================================================
    FIELD VALIDATION
-========================= */
+========================================================= */
 
 function validateField(
-  element,
-  groupId
+    element,
+    groupId
 ) {
 
-  const group =
-    document.getElementById(groupId);
+    const group =
+        document.getElementById(
+            groupId
+        );
 
-  const valid =
-    element.value.trim() !== "";
 
-  group.classList.toggle(
-    "invalid",
-    !valid
-  );
+    const valid =
+        element.value.trim() !== "";
 
-  return valid;
+
+    group.classList.toggle(
+        "invalid",
+        !valid
+    );
+
+
+    return valid;
 }
 
 
-/* =========================
+/* =========================================================
    FORM VALIDATION
-========================= */
+========================================================= */
 
 function isFormValid() {
 
-  const nameValid =
-    fullName.value.trim() !== "";
+    const nameValid =
+        fullName.value.trim() !== "";
 
-  const locationValid =
-    locationInput.value.trim() !== "";
 
-  const phoneValid =
-    phone.value.trim() !== "";
+    const locationValid =
+        locationInput.value.trim() !== "";
 
-  const lyricsValid =
-    lyrics.value.trim() !== "";
 
-  const agreementValid =
-    agreement.checked;
+    const phoneValid =
+        phone.value.trim() !== "";
 
-  const tuneValid =
-    submissionType === "lyrics" ||
-    tuneFile.files.length > 0;
 
-  const attachmentsValid =
-    checkAttachmentSize();
+    const lyricsValid =
+        lyrics.value.trim() !== "";
 
-  return (
-    nameValid &&
-    locationValid &&
-    phoneValid &&
-    lyricsValid &&
-    agreementValid &&
-    tuneValid &&
-    attachmentsValid
-  );
+
+    const agreementValid =
+        agreement.checked;
+
+
+    const tuneValid =
+        submissionType === "lyrics" ||
+        tuneFile.files.length > 0;
+
+
+    const attachmentsValid =
+        checkAttachmentSize();
+
+
+    return (
+        nameValid &&
+        locationValid &&
+        phoneValid &&
+        lyricsValid &&
+        agreementValid &&
+        tuneValid &&
+        attachmentsValid
+    );
 }
 
 
-/* =========================
-   SUBMIT BUTTON
-========================= */
+/* =========================================================
+   SUBMIT BUTTON STATE
+========================================================= */
 
 function updateSubmitState() {
 
-  submitBtn.disabled =
-    !isFormValid();
+    submitBtn.disabled =
+        !isFormValid();
 }
 
 
-/* =========================
+/* =========================================================
    LIVE VALIDATION
-========================= */
+========================================================= */
 
-fullName.addEventListener("input", () => {
+fullName.addEventListener(
+    "input",
+    () => {
 
-  validateField(
-    fullName,
-    "nameGroup"
-  );
-
-  updateSubmitState();
-});
-
-
-locationInput.addEventListener("input", () => {
-
-  validateField(
-    locationInput,
-    "locationGroup"
-  );
-
-  updateSubmitState();
-});
+        validateField(
+            fullName,
+            "nameGroup"
+        );
 
 
-phone.addEventListener("input", () => {
+        updateSubmitState();
 
-  validateField(
-    phone,
-    "phoneGroup"
-  );
-
-  updateSubmitState();
-});
+    }
+);
 
 
-lyrics.addEventListener("input", () => {
+locationInput.addEventListener(
+    "input",
+    () => {
 
-  validateField(
-    lyrics,
-    "lyricsGroup"
-  );
+        validateField(
+            locationInput,
+            "locationGroup"
+        );
 
-  updateSubmitState();
-});
+
+        updateSubmitState();
+
+    }
+);
+
+
+phone.addEventListener(
+    "input",
+    () => {
+
+        validateField(
+            phone,
+            "phoneGroup"
+        );
+
+
+        updateSubmitState();
+
+    }
+);
+
+
+lyrics.addEventListener(
+    "input",
+    () => {
+
+        validateField(
+            lyrics,
+            "lyricsGroup"
+        );
+
+
+        updateSubmitState();
+
+    }
+);
 
 
 agreement.addEventListener(
-  "change",
-  updateSubmitState
+    "change",
+    updateSubmitState
 );
 
 
-/* =========================
-   FORM SUBMIT
-========================= */
-
 /* =========================================================
-   BACKEND SUBMISSION
+   FORM SUBMIT
 ========================================================= */
 
 form.addEventListener(
-  "submit",
-  async (event) => {
+    "submit",
+    async (event) => {
 
-      event.preventDefault();
+        event.preventDefault();
 
 
-      if (!isFormValid()) {
+        /* ---------------------------------------------
+           FINAL VALIDATION
+        --------------------------------------------- */
 
-          updateSubmitState();
+        if (
+            !isFormValid()
+        ) {
 
-          return;
-      }
+            updateSubmitState();
 
+            return;
+        }
 
-      /* ---------------------------------------------
-         FINAL FILE SIZE CHECK
-      --------------------------------------------- */
 
-      const MAX_FILE_SIZE =
-          10 * 1024 * 1024;
+        /* ---------------------------------------------
+           FINAL FILE SIZE LIMITS
+        --------------------------------------------- */
 
+        const MAX_FILE_SIZE =
+            10 * 1024 * 1024;
 
-      const MAX_TOTAL_SIZE =
-          18 * 1024 * 1024;
 
+        const MAX_TOTAL_SIZE =
+            18 * 1024 * 1024;
 
-      const tune =
-          tuneFile.files[0] ||
-          null;
 
-      const support =
-          supportFile.files[0] ||
-          null;
+        const tune =
+            tuneFile.files[0] ||
+            null;
 
 
-      if (
-          tune &&
-          tune.size >
-          MAX_FILE_SIZE
-      ) {
+        const support =
+            supportFile.files[0] ||
+            null;
 
-          alert(
-              "The tune/audio file must be 10 MB or smaller."
-          );
 
-          return;
-      }
+        /* ---------------------------------------------
+           INDIVIDUAL TUNE FILE SIZE
+        --------------------------------------------- */
 
+        if (
+            tune &&
+            tune.size >
+            MAX_FILE_SIZE
+        ) {
 
-      if (
-          support &&
-          support.size >
-          MAX_FILE_SIZE
-      ) {
+            alert(
+                "The tune/audio file must be 10 MB or smaller."
+            );
 
-          alert(
-              "The supporting file must be 10 MB or smaller."
-          );
 
-          return;
-      }
+            return;
+        }
 
 
-      const totalSize =
-          (tune?.size || 0) +
-          (support?.size || 0);
+        /* ---------------------------------------------
+           INDIVIDUAL SUPPORT FILE SIZE
+        --------------------------------------------- */
 
+        if (
+            support &&
+            support.size >
+            MAX_FILE_SIZE
+        ) {
 
-      if (
-          totalSize >
-          MAX_TOTAL_SIZE
-      ) {
+            alert(
+                "The supporting file must be 10 MB or smaller."
+            );
 
-          alert(
-              "The combined attachment size must not exceed 18 MB."
-          );
 
-          return;
-      }
+            return;
+        }
 
 
-      /* ---------------------------------------------
-         SUBMIT STATE
-      --------------------------------------------- */
+        /* ---------------------------------------------
+           TOTAL FILE SIZE
+        --------------------------------------------- */
 
-      submitBtn.disabled =
-          true;
+        const totalSize =
+            (tune?.size || 0) +
+            (support?.size || 0);
 
-      submitBtn.textContent =
-          "Sending...";
 
+        if (
+            totalSize >
+            MAX_TOTAL_SIZE
+        ) {
 
-      try {
+            alert(
+                "The combined attachment size must not exceed 18 MB."
+            );
 
-          const formData =
-              new FormData(
-                  form
-              );
 
+            return;
+        }
 
-          /*
-             Make sure backend receives
-             the submission type.
-          */
 
-          formData.set(
-              "submissionType",
-              submissionType
-          );
+        /* ---------------------------------------------
+           DISABLE SUBMIT BUTTON
+        --------------------------------------------- */
 
+        submitBtn.disabled =
+            true;
 
-          const response =
-              await fetch(
-                  "https://yirehministry.onrender.com/api/anthems",
-                  {
-                      method:
-                          "POST",
 
-                      body:
-                          formData
-                  }
-              );
+        submitBtn.textContent =
+            "Sending...";
 
 
-          const result =
-              await response.json();
+        /* ---------------------------------------------
+           SHOW RENDER WAKE-UP LOADER
+        --------------------------------------------- */
 
+        showSubmissionLoader();
 
-          if (
-              !response.ok ||
-              !result.success
-          ) {
 
-              throw new Error(
-                  result.message ||
-                  "Submission failed."
-              );
-          }
+        try {
 
+            /* -----------------------------------------
+               FORM DATA
+            ----------------------------------------- */
 
-          /* -----------------------------------------
-             SUCCESS
-          ----------------------------------------- */
+            const formData =
+                new FormData(
+                    form
+                );
 
-          alert(
-              "Your anthem submission was sent successfully!"
-          );
 
+            /*
+               Make sure backend receives
+               the submission type.
+            */
 
-          form.reset();
+            formData.set(
+                "submissionType",
+                submissionType
+            );
 
 
-          tuneFileName.textContent =
-              "";
+            /* -----------------------------------------
+               SEND TO RENDER BACKEND
+            ----------------------------------------- */
 
-          supportFileName.textContent =
-              "";
+            const response =
+                await fetch(
+                    "https://yirehministry.onrender.com/api/anthems",
+                    {
+                        method:
+                            "POST",
 
+                        body:
+                            formData
+                    }
+                );
 
-          document
-              .getElementById(
-                  "tuneUploadBox"
-              )
-              ?.classList
-              .remove(
-                  "has-file"
-              );
 
+            /* -----------------------------------------
+               RESPONSE
+            ----------------------------------------- */
 
-          document
-              .getElementById(
-                  "supportUploadBox"
-              )
-              ?.classList
-              .remove(
-                  "has-file"
-              );
+            const result =
+                await response.json();
 
 
-          updateSubmitState();
+            /* -----------------------------------------
+               CHECK RESPONSE
+            ----------------------------------------- */
 
-      } catch (error) {
+            if (
+                !response.ok ||
+                !result.success
+            ) {
 
-          console.error(
-              "Submission error:",
-              error
-          );
+                throw new Error(
+                    result.message ||
+                    "Submission failed."
+                );
+            }
 
 
-          alert(
-              error.message ||
-              "Unable to submit your anthem."
-          );
+            /* -----------------------------------------
+               SUCCESS
+            ----------------------------------------- */
 
-      } finally {
+            hideSubmissionLoader();
 
-          submitBtn.textContent =
-              "Submit";
 
+            alert(
+                "Your anthem submission was sent successfully!"
+            );
 
-          updateSubmitState();
-      }
 
-  }
+            /* -----------------------------------------
+               RESET FORM
+            ----------------------------------------- */
+
+            form.reset();
+
+
+            tuneFileName.textContent =
+                "";
+
+
+            supportFileName.textContent =
+                "";
+
+
+            tuneUploadBox
+                ?.classList
+                .remove(
+                    "has-file"
+                );
+
+
+            supportUploadBox
+                ?.classList
+                .remove(
+                    "has-file"
+                );
+
+
+            /* -----------------------------------------
+               RESET SUBMISSION TYPE
+            ----------------------------------------- */
+
+            setSubmissionType(
+                "lyrics"
+            );
+
+
+            updateSubmitState();
+
+
+        } catch (error) {
+
+            /* -----------------------------------------
+               ERROR
+            ----------------------------------------- */
+
+            console.error(
+                "Submission error:",
+                error
+            );
+
+
+            hideSubmissionLoader();
+
+
+            alert(
+                error.message ||
+                "Unable to submit your anthem."
+            );
+
+
+        } finally {
+
+            /* -----------------------------------------
+               RESTORE BUTTON
+            ----------------------------------------- */
+
+            submitBtn.disabled =
+                false;
+
+
+            submitBtn.textContent =
+                "Submit";
+
+
+            updateSubmitState();
+
+        }
+
+    }
 );
 
 
-
-// form.addEventListener("submit", (event) => {
-
-//   if (!checkAttachmentSize()) {
-
-//     event.preventDefault();
-
-//     return;
-//   }
-
-//   const nameValid =
-//     validateField(
-//       fullName,
-//       "nameGroup"
-//     );
-
-//   const locationValid =
-//     validateField(
-//       locationInput,
-//       "locationGroup"
-//     );
-
-//   const phoneValid =
-//     validateField(
-//       phone,
-//       "phoneGroup"
-//     );
-
-//   const lyricsValid =
-//     validateField(
-//       lyrics,
-//       "lyricsGroup"
-//     );
-
-//   const tuneValid =
-//     submissionType === "lyrics" ||
-//     tuneFile.files.length > 0;
-
-//   const agreementValid =
-//     agreement.checked;
-
-
-//   if (
-//     !nameValid ||
-//     !locationValid ||
-//     !phoneValid ||
-//     !lyricsValid ||
-//     !tuneValid ||
-//     !agreementValid
-//   ) {
-
-//     event.preventDefault();
-
-//     updateSubmitState();
-
-//     return;
-//   }
-
-
-//   /*
-//     Valid:
-//     allow FormSubmit to submit normally.
-//   */
-
-//   submitBtn.disabled = true;
-
-//   submitBtn.textContent =
-//     "Submitting...";
-// });
-
-
-/* =========================
+/* =========================================================
    INITIAL STATE
-========================= */
+========================================================= */
 
-setSubmissionType("lyrics");
+setSubmissionType(
+    "lyrics"
+);
+
 
 updateSubmitState();
+
+
+/* =========================================================
+   SAFETY
+   If the page is restored/reloaded while loader is active,
+   make sure scrolling is restored.
+========================================================= */
+
+window.addEventListener(
+    "pageshow",
+    () => {
+
+        if (
+            submissionLoader &&
+            !submissionLoader.classList.contains(
+                "is-active"
+            )
+        ) {
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+    }
+);

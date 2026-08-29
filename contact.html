@@ -259,157 +259,135 @@
                  FORM CARD
             ================================================== -->
 
-            <div
-                class="contact-details-form-card"
-                data-aos="fade-right"
-                data-aos-duration="800"
-                data-aos-easing="ease-out-cubic"
-                data-aos-offset="70"
-                data-aos-mirror="false"
-            >
+            <div class="contact-details-form-card">
 
                 <form
                     id="contactDetailsForm"
-                    action="https://formsubmit.co/mylogin00000@gmail.com"
-                    method="POST"
-                    enctype="multipart/form-data"
                     class="contact-details-form"
+                    novalidate
                 >
-
-
-                    <input
-                        type="hidden"
-                        name="_subject"
-                        value="New Contact Form Submission"
-                    >
-
-
-                    <input
-                        type="hidden"
-                        name="_template"
-                        value="table"
-                    >
-
-
-                    <input
-                        type="hidden"
-                        name="_captcha"
-                        value="false"
-                    >
-
-
-                    <input
-                        type="hidden"
-                        name="_next"
-                        value="https://1raviray.github.io/YirehMinistry/"
-                    >
-
-
+            
                     <!-- Row -->
-
                     <div class="contact-details-row">
-
-
+            
                         <!-- Name -->
-
                         <div class="contact-details-field">
-
+            
                             <label for="detailsName">
                                 FULL NAME
                             </label>
-
-
+            
                             <input
                                 type="text"
                                 id="detailsName"
                                 name="name"
+                                autocomplete="name"
+                                maxlength="100"
                                 required
-                            >
-
+                            />
+            
+                            <small
+                                class="contact-error"
+                                id="detailsNameError"
+                            ></small>
+            
                         </div>
-
-
+            
+            
                         <!-- Location -->
-
                         <div class="contact-details-field">
-
+            
                             <label for="detailsLocation">
                                 WHERE ARE YOU FROM?
                             </label>
-
-
+            
                             <input
                                 type="text"
                                 id="detailsLocation"
                                 name="location"
+                                autocomplete="address-level2"
+                                maxlength="150"
                                 required
-                            >
-
+                            />
+            
+                            <small
+                                class="contact-error"
+                                id="detailsLocationError"
+                            ></small>
+            
                         </div>
-
+            
                     </div>
-
-
-                    <!-- Contact -->
-
+            
+            
+                    <!-- Email / Phone -->
                     <div class="contact-details-field contact-email-field">
-
+            
                         <label for="detailsContact">
                             EMAIL / PHONE NUMBER
                         </label>
-
-
+            
                         <input
                             type="text"
                             id="detailsContact"
                             name="contact"
-                            placeholder="you@example.com"
+                            placeholder="you@example.com or +91 9876543210"
+                            autocomplete="email"
+                            maxlength="100"
                             required
-                        >
-
+                        />
+            
+                        <small
+                            class="contact-error"
+                            id="detailsContactError"
+                        ></small>
+            
                     </div>
-
-
+            
+            
                     <!-- Message -->
-
                     <div class="contact-details-field contact-message-field">
-
+            
                         <label for="detailsMessage">
                             YOUR MESSAGE OR PRAYER REQUEST
                         </label>
-
-
+            
                         <textarea
                             id="detailsMessage"
                             name="message"
                             placeholder="Tell us how we can serve you"
+                            maxlength="5000"
                             required
                         ></textarea>
-
+            
+                        <small
+                            class="contact-error"
+                            id="detailsMessageError"
+                        ></small>
+            
                     </div>
-
-
+            
+            
                     <!-- Submit -->
-
                     <button
                         type="submit"
                         class="contact-details-submit"
+                        id="contactSubmitButton"
                     >
-
+            
                         <span>
                             Send Message
                         </span>
-
-
+            
                         <img
                             src="assets/Send.png"
                             alt=""
-                        >
-
+                        />
+            
                     </button>
-
+            
                 </form>
-
+            
             </div>
 
 
@@ -1226,7 +1204,29 @@
 
     </footer>
 
+<!-- =====================================================
+     CONTACT FORM LOADER
+===================================================== -->
 
+<div id="contactLoader" class="contact-loader" aria-hidden="true">
+    <div class="contact-loader-box">
+  
+      <div class="contact-loader-spinner"></div>
+  
+      <p class="contact-loader-title">
+        Sending your message
+      </p>
+  
+      <p class="contact-loader-text">
+        Please wait while we connect with Yireh Ministry...
+      </p>
+  
+      <div class="contact-loader-hourglass">
+        <span>⌛</span>
+      </div>
+  
+    </div>
+  </div>
 
     <!-- =====================================================
          AOS
@@ -1268,6 +1268,7 @@
          MAIN SITE SCRIPT
     ====================================================== -->
 
+    <script src="contact.js"></script>
     <script src="script.js"></script>
 
 

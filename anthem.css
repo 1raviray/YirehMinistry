@@ -1271,3 +1271,208 @@ body {
         font-size: 13px;
     }
 }
+
+
+/* =========================================================
+   SUBMISSION LOADER
+========================================================= */
+
+.submission-loader {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background: rgba(20, 20, 20, 0.72);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+}
+
+
+.submission-loader.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================================
+ LOADER BOX
+========================================================= */
+
+.submission-loader-box {
+
+  width: min(390px, 100%);
+
+  padding: 34px 28px 30px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(242, 98, 34, 0.25);
+
+  border-radius: 14px;
+
+  box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.25);
+
+  transform: translateY(15px);
+
+  transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.submission-loader.is-active
+.submission-loader-box {
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+ TITLE
+========================================================= */
+
+.submission-loader-title {
+
+  margin: 0 0 9px;
+
+  color: #292929;
+
+  font-family:
+      "Cormorant Garamond",
+      Georgia,
+      serif;
+
+  font-size: 25px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+ DESCRIPTION
+========================================================= */
+
+.submission-loader-text {
+
+  margin: 0;
+
+  color: #777;
+
+  font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+ HOURGLASS
+========================================================= */
+
+.submission-hourglass {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+
+  height: 42px;
+}
+
+
+.submission-hourglass img {
+
+  display: block;
+
+  width: 38px;
+  height: 38px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+ MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .submission-loader {
+
+      padding: 20px;
+  }
+
+
+  .submission-loader-box {
+
+      width: 100%;
+
+      max-width: 340px;
+
+      padding: 30px 22px 26px;
+  }
+
+
+  .submission-loader-title {
+
+      font-size: 23px;
+  }
+
+
+  .submission-loader-text {
+
+      font-size: 13px;
+  }
+
+
+  .submission-hourglass img {
+
+      width: 34px;
+      height: 34px;
+  }
+}
+
+
+/* =========================================================
+ REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .submission-loader,
+  .submission-loader-box {
+
+      transition: none;
+  }
+}

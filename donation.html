@@ -1,433 +1,1273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Donate - Yireh Ministry</title>
 
+
     <style>
-      body {
-        font-family: Arial, sans-serif;
 
-        min-height: 100vh;
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
 
-        display: flex;
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
 
-        align-items: center;
+            overflow-x: clip;
+        }
 
-        justify-content: center;
 
-        margin: 0;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-        background: #f5f5f5;
-      }
 
-      .donation-box {
-        width: 320px;
+        body {
+            font-family: Arial, sans-serif;
 
-        padding: 30px;
+            min-height: 100vh;
 
-        background: #ffffff;
+            display: flex;
 
-        border-radius: 12px;
+            align-items: center;
+            justify-content: center;
 
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      }
+            margin: 0;
 
-      h2 {
-        margin-top: 0;
+            padding: 20px;
 
-        margin-bottom: 20px;
-      }
+            background: #f5f5f5;
+        }
 
-      /* =========================================================
-   FORM FIELDS
-========================================================= */
 
-.donation-box label {
-    display: block;
+        /* =========================================================
+           DONATION BOX
+        ========================================================= */
 
-    margin-bottom: 8px;
+        .donation-box {
 
-    color: #222;
+            width: 320px;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+            max-width: 100%;
 
-    font-size: 14px;
+            padding: 30px;
 
-    font-weight: 600;
+            background: #ffffff;
 
-    line-height: 1.2;
-}
+            border-radius: 12px;
 
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.08);
+        }
 
-/* =========================================================
-   ALL INPUTS
-========================================================= */
 
-.donation-box input {
-    width: 100%;
+        .donation-box h2 {
 
-    height: 48px;
+            margin-top: 0;
 
-    box-sizing: border-box;
+            margin-bottom: 20px;
 
-    padding: 0 14px;
+            color: #292929;
 
-    margin-bottom: 18px;
+            font-family:
+                "Gowun Batang",
+                Georgia,
+                serif;
 
-    background: #f1f1f1;
+            font-weight: 400;
+        }
 
-    border: 1px solid #8f8f8f;
 
-    border-radius: 7px;
+        /* =========================================================
+           FORM LABELS
+        ========================================================= */
 
-    outline: none;
+        .donation-box label {
 
-    color: #222;
+            display: block;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+            margin-bottom: 8px;
 
-    font-size: 16px;
+            color: #222;
 
-    font-weight: 400;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-    transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
+            font-size: 14px;
 
+            font-weight: 600;
 
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
+            line-height: 1.2;
+        }
 
-.donation-box input::placeholder {
-    color: #999;
 
-    opacity: 1;
-}
+        /* =========================================================
+           INPUTS
+        ========================================================= */
 
+        .donation-box input {
 
-/* =========================================================
-   FOCUS
-========================================================= */
+            width: 100%;
 
-.donation-box input:focus {
-    background: #f7f7f7;
+            height: 48px;
 
-    border-color: #f56622;
+            box-sizing: border-box;
 
-    box-shadow:
-        0 0 0 2px
-        rgba(245, 102, 34, 0.10);
-}
+            padding: 0 14px;
 
+            margin-bottom: 18px;
 
-/* =========================================================
-   NUMBER INPUT
-========================================================= */
+            background: #f1f1f1;
 
-#donationAmount {
-    font-size: 16px;
-}
+            border:
+                1px solid #8f8f8f;
 
+            border-radius: 7px;
 
-/* =========================================================
-   REMOVE NUMBER ARROWS
-========================================================= */
+            outline: none;
 
-#donationAmount::-webkit-inner-spin-button,
-#donationAmount::-webkit-outer-spin-button {
-    margin: 0;
+            color: #222;
 
-    -webkit-appearance: none;
-}
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
+            font-size: 16px;
 
-#donationAmount {
-    appearance: textfield;
-}
+            font-weight: 400;
 
-      #donateButton {
-        width: 100%;
+            transition:
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
 
-        padding: 13px;
 
-        border: none;
+        .donation-box input::placeholder {
 
-        border-radius: 6px;
+            color: #999;
 
-        background: #f56622;
+            opacity: 1;
+        }
 
-        color: white;
 
-        font-size: 16px;
+        .donation-box input:focus {
 
-        cursor: pointer;
-      }
+            background: #f7f7f7;
 
-      #donateButton:disabled {
-        opacity: 0.6;
+            border-color: #f56622;
 
-        cursor: not-allowed;
-      }
+            box-shadow:
+                0 0 0 2px
+                rgba(245, 102, 34, 0.10);
+        }
+
+
+        /* =========================================================
+           NUMBER INPUT
+        ========================================================= */
+
+        #donationAmount {
+            font-size: 16px;
+
+            appearance: textfield;
+        }
+
+
+        #donationAmount::-webkit-inner-spin-button,
+        #donationAmount::-webkit-outer-spin-button {
+
+            margin: 0;
+
+            -webkit-appearance: none;
+        }
+
+
+        /* =========================================================
+           DONATE BUTTON
+        ========================================================= */
+
+        #donateButton {
+
+            width: 100%;
+
+            min-height: 48px;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #f56622;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+
+        #donateButton:hover:not(:disabled) {
+
+            background: #df591b;
+        }
+
+
+        #donateButton:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           YIREH MINISTRY LOADER
+        ========================================================= */
+
+        .yireh-loader {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            width: 100%;
+            max-width: 100vw;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+            background:
+                rgba(250, 248, 244, 0.82);
+
+            backdrop-filter:
+                blur(7px);
+
+            -webkit-backdrop-filter:
+                blur(7px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+
+        /* =========================================================
+           LOADER ACTIVE
+        ========================================================= */
+
+        .yireh-loader.is-active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: all;
+        }
+
+
+        /* =========================================================
+           LOADER CARD
+        ========================================================= */
+
+        .yireh-loader-card {
+
+            width:
+                min(360px, calc(100vw - 44px));
+
+            max-width:
+                calc(100vw - 44px);
+
+            padding:
+                38px 28px 32px;
+
+            text-align: center;
+
+            background:
+                rgba(255, 255, 255, 0.94);
+
+            border:
+                1px solid
+                rgba(119, 119, 119, 0.35);
+
+            border-radius: 5px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.12);
+
+            transform:
+                translateY(12px)
+                scale(0.98);
+
+            transition:
+                transform 0.3s
+                cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+        }
+
+
+        .yireh-loader.is-active
+        .yireh-loader-card {
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
+        .yireh-loader-brand {
+
+            margin-bottom: 22px;
+        }
+
+
+        .yireh-loader-name {
+
+            color: #f47b3c;
+
+            font-family:
+                "Gowun Batang",
+                Georgia,
+                serif;
+
+            font-size: 30px;
+
+            font-weight: 400;
+
+            line-height: 1;
+        }
+
+
+        .yireh-loader-ministry {
+
+            margin-top: 4px;
+
+            color: #292929;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+        }
+
+
+        /* =========================================================
+           SPINNER
+        ========================================================= */
+
+        .yireh-loader-spinner {
+
+            width: 30px;
+
+            height: 30px;
+
+            margin:
+                0 auto 18px;
+
+            border:
+                2px solid
+                rgba(244, 123, 60, 0.20);
+
+            border-top-color:
+                #f47b3c;
+
+            border-radius: 50%;
+
+            animation:
+                yireh-loader-spin
+                0.9s linear infinite;
+        }
+
+
+        @keyframes yireh-loader-spin {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        .yireh-loader-message {
+
+            margin: 0;
+
+            color: #292929;
+
+            font-family:
+                "Gowun Batang",
+                Georgia,
+                serif;
+
+            font-size: 17px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           HOURGLASS GIF
+        ========================================================= */
+
+        .yireh-loader-hourglass {
+
+            display: block;
+
+            width: 26px;
+
+            height: 26px;
+
+            object-fit: contain;
+
+            margin:
+                14px auto 0;
+
+            opacity: 0.85;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 768px) {
+
+            html,
+            body {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                overflow-x: hidden !important;
+            }
+
+
+            body {
+
+                padding: 20px;
+            }
+
+
+            .donation-box {
+
+                width: 100%;
+
+                max-width: 360px;
+
+                padding: 25px 20px;
+            }
+
+
+            .yireh-loader {
+
+                width: 100%;
+
+                max-width: 100vw;
+
+                padding: 20px;
+
+                overflow: hidden;
+            }
+
+
+            .yireh-loader-card {
+
+                width:
+                    calc(100vw - 44px);
+
+                max-width:
+                    calc(100vw - 44px);
+
+                padding:
+                    32px 22px 28px;
+            }
+
+
+            .yireh-loader-name {
+
+                font-size: 27px;
+            }
+
+
+            .yireh-loader-message {
+
+                font-size: 16px;
+            }
+
+
+            .yireh-loader-hourglass {
+
+                width: 24px;
+
+                height: 24px;
+            }
+
+        }
+
+
+        /* =========================================================
+           VERY SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 360px) {
+
+            .donation-box {
+
+                padding:
+                    22px 17px;
+            }
+
+
+            .yireh-loader-card {
+
+                width:
+                    calc(100vw - 30px);
+
+                max-width:
+                    calc(100vw - 30px);
+
+                padding:
+                    28px 18px 25px;
+            }
+
+        }
+
     </style>
-  </head>
 
-  <body>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         DONATION FORM
+    ========================================================= -->
+
     <div class="donation-box">
-      <h2>Support Yireh Ministry</h2>
 
-      <label for="donorName"> Name </label>
+        <h2>
+            Support Yireh Ministry
+        </h2>
 
-      <input type="text" id="donorName" placeholder="Your name" />
 
-      <label for="donorEmail"> Email </label>
+        <label for="donorName">
+            Name
+        </label>
 
-      <input
-        type="email"
-        id="donorEmail"
-        placeholder="Your email address"
-        required
-      />
+        <input
+            type="text"
+            id="donorName"
+            placeholder="Your name"
+        >
 
-      <label for="donorPhone"> Phone </label>
 
-      <input type="tel" id="donorPhone" placeholder="Phone number" />
+        <label for="donorEmail">
+            Email
+        </label>
 
-      <label for="donationAmount"> Donation Amount (₹) </label>
+        <input
+            type="email"
+            id="donorEmail"
+            placeholder="Your email address"
+            required
+        >
 
-      <input
-        type="number"
-        id="donationAmount"
-        min="10"
-        step="1"
-        placeholder="Enter amount"
-      />
 
-      <button type="button" id="donateButton">Checkout</button>
+        <label for="donorPhone">
+            Phone
+        </label>
+
+        <input
+            type="tel"
+            id="donorPhone"
+            placeholder="Phone number"
+        >
+
+
+        <label for="donationAmount">
+            Donation Amount (₹)
+        </label>
+
+        <input
+            type="number"
+            id="donationAmount"
+            min="10"
+            step="1"
+            placeholder="Enter amount"
+        >
+
+
+        <button
+            type="button"
+            id="donateButton"
+        >
+            Checkout
+        </button>
+
     </div>
 
-    <!-- =====================================================
+
+    <!-- =========================================================
+         YIREH MINISTRY LOADER
+    ========================================================= -->
+
+    <div
+        id="yirehLoader"
+        class="yireh-loader"
+        aria-hidden="true"
+    >
+
+        <div class="yireh-loader-card">
+
+
+            <div class="yireh-loader-brand">
+
+                <div class="yireh-loader-name">
+                    Yireh
+                </div>
+
+                <div class="yireh-loader-ministry">
+                    MINISTRY
+                </div>
+
+            </div>
+
+
+            <div
+                class="yireh-loader-spinner"
+            ></div>
+
+
+            <p
+                id="yirehLoaderMessage"
+                class="yireh-loader-message"
+            >
+                Preparing your donation...
+            </p>
+
+
+            <!-- <img
+                src="assets/hourglass.gif"
+                alt=""
+                class="yireh-loader-hourglass"
+            > -->
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
          RAZORPAY CHECKOUT
-    ====================================================== -->
+    ========================================================= -->
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <script>
-      "use strict";
 
-      const donateButton = document.getElementById("donateButton");
+        "use strict";
 
-      const amountInput = document.getElementById("donationAmount");
 
-      const nameInput = document.getElementById("donorName");
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
 
-      const emailInput = document.getElementById("donorEmail");
-
-      const phoneInput = document.getElementById("donorPhone");
-
-      donateButton.addEventListener("click", async function () {
-        try {
-          const amount = Number(amountInput.value);
-
-          const name = nameInput.value.trim();
-
-          const email = emailInput.value.trim();
-
-          const phone = phoneInput.value.trim();
-
-          /* -----------------------------------------
-           VALIDATE AMOUNT
-        ----------------------------------------- */
-
-          if (!Number.isFinite(amount) || amount < 10) {
-            alert("Please enter a valid donation amount of at least ₹10.");
-
-            return;
-          }
-
-          /* -----------------------------------------
-           VALIDATE EMAIL
-        ----------------------------------------- */
-
-          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert("Please enter a valid email address.");
-
-            return;
-          }
-
-          donateButton.disabled = true;
-
-          donateButton.textContent = "Creating order...";
-
-          /* -----------------------------------------
-           CREATE ORDER
-        ----------------------------------------- */
-
-          const response = await fetch(
-            "https://yirehministry.onrender.com/api/donate/create-order",
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json",
-              },
-
-              body: JSON.stringify({
-                amount: amount,
-
-                name: name,
-
-                email: email,
-
-                phone: phone,
-              }),
-            }
-          );
-
-          const data = await response.json();
-
-          if (!response.ok || !data.success) {
-            throw new Error(data.message || "Unable to create donation order.");
-          }
-
-          donateButton.textContent = "Opening checkout...";
-
-          /* -----------------------------------------
-           RAZORPAY
-        ----------------------------------------- */
-
-          const options = {
-            key: data.keyId,
-
-            amount: data.amount,
-
-            currency: data.currency,
-
-            name: "Yireh Ministry",
-
-            description: "Donation to Yireh Ministry",
-
-            order_id: data.orderId,
-
-            prefill: {
-              name: name,
-
-              email: email,
-
-              contact: phone,
-            },
-
-            theme: {
-              color: "#f56622",
-            },
-
-            handler: async function (paymentResponse) {
-              try {
-                donateButton.textContent = "Verifying payment...";
-
-                /* ---------------------------------
-                           VERIFY ON SERVER
-                        --------------------------------- */
-
-                const verifyResponse = await fetch(
-                  "https://yirehministry.onrender.com/api/donate/verify",
-                  {
-                    method: "POST",
-
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-
-                    body: JSON.stringify(paymentResponse),
-                  }
-                );
-
-                const verifyData = await verifyResponse.json();
-
-                if (!verifyResponse.ok || !verifyData.success) {
-                  throw new Error(
-                    verifyData.message || "Payment verification failed."
-                  );
-                }
-
-                /* ---------------------------------
-                           SUCCESS
-                        --------------------------------- */
-
-                alert(
-                  verifyData.emailSent
-                    ? "Thank you! Your donation was successful. A confirmation email has been sent to you."
-                    : "Thank you! Your donation was successful."
-                );
-
-                donateButton.disabled = false;
-
-                donateButton.textContent = "Checkout";
-
-                amountInput.value = "";
-              } catch (error) {
-                console.error("Payment verification error:", error);
-
-                alert(error.message || "Unable to verify the payment.");
-
-                donateButton.disabled = false;
-
-                donateButton.textContent = "Checkout";
-              }
-            },
-
-            modal: {
-              ondismiss: function () {
-                donateButton.disabled = false;
-
-                donateButton.textContent = "Checkout";
-              },
-            },
-          };
-
-          /* -----------------------------------------
-           OPEN CHECKOUT
-        ----------------------------------------- */
-
-          const checkout = new Razorpay(options);
-
-          checkout.on("payment.failed", function (response) {
-            console.error("Razorpay payment failed:", response.error);
-
-            alert(
-              response.error?.description || "Payment failed. Please try again."
+        const donateButton =
+            document.getElementById(
+                "donateButton"
             );
 
-            donateButton.disabled = false;
 
-            donateButton.textContent = "Checkout";
-          });
+        const amountInput =
+            document.getElementById(
+                "donationAmount"
+            );
 
-          checkout.open();
-        } catch (error) {
-          console.error("Donation error:", error);
 
-          alert(error.message || "Unable to start payment.");
+        const nameInput =
+            document.getElementById(
+                "donorName"
+            );
 
-          donateButton.disabled = false;
 
-          donateButton.textContent = "Checkout";
+        const emailInput =
+            document.getElementById(
+                "donorEmail"
+            );
+
+
+        const phoneInput =
+            document.getElementById(
+                "donorPhone"
+            );
+
+
+        const yirehLoader =
+            document.getElementById(
+                "yirehLoader"
+            );
+
+
+        const yirehLoaderMessage =
+            document.getElementById(
+                "yirehLoaderMessage"
+            );
+
+
+        /* =====================================================
+           LOADER FUNCTIONS
+        ===================================================== */
+
+        function showYirehLoader(message) {
+
+            yirehLoaderMessage.textContent =
+                message ||
+                "Please wait...";
+
+
+            yirehLoader.classList.add(
+                "is-active"
+            );
+
+
+            yirehLoader.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
         }
-      });
+
+
+        function updateYirehLoader(message) {
+
+            yirehLoaderMessage.textContent =
+                message;
+        }
+
+
+        function hideYirehLoader() {
+
+            yirehLoader.classList.remove(
+                "is-active"
+            );
+
+
+            yirehLoader.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.style.overflow =
+                "";
+        }
+
+
+        /* =====================================================
+           DONATION
+        ===================================================== */
+
+        donateButton.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    /* -----------------------------------------
+                       VALUES
+                    ----------------------------------------- */
+
+                    const amount =
+                        Number(
+                            amountInput.value
+                        );
+
+
+                    const name =
+                        nameInput.value.trim();
+
+
+                    const email =
+                        emailInput.value.trim();
+
+
+                    const phone =
+                        phoneInput.value.trim();
+
+
+                    /* -----------------------------------------
+                       VALIDATE AMOUNT
+                    ----------------------------------------- */
+
+                    if (
+                        !Number.isFinite(amount) ||
+                        amount < 10
+                    ) {
+
+                        alert(
+                            "Please enter a valid donation amount of at least ₹10."
+                        );
+
+                        return;
+                    }
+
+
+                    /* -----------------------------------------
+                       VALIDATE EMAIL
+                    ----------------------------------------- */
+
+                    if (
+                        !email ||
+                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                            email
+                        )
+                    ) {
+
+                        alert(
+                            "Please enter a valid email address."
+                        );
+
+                        return;
+                    }
+
+
+                    /* -----------------------------------------
+                       DISABLE BUTTON
+                    ----------------------------------------- */
+
+                    donateButton.disabled =
+                        true;
+
+
+                    donateButton.textContent =
+                        "Please wait...";
+
+
+                    /* -----------------------------------------
+                       SHOW LOADER
+                    ----------------------------------------- */
+
+                    showYirehLoader(
+                        "Preparing your donation..."
+                    );
+
+
+                    /* -----------------------------------------
+                       CREATE ORDER
+                    ----------------------------------------- */
+
+                    const response =
+                        await fetch(
+                            "https://yirehministry.onrender.com/api/donate/create-order",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        amount:
+                                            amount,
+
+                                        name:
+                                            name,
+
+                                        email:
+                                            email,
+
+                                        phone:
+                                            phone
+                                    })
+                            }
+                        );
+
+
+                    /* -----------------------------------------
+                       CHECK RESPONSE
+                    ----------------------------------------- */
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !response.ok ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to create donation order."
+                        );
+                    }
+
+
+                    /* -----------------------------------------
+                       ORDER CREATED
+                    ----------------------------------------- */
+
+                    updateYirehLoader(
+                        "Opening secure payment..."
+                    );
+
+
+                    /*
+                       Give the message a moment
+                       before Razorpay opens.
+                    */
+
+                    await new Promise(
+                        resolve =>
+                            setTimeout(
+                                resolve,
+                                300
+                            )
+                    );
+
+
+                    /* -----------------------------------------
+                       HIDE OUR LOADER
+                    ----------------------------------------- */
+
+                    hideYirehLoader();
+
+
+                    donateButton.textContent =
+                        "Opening checkout...";
+
+
+                    /* -----------------------------------------
+                       RAZORPAY OPTIONS
+                    ----------------------------------------- */
+
+                    const options = {
+
+                        key:
+                            data.keyId,
+
+                        amount:
+                            data.amount,
+
+                        currency:
+                            data.currency,
+
+                        name:
+                            "Yireh Ministry",
+
+                        description:
+                            "Donation to Yireh Ministry",
+
+                        order_id:
+                            data.orderId,
+
+
+                        prefill: {
+
+                            name:
+                                name,
+
+                            email:
+                                email,
+
+                            contact:
+                                phone
+                        },
+
+
+                        theme: {
+
+                            color:
+                                "#f56622"
+                        },
+
+
+                        /* =====================================
+                           PAYMENT SUCCESS
+                        ===================================== */
+
+                        handler:
+                            async function (
+                                paymentResponse
+                            ) {
+
+                                try {
+
+                                    /* -------------------------
+                                       SHOW VERIFICATION LOADER
+                                    ------------------------- */
+
+                                    donateButton.disabled =
+                                        true;
+
+                                    donateButton.textContent =
+                                        "Verifying...";
+
+
+                                    showYirehLoader(
+                                        "Verifying your donation..."
+                                    );
+
+
+                                    /* -------------------------
+                                       VERIFY PAYMENT
+                                    ------------------------- */
+
+                                    const verifyResponse =
+                                        await fetch(
+                                            "https://yirehministry.onrender.com/api/donate/verify",
+                                            {
+                                                method:
+                                                    "POST",
+
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json"
+                                                },
+
+                                                body:
+                                                    JSON.stringify(
+                                                        paymentResponse
+                                                    )
+                                            }
+                                        );
+
+
+                                    const verifyData =
+                                        await verifyResponse.json();
+
+
+                                    if (
+                                        !verifyResponse.ok ||
+                                        !verifyData.success
+                                    ) {
+
+                                        throw new Error(
+                                            verifyData.message ||
+                                            "Payment verification failed."
+                                        );
+                                    }
+
+
+                                    /* -------------------------
+                                       SUCCESS
+                                    ------------------------- */
+
+                                    hideYirehLoader();
+
+
+                                    alert(
+                                        verifyData.emailSent
+                                            ? "Thank you! Your donation was successful. A confirmation email has been sent to you."
+                                            : "Thank you! Your donation was successful."
+                                    );
+
+
+                                    donateButton.disabled =
+                                        false;
+
+
+                                    donateButton.textContent =
+                                        "Checkout";
+
+
+                                    amountInput.value =
+                                        "";
+
+
+                                } catch (error) {
+
+                                    console.error(
+                                        "Payment verification error:",
+                                        error
+                                    );
+
+
+                                    hideYirehLoader();
+
+
+                                    alert(
+                                        error.message ||
+                                        "Unable to verify the payment."
+                                    );
+
+
+                                    donateButton.disabled =
+                                        false;
+
+
+                                    donateButton.textContent =
+                                        "Checkout";
+                                }
+
+                            },
+
+
+                        /* =====================================
+                           CHECKOUT CLOSED
+                        ===================================== */
+
+                        modal: {
+
+                            ondismiss:
+                                function () {
+
+                                    hideYirehLoader();
+
+
+                                    donateButton.disabled =
+                                        false;
+
+
+                                    donateButton.textContent =
+                                        "Checkout";
+                                }
+                        }
+
+                    };
+
+
+                    /* -----------------------------------------
+                       OPEN RAZORPAY
+                    ----------------------------------------- */
+
+                    const checkout =
+                        new Razorpay(
+                            options
+                        );
+
+
+                    /* -----------------------------------------
+                       PAYMENT FAILED
+                    ----------------------------------------- */
+
+                    checkout.on(
+                        "payment.failed",
+                        function (
+                            response
+                        ) {
+
+                            console.error(
+                                "Razorpay payment failed:",
+                                response.error
+                            );
+
+
+                            hideYirehLoader();
+
+
+                            alert(
+                                response.error?.description ||
+                                "Payment failed. Please try again."
+                            );
+
+
+                            donateButton.disabled =
+                                false;
+
+
+                            donateButton.textContent =
+                                "Checkout";
+                        }
+                    );
+
+
+                    checkout.open();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Donation error:",
+                        error
+                    );
+
+
+                    hideYirehLoader();
+
+
+                    alert(
+                        error.message ||
+                        "Unable to start payment."
+                    );
+
+
+                    donateButton.disabled =
+                        false;
+
+
+                    donateButton.textContent =
+                        "Checkout";
+                }
+
+            }
+        );
+
     </script>
-  </body>
+
+</body>
 </html>

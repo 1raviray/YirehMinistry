@@ -842,3 +842,252 @@
         font-size: 13px;
     }
 }
+
+
+/* =========================================================
+   CONTACT FORM VALIDATION
+========================================================= */
+
+.contact-error {
+    display: block;
+
+    min-height: 17px;
+
+    margin-top: 6px;
+
+    color: #d9534f;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 17px;
+}
+
+
+.contact-field-error {
+    border-color: #d9534f !important;
+}
+
+
+.contact-details-submit:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+
+/* =========================================================
+   CONTACT FORM LOADER
+========================================================= */
+
+.contact-loader {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(8, 8, 8, 0.92);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.contact-loader.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   LOADER BOX
+========================================================= */
+
+.contact-loader-box {
+    width: min(90%, 360px);
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ROUND SPINNER
+========================================================= */
+
+.contact-loader-spinner {
+    width: 46px;
+    height: 46px;
+
+    margin: 0 auto 24px;
+
+    border: 3px solid rgba(255, 255, 255, 0.15);
+
+    border-top-color: #f26222;
+
+    border-radius: 50%;
+
+    animation:
+        contactLoaderRotate 0.9s linear infinite;
+}
+
+
+@keyframes contactLoaderRotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.contact-loader-title {
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 24px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.contact-loader-text {
+    margin: 0 auto;
+
+    max-width: 280px;
+
+    color: #999;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 13px;
+
+    line-height: 20px;
+}
+
+
+/* =========================================================
+   HOURGLASS
+========================================================= */
+
+.contact-loader-hourglass {
+    margin-top: 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.contact-loader-hourglass span {
+    display: inline-block;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    animation:
+        contactHourglassRotate 2s ease-in-out infinite;
+}
+
+
+@keyframes contactHourglassRotate {
+
+    0%,
+    40% {
+        transform: rotate(0deg);
+    }
+
+    50%,
+    90% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .contact-loader-box {
+        width: 100%;
+        max-width: 320px;
+
+        padding: 25px 20px;
+    }
+
+    .contact-loader-spinner {
+        width: 42px;
+        height: 42px;
+
+        margin-bottom: 20px;
+    }
+
+    .contact-loader-title {
+        font-size: 22px;
+    }
+
+    .contact-loader-text {
+        font-size: 12px;
+        line-height: 19px;
+    }
+
+}
