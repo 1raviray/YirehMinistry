@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Register Interest - Yireh Ministry</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="event-register.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         PAGE
+    ====================================================== -->
+
+    <main class="registration-page">
+
+        <p class="page-heading">
+            ALL EVENTS
+        </p>
+        <div class="registration-container">
+
+            <!-- =================================================
+                 LEFT SIDE
+            ================================================== -->
+
+            <section class="registration-content">
+
+                <p class="eyebrow">
+                    register interest
+                </p>
+
+                <h1>
+                    Save your seat for
+                    <span id="eventTitle">RAW</span>
+                </h1>
+
+                <p class="intro-text">
+                    Registration is free. It simply helps us prepare
+                    seating, prayer, and hospitality for everyone He brings.
+                </p>
+
+
+                <!-- =================================================
+                     STEPS
+                ================================================== -->
+
+                <div class="steps">
+
+                    <div
+                        class="step active"
+                        id="stepOneLabel"
+                    >
+                        1.Your details
+                    </div>
+
+                    <div
+                        class="step"
+                        id="stepTwoLabel"
+                    >
+                        2.Review &amp; Confirm
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     STEP 1
+                ================================================== -->
+
+                <form
+                    id="registrationForm"
+                    novalidate
+                >
+
+                    <div
+                        class="form-step active"
+                        id="stepOne"
+                    >
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="fullName">
+                                    Full name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="name"
+                                    autocomplete="name"
+                                    maxlength="100"
+                                    required
+                                >
+
+                                <span
+                                    class="field-error"
+                                    id="nameError"
+                                ></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    Where are you from
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    autocomplete="address-level2"
+                                    maxlength="100"
+                                    required
+                                >
+
+                                <span
+                                    class="field-error"
+                                    id="cityError"
+                                ></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="phone">
+                                    Phone number / WhatsApp number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    autocomplete="tel"
+                                    inputmode="tel"
+                                    maxlength="15"
+                                    required
+                                >
+
+                                <span
+                                    class="field-error"
+                                    id="phoneError"
+                                ></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autocomplete="email"
+                                    maxlength="150"
+                                    required
+                                >
+
+                                <span
+                                    class="field-error"
+                                    id="emailError"
+                                ></span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                class="text-button"
+                                id="cancelButton"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                class="orange-button"
+                                id="continueButton"
+                            >
+                                Continue
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         STEP 2
+                    ================================================== -->
+
+                    <div
+                        class="form-step"
+                        id="stepTwo"
+                    >
+
+                        <div class="review">
+
+                            <div class="review-row">
+
+                                <span>
+                                    Event name :
+                                </span>
+
+                                <strong id="reviewEvent">
+                                    RAW
+                                </strong>
+
+                            </div>
+
+
+                            <div class="review-row">
+
+                                <span>
+                                    Name:
+                                </span>
+
+                                <strong id="reviewName">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="review-row">
+
+                                <span>
+                                    Contact:
+                                </span>
+
+                                <strong id="reviewContact">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="review-row">
+
+                                <span>
+                                    City:
+                                </span>
+
+                                <strong id="reviewCity">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="review-row seats-row">
+
+                                <label for="seats">
+                                    Seats:
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="seats"
+                                    min="1"
+                                    max="20"
+                                    value="1"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                class="text-button"
+                                id="backButton"
+                            >
+                                Back
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="orange-button"
+                                id="submitButton"
+                            >
+                                Confirm Registration
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 RIGHT SIDE
+            ================================================== -->
+
+            <aside class="registration-sidebar">
+
+                <div class="info-card">
+
+                    <h2>
+                        What to expect
+                    </h2>
+
+                    <ul>
+
+                        <li>
+                            Doors open 30 minutes early —
+                            come early, come hungry.
+                        </li>
+
+                        <li>
+                            Live worship, the Word, and space
+                            to respond.
+                        </li>
+
+                        <li>
+                            Entry is free; a love offering is
+                            received, never required.
+                        </li>
+
+                        <li>
+                            Families and first-timers are always welcome.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="info-card help-card">
+
+                    <h2>
+                        Need help?
+                    </h2>
+
+                    <p>
+                        Bringing a group, need accessibility support,
+                        or want to serve on the night?
+                    </p>
+
+                    <a
+                        href="contact.html"
+                        class="orange-button small-button"
+                    >
+                        Talk to our team
+                    </a>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         LOADING OVERLAY
+    ====================================================== -->
+
+    <div
+        class="loader-overlay"
+        id="loaderOverlay"
+        aria-hidden="true"
+    >
+
+        <div class="loader-card">
+
+            <div class="loader-circle">
+
+                <div class="loader-circle-inner"></div>
+
+            </div>
+
+            <h3 id="loaderTitle">
+                Sending your registration...
+            </h3>
+
+            <p id="loaderText">
+                Please wait while we connect to Yireh Ministry.
+            </p>
+
+            <div class="hourglass">
+                ⌛
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUCCESS OVERLAY
+    ====================================================== -->
+
+    <div
+        class="success-overlay"
+        id="successOverlay"
+        aria-hidden="true"
+    >
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Registration confirmed
+            </h2>
+
+            <p id="successMessage">
+                Thank you. Your registration has been received.
+            </p>
+
+            <button
+                type="button"
+                class="orange-button"
+                id="successButton"
+            >
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="event-register.js"></script>
+
+</body>
+</html>

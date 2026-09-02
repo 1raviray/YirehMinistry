@@ -1,0 +1,850 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    background: #f4f3f1;
+
+    color: #292929;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.registration-page {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 80px 24px;
+}
+
+
+.registration-container {
+    width: min(1160px, 100%);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(320px, 0.85fr);
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.registration-content {
+    padding: 5px 0;
+}
+
+
+.page-heading {
+    margin: 0 auto 28px auto;
+    width: min(1160px, 100%);
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+font-weight: 700;
+    font-size: clamp(37px, 4vw, 42px);
+
+    font-style: italic;
+
+    line-height: 1.1;
+}
+
+
+.eyebrow {
+    margin: 0 0 16px;
+    font-family:
+        "Gabarito",
+        Georgia,
+        serif;
+    color: #f56622;
+
+    font-size: 23px;
+
+    font-weight: 500;
+}
+
+
+.registration-content h1 {
+    margin: 0 0 8px;
+
+    max-width: 720px;
+
+    font-size: clamp(32px, 4vw, 40px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1.5px;
+}
+
+
+.intro-text {
+    max-width: 700px;
+
+    margin: 0 0 22px;
+
+    font-size: 20px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   STEPS
+========================================================= */
+
+.steps {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+    margin: 0 0 28px;
+
+    font-size: 20px;
+}
+
+
+.step {
+    position: relative;
+
+    color: #292929;
+
+    cursor: default;
+}
+
+
+.step.active {
+    color: #f56622;
+}
+
+
+.step.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: -5px;
+
+    height: 1px;
+
+    background: #f56622;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px 20px;
+}
+
+
+.form-group {
+    min-width: 0;
+}
+
+
+.form-group label,
+.seats-row label {
+    display: block;
+
+    margin-bottom: 7px;
+    font-family: "Inter";
+    font-size: 13.5px;
+
+    line-height: 1.2;
+}
+
+
+.form-group input,
+.seats-row input {
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 14px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #dcdcdc;
+
+    color: #292929;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-group input:focus,
+.seats-row input:focus {
+    background: #e5e5e5;
+
+    box-shadow:
+        0 0 0 1px #f56622;
+}
+
+
+.field-error {
+    display: block;
+
+    min-height: 18px;
+
+    margin-top: 5px;
+
+    color: #c43820;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+
+.text-button {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #292929;
+
+    font-family:
+        "Gabarito",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+
+.orange-button {
+    min-width: 290px;
+
+    min-height: 56px;
+
+    padding: 12px 28px;
+
+    border: 1px solid #777;
+
+    background: #f47b3c;
+
+    color: #292929;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.orange-button:hover {
+    background: #e9692b;
+
+    transform: translateY(-2px);
+}
+
+
+.orange-button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+.review {
+    min-height: 230px;
+
+    padding: 2px 0;
+}
+
+
+.review-row {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+    font-size: 20px;
+
+    line-height: 1.3;
+}
+
+
+.review-row strong {
+    font-weight: 400;
+}
+
+
+.seats-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.seats-row label {
+    margin: 0;
+}
+
+
+.seats-row input {
+    width: 90px;
+
+    height: 42px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.registration-sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+.info-card {
+    padding: 26px 20px 24px;
+
+    border: 1px solid #f47b3c;
+
+    border-radius: 12px;
+
+    background: #eeeeec;
+}
+
+
+.info-card h2 {
+    margin: 0 0 8px;
+    font-family: "Gabarito";
+    font-size: 28px;
+
+    line-height: 1.15;
+
+    letter-spacing: -0.8px;
+}
+
+
+.info-card ul {
+    margin: 0;
+
+    padding-left: 26px;
+}
+
+
+.info-card li {
+    margin-bottom: 7px;
+    font-family: "Gabarito";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+
+.info-card p {
+    margin: 0 0 26px;
+    font-family: "Gabarito";
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+.small-button {
+    display: inline-flex;
+
+    min-width: 250px;
+
+    min-height: 50px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 23px;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader-overlay,
+.success-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(20, 20, 20, 0.72);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.loader-overlay.show,
+.success-overlay.show {
+    display: flex;
+}
+
+
+.loader-card,
+.success-card {
+    width: min(390px, 100%);
+
+    padding: 40px 28px;
+
+    border: 1px solid rgba(244, 123, 60, 0.6);
+
+    border-radius: 16px;
+
+    background: #f4f3f1;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   ROUND LOADER
+========================================================= */
+
+.loader-circle {
+    width: 64px;
+
+    height: 64px;
+
+    margin: 0 auto 22px;
+
+    border: 4px solid #d5d5d5;
+
+    border-top-color: #f56622;
+
+    border-right-color: #f47b3c;
+
+    border-radius: 50%;
+
+    animation:
+        loaderSpin 0.9s linear infinite;
+}
+
+
+.loader-circle-inner {
+    width: 100%;
+
+    height: 100%;
+
+    border-radius: 50%;
+}
+
+
+@keyframes loaderSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.loader-card h3 {
+    margin: 0 0 10px;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size: 23px;
+
+    font-weight: 400;
+}
+
+
+.loader-card p {
+    margin: 0;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.hourglass {
+    margin-top: 18px;
+
+    font-size: 20px;
+
+    animation:
+        hourglassMove 1.2s ease-in-out infinite;
+}
+
+
+@keyframes hourglassMove {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.success-icon {
+    width: 62px;
+
+    height: 62px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f47b3c;
+
+    font-size: 32px;
+}
+
+
+.success-card h2 {
+    margin: 0 0 10px;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size: 28px;
+
+    font-weight: 400;
+}
+
+
+.success-card p {
+    margin: 0 0 24px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .registration-page {
+        padding: 50px 18px;
+    }
+
+
+    .registration-container {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+
+    .registration-sidebar {
+        order: 2;
+    }
+
+
+    .registration-content {
+        order: 1;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .registration-page {
+        padding: 35px 16px;
+    }
+
+
+    .page-heading {
+        margin-bottom: 22px;
+
+        font-size: 32px;
+    }
+
+
+    .eyebrow {
+        font-size: 19px;
+    }
+
+
+    .registration-content h1 {
+        font-size: 31px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .intro-text {
+        font-size: 16px;
+    }
+
+
+    .steps {
+        gap: 20px;
+
+        font-size: 15px;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+
+    .form-group input {
+        height: 48px;
+    }
+
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+        margin-top: 20px;
+    }
+
+
+    .orange-button {
+        width: 100%;
+
+        min-width: 0;
+
+        min-height: 56px;
+
+        font-size: 24px;
+    }
+
+
+    .text-button {
+        align-self: flex-start;
+    }
+
+
+    .review-row {
+        font-size: 17px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .info-card {
+        padding: 22px 18px;
+    }
+
+
+    .info-card h2 {
+        font-size: 25px;
+    }
+
+
+    .small-button {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .steps {
+        gap: 12px;
+
+        font-size: 14px;
+    }
+
+
+    .registration-content h1 {
+        font-size: 28px;
+    }
+
+
+    .review-row {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+}
