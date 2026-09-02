@@ -86,7 +86,7 @@ const TOKEN_PATH =
 
 const REDIRECT_URI =
     process.env.GOOGLE_REDIRECT_URI ||
-    "http://localhost:10000/oauth2callback";
+    "http://localhost:10000/oauth2callback" || "https://yirehministry.onrender.com/oauth2callback";
 
 
 const SCOPES = [
