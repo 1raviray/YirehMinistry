@@ -1604,132 +1604,285 @@ app.get(
 /* =========================================================
    CONTACT FORM
    ========================================================= */
+/* =========================================================
+   CONTACT FORM
+   POST /api/contact
+   Supports:
+   - email OR phone in the Contact field
+   ========================================================= */
 
-app.post(
-  "/api/contact",
-
-  contactLimiter,
-
-  async (req, res) => {
-    try {
-      const fullName =
-        cleanText(
-          req.body.fullName,
-          120
+   app.post(
+    "/api/contact",
+    contactLimiter,
+    async (req, res) => {
+      try {
+        console.log("CONTACT REQUEST:", req.body);
+  
+        /* -----------------------------------------
+           RECEIVE FRONTEND DATA
+           ----------------------------------------- */
+  
+        const fullName =
+          cleanText(
+            req.body.fullName ||
+            req.body.name,
+            120
+          );
+  
+        const location =
+          cleanText(
+            req.body.location,
+            200
+          );
+  
+        const contact =
+          cleanText(
+            req.body.contact,
+            200
+          );
+  
+        const emailFromForm =
+          cleanText(
+            req.body.email,
+            200
+          ).toLowerCase();
+  
+        const phoneFromForm =
+          cleanText(
+            req.body.phone,
+            40
+          );
+  
+        const subject =
+          cleanText(
+            req.body.subject,
+            200
+          );
+  
+        const message =
+          cleanText(
+            req.body.message,
+            10000
+          );
+  
+        /* -----------------------------------------
+           DETERMINE EMAIL / PHONE
+           ----------------------------------------- */
+  
+        let email = emailFromForm;
+        let phone = phoneFromForm;
+  
+        /*
+           Your frontend currently sends the user's
+           email OR phone in:
+  
+           req.body.contact
+        */
+  
+        if (
+          !email &&
+          contact &&
+          isEmail(contact)
+        ) {
+          email =
+            contact.toLowerCase();
+        }
+  
+        if (
+          !phone &&
+          contact &&
+          !isEmail(contact)
+        ) {
+          const digits =
+            contact.replace(
+              /\D/g,
+              ""
+            );
+  
+          if (
+            digits.length >= 10 &&
+            digits.length <= 15
+          ) {
+            phone = contact;
+          }
+        }
+  
+        /* -----------------------------------------
+           REQUIRED FIELDS
+           ----------------------------------------- */
+  
+        if (
+          !fullName ||
+          !message ||
+          (!email && !phone)
+        ) {
+          return res
+            .status(400)
+            .json({
+              success: false,
+  
+              message:
+                "Please complete your name, contact, and message.",
+            });
+        }
+  
+        /* -----------------------------------------
+           EMAIL VALIDATION
+           ----------------------------------------- */
+  
+        if (
+          email &&
+          !isEmail(email)
+        ) {
+          return res
+            .status(400)
+            .json({
+              success: false,
+  
+              message:
+                "Please enter a valid email address.",
+            });
+        }
+  
+        /* -----------------------------------------
+           PHONE VALIDATION
+           ----------------------------------------- */
+  
+        if (phone) {
+          const phoneDigits =
+            phone.replace(
+              /\D/g,
+              ""
+            );
+  
+          if (
+            phoneDigits.length < 10 ||
+            phoneDigits.length > 15
+          ) {
+            return res
+              .status(400)
+              .json({
+                success: false,
+  
+                message:
+                  "Please enter a valid phone number.",
+              });
+          }
+        }
+  
+        /* -----------------------------------------
+           DEFAULT SUBJECT
+           ----------------------------------------- */
+  
+        const finalSubject =
+          subject ||
+          `Website Contact - ${fullName}`;
+  
+        /* -----------------------------------------
+           EMAIL BODY
+           ----------------------------------------- */
+  
+        const body = `
+  YIREH MINISTRY
+  WEBSITE CONTACT FORM
+  ========================================
+  
+  Full Name:
+  ${fullName}
+  
+  Location:
+  ${location || "Not provided"}
+  
+  Email:
+  ${email || "Not provided"}
+  
+  Phone / WhatsApp:
+  ${phone || "Not provided"}
+  
+  Subject:
+  ${finalSubject}
+  
+  Message:
+  ${message}
+  
+  ========================================
+  
+  This message was submitted through the
+  Yireh Ministry website.
+        `.trim();
+  
+        /* -----------------------------------------
+           REPLY-TO
+           ----------------------------------------- */
+  
+        /*
+           Gmail replyTo should only be set when
+           the visitor supplied an email address.
+        */
+  
+        const replyTo =
+          email &&
+          isEmail(email)
+            ? email
+            : null;
+  
+        /* -----------------------------------------
+           SEND EMAIL
+           ----------------------------------------- */
+  
+        await sendGmailMessage({
+          subject:
+            finalSubject,
+  
+          text:
+            body,
+  
+          replyTo:
+            replyTo,
+        });
+  
+        /* -----------------------------------------
+           SUCCESS
+           ----------------------------------------- */
+  
+        console.log(
+          "Contact submission completed:",
+          {
+            fullName,
+            email:
+              email || null,
+            phone:
+              phone || null,
+          }
         );
-
-      const email =
-        cleanText(
-          req.body.email,
-          200
-        ).toLowerCase();
-
-      const phone =
-        cleanText(
-          req.body.phone,
-          40
-        );
-
-      const subjectInput =
-        cleanText(
-          req.body.subject,
-          200
-        );
-
-      const message =
-        cleanText(
-          req.body.message,
-          10000
-        );
-
-      if (
-        !fullName ||
-        !email ||
-        !message
-      ) {
+  
         return res
-          .status(400)
+          .status(200)
+          .json({
+            success: true,
+  
+            message:
+              "Your message has been sent successfully.",
+          });
+  
+      } catch (error) {
+  
+        console.error(
+          "Contact submission error:",
+          error.message
+        );
+  
+        return res
+          .status(500)
           .json({
             success: false,
-
+  
             message:
-              "Please complete your name, email, and message.",
+              "Unable to send your message. Please try again.",
           });
       }
-
-      if (
-        !isEmail(email)
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please enter a valid email address.",
-          });
-      }
-
-      const subject =
-        subjectInput ||
-        `Website Contact - ${fullName}`;
-
-      const body = `
-YIREH MINISTRY
-WEBSITE CONTACT
-========================================
-
-Full Name:
-${fullName}
-
-Email:
-${email}
-
-Phone:
-${phone || "Not provided"}
-
-Subject:
-${subject}
-
-Message:
-${message}
-
-========================================
-This message was submitted through the Yireh Ministry website.
-      `.trim();
-
-      await sendGmailMessage({
-        subject,
-        text: body,
-        replyTo: email,
-      });
-
-      return res
-        .status(200)
-        .json({
-          success: true,
-
-          message:
-            "Your message has been sent successfully.",
-        });
-    } catch (error) {
-      console.error(
-        "Contact submission error:",
-        error.message
-      );
-
-      return res
-        .status(500)
-        .json({
-          success: false,
-
-          message:
-            error.message ||
-            "Unable to send your message. Please try again.",
-        });
     }
-  }
-);
+  );
 
 /* =========================================================
    EVENT REGISTRATION
