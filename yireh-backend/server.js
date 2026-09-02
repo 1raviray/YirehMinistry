@@ -1,3 +1,25 @@
+"use strict";
+
+/* =========================================================
+   YIREH MINISTRY BACKEND
+   ---------------------------------------------------------
+   Includes:
+   - Gmail API / Google OAuth
+   - Contact form
+   - Event registration
+   - Anthem submissions + attachments
+   - Razorpay donations
+   - Razorpay webhook
+   - Health endpoint
+   - CORS
+   - Rate limiting
+========================================================= */
+
+
+/* =========================================================
+   IMPORTS
+========================================================= */
+
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -12,750 +34,1039 @@ const Razorpay = require("razorpay");
 
 require("dotenv").config();
 
-const app = express();
-app.set(
-    "trust proxy",1
-)
+
 /* =========================================================
-   SERVER
+   APP
 ========================================================= */
 
-const PORT = Number(process.env.PORT) || 10000;
+const app = express();
+
+app.set("trust proxy", 1);
+
+const PORT =
+    Number(process.env.PORT) || 10000;
+
 
 /* =========================================================
    GMAIL / GOOGLE OAUTH
 ========================================================= */
 
 const GMAIL_USER =
-  process.env.GMAIL_USER || "mylogin00000@gmail.com";
+    process.env.GMAIL_USER ||
+    "mylogin00000@gmail.com";
 
-const CREDENTIALS_PATH = path.join(
-  __dirname,
-  "credentials.json"
-);
-
-const TOKEN_PATH = path.join(
-  __dirname,
-  "token.json"
-);
 
 /*
-   Render:
-   https://YOUR-SERVICE.onrender.com/oauth2callback
-
    Local:
-   http://localhost:10000/oauth2callback
+   credentials.json
+   token.json
+
+   Render:
+   You can set these paths with environment variables:
+
+   GOOGLE_CREDENTIALS_PATH
+   GOOGLE_TOKEN_PATH
 */
 
+const CREDENTIALS_PATH =
+    process.env.GOOGLE_CREDENTIALS_PATH ||
+    path.join(
+        __dirname,
+        "credentials.json"
+    );
+
+
+const TOKEN_PATH =
+    process.env.GOOGLE_TOKEN_PATH ||
+    path.join(
+        __dirname,
+        "token.json"
+    );
+
+
 const REDIRECT_URI =
-  process.env.GOOGLE_REDIRECT_URI ||
-  "http://localhost:10000/oauth2callback";
+    process.env.GOOGLE_REDIRECT_URI ||
+    "http://localhost:10000/oauth2callback";
+
 
 const SCOPES = [
-  "https://www.googleapis.com/auth/gmail.send",
+    "https://www.googleapis.com/auth/gmail.send"
 ];
+
 
 /* =========================================================
    RAZORPAY
 ========================================================= */
 
 const RAZORPAY_KEY_ID =
-  process.env.RAZORPAY_KEY_ID;
+    process.env.RAZORPAY_KEY_ID;
 
 const RAZORPAY_KEY_SECRET =
-  process.env.RAZORPAY_KEY_SECRET;
+    process.env.RAZORPAY_KEY_SECRET;
 
 const RAZORPAY_WEBHOOK_SECRET =
-  process.env.RAZORPAY_WEBHOOK_SECRET;
+    process.env.RAZORPAY_WEBHOOK_SECRET;
+
 
 let razorpay = null;
 
+
 if (
-  RAZORPAY_KEY_ID &&
-  RAZORPAY_KEY_SECRET
+    RAZORPAY_KEY_ID &&
+    RAZORPAY_KEY_SECRET
 ) {
-  razorpay = new Razorpay({
-    key_id: RAZORPAY_KEY_ID,
-    key_secret: RAZORPAY_KEY_SECRET,
-  });
+
+    razorpay =
+        new Razorpay({
+            key_id:
+                RAZORPAY_KEY_ID,
+
+            key_secret:
+                RAZORPAY_KEY_SECRET
+        });
+
 } else {
-  console.warn(
-    "Razorpay is not configured. Add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET."
-  );
+
+    console.warn(
+        "Razorpay is not configured."
+    );
+
 }
 
+
 /* =========================================================
-   TEMPORARY RAZORPAY ORDER STORE
+   MEMORY STORE
 ========================================================= */
 
-const razorpayOrders = new Map();
+const razorpayOrders =
+    new Map();
+
 
 /* =========================================================
    FILE LIMITS
 ========================================================= */
 
 const MAX_FILE_SIZE =
-  10 * 1024 * 1024;
+    10 * 1024 * 1024;
+
 
 const MAX_TOTAL_FILES =
-  18 * 1024 * 1024;
+    18 * 1024 * 1024;
+
 
 /* =========================================================
    SECURITY
 ========================================================= */
 
-app.disable("x-powered-by");
+app.disable(
+    "x-powered-by"
+);
 
-app.use(helmet());
+app.use(
+    helmet()
+);
+
 
 /* =========================================================
    CORS
 ========================================================= */
 
-const allowedOrigins = new Set([
-  "http://127.0.0.1:5500",
-  "http://localhost:5500",
-  "http://127.0.0.1:3000",
-  "http://localhost:3000",
-]);
+const allowedOrigins =
+    new Set([
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+        "https://1raviray.github.io"
+    ]);
 
-if (process.env.FRONTEND_URL) {
-  allowedOrigins.add(
-    process.env.FRONTEND_URL.replace(/\/$/, "")
-  );
+
+if (
+    process.env.FRONTEND_URL
+) {
+
+    allowedOrigins.add(
+        process.env.FRONTEND_URL
+            .replace(/\/$/, "")
+    );
+
 }
 
+
 app.use(
-  cors({
-    origin(origin, callback) {
-      /*
-         Requests from Postman, curl, etc.
-         do not have an Origin header.
-      */
+    cors({
 
-      if (!origin) {
-        return callback(null, true);
-      }
+        origin(
+            origin,
+            callback
+        ) {
 
-      if (allowedOrigins.has(origin)) {
-        return callback(null, true);
-      }
+            /*
+               Requests without Origin:
+               Postman, curl, server-to-server etc.
+            */
 
-      return callback(
-        new Error("CORS origin not allowed.")
-      );
-    },
+            if (!origin) {
 
-    methods: [
-      "GET",
-      "POST",
-      "OPTIONS",
-    ],
+                return callback(
+                    null,
+                    true
+                );
 
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-    ],
-  })
+            }
+
+
+            if (
+                allowedOrigins.has(
+                    origin
+                )
+            ) {
+
+                return callback(
+                    null,
+                    true
+                );
+
+            }
+
+
+            return callback(
+                new Error(
+                    "CORS origin not allowed."
+                )
+            );
+
+        },
+
+
+        methods: [
+            "GET",
+            "POST",
+            "OPTIONS"
+        ],
+
+
+        allowedHeaders: [
+            "Content-Type",
+            "Authorization"
+        ]
+
+    })
 );
+
 
 /* =========================================================
    RAZORPAY WEBHOOK
-   MUST BE BEFORE express.json()
+   MUST COME BEFORE express.json()
 ========================================================= */
 
 app.post(
-  "/api/donate/webhook",
+    "/api/donate/webhook",
 
-  express.raw({
-    type: "application/json",
-  }),
+    express.raw({
+        type:
+            "application/json"
+    }),
 
-  (req, res) => {
-    try {
-      if (!RAZORPAY_WEBHOOK_SECRET) {
-        console.error(
-          "Razorpay webhook secret is missing."
-        );
+    (
+        req,
+        res
+    ) => {
 
-        return res
-          .status(500)
-          .send(
-            "Webhook secret not configured."
-          );
-      }
+        try {
 
-      const receivedSignature =
-        req.headers[
-          "x-razorpay-signature"
-        ];
+            if (
+                !RAZORPAY_WEBHOOK_SECRET
+            ) {
 
-      if (!receivedSignature) {
-        return res
-          .status(400)
-          .send(
-            "Missing webhook signature."
-          );
-      }
+                return res
+                    .status(500)
+                    .send(
+                        "Webhook secret not configured."
+                    );
 
-      const expectedSignature =
-        crypto
-          .createHmac(
-            "sha256",
-            RAZORPAY_WEBHOOK_SECRET
-          )
-          .update(req.body)
-          .digest("hex");
-
-      const valid =
-        expectedSignature.length ===
-          receivedSignature.length &&
-        crypto.timingSafeEqual(
-          Buffer.from(
-            expectedSignature
-          ),
-          Buffer.from(
-            receivedSignature
-          )
-        );
-
-      if (!valid) {
-        console.error(
-          "Invalid Razorpay webhook signature."
-        );
-
-        return res
-          .status(400)
-          .send("Invalid signature.");
-      }
-
-      const event = JSON.parse(
-        req.body.toString("utf8")
-      );
-
-      console.log(
-        `Razorpay webhook received: ${event.event}`
-      );
-
-      if (
-        event.event ===
-        "payment.captured"
-      ) {
-        const payment =
-          event.payload?.payment?.entity;
-
-        if (payment) {
-          console.log(
-            "Payment captured:",
-            {
-              paymentId: payment.id,
-              orderId:
-                payment.order_id,
-              amount:
-                payment.amount,
-              currency:
-                payment.currency,
             }
-          );
+
+
+            const receivedSignature =
+                req.headers[
+                    "x-razorpay-signature"
+                ];
+
+
+            if (
+                !receivedSignature
+            ) {
+
+                return res
+                    .status(400)
+                    .send(
+                        "Missing webhook signature."
+                    );
+
+            }
+
+
+            const expectedSignature =
+                crypto
+                    .createHmac(
+                        "sha256",
+                        RAZORPAY_WEBHOOK_SECRET
+                    )
+                    .update(
+                        req.body
+                    )
+                    .digest(
+                        "hex"
+                    );
+
+
+            const valid =
+                expectedSignature.length ===
+                    receivedSignature.length &&
+
+                crypto.timingSafeEqual(
+                    Buffer.from(
+                        expectedSignature
+                    ),
+
+                    Buffer.from(
+                        receivedSignature
+                    )
+                );
+
+
+            if (!valid) {
+
+                return res
+                    .status(400)
+                    .send(
+                        "Invalid signature."
+                    );
+
+            }
+
+
+            const event =
+                JSON.parse(
+                    req.body.toString(
+                        "utf8"
+                    )
+                );
+
+
+            console.log(
+                "Razorpay webhook:",
+                event.event
+            );
+
+
+            return res
+                .status(200)
+                .json({
+                    received:
+                        true
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Razorpay webhook error:",
+                error
+            );
+
+
+            return res
+                .status(500)
+                .send(
+                    "Webhook processing failed."
+                );
+
         }
-      }
 
-      if (
-        event.event ===
-        "order.paid"
-      ) {
-        const order =
-          event.payload?.order?.entity;
-
-        if (order) {
-          console.log(
-            "Order paid:",
-            order.id
-          );
-        }
-      }
-
-      return res
-        .status(200)
-        .json({
-          received: true,
-        });
-    } catch (error) {
-      console.error(
-        "Razorpay webhook error:",
-        error
-      );
-
-      return res
-        .status(500)
-        .send(
-          "Webhook processing failed."
-        );
     }
-  }
 );
+
 
 /* =========================================================
    BODY PARSERS
 ========================================================= */
 
 app.use(
-  express.json({
-    limit: "1mb",
-  })
+    express.json({
+        limit:
+            "1mb"
+    })
 );
 
+
 app.use(
-  express.urlencoded({
-    extended: true,
-    limit: "1mb",
-  })
+    express.urlencoded({
+        extended:
+            true,
+
+        limit:
+            "1mb"
+    })
 );
+
 
 /* =========================================================
    RATE LIMITERS
 ========================================================= */
 
 const formLimiter =
-  rateLimit({
-    windowMs:
-      15 * 60 * 1000,
+    rateLimit({
 
-    max: 10,
+        windowMs:
+            15 * 60 * 1000,
 
-    standardHeaders: true,
+        max:
+            10,
 
-    legacyHeaders: false,
+        standardHeaders:
+            true,
 
-    message: {
-      success: false,
-      message:
-        "Too many submissions. Please try again later.",
-    },
-  });
+        legacyHeaders:
+            false,
+
+        message: {
+            success:
+                false,
+
+            message:
+                "Too many submissions. Please try again later."
+        }
+
+    });
+
 
 const contactLimiter =
-  rateLimit({
-    windowMs:
-      15 * 60 * 1000,
+    rateLimit({
 
-    max: 8,
+        windowMs:
+            15 * 60 * 1000,
 
-    standardHeaders: true,
+        max:
+            8,
 
-    legacyHeaders: false,
+        standardHeaders:
+            true,
 
-    message: {
-      success: false,
-      message:
-        "Too many contact submissions. Please try again later.",
-    },
-  });
+        legacyHeaders:
+            false,
+
+        message: {
+            success:
+                false,
+
+            message:
+                "Too many contact submissions. Please try again later."
+        }
+
+    });
+
 
 const eventLimiter =
-  rateLimit({
-    windowMs:
-      15 * 60 * 1000,
+    rateLimit({
 
-    max: 10,
+        windowMs:
+            15 * 60 * 1000,
 
-    standardHeaders: true,
+        max:
+            10,
 
-    legacyHeaders: false,
+        standardHeaders:
+            true,
 
-    message: {
-      success: false,
-      message:
-        "Too many registration attempts. Please try again later.",
-    },
-  });
+        legacyHeaders:
+            false,
+
+        message: {
+            success:
+                false,
+
+            message:
+                "Too many event registrations. Please try again later."
+        }
+
+    });
+
 
 /* =========================================================
    MULTER
 ========================================================= */
 
-const upload = multer({
-  storage:
-    multer.memoryStorage(),
+const upload =
+    multer({
 
-  limits: {
-    fileSize:
-      MAX_FILE_SIZE,
+        storage:
+            multer.memoryStorage(),
 
-    files: 2,
-  },
-});
+        limits: {
+
+            fileSize:
+                MAX_FILE_SIZE,
+
+            files:
+                2
+
+        }
+
+    });
+
 
 /* =========================================================
-   ALLOWED AUDIO TYPES
+   ALLOWED FILE TYPES
 ========================================================= */
 
 const allowedTuneTypes =
-  new Set([
-    "audio/mpeg",
-    "audio/wav",
-    "audio/x-wav",
-    "audio/mp4",
-    "audio/aac",
-    "audio/ogg",
-    "audio/webm",
-  ]);
+    new Set([
+
+        "audio/mpeg",
+        "audio/wav",
+        "audio/x-wav",
+        "audio/mp4",
+        "audio/aac",
+        "audio/ogg",
+        "audio/webm"
+
+    ]);
+
 
 const allowedTuneExtensions =
-  new Set([
-    ".mp3",
-    ".wav",
-    ".m4a",
-    ".aac",
-    ".ogg",
-    ".webm",
-  ]);
+    new Set([
 
-/* =========================================================
-   ALLOWED SUPPORT FILE TYPES
-========================================================= */
+        ".mp3",
+        ".wav",
+        ".m4a",
+        ".aac",
+        ".ogg",
+        ".webm"
+
+    ]);
+
 
 const allowedSupportTypes =
-  new Set([
-    "image/jpeg",
-    "image/png",
-    "image/webp",
-    "image/heic",
-    "application/pdf",
-  ]);
+    new Set([
+
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/heic",
+        "application/pdf"
+
+    ]);
+
 
 const allowedSupportExtensions =
-  new Set([
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".webp",
-    ".heic",
-    ".pdf",
-  ]);
+    new Set([
+
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp",
+        ".heic",
+        ".pdf"
+
+    ]);
+
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
 function cleanText(
-  value,
-  maxLength = 5000
+    value,
+    maxLength = 5000
 ) {
-  if (
-    typeof value !== "string"
-  ) {
-    return "";
-  }
 
-  return value
-    .replace(/\u0000/g, "")
-    .replace(/\r\n/g, "\n")
-    .replace(/\r/g, "\n")
-    .trim()
-    .slice(0, maxLength);
+    if (
+        typeof value !==
+        "string"
+    ) {
+
+        return "";
+
+    }
+
+
+    return value
+
+        .replace(
+            /\u0000/g,
+            ""
+        )
+
+        .replace(
+            /\r\n/g,
+            "\n"
+        )
+
+        .replace(
+            /\r/g,
+            "\n"
+        )
+
+        .trim()
+
+        .slice(
+            0,
+            maxLength
+        );
+
 }
 
-function isEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+
+function isEmail(
     value
-  );
+) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(value);
+
 }
+
 
 function getExtension(
-  filename
+    filename
 ) {
-  return path
-    .extname(filename || "")
-    .toLowerCase();
+
+    return path
+        .extname(
+            filename || ""
+        )
+        .toLowerCase();
+
 }
+
 
 /* =========================================================
    GOOGLE OAUTH CLIENT
 ========================================================= */
 
 function getOAuthClient() {
-  if (
-    !fs.existsSync(
-      CREDENTIALS_PATH
-    )
-  ) {
-    throw new Error(
-      "credentials.json was not found."
+
+    if (
+        !fs.existsSync(
+            CREDENTIALS_PATH
+        )
+    ) {
+
+        throw new Error(
+            "credentials.json was not found."
+        );
+
+    }
+
+
+    const credentials =
+        JSON.parse(
+            fs.readFileSync(
+                CREDENTIALS_PATH,
+                "utf8"
+            )
+        );
+
+
+    const config =
+        credentials.web ||
+        credentials.installed;
+
+
+    if (!config) {
+
+        throw new Error(
+            "Invalid Google OAuth credentials."
+        );
+
+    }
+
+
+    return new google.auth.OAuth2(
+
+        config.client_id,
+
+        config.client_secret,
+
+        REDIRECT_URI
+
     );
-  }
 
-  const credentials =
-    JSON.parse(
-      fs.readFileSync(
-        CREDENTIALS_PATH,
-        "utf8"
-      )
-    );
-
-  const config =
-    credentials.web ||
-    credentials.installed;
-
-  if (!config) {
-    throw new Error(
-      "Invalid Google OAuth credentials."
-    );
-  }
-
-  return new google.auth.OAuth2(
-    config.client_id,
-    config.client_secret,
-    REDIRECT_URI
-  );
 }
 
+
 /* =========================================================
-   AUTHENTICATED GMAIL CLIENT
+   GET AUTHENTICATED CLIENT
 ========================================================= */
 
 function getAuthenticatedClient() {
-  const client =
-    getOAuthClient();
 
-  if (
-    !fs.existsSync(
-      TOKEN_PATH
-    )
-  ) {
-    return null;
-  }
+    const client =
+        getOAuthClient();
 
-  const token =
-    JSON.parse(
-      fs.readFileSync(
-        TOKEN_PATH,
-        "utf8"
-      )
+
+    if (
+        !fs.existsSync(
+            TOKEN_PATH
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    const token =
+        JSON.parse(
+            fs.readFileSync(
+                TOKEN_PATH,
+                "utf8"
+            )
+        );
+
+
+    client.setCredentials(
+        token
     );
 
-  client.setCredentials(
-    token
-  );
 
-  return client;
+    return client;
+
 }
 
+
 /* =========================================================
-   NODEMAILER MIME GENERATOR
+   MIME TRANSPORT
 ========================================================= */
 
 const mimeTransport =
-  nodemailer.createTransport({
-    streamTransport: true,
-    buffer: true,
-  });
+    nodemailer.createTransport({
+
+        streamTransport:
+            true,
+
+        buffer:
+            true
+
+    });
+
 
 /* =========================================================
-   SEND EMAIL THROUGH GMAIL API
+   SEND GMAIL MESSAGE
 ========================================================= */
 
 async function sendGmailMessage({
-  subject,
-  text,
-  attachments = [],
-  replyTo = null,
-}) {
-  const auth =
-    getAuthenticatedClient();
 
-  if (!auth) {
-    throw new Error(
-      "Gmail authorization has not been completed."
-    );
-  }
-
-  const mailOptions = {
-    from: GMAIL_USER,
-
-    to: GMAIL_USER,
-
-    subject: cleanText(
-      subject,
-      200
-    ),
+    subject,
 
     text,
 
-    attachments,
-  };
+    attachments = [],
 
-  if (
-    replyTo &&
-    isEmail(replyTo)
-  ) {
-    mailOptions.replyTo =
-      replyTo;
-  }
+    replyTo = null
 
-  const info =
-    await mimeTransport.sendMail(
-      mailOptions
-    );
+}) {
 
-  if (
-    !info.message ||
-    !Buffer.isBuffer(
-      info.message
-    )
-  ) {
-    throw new Error(
-      "Failed to generate MIME message."
-    );
-  }
+    const auth =
+        getAuthenticatedClient();
 
-  const encodedMessage =
-    info.message
-      .toString("base64")
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=+$/, "");
 
-  const gmail =
-    google.gmail({
-      version: "v1",
-      auth,
-    });
+    if (!auth) {
 
-  await gmail.users.messages.send({
-    userId: "me",
+        throw new Error(
+            "Gmail authorization has not been completed."
+        );
 
-    requestBody: {
-      raw: encodedMessage,
-    },
-  });
+    }
+
+
+    const mailOptions = {
+
+        from:
+            GMAIL_USER,
+
+        to:
+            GMAIL_USER,
+
+        subject:
+            cleanText(
+                subject,
+                200
+            ),
+
+        text,
+
+        attachments
+
+    };
+
+
+    if (
+        replyTo &&
+        isEmail(replyTo)
+    ) {
+
+        mailOptions.replyTo =
+            replyTo;
+
+    }
+
+
+    const info =
+        await mimeTransport
+            .sendMail(
+                mailOptions
+            );
+
+
+    if (
+        !info.message ||
+        !Buffer.isBuffer(
+            info.message
+        )
+    ) {
+
+        throw new Error(
+            "Failed to generate MIME message."
+        );
+
+    }
+
+
+    const encodedMessage =
+        info.message
+
+            .toString(
+                "base64"
+            )
+
+            .replace(
+                /\+/g,
+                "-"
+            )
+
+            .replace(
+                /\//g,
+                "_"
+            )
+
+            .replace(
+                /=+$/,
+                ""
+            );
+
+
+    const gmail =
+        google.gmail({
+
+            version:
+                "v1",
+
+            auth
+
+        });
+
+
+    await gmail
+        .users
+        .messages
+        .send({
+
+            userId:
+                "me",
+
+            requestBody: {
+
+                raw:
+                    encodedMessage
+
+            }
+
+        });
+
 }
+
 
 /* =========================================================
    HOME
 ========================================================= */
 
 app.get(
-  "/",
-  (req, res) => {
-    res.send(
-      "Yireh Ministry backend is running."
-    );
-  }
+    "/",
+    (
+        req,
+        res
+    ) => {
+
+        res.send(
+            "Yireh Ministry backend is running."
+        );
+
+    }
 );
 
+
 /* =========================================================
-   HEALTH CHECK
+   HEALTH
 ========================================================= */
 
 app.get(
-  "/api/health",
-  (req, res) => {
-    res.json({
-      success: true,
+    "/api/health",
+    (
+        req,
+        res
+    ) => {
 
-      message:
-        "Yireh backend is running.",
-    });
-  }
-);
+        res.json({
 
-/* =========================================================
-   GOOGLE AUTH START
-========================================================= */
+            success:
+                true,
 
-app.get(
-  "/auth/google",
-  (req, res) => {
-    try {
-      const client =
-        getOAuthClient();
+            message:
+                "Yireh backend is running."
 
-      const authUrl =
-        client.generateAuthUrl({
-          access_type:
-            "offline",
-
-          prompt:
-            "consent",
-
-          scope: SCOPES,
         });
 
-      res.redirect(
-        authUrl
-      );
-    } catch (error) {
-      console.error(
-        "Google auth start error:",
-        error
-      );
-
-      res
-        .status(500)
-        .send(
-          "Unable to start Google authentication."
-        );
     }
-  }
 );
+
+
+/* =========================================================
+   GOOGLE AUTH
+========================================================= */
+
+app.get(
+    "/auth/google",
+    (
+        req,
+        res
+    ) => {
+
+        try {
+
+            const client =
+                getOAuthClient();
+
+
+            const authUrl =
+                client
+                    .generateAuthUrl({
+
+                        access_type:
+                            "offline",
+
+                        prompt:
+                            "consent",
+
+                        scope:
+                            SCOPES
+
+                    });
+
+
+            res.redirect(
+                authUrl
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Google auth error:",
+                error
+            );
+
+
+            res
+                .status(500)
+                .send(
+                    "Unable to start Google authentication."
+                );
+
+        }
+
+    }
+);
+
 
 /* =========================================================
    GOOGLE OAUTH CALLBACK
 ========================================================= */
 
 app.get(
-  "/oauth2callback",
-  async (req, res) => {
-    try {
-      const {
-        code,
-        error,
-      } = req.query;
+    "/oauth2callback",
+    async (
+        req,
+        res
+    ) => {
 
-      if (error) {
-        return res
-          .status(400)
-          .send(
-            `Google authorization failed: ${cleanText(
-              error,
-              300
-            )}`
-          );
-      }
+        try {
 
-      if (!code) {
-        return res
-          .status(400)
-          .send(
-            "Authorization code is missing."
-          );
-      }
+            const {
+                code,
+                error
+            } = req.query;
 
-      const client =
-        getOAuthClient();
 
-      const {
-        tokens,
-      } =
-        await client.getToken(
-          code
-        );
+            if (error) {
 
-      client.setCredentials(
-        tokens
-      );
+                return res
+                    .status(400)
+                    .send(
+                        `Google authorization failed: ${cleanText(
+                            error,
+                            300
+                        )}`
+                    );
 
-      fs.writeFileSync(
-        TOKEN_PATH,
-        JSON.stringify(
-          tokens,
-          null,
-          2
-        )
-      );
+            }
 
-      res.send(`
+
+            if (!code) {
+
+                return res
+                    .status(400)
+                    .send(
+                        "Authorization code is missing."
+                    );
+
+            }
+
+
+            const client =
+                getOAuthClient();
+
+
+            const {
+                tokens
+            } =
+                await client.getToken(
+                    code
+                );
+
+
+            client.setCredentials(
+                tokens
+            );
+
+
+            fs.writeFileSync(
+
+                TOKEN_PATH,
+
+                JSON.stringify(
+                    tokens,
+                    null,
+                    2
+                )
+
+            );
+
+
+            res.send(`
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -765,54 +1076,56 @@ app.get(
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
 />
 
 <title>
-Yireh Ministry - Gmail Connected
+Gmail Connected - Yireh Ministry
 </title>
 
 <style>
 
 body {
-  margin: 0;
 
-  min-height: 100vh;
+    margin: 0;
 
-  display: flex;
+    min-height: 100vh;
 
-  align-items: center;
+    display: flex;
 
-  justify-content: center;
+    align-items: center;
 
-  background: #ededed;
+    justify-content: center;
 
-  font-family: Arial, sans-serif;
+    background: #ededed;
 
-  color: #222;
+    font-family: Arial, sans-serif;
+
 }
 
 .box {
-  max-width: 520px;
 
-  margin: 20px;
+    width: min(500px, 90%);
 
-  padding: 40px;
+    padding: 40px;
 
-  background: #fff;
+    background: white;
 
-  border-radius: 16px;
+    border-radius: 16px;
 
-  text-align: center;
+    text-align: center;
 
-  box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.08);
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.10);
+
 }
 
 h1 {
-  margin-top: 0;
+
+    margin-top: 0;
+
 }
 
 </style>
@@ -832,7 +1145,7 @@ Yireh Ministry backend is now authorized.
 </p>
 
 <p>
-You can close this window.
+You may close this window.
 </p>
 
 </div>
@@ -840,140 +1153,190 @@ You can close this window.
 </body>
 
 </html>
-      `);
-    } catch (error) {
-      console.error(
-        "OAuth callback error:",
-        error
-      );
 
-      res
-        .status(500)
-        .send(
-          "Google authorization failed."
-        );
+            `);
+
+
+        } catch (error) {
+
+            console.error(
+                "OAuth callback error:",
+                error
+            );
+
+
+            res
+                .status(500)
+                .send(
+                    "Google authorization failed."
+                );
+
+        }
+
     }
-  }
 );
+
 
 /* =========================================================
    TEST GMAIL
 ========================================================= */
 
 app.get(
-  "/api/test-gmail",
-  async (req, res) => {
-    try {
-      await sendGmailMessage({
-        subject:
-          "Yireh Ministry Backend Test",
+    "/api/test-gmail",
+    async (
+        req,
+        res
+    ) => {
 
-        text: [
-          "This is a test email from the Yireh Ministry Node.js backend.",
-          "",
-          "Gmail API OAuth is working correctly.",
-        ].join("\n"),
-      });
+        try {
 
-      res.json({
-        success: true,
+            await sendGmailMessage({
 
-        message:
-          "Test email sent successfully.",
-      });
-    } catch (error) {
-      console.error(
-        "Gmail test error:",
-        error
-      );
+                subject:
+                    "Yireh Ministry Backend Test",
 
-      res.status(500).json({
-        success: false,
+                text:
+                    "This is a test email from the Yireh Ministry backend."
 
-        message:
-          "Unable to send test email.",
-      });
+            });
+
+
+            res.json({
+
+                success:
+                    true,
+
+                message:
+                    "Test email sent successfully."
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Gmail test error:",
+                error
+            );
+
+
+            res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to send test email."
+
+                });
+
+        }
+
     }
-  }
 );
+
 
 /* =========================================================
    CONTACT FORM
 ========================================================= */
 
 app.post(
-  "/api/contact",
-  contactLimiter,
-  async (req, res) => {
-    try {
-      const fullName =
-        cleanText(
-          req.body.fullName,
-          120
-        );
+    "/api/contact",
+    contactLimiter,
+    async (
+        req,
+        res
+    ) => {
 
-      const email =
-        cleanText(
-          req.body.email,
-          200
-        ).toLowerCase();
+        try {
 
-      const phone =
-        cleanText(
-          req.body.phone,
-          40
-        );
+            const fullName =
+                cleanText(
+                    req.body.fullName,
+                    120
+                );
 
-      const subjectInput =
-        cleanText(
-          req.body.subject,
-          200
-        );
 
-      const message =
-        cleanText(
-          req.body.message,
-          10000
-        );
+            const email =
+                cleanText(
+                    req.body.email,
+                    200
+                ).toLowerCase();
 
-      /* -----------------------------------------
-         VALIDATION
-      ----------------------------------------- */
 
-      if (
-        !fullName ||
-        !email ||
-        !message
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
+            const phone =
+                cleanText(
+                    req.body.phone,
+                    40
+                );
 
-            message:
-              "Please complete your name, email, and message.",
-          });
-      }
 
-      if (
-        !isEmail(email)
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
+            const subjectInput =
+                cleanText(
+                    req.body.subject,
+                    200
+                );
 
-            message:
-              "Please enter a valid email address.",
-          });
-      }
 
-      const subject =
-        subjectInput ||
-        `Website Contact - ${fullName}`;
+            const message =
+                cleanText(
+                    req.body.message,
+                    10000
+                );
 
-      const body = `
-Yireh Ministry Website Contact
+
+            if (
+                !fullName ||
+                !email ||
+                !message
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Please complete your name, email, and message."
+
+                    });
+
+            }
+
+
+            if (
+                !isEmail(email)
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Please enter a valid email address."
+
+                    });
+
+            }
+
+
+            const subject =
+                subjectInput ||
+                `Website Contact - ${fullName}`;
+
+
+            const body = `
+
+YIREH MINISTRY
+CONTACT FORM
+
 ========================================
 
 Full Name:
@@ -989,278 +1352,266 @@ Subject:
 ${subject}
 
 Message:
+
 ${message}
 
 ========================================
 
-This message was submitted through the Yireh Ministry website.
-      `.trim();
+Submitted through the Yireh Ministry website.
 
-      await sendGmailMessage({
-        subject,
+            `.trim();
 
-        text: body,
 
-        replyTo: email,
-      });
+            await sendGmailMessage({
 
-      return res
-        .status(200)
-        .json({
-          success: true,
+                subject,
 
-          message:
-            "Your message has been sent successfully.",
-        });
-    } catch (error) {
-      console.error(
-        "Contact submission error:",
-        error
-      );
+                text:
+                    body,
 
-      return res
-        .status(500)
-        .json({
-          success: false,
+                replyTo:
+                    email
 
-          message:
-            "Unable to send your message. Please try again.",
-        });
+            });
+
+
+            return res
+                .status(200)
+                .json({
+
+                    success:
+                        true,
+
+                    message:
+                        "Your message has been sent successfully."
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Contact submission error:",
+                error
+            );
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to send your message. Please try again."
+
+                });
+
+        }
+
     }
-  }
-);
-app.use(
-    express.json({
-        limit: "1mb"
-    })
 );
 
-app.use(
-    express.urlencoded({
-        extended: true,
-        limit: "1mb"
-    })
-);/* =========================================================
-EVENT REGISTRATION
-POST /api/event-register
+
+/* =========================================================
+   EVENT REGISTRATION
+   POST /api/event-register
 ========================================================= */
 
 app.post(
- "/api/event-register",
- eventLimiter,
- async (req, res) => {
+    "/api/event-register",
+    eventLimiter,
+    async (
+        req,
+        res
+    ) => {
 
-     try {
+        try {
 
-         console.log(
-             "EVENT REGISTRATION REQUEST:",
-             req.body
-         );
-
-
-         /* =================================================
-            RECEIVE DATA
-
-            Accept both:
-            fullName / name
-            city / location
-         ================================================= */
-
-         const eventName =
-             cleanText(
-                 req.body.eventName,
-                 200
-             );
+            console.log(
+                "EVENT REGISTRATION REQUEST:",
+                req.body
+            );
 
 
-         const fullName =
-             cleanText(
-                 req.body.fullName ||
-                 req.body.name,
-                 120
-             );
+            /* ---------------------------------------------
+               RECEIVE DATA
+
+               Supports:
+               fullName OR name
+               city OR location
+            --------------------------------------------- */
+
+            const eventName =
+                cleanText(
+                    req.body.eventName,
+                    200
+                );
 
 
-         const phone =
-             cleanText(
-                 req.body.phone,
-                 40
-             );
+            const fullName =
+                cleanText(
+                    req.body.fullName ||
+                    req.body.name,
+                    120
+                );
 
 
-         const email =
-             cleanText(
-                 req.body.email,
-                 200
-             ).toLowerCase();
+            const phone =
+                cleanText(
+                    req.body.phone,
+                    40
+                );
 
 
-         const city =
-             cleanText(
-                 req.body.city ||
-                 req.body.location,
-                 120
-             );
+            const email =
+                cleanText(
+                    req.body.email,
+                    200
+                ).toLowerCase();
 
 
-         const seats =
-             Number(
-                 req.body.seats
-             );
+            const city =
+                cleanText(
+                    req.body.city ||
+                    req.body.location,
+                    120
+                );
 
 
-         /* =================================================
-            DEBUG LOG
-         ================================================= */
-
-         console.log(
-             "Parsed registration:",
-             {
-                 eventName,
-                 fullName,
-                 phone,
-                 email,
-                 city,
-                 seats
-             }
-         );
+            const seats =
+                Number(
+                    req.body.seats
+                );
 
 
-         /* =================================================
-            REQUIRED FIELDS
-         ================================================= */
-
-         if (
-             !eventName ||
-             !fullName ||
-             !phone ||
-             !email ||
-             !city
-         ) {
-
-             console.error(
-                 "Missing registration field:",
-                 {
-                     eventName: Boolean(eventName),
-                     fullName: Boolean(fullName),
-                     phone: Boolean(phone),
-                     email: Boolean(email),
-                     city: Boolean(city)
-                 }
-             );
+            console.log(
+                "Parsed registration:",
+                {
+                    eventName,
+                    fullName,
+                    phone,
+                    email,
+                    city,
+                    seats
+                }
+            );
 
 
-             return res
-                 .status(400)
-                 .json({
-                     success: false,
+            /* ---------------------------------------------
+               REQUIRED FIELDS
+            --------------------------------------------- */
 
-                     message:
-                         "Please complete all required registration fields."
-                 });
-         }
+            if (
+                !eventName ||
+                !fullName ||
+                !phone ||
+                !email ||
+                !city
+            ) {
 
+                return res
+                    .status(400)
+                    .json({
 
-         /* =================================================
-            EMAIL VALIDATION
-         ================================================= */
+                        success:
+                            false,
 
-         if (
-             !isEmail(email)
-         ) {
+                        message:
+                            "Please complete all required registration fields."
 
-             return res
-                 .status(400)
-                 .json({
-                     success: false,
+                    });
 
-                     message:
-                         "Please enter a valid email address."
-                 });
-         }
+            }
 
 
-         /* =================================================
-            PHONE VALIDATION
-         ================================================= */
+            /* ---------------------------------------------
+               EMAIL
+            --------------------------------------------- */
 
-         const phoneDigits =
-             phone.replace(
-                 /\D/g,
-                 ""
-             );
+            if (
+                !isEmail(email)
+            ) {
 
+                return res
+                    .status(400)
+                    .json({
 
-         if (
-             phoneDigits.length < 10 ||
-             phoneDigits.length > 15
-         ) {
+                        success:
+                            false,
 
-             return res
-                 .status(400)
-                 .json({
-                     success: false,
+                        message:
+                            "Please enter a valid email address."
 
-                     message:
-                         "Please enter a valid phone number."
-                 });
-         }
+                    });
+
+            }
 
 
-         /* =================================================
-            SEAT VALIDATION
-         ================================================= */
+            /* ---------------------------------------------
+               PHONE
+            --------------------------------------------- */
 
-         if (
-             !Number.isInteger(seats) ||
-             seats < 1 ||
-             seats > 20
-         ) {
-
-             return res
-                 .status(400)
-                 .json({
-                     success: false,
-
-                     message:
-                         "Please select between 1 and 20 seats."
-                 });
-         }
+            const phoneDigits =
+                phone.replace(
+                    /\D/g,
+                    ""
+                );
 
 
-         /* =================================================
-            ADMIN EMAIL
-         ================================================= */
+            if (
+                phoneDigits.length < 10 ||
+                phoneDigits.length > 15
+            ) {
 
-         const registrationEmail =
-             process.env.GMAIL_USER;
+                return res
+                    .status(400)
+                    .json({
 
+                        success:
+                            false,
 
-         if (
-             !registrationEmail
-         ) {
+                        message:
+                            "Please enter a valid phone number."
 
-             console.error(
-                 "GMAIL_USER is not configured."
-             );
+                    });
 
-
-             return res
-                 .status(500)
-                 .json({
-                     success: false,
-
-                     message:
-                         "Registration email service is not configured."
-                 });
-         }
+            }
 
 
-         /* =================================================
-            EMAIL BODY
-         ================================================= */
+            /* ---------------------------------------------
+               SEATS
+            --------------------------------------------- */
 
-         const emailBody = `
+            if (
+                !Number.isInteger(
+                    seats
+                ) ||
+                seats < 1 ||
+                seats > 20
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Please select between 1 and 20 seats."
+
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               EMAIL BODY
+            --------------------------------------------- */
+
+            const emailBody = `
 
 YIREH MINISTRY
 EVENT REGISTRATION
@@ -1290,954 +1641,895 @@ ${seats}
 This registration was submitted through the
 Yireh Ministry website.
 
-         `.trim();
+            `.trim();
 
 
-         /* =================================================
-            SEND EMAIL TO MINISTRY
-         ================================================= */
+            /* ---------------------------------------------
+               SEND TO YIREH GMAIL
+            --------------------------------------------- */
 
-         await sendGmailMessage({
+            await sendGmailMessage({
 
-             subject:
-                 `Event Registration - ${eventName} - ${fullName}`,
+                subject:
+                    `Event Registration - ${eventName} - ${fullName}`,
 
-             text:
-                 emailBody,
+                text:
+                    emailBody,
 
-             replyTo:
-                 email
+                replyTo:
+                    email
 
-         });
+            });
 
 
-         /* =================================================
-            CONFIRMATION EMAIL TO USER
-         ================================================= */
+            /* ---------------------------------------------
+               SUCCESS
+            --------------------------------------------- */
 
-         try {
+            console.log(
+                "EVENT REGISTRATION EMAIL SENT:",
+                email
+            );
 
-             const confirmationBody = `
 
-Dear ${fullName},
+            return res
+                .status(200)
+                .json({
 
-Thank you for registering for:
+                    success:
+                        true,
 
-${eventName}
+                    message:
+                        `Your registration for ${eventName} has been received successfully.`
 
-Your registration details:
+                });
 
-Name:
-${fullName}
 
-Phone / WhatsApp:
-${phone}
+        } catch (error) {
 
-City:
-${city}
+            console.error(
+                "Event registration error:",
+                error
+            );
 
-Seats:
-${seats}
 
-We have successfully received your registration.
+            return res
+                .status(500)
+                .json({
 
-We look forward to seeing you.
+                    success:
+                        false,
 
-Yireh Ministry
+                    message:
+                        "Unable to submit your registration. Please try again."
 
-             `.trim();
+                });
 
-
-             await sendGmailMessage({
-
-                 subject:
-                     `Registration Confirmed - ${eventName}`,
-
-                 text:
-                     confirmationBody
-
-             });
-
-         } catch (
-             confirmationError
-         ) {
-
-             /*
-                The main registration email has already
-                succeeded, so don't fail the registration
-                because the confirmation email failed.
-             */
-
-             console.error(
-                 "Registration confirmation email error:",
-                 confirmationError
-             );
-
-         }
-
-
-         /* =================================================
-            SUCCESS
-         ================================================= */
-
-         console.log(
-             "Event registration completed:",
-             {
-                 eventName,
-                 fullName,
-                 email,
-                 seats
-             }
-         );
-
-
-         return res
-             .status(200)
-             .json({
-
-                 success:
-                     true,
-
-                 message:
-                     `Your registration for ${eventName} has been received successfully.`
-
-             });
-
-
-     } catch (error) {
-
-         console.error(
-             "EVENT REGISTRATION ERROR:",
-             error
-         );
-
-
-         return res
-             .status(500)
-             .json({
-
-                 success:
-                     false,
-
-                 message:
-                     "Unable to submit your registration. Please try again."
-
-             });
-
-     }
-
- }
-);
-/* =========================================================
-   EVENT REGISTRATION
-========================================================= */
-
-/*
-   FRONTEND REQUEST:
-
-   POST /api/events/register
-
-   JSON:
-
-   {
-     eventName,
-     fullName,
-     phone,
-     email,
-     city,
-     seats
-   }
-*/
-
-app.post(
-  "/api/event-register",
-  eventLimiter,
-  async (req, res) => {
-    try {
-      const eventName =
-        cleanText(
-          req.body.eventName,
-          200
-        );
-
-      const fullName =
-        cleanText(
-          req.body.fullName,
-          120
-        );
-
-      const phone =
-        cleanText(
-          req.body.phone,
-          40
-        );
-
-      const email =
-        cleanText(
-          req.body.email,
-          200
-        ).toLowerCase();
-
-      const city =
-        cleanText(
-          req.body.city,
-          120
-        );
-
-      const seatsRaw =
-        req.body.seats;
-
-      const seats =
-        Number(seatsRaw);
-
-      /* -----------------------------------------
-         REQUIRED FIELDS
-      ----------------------------------------- */
-
-      if (
-        !eventName ||
-        !fullName ||
-        !phone ||
-        !email ||
-        !city
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please complete all required registration fields.",
-          });
-      }
-
-      /* -----------------------------------------
-         EMAIL
-      ----------------------------------------- */
-
-      if (
-        !isEmail(email)
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please enter a valid email address.",
-          });
-      }
-
-      /* -----------------------------------------
-         SEATS
-      ----------------------------------------- */
-
-      if (
-        !Number.isInteger(
-          seats
-        ) ||
-        seats < 1 ||
-        seats > 20
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please select between 1 and 20 seats.",
-          });
-      }
-
-      /* -----------------------------------------
-         EMAIL BODY
-      ----------------------------------------- */
-
-      const body = `
-Yireh Ministry Event Registration
-========================================
-
-Event Name:
-${eventName}
-
-Full Name:
-${fullName}
-
-Phone / WhatsApp:
-${phone}
-
-Email:
-${email}
-
-City:
-${city}
-
-Seats:
-${seats}
-
-========================================
-
-This registration was submitted through the Yireh Ministry website.
-      `.trim();
-
-      /* -----------------------------------------
-         SEND EMAIL
-      ----------------------------------------- */
-
-      await sendGmailMessage({
-        subject:
-          `Event Registration - ${eventName} - ${fullName}`,
-
-        text: body,
-
-        replyTo: email,
-      });
-
-      /* -----------------------------------------
-         SUCCESS
-      ----------------------------------------- */
-
-      return res
-        .status(200)
-        .json({
-          success: true,
-
-          message:
-            "Your event registration has been submitted successfully.",
-        });
-    } catch (error) {
-      console.error(
-        "Event registration error:",
-        error
-      );
-
-      return res
-        .status(500)
-        .json({
-          success: false,
-
-          message:
-            "Unable to submit your registration. Please try again.",
-        });
-    }
-  }
-);
-
-/* =========================================================
-   RAZORPAY CREATE DONATION ORDER
-========================================================= */
-
-app.post(
-  "/api/donate/create-order",
-  async (req, res) => {
-    try {
-      if (!razorpay) {
-        return res
-          .status(503)
-          .json({
-            success: false,
-
-            message:
-              "Razorpay is not configured on the server.",
-          });
-      }
-
-      const amount =
-        Number(
-          req.body.amount
-        );
-
-      const name =
-        cleanText(
-          req.body.name,
-          120
-        );
-
-      const email =
-        cleanText(
-          req.body.email,
-          200
-        ).toLowerCase();
-
-      const phone =
-        cleanText(
-          req.body.phone,
-          40
-        );
-
-      /* -----------------------------------------
-         AMOUNT
-      ----------------------------------------- */
-
-      if (
-        !Number.isFinite(
-          amount
-        )
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please enter a valid donation amount.",
-          });
-      }
-
-      if (
-        amount < 10
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Minimum donation amount is ₹10.",
-          });
-      }
-
-      if (
-        amount > 500000
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Donation amount is too large.",
-          });
-      }
-
-      /* -----------------------------------------
-         EMAIL
-      ----------------------------------------- */
-
-      if (
-        email &&
-        !isEmail(email)
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please enter a valid email address.",
-          });
-      }
-
-      /* -----------------------------------------
-         CONVERT TO PAISE
-      ----------------------------------------- */
-
-      const amountInPaise =
-        Math.round(
-          amount * 100
-        );
-
-      /* -----------------------------------------
-         RECEIPT
-      ----------------------------------------- */
-
-      const receipt =
-        `yireh_donation_${Date.now()}_${Math.random()
-          .toString(36)
-          .slice(2, 8)}`;
-
-      /* -----------------------------------------
-         CREATE ORDER
-      ----------------------------------------- */
-
-      const order =
-        await razorpay.orders.create({
-          amount:
-            amountInPaise,
-
-          currency: "INR",
-
-          receipt,
-
-          notes: {
-            purpose:
-              "Yireh Ministry Donation",
-
-            donorName:
-              name,
-
-            donorEmail:
-              email,
-
-            donorPhone:
-              phone,
-          },
-        });
-
-      /* -----------------------------------------
-         STORE ORDER
-      ----------------------------------------- */
-
-      razorpayOrders.set(
-        order.id,
-        {
-          orderId:
-            order.id,
-
-          amount:
-            order.amount,
-
-          currency:
-            order.currency,
-
-          receipt:
-            order.receipt,
-
-          donorName:
-            name,
-
-          donorEmail:
-            email,
-
-          donorPhone:
-            phone,
-
-          status:
-            "created",
-
-          createdAt:
-            new Date(),
         }
-      );
 
-      /* -----------------------------------------
-         RESPONSE
-      ----------------------------------------- */
-
-      return res
-        .status(200)
-        .json({
-          success: true,
-
-          keyId:
-            RAZORPAY_KEY_ID,
-
-          orderId:
-            order.id,
-
-          amount:
-            order.amount,
-
-          currency:
-            order.currency,
-        });
-    } catch (error) {
-      console.error(
-        "Razorpay order creation error:",
-        error
-      );
-
-      return res
-        .status(500)
-        .json({
-          success: false,
-
-          message:
-            "Unable to create donation order.",
-        });
     }
-  }
 );
 
+
 /* =========================================================
-   RAZORPAY VERIFY PAYMENT
+   RAZORPAY
+   CREATE DONATION ORDER
 ========================================================= */
 
 app.post(
-  "/api/donate/verify",
-  async (req, res) => {
-    try {
-      const {
-        razorpay_payment_id,
-        razorpay_order_id,
-        razorpay_signature,
-      } = req.body;
+    "/api/donate/create-order",
+    async (
+        req,
+        res
+    ) => {
 
-      if (
-        !razorpay_payment_id ||
-        !razorpay_order_id ||
-        !razorpay_signature
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
+        try {
 
-            message:
-              "Incomplete payment verification data.",
-          });
-      }
+            if (!razorpay) {
 
-      if (
-        !RAZORPAY_KEY_SECRET
-      ) {
-        return res
-          .status(503)
-          .json({
-            success: false,
+                return res
+                    .status(503)
+                    .json({
 
-            message:
-              "Razorpay verification is not configured.",
-          });
-      }
+                        success:
+                            false,
 
-      const storedOrder =
-        razorpayOrders.get(
-          razorpay_order_id
-        );
+                        message:
+                            "Razorpay is not configured on the server."
 
-      if (!storedOrder) {
-        return res
-          .status(400)
-          .json({
-            success: false,
+                    });
 
-            message:
-              "Payment order could not be verified.",
-          });
-      }
+            }
 
-      const body =
-        `${storedOrder.orderId}|${razorpay_payment_id}`;
 
-      const expectedSignature =
-        crypto
-          .createHmac(
-            "sha256",
-            RAZORPAY_KEY_SECRET
-          )
-          .update(body)
-          .digest("hex");
+            const amount =
+                Number(
+                    req.body.amount
+                );
 
-      const valid =
-        expectedSignature.length ===
-          razorpay_signature.length &&
-        crypto.timingSafeEqual(
-          Buffer.from(
-            expectedSignature
-          ),
-          Buffer.from(
-            razorpay_signature
-          )
-        );
 
-      if (!valid) {
-        storedOrder.status =
-          "verification_failed";
+            const name =
+                cleanText(
+                    req.body.name,
+                    120
+                );
 
-        return res
-          .status(400)
-          .json({
-            success: false,
 
-            message:
-              "Payment verification failed.",
-          });
-      }
+            const email =
+                cleanText(
+                    req.body.email,
+                    200
+                ).toLowerCase();
 
-      storedOrder.status =
-        "signature_verified";
 
-      storedOrder.paymentId =
-        razorpay_payment_id;
+            const phone =
+                cleanText(
+                    req.body.phone,
+                    40
+                );
 
-      storedOrder.verifiedAt =
-        new Date();
 
-      return res
-        .status(200)
-        .json({
-          success: true,
+            /* ---------------------------------------------
+               AMOUNT
+            --------------------------------------------- */
 
-          message:
-            "Donation payment verified successfully.",
+            if (
+                !Number.isFinite(
+                    amount
+                )
+            ) {
 
-          paymentId:
-            razorpay_payment_id,
+                return res
+                    .status(400)
+                    .json({
 
-          orderId:
-            razorpay_order_id,
-        });
-    } catch (error) {
-      console.error(
-        "Razorpay verification error:",
-        error
-      );
+                        success:
+                            false,
 
-      return res
-        .status(500)
-        .json({
-          success: false,
+                        message:
+                            "Please enter a valid donation amount."
 
-          message:
-            "Unable to verify payment.",
-        });
+                    });
+
+            }
+
+
+            if (
+                amount < 10
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Minimum donation amount is ₹10."
+
+                    });
+
+            }
+
+
+            if (
+                amount > 500000
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Donation amount is too large."
+
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               EMAIL
+            --------------------------------------------- */
+
+            if (
+                email &&
+                !isEmail(email)
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Please enter a valid email address."
+
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               PAISE
+            --------------------------------------------- */
+
+            const amountInPaise =
+                Math.round(
+                    amount * 100
+                );
+
+
+            /* ---------------------------------------------
+               RECEIPT
+            --------------------------------------------- */
+
+            const receipt =
+                `yireh_donation_${Date.now()}_${Math.random()
+                    .toString(36)
+                    .slice(2, 8)}`;
+
+
+            /* ---------------------------------------------
+               CREATE ORDER
+            --------------------------------------------- */
+
+            const order =
+                await razorpay
+                    .orders
+                    .create({
+
+                        amount:
+                            amountInPaise,
+
+                        currency:
+                            "INR",
+
+                        receipt,
+
+                        notes: {
+
+                            purpose:
+                                "Yireh Ministry Donation",
+
+                            donorName:
+                                name,
+
+                            donorEmail:
+                                email,
+
+                            donorPhone:
+                                phone
+
+                        }
+
+                    });
+
+
+            /* ---------------------------------------------
+               STORE
+            --------------------------------------------- */
+
+            razorpayOrders.set(
+
+                order.id,
+
+                {
+
+                    orderId:
+                        order.id,
+
+                    amount:
+                        order.amount,
+
+                    currency:
+                        order.currency,
+
+                    receipt:
+                        order.receipt,
+
+                    donorName:
+                        name,
+
+                    donorEmail:
+                        email,
+
+                    donorPhone:
+                        phone,
+
+                    status:
+                        "created",
+
+                    createdAt:
+                        new Date()
+
+                }
+
+            );
+
+
+            /* ---------------------------------------------
+               RESPONSE
+            --------------------------------------------- */
+
+            return res
+                .status(200)
+                .json({
+
+                    success:
+                        true,
+
+                    keyId:
+                        RAZORPAY_KEY_ID,
+
+                    orderId:
+                        order.id,
+
+                    amount:
+                        order.amount,
+
+                    currency:
+                        order.currency
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Razorpay order creation error:",
+                error
+            );
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to create donation order."
+
+                });
+
+        }
+
     }
-  }
 );
+
+
+/* =========================================================
+   RAZORPAY
+   VERIFY PAYMENT
+========================================================= */
+
+app.post(
+    "/api/donate/verify",
+    async (
+        req,
+        res
+    ) => {
+
+        try {
+
+            const {
+                razorpay_payment_id,
+                razorpay_order_id,
+                razorpay_signature
+            } = req.body;
+
+
+            if (
+                !razorpay_payment_id ||
+                !razorpay_order_id ||
+                !razorpay_signature
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Incomplete payment verification data."
+
+                    });
+
+            }
+
+
+            if (
+                !RAZORPAY_KEY_SECRET
+            ) {
+
+                return res
+                    .status(503)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Razorpay verification is not configured."
+
+                    });
+
+            }
+
+
+            const storedOrder =
+                razorpayOrders.get(
+                    razorpay_order_id
+                );
+
+
+            if (
+                !storedOrder
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Payment order could not be verified."
+
+                    });
+
+            }
+
+
+            const signatureBody =
+                `${storedOrder.orderId}|${razorpay_payment_id}`;
+
+
+            const expectedSignature =
+                crypto
+                    .createHmac(
+                        "sha256",
+                        RAZORPAY_KEY_SECRET
+                    )
+                    .update(
+                        signatureBody
+                    )
+                    .digest(
+                        "hex"
+                    );
+
+
+            const valid =
+                expectedSignature.length ===
+                    razorpay_signature.length &&
+
+                crypto.timingSafeEqual(
+                    Buffer.from(
+                        expectedSignature
+                    ),
+
+                    Buffer.from(
+                        razorpay_signature
+                    )
+                );
+
+
+            if (!valid) {
+
+                storedOrder.status =
+                    "verification_failed";
+
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Payment verification failed."
+
+                    });
+
+            }
+
+
+            storedOrder.status =
+                "signature_verified";
+
+
+            storedOrder.paymentId =
+                razorpay_payment_id;
+
+
+            storedOrder.verifiedAt =
+                new Date();
+
+
+            return res
+                .status(200)
+                .json({
+
+                    success:
+                        true,
+
+                    message:
+                        "Donation payment verified successfully.",
+
+                    paymentId:
+                        razorpay_payment_id,
+
+                    orderId:
+                        razorpay_order_id
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Razorpay verification error:",
+                error
+            );
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to verify payment."
+
+                });
+
+        }
+
+    }
+);
+
 
 /* =========================================================
    ANTHEMS SUBMISSION
 ========================================================= */
 
 app.post(
-  "/api/anthems",
+    "/api/anthems",
 
-  formLimiter,
+    formLimiter,
 
-  upload.fields([
-    {
-      name: "tuneFile",
-      maxCount: 1,
-    },
+    upload.fields([
 
-    {
-      name: "supportFile",
-      maxCount: 1,
-    },
-  ]),
+        {
+            name:
+                "tuneFile",
 
-  async (req, res) => {
-    try {
-      const fullName =
-        cleanText(
-          req.body.fullName,
-          120
-        );
+            maxCount:
+                1
+        },
 
-      const location =
-        cleanText(
-          req.body.location,
-          200
-        );
+        {
+            name:
+                "supportFile",
 
-      const phone =
-        cleanText(
-          req.body.phone,
-          40
-        );
-
-      const lyrics =
-        cleanText(
-          req.body.lyrics,
-          30000
-        );
-
-      const submissionType =
-        req.body.submissionType ===
-        "tune"
-          ? "tune"
-          : "lyrics";
-
-      /* -----------------------------------------
-         REQUIRED FIELDS
-      ----------------------------------------- */
-
-      if (
-        !fullName ||
-        !location ||
-        !phone ||
-        !lyrics
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please complete all required fields.",
-          });
-      }
-
-      const tune =
-        req.files?.tuneFile?.[0] ||
-        null;
-
-      const support =
-        req.files?.supportFile?.[0] ||
-        null;
-
-      /* -----------------------------------------
-         TOTAL FILE SIZE
-      ----------------------------------------- */
-
-      const totalSize =
-        (tune?.size || 0) +
-        (support?.size || 0);
-
-      if (
-        totalSize >
-        MAX_TOTAL_FILES
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "The combined attachment size must not exceed 18 MB.",
-          });
-      }
-
-      /* -----------------------------------------
-         TUNE REQUIRED
-      ----------------------------------------- */
-
-      if (
-        submissionType ===
-          "tune" &&
-        !tune
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-
-            message:
-              "Please attach your tune/audio file.",
-          });
-      }
-
-      /* -----------------------------------------
-         AUDIO VALIDATION
-      ----------------------------------------- */
-
-      if (tune) {
-        const extension =
-          getExtension(
-            tune.originalname
-          );
-
-        const validType =
-          allowedTuneTypes.has(
-            tune.mimetype
-          );
-
-        const validExtension =
-          allowedTuneExtensions.has(
-            extension
-          );
-
-        if (
-          !validType ||
-          !validExtension
-        ) {
-          return res
-            .status(400)
-            .json({
-              success: false,
-
-              message:
-                "Invalid audio file. Please use MP3, WAV, M4A, AAC, OGG, or WebM.",
-            });
+            maxCount:
+                1
         }
-      }
 
-      /* -----------------------------------------
-         SUPPORT FILE VALIDATION
-      ----------------------------------------- */
+    ]),
 
-      if (support) {
-        const extension =
-          getExtension(
-            support.originalname
-          );
+    async (
+        req,
+        res
+    ) => {
 
-        const validType =
-          allowedSupportTypes.has(
-            support.mimetype
-          );
+        try {
 
-        const validExtension =
-          allowedSupportExtensions.has(
-            extension
-          );
+            const fullName =
+                cleanText(
+                    req.body.fullName,
+                    120
+                );
 
-        if (
-          !validType ||
-          !validExtension
-        ) {
-          return res
-            .status(400)
-            .json({
-              success: false,
 
-              message:
-                "Supporting file must be JPG, PNG, WEBP, HEIC, or PDF.",
-            });
-        }
-      }
+            const location =
+                cleanText(
+                    req.body.location,
+                    200
+                );
 
-      /* -----------------------------------------
-         EMAIL ATTACHMENTS
-      ----------------------------------------- */
 
-      const attachments = [];
+            const phone =
+                cleanText(
+                    req.body.phone,
+                    40
+                );
 
-      if (tune) {
-        attachments.push({
-          filename:
-            path.basename(
-              tune.originalname
-            ),
 
-          content:
-            tune.buffer,
+            const lyrics =
+                cleanText(
+                    req.body.lyrics,
+                    30000
+                );
 
-          contentType:
-            tune.mimetype,
-        });
-      }
 
-      if (support) {
-        attachments.push({
-          filename:
-            path.basename(
-              support.originalname
-            ),
+            const submissionType =
+                req.body.submissionType ===
+                "tune"
+                    ? "tune"
+                    : "lyrics";
 
-          content:
-            support.buffer,
 
-          contentType:
-            support.mimetype,
-        });
-      }
+            /* ---------------------------------------------
+               REQUIRED FIELDS
+            --------------------------------------------- */
 
-      /* -----------------------------------------
-         SUBJECT
-      ----------------------------------------- */
+            if (
+                !fullName ||
+                !location ||
+                !phone ||
+                !lyrics
+            ) {
 
-      const subject =
-        `Anthems Season 1 - ${
-          submissionType === "tune"
-            ? "Lyrics & Tune"
-            : "Lyrics"
-        } - ${fullName}`;
+                return res
+                    .status(400)
+                    .json({
 
-      /* -----------------------------------------
-         EMAIL BODY
-      ----------------------------------------- */
+                        success:
+                            false,
 
-      const body = `
-Anthems Season 1 Submission
+                        message:
+                            "Please complete all required fields."
+
+                    });
+
+            }
+
+
+            const tune =
+                req.files?.tuneFile?.[0] ||
+                null;
+
+
+            const support =
+                req.files?.supportFile?.[0] ||
+                null;
+
+
+            /* ---------------------------------------------
+               TOTAL SIZE
+            --------------------------------------------- */
+
+            const totalSize =
+                (tune?.size || 0) +
+                (support?.size || 0);
+
+
+            if (
+                totalSize >
+                MAX_TOTAL_FILES
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "The combined attachment size must not exceed 18 MB."
+
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               TUNE REQUIRED
+            --------------------------------------------- */
+
+            if (
+                submissionType === "tune" &&
+                !tune
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Please attach your tune/audio file."
+
+                    });
+
+            }
+
+
+            /* ---------------------------------------------
+               TUNE VALIDATION
+            --------------------------------------------- */
+
+            if (tune) {
+
+                const extension =
+                    getExtension(
+                        tune.originalname
+                    );
+
+
+                const validType =
+                    allowedTuneTypes.has(
+                        tune.mimetype
+                    );
+
+
+                const validExtension =
+                    allowedTuneExtensions.has(
+                        extension
+                    );
+
+
+                if (
+                    !validType ||
+                    !validExtension
+                ) {
+
+                    return res
+                        .status(400)
+                        .json({
+
+                            success:
+                                false,
+
+                            message:
+                                "Invalid audio file. Please use MP3, WAV, M4A, AAC, OGG, or WebM."
+
+                        });
+
+                }
+
+            }
+
+
+            /* ---------------------------------------------
+               SUPPORT FILE
+            --------------------------------------------- */
+
+            if (support) {
+
+                const extension =
+                    getExtension(
+                        support.originalname
+                    );
+
+
+                const validType =
+                    allowedSupportTypes.has(
+                        support.mimetype
+                    );
+
+
+                const validExtension =
+                    allowedSupportExtensions.has(
+                        extension
+                    );
+
+
+                if (
+                    !validType ||
+                    !validExtension
+                ) {
+
+                    return res
+                        .status(400)
+                        .json({
+
+                            success:
+                                false,
+
+                            message:
+                                "Supporting file must be JPG, PNG, WEBP, HEIC, or PDF."
+
+                        });
+
+                }
+
+            }
+
+
+            /* ---------------------------------------------
+               ATTACHMENTS
+            --------------------------------------------- */
+
+            const attachments =
+                [];
+
+
+            if (tune) {
+
+                attachments.push({
+
+                    filename:
+                        path.basename(
+                            tune.originalname
+                        ),
+
+                    content:
+                        tune.buffer,
+
+                    contentType:
+                        tune.mimetype
+
+                });
+
+            }
+
+
+            if (support) {
+
+                attachments.push({
+
+                    filename:
+                        path.basename(
+                            support.originalname
+                        ),
+
+                    content:
+                        support.buffer,
+
+                    contentType:
+                        support.mimetype
+
+                });
+
+            }
+
+
+            /* ---------------------------------------------
+               SUBJECT
+            --------------------------------------------- */
+
+            const subject =
+                `Anthems Season 1 - ${
+                    submissionType === "tune"
+                        ? "Lyrics & Tune"
+                        : "Lyrics"
+                } - ${fullName}`;
+
+
+            /* ---------------------------------------------
+               EMAIL
+            --------------------------------------------- */
+
+            const body = `
+
+ANTHEMS SEASON 1 SUBMISSION
+
 ========================================
 
 Submission Type:
 ${
-  submissionType === "tune"
-    ? "Lyrics & Tune"
-    : "Lyrics Only"
+    submissionType === "tune"
+        ? "Lyrics & Tune"
+        : "Lyrics Only"
 }
 
 Full Name:
@@ -2259,203 +2551,251 @@ ${lyrics}
 
 Tune:
 ${
-  tune
-    ? tune.originalname
-    : "Not attached"
+    tune
+        ? tune.originalname
+        : "Not attached"
 }
 
 Supporting File:
 ${
-  support
-    ? support.originalname
-    : "None"
+    support
+        ? support.originalname
+        : "None"
 }
 
 ========================================
 
-This submission was received through the Yireh Ministry website.
-      `.trim();
+Submitted through:
+Yireh Ministry website.
 
-      /* -----------------------------------------
-         SEND EMAIL
-      ----------------------------------------- */
+            `.trim();
 
-      await sendGmailMessage({
-        subject,
 
-        text: body,
+            /* ---------------------------------------------
+               SEND
+            --------------------------------------------- */
 
-        attachments,
-      });
+            await sendGmailMessage({
 
-      /* -----------------------------------------
-         SUCCESS
-      ----------------------------------------- */
+                subject,
 
-      return res
-        .status(200)
-        .json({
-          success: true,
+                text:
+                    body,
 
-          message:
-            "Your anthem submission was sent successfully.",
-        });
-    } catch (error) {
-      console.error(
-        "Anthem submission error:",
-        error
-      );
+                attachments
 
-      if (
-        error.code ===
-        "LIMIT_FILE_SIZE"
-      ) {
-        return res
-          .status(400)
-          .json({
-            success: false,
+            });
 
-            message:
-              "Each attachment must be 10 MB or smaller.",
-          });
-      }
 
-      return res
-        .status(500)
-        .json({
-          success: false,
+            /* ---------------------------------------------
+               SUCCESS
+            --------------------------------------------- */
 
-          message:
-            "Unable to submit your anthem. Please try again.",
-        });
+            return res
+                .status(200)
+                .json({
+
+                    success:
+                        true,
+
+                    message:
+                        "Your anthem submission was sent successfully."
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Anthem submission error:",
+                error
+            );
+
+
+            if (
+                error.code ===
+                "LIMIT_FILE_SIZE"
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        success:
+                            false,
+
+                        message:
+                            "Each attachment must be 10 MB or smaller."
+
+                    });
+
+            }
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Unable to submit your anthem. Please try again."
+
+                });
+
+        }
+
     }
-  }
 );
 
+
 /* =========================================================
-   API 404 HANDLER
+   API 404
 ========================================================= */
 
 app.use(
-  (req, res) => {
-    /*
-       IMPORTANT:
+    (
+        req,
+        res
+    ) => {
 
-       API routes return JSON.
+        if (
+            req.path.startsWith(
+                "/api/"
+            )
+        ) {
 
-       This prevents the frontend from receiving:
+            return res
+                .status(404)
+                .json({
 
-       <!DOCTYPE html>
+                    success:
+                        false,
 
-       and then failing with:
+                    message:
+                        `API route not found: ${req.method} ${req.path}`
 
-       JSON.parse unexpected character
-    */
+                });
 
-    if (
-      req.path.startsWith(
-        "/api/"
-      )
-    ) {
-      return res
-        .status(404)
-        .json({
-          success: false,
+        }
 
-          message:
-            `API route not found: ${req.method} ${req.path}`,
-        });
+
+        return res
+            .status(404)
+            .send(
+                "Page not found."
+            );
+
     }
-
-    return res
-      .status(404)
-      .send(
-        "Page not found."
-      );
-  }
 );
+
 
 /* =========================================================
    GLOBAL ERROR HANDLER
 ========================================================= */
 
 app.use(
-  (
-    error,
-    req,
-    res,
-    next
-  ) => {
-    console.error(
-      "Global server error:",
-      error
-    );
+    (
+        error,
+        req,
+        res,
+        next
+    ) => {
 
-    if (
-      res.headersSent
-    ) {
-      return next(
-        error
-      );
+        console.error(
+            "Global server error:",
+            error
+        );
+
+
+        if (
+            res.headersSent
+        ) {
+
+            return next(
+                error
+            );
+
+        }
+
+
+        if (
+            error.code ===
+            "LIMIT_FILE_SIZE"
+        ) {
+
+            return res
+                .status(400)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Each attachment must be 10 MB or smaller."
+
+                });
+
+        }
+
+
+        if (
+            error.message ===
+            "CORS origin not allowed."
+        ) {
+
+            return res
+                .status(403)
+                .json({
+
+                    success:
+                        false,
+
+                    message:
+                        "CORS origin not allowed."
+
+                });
+
+        }
+
+
+        return res
+            .status(500)
+            .json({
+
+                success:
+                    false,
+
+                message:
+                    "Something went wrong on the server."
+
+            });
+
     }
-
-    if (
-      error.code ===
-      "LIMIT_FILE_SIZE"
-    ) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-
-          message:
-            "Each attachment must be 10 MB or smaller.",
-        });
-    }
-
-    if (
-      error.message ===
-      "CORS origin not allowed."
-    ) {
-      return res
-        .status(403)
-        .json({
-          success: false,
-
-          message:
-            "CORS origin not allowed.",
-        });
-    }
-
-    return res
-      .status(500)
-      .json({
-        success: false,
-
-        message:
-          "Something went wrong on the server.",
-      });
-  }
 );
 
+
 /* =========================================================
-   START SERVER
+   START
 ========================================================= */
 
 app.listen(
-  PORT,
-  "0.0.0.0",
-  () => {
-    console.log(
-      `Yireh backend running on port ${PORT}`
-    );
+    PORT,
+    "0.0.0.0",
+    () => {
 
-    console.log(
-      `Local: http://localhost:${PORT}`
-    );
+        console.log(
+            `Yireh backend running on port ${PORT}`
+        );
 
-    console.log(
-      `Google OAuth callback: ${REDIRECT_URI}`
-    );
-  }
+        console.log(
+            `Local: http://localhost:${PORT}`
+        );
+
+        console.log(
+            `Google OAuth callback: ${REDIRECT_URI}`
+        );
+
+    }
 );
