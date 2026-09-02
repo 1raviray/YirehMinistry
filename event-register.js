@@ -478,7 +478,7 @@ form.addEventListener(
                             eventName:
                                 eventName,
 
-                            name:
+                            fullName:
                                 fullName.value.trim(),
 
                             city:

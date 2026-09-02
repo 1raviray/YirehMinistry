@@ -1029,7 +1029,405 @@ This message was submitted through the Yireh Ministry website.
     }
   }
 );
+app.use(
+    express.json({
+        limit: "1mb"
+    })
+);
 
+app.use(
+    express.urlencoded({
+        extended: true,
+        limit: "1mb"
+    })
+);/* =========================================================
+EVENT REGISTRATION
+POST /api/event-register
+========================================================= */
+
+app.post(
+ "/api/event-register",
+ eventLimiter,
+ async (req, res) => {
+
+     try {
+
+         console.log(
+             "EVENT REGISTRATION REQUEST:",
+             req.body
+         );
+
+
+         /* =================================================
+            RECEIVE DATA
+
+            Accept both:
+            fullName / name
+            city / location
+         ================================================= */
+
+         const eventName =
+             cleanText(
+                 req.body.eventName,
+                 200
+             );
+
+
+         const fullName =
+             cleanText(
+                 req.body.fullName ||
+                 req.body.name,
+                 120
+             );
+
+
+         const phone =
+             cleanText(
+                 req.body.phone,
+                 40
+             );
+
+
+         const email =
+             cleanText(
+                 req.body.email,
+                 200
+             ).toLowerCase();
+
+
+         const city =
+             cleanText(
+                 req.body.city ||
+                 req.body.location,
+                 120
+             );
+
+
+         const seats =
+             Number(
+                 req.body.seats
+             );
+
+
+         /* =================================================
+            DEBUG LOG
+         ================================================= */
+
+         console.log(
+             "Parsed registration:",
+             {
+                 eventName,
+                 fullName,
+                 phone,
+                 email,
+                 city,
+                 seats
+             }
+         );
+
+
+         /* =================================================
+            REQUIRED FIELDS
+         ================================================= */
+
+         if (
+             !eventName ||
+             !fullName ||
+             !phone ||
+             !email ||
+             !city
+         ) {
+
+             console.error(
+                 "Missing registration field:",
+                 {
+                     eventName: Boolean(eventName),
+                     fullName: Boolean(fullName),
+                     phone: Boolean(phone),
+                     email: Boolean(email),
+                     city: Boolean(city)
+                 }
+             );
+
+
+             return res
+                 .status(400)
+                 .json({
+                     success: false,
+
+                     message:
+                         "Please complete all required registration fields."
+                 });
+         }
+
+
+         /* =================================================
+            EMAIL VALIDATION
+         ================================================= */
+
+         if (
+             !isEmail(email)
+         ) {
+
+             return res
+                 .status(400)
+                 .json({
+                     success: false,
+
+                     message:
+                         "Please enter a valid email address."
+                 });
+         }
+
+
+         /* =================================================
+            PHONE VALIDATION
+         ================================================= */
+
+         const phoneDigits =
+             phone.replace(
+                 /\D/g,
+                 ""
+             );
+
+
+         if (
+             phoneDigits.length < 10 ||
+             phoneDigits.length > 15
+         ) {
+
+             return res
+                 .status(400)
+                 .json({
+                     success: false,
+
+                     message:
+                         "Please enter a valid phone number."
+                 });
+         }
+
+
+         /* =================================================
+            SEAT VALIDATION
+         ================================================= */
+
+         if (
+             !Number.isInteger(seats) ||
+             seats < 1 ||
+             seats > 20
+         ) {
+
+             return res
+                 .status(400)
+                 .json({
+                     success: false,
+
+                     message:
+                         "Please select between 1 and 20 seats."
+                 });
+         }
+
+
+         /* =================================================
+            ADMIN EMAIL
+         ================================================= */
+
+         const registrationEmail =
+             process.env.GMAIL_USER;
+
+
+         if (
+             !registrationEmail
+         ) {
+
+             console.error(
+                 "GMAIL_USER is not configured."
+             );
+
+
+             return res
+                 .status(500)
+                 .json({
+                     success: false,
+
+                     message:
+                         "Registration email service is not configured."
+                 });
+         }
+
+
+         /* =================================================
+            EMAIL BODY
+         ================================================= */
+
+         const emailBody = `
+
+YIREH MINISTRY
+EVENT REGISTRATION
+
+========================================
+
+Event Name:
+${eventName}
+
+Full Name:
+${fullName}
+
+Phone / WhatsApp:
+${phone}
+
+Email:
+${email}
+
+City:
+${city}
+
+Seats:
+${seats}
+
+========================================
+
+This registration was submitted through the
+Yireh Ministry website.
+
+         `.trim();
+
+
+         /* =================================================
+            SEND EMAIL TO MINISTRY
+         ================================================= */
+
+         await sendGmailMessage({
+
+             subject:
+                 `Event Registration - ${eventName} - ${fullName}`,
+
+             text:
+                 emailBody,
+
+             replyTo:
+                 email
+
+         });
+
+
+         /* =================================================
+            CONFIRMATION EMAIL TO USER
+         ================================================= */
+
+         try {
+
+             const confirmationBody = `
+
+Dear ${fullName},
+
+Thank you for registering for:
+
+${eventName}
+
+Your registration details:
+
+Name:
+${fullName}
+
+Phone / WhatsApp:
+${phone}
+
+City:
+${city}
+
+Seats:
+${seats}
+
+We have successfully received your registration.
+
+We look forward to seeing you.
+
+Yireh Ministry
+
+             `.trim();
+
+
+             await sendGmailMessage({
+
+                 subject:
+                     `Registration Confirmed - ${eventName}`,
+
+                 text:
+                     confirmationBody
+
+             });
+
+         } catch (
+             confirmationError
+         ) {
+
+             /*
+                The main registration email has already
+                succeeded, so don't fail the registration
+                because the confirmation email failed.
+             */
+
+             console.error(
+                 "Registration confirmation email error:",
+                 confirmationError
+             );
+
+         }
+
+
+         /* =================================================
+            SUCCESS
+         ================================================= */
+
+         console.log(
+             "Event registration completed:",
+             {
+                 eventName,
+                 fullName,
+                 email,
+                 seats
+             }
+         );
+
+
+         return res
+             .status(200)
+             .json({
+
+                 success:
+                     true,
+
+                 message:
+                     `Your registration for ${eventName} has been received successfully.`
+
+             });
+
+
+     } catch (error) {
+
+         console.error(
+             "EVENT REGISTRATION ERROR:",
+             error
+         );
+
+
+         return res
+             .status(500)
+             .json({
+
+                 success:
+                     false,
+
+                 message:
+                     "Unable to submit your registration. Please try again."
+
+             });
+
+     }
+
+ }
+);
 /* =========================================================
    EVENT REGISTRATION
 ========================================================= */
