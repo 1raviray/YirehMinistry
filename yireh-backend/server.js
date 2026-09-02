@@ -1052,7 +1052,7 @@ This message was submitted through the Yireh Ministry website.
 */
 
 app.post(
-  "/api/events/register",
+  "/api/event-register",
   eventLimiter,
   async (req, res) => {
     try {
