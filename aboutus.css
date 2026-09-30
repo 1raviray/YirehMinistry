@@ -50,7 +50,7 @@ select {
 
     html,
     body {
-        overflow-x: hidden !important;
+        overflow-x: clip !important;
     }
 
     .site-header,
