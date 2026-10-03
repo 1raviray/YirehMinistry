@@ -269,7 +269,7 @@ select {
 .mission-statement{margin:44px auto 0;text-align:center;color:#161616;font-family:"Cormorant Garamond",Georgia,serif;font-size:41px;font-weight:700;font-style:italic;line-height:1.15;letter-spacing:-2px;vertical-align:middle}
 .mission-statement strong{color:#f26a24;font-size:30px;font-weight:700;font-style:normal}
 
-.mission-cta{display:flex;width:max-content;margin:76px auto 0;padding:11px 29px 12px;background:#f26a24;color:#111;text-decoration:none;font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:400;line-height:1;transition:background .25s ease,transform .25s ease}
+.mission-cta{display:flex;width:max-content;margin:76px auto 0;padding:18px 29px 19px;background:#f26a24;color:#111;text-decoration:none;font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:400;line-height:1;transition:background .25s ease,transform .25s ease}
 .mission-cta:hover{background:#c8561d;transform:translateY(-2px)}
 
 @media(max-width:1200px){
@@ -302,7 +302,7 @@ select {
   .banner-label{font-size:14px}
   .watch-button{min-width:100px;height:30px;padding:0 15px;font-size:10px}
   .mission-statement{margin-top:28px;font-size:25px;line-height:1.2}
-  .mission-cta{margin-top:42px;padding:10px 22px 11px;font-size:20px}
+  .mission-cta{margin-top:42px;padding:16px 22px 16px;font-size:20px}
 }
 
 @media(max-width:420px){
@@ -338,7 +338,39 @@ select {
 .service-button{align-self:center;justify-self:end;width:126px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:#1978f2;color:#fff;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2px;transition:background .2s ease,transform .2s ease}
 .service-button:hover{background:#0966dd;transform:translateY(-1px)}
 
-.what-we-do-cta{display:flex;width:max-content;margin:85px auto 0;padding:10px 24px 11px;background:#f26722;color:#292929;text-decoration:none;border:1px solid #9e9e9e;font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;font-weight:500;line-height:1;transition:background .2s ease,transform .2s ease}
+.what-we-do-cta{    
+    width:310px;
+    height:63px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:32px auto 0;
+
+    background:#f57437;
+
+    border:1px solid #888;
+
+    color:#262626;
+
+    text-decoration:none;
+
+    font-family:
+        "Gowun Batang",
+        Georgia,
+        serif;
+
+    font-size:26px;
+    font-weight:400;
+
+    line-height:1;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
 .what-we-do-cta:hover{background:#db5516;transform:translateY(-2px)}
 
 @media(max-width:1100px){
@@ -385,7 +417,7 @@ select {
   .what-we-do-description{font-size:16px}
   .service-info h3{font-size:21px}
   .service-info p{font-size:13px}
-  .what-we-do-cta{font-size:19px}
+  .what-we-do-cta{font-size:19px;height: 52px;width: 240px;}
 }
 /* =========================================================
    FOOTER
