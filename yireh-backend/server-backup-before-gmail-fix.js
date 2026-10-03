@@ -588,73 +588,81 @@ function getOAuthClient() {
    AUTHENTICATED GMAIL CLIENT
    ========================================================= */
 
-   function getAuthenticatedClient() {
-    const client = getOAuthClient();
-  
-    /*
-       PRODUCTION (RENDER)
-       -------------------
-       Use ONLY GMAIL_REFRESH_TOKEN.
-  
-       This becomes the single source of truth
-       for Gmail authentication in production.
-    */
-    if (process.env.RENDER) {
-      const refreshToken =
-        process.env.GMAIL_REFRESH_TOKEN?.trim();
-  
-      if (!refreshToken) {
-        throw new Error(
-          "GMAIL_REFRESH_TOKEN is not configured on Render."
-        );
-      }
-  
-      client.setCredentials({
-        refresh_token: refreshToken,
-      });
-  
-      return client;
-    }
-  
-    /*
-       LOCAL DEVELOPMENT
-       -----------------
-       Keep token.json support locally so
-       OAuth authorization can still generate
-       and use token.json on your computer.
-    */
-    if (!fs.existsSync(TOKEN_PATH)) {
-      return null;
-    }
-  
-    let token;
-  
-    try {
-      token = JSON.parse(
+function getAuthenticatedClient() {
+  const client =
+    getOAuthClient();
+
+  /*
+     BEST METHOD FOR RENDER
+
+     Render environment variable:
+
+     GMAIL_REFRESH_TOKEN
+
+     This avoids depending on a writable filesystem.
+  */
+
+  if (
+    process.env.GMAIL_REFRESH_TOKEN
+  ) {
+    client.setCredentials({
+      refresh_token:
+        process.env.GMAIL_REFRESH_TOKEN.trim(),
+    });
+
+    return client;
+  }
+
+  /*
+     FALLBACK:
+     token.json
+
+     Local:
+       ./token.json
+
+     Render:
+       /etc/secrets/token.json
+  */
+
+  if (
+    !fs.existsSync(
+      TOKEN_PATH
+    )
+  ) {
+    return null;
+  }
+
+  let token;
+
+  try {
+    token =
+      JSON.parse(
         fs.readFileSync(
           TOKEN_PATH,
           "utf8"
         )
       );
-    } catch (error) {
-      throw new Error(
-        "Unable to read token.json."
-      );
-    }
-  
-    if (
-      !token ||
-      !token.refresh_token
-    ) {
-      throw new Error(
-        "token.json does not contain a refresh token."
-      );
-    }
-  
-    client.setCredentials(token);
-  
-    return client;
+  } catch (error) {
+    throw new Error(
+      "Unable to read token.json."
+    );
   }
+
+  if (
+    !token ||
+    !token.refresh_token
+  ) {
+    throw new Error(
+      "token.json does not contain a refresh token."
+    );
+  }
+
+  client.setCredentials(
+    token
+  );
+
+  return client;
+}
 
 /* =========================================================
    NODEMAILER MIME GENERATOR
