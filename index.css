@@ -559,6 +559,7 @@
 
     .home-promise h2{
         font-size:21px;
+        font-weight: 600;
     }
 
     .home-message{
@@ -566,7 +567,11 @@
     }
 
     .home-message h1{
-        font-size:28px;
+        font-size:24px;
+    }
+
+    .home-message h1 em{
+        font-size:26px;
     }
 
     .home-description{
@@ -1214,7 +1219,6 @@
         max-width: none;
         padding: 44px 20px 48px;
     }
-
     .home-events-eyebrow {
         margin-bottom: 14px;
         font-size: 25px;
@@ -1412,6 +1416,10 @@
     font-style: normal;
 }
 
+.anthems-hero-left h1 img{
+    width: 50px;
+    height: 50px;
+}
 
 /* =========================
    RIGHT SIDE
@@ -1796,6 +1804,10 @@
         font-size: 48px;
 
         letter-spacing: -2px;
+    }
+    .anthems-hero-left h1 img{
+        width: 35px;
+        height: 35px;
     }
 
     .anthems-hero-eyebrow {
@@ -2677,8 +2689,8 @@
     }
 
     .prayer-cta-description{
-        width: 90%;
-        font-size:14px;
+        width: 80%;
+        font-size:13px;
     }
 
     .prayer-cta-button{
@@ -2696,11 +2708,13 @@
 
     .prayer-cta-hand-left{
         left:-48px;
-        top:175px;
+        top:155px;
+        scale: .8;
     }
-
+    
     .prayer-cta-hand-right{
         right:-48px;
-        top:175px;
+        top:155px;
+        scale: .8;
     }
 }

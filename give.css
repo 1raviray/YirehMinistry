@@ -586,7 +586,7 @@
 
     background: #f77a3b;
 
-    color: #fff;
+    color: #111;
 
     text-decoration: none;
 
@@ -862,7 +862,7 @@
     background:#f77a3b;
     border:1px solid #8d8d8d;
 
-    color:#fff;
+    color:#111;
     text-decoration:none;
 
     font-family:"Gowun Batang",Georgia,serif;
@@ -889,7 +889,7 @@
     margin:21px 0 0;
     padding:0;
 
-    color:#fff;
+    color:#1e1e1e;
 
     font-family:"Gabarito",sans-serif;
     font-size:20px;
