@@ -310,36 +310,50 @@
   </head>
 
   <body>
-    <!-- =========================================================
+
+<!-- =========================================================
      YIREH MINISTRY INTRO LOADER
 ========================================================= -->
 
-    <div class="ym-loader" id="ymLoader">
-      <div class="ym-loader-mountains">
-        <img
-          src="./assets/cce5a9a7c4c729d0b10e733416121b6aba9220bd.png"
-          alt=""
-          aria-hidden="true"
-        />
-      </div>
+<div
+  class="ym-loader"
+  id="ymLoader"
+  aria-label="Welcome to Yireh Ministry"
+>
 
-      <div class="ym-loader-wash"></div>
+  <!-- Background -->
+  <div class="ym-loader-bg">
+    <img
+      src="./assets/cce5a9a7c4c729d0b10e733416121b6aba9220bd.png"
+      alt=""
+      aria-hidden="true"
+      id="ymLoaderBackground"
+    />
+  </div>
 
-      <div class="ym-loader-content">
-        <div class="ym-loader-logo">
-          <img
-            src="./assets/Logo 1.png"
-            alt="Yireh Ministry"
-            id="ymLoaderLogoImage"
-          />
-        </div>
+  <!-- Soft overlay -->
+  <div class="ym-loader-overlay"></div>
 
-        <div class="ym-loader-welcome" id="ymLoaderWelcome">welcome to</div>
+  <!-- Text -->
+  <div class="ym-loader-content">
 
-        <div class="ym-loader-title" id="ymLoaderTitle">Yireh Ministry</div>
-      </div>
+    <div
+      class="ym-loader-welcome"
+      id="ymLoaderWelcome"
+    >
+      Welcome to
     </div>
 
+    <div
+      class="ym-loader-title"
+      id="ymLoaderTitle"
+    >
+      Yireh Ministry
+    </div>
+
+  </div>
+
+</div>
     <!-- =========================================================
      HEADER
 ========================================================= -->
@@ -420,13 +434,329 @@
       <img src="assets/home1.png" alt="" class="home-foreground" />
     </section>
 
+
+<!-- =========================================================
+     YIREH MINISTRY - NEW WHAT WE DO CAROUSEL
+     Keep the existing section unchanged.
+========================================================= -->
+
+<section
+  class="ym-wd-carousel"
+  id="ymWhatWeDoCarousel"
+  aria-label="What We Do"
+  data-ym-wd-carousel
+>
+  <div class="ym-wd-slides" aria-live="off">
+
+    <!-- SLIDE 1: WORSHIP & SONGWRITING -->
+    <article class="ym-wd-slide is-active" aria-hidden="false">
+
+      <img
+        class="ym-wd-image"
+        src="./assets/c1.jpeg"
+        alt="Worship leader singing on a blue-lit stage"
+        fetchpriority="high"
+      >
+
+      <div class="ym-wd-shade" aria-hidden="true"></div>
+
+      <div class="ym-wd-kicker">What We Do</div>
+
+      <div class="ym-wd-copy">
+
+        <div class="ym-wd-title-row">
+
+          <span class="ym-wd-icon" aria-hidden="true">
+            <svg viewBox="0 0 88 100">
+              <defs>
+                <linearGradient
+                  id="ymHarpGold"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop offset="0" stop-color="#fff08a"/>
+                  <stop offset=".5" stop-color="#f5c83f"/>
+                  <stop offset="1" stop-color="#b77b13"/>
+                </linearGradient>
+              </defs>
+
+              <path
+                d="M18 88 L18 17 Q18 7 27 7 Q36 7 36 17 L36 29 Q36 57 25 79 L25 88 Z"
+                fill="url(#ymHarpGold)"
+                stroke="#f7d96b"
+                stroke-width="2"
+              />
+
+              <path
+                d="M31 17 L77 17 L63 29 L45 31 Q48 55 35 80 L28 80 Q39 55 36 31"
+                fill="url(#ymHarpGold)"
+                stroke="#f7d96b"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M43 31 L36 77 M49 30 L39 78 M55 28 L42 78 M61 25 L45 78 M67 22 L48 78"
+                stroke="#fff0a2"
+                stroke-width="1.4"
+              />
+
+              <path
+                d="M12 88 H42 L48 94 H8 Z"
+                fill="url(#ymHarpGold)"
+                stroke="#e7b72f"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+
+          <h2>Worship &amp;<br>Songwriting</h2>
+
+        </div>
+
+        <p>
+          Word-based worship songs that heal, encourage,
+          and glorify Jesus — written, composed, and
+          released for the Church.
+        </p>
+
+        <a class="ym-wd-cta" href="./anthem.html">
+          WATCH NOW
+        </a>
+
+      </div>
+    </article>
+
+
+    <!-- SLIDE 2: MENTORSHIP & DISCIPLESHIP -->
+    <article class="ym-wd-slide" aria-hidden="true">
+
+      <img
+        class="ym-wd-image"
+        src="./assets/c2.jpeg"
+        alt="Ministry leader teaching with a Bible in a church auditorium"
+        loading="lazy"
+      >
+
+      <div class="ym-wd-shade" aria-hidden="true"></div>
+
+      <div class="ym-wd-kicker">What We Do</div>
+
+      <div class="ym-wd-copy">
+
+        <div class="ym-wd-title-row">
+
+          <span class="ym-wd-icon" aria-hidden="true">
+            <svg viewBox="0 0 100 86">
+
+              <path
+                d="M8 35 Q25 25 47 41 L47 74 Q26 59 8 64 Z"
+                fill="#fffaf0"
+                stroke="#d9c7ab"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M92 35 Q73 25 52 41 L52 74 Q73 59 92 64 Z"
+                fill="#fffaf0"
+                stroke="#d9c7ab"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M47 41 Q50 38 52 41 V74 Q50 71 47 74 Z"
+                fill="#d8c4a1"
+              />
+
+              <path
+                d="M17 43 Q30 39 41 47 M17 51 Q30 47 41 55 M60 47 Q73 39 84 43 M60 55 Q73 47 84 51"
+                fill="none"
+                stroke="#d4c3a8"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M50 5 V29 M39 17 H61"
+                fill="none"
+                stroke="#f2a43b"
+                stroke-width="7"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M50 5 V29 M39 17 H61"
+                fill="none"
+                stroke="#ffe08a"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M7 65 L7 72 Q26 69 47 82 L47 74 Q27 61 7 65 Z M93 65 L93 72 Q73 69 52 82 L52 74 Q73 61 93 65 Z"
+                fill="#c29b62"
+              />
+
+            </svg>
+          </span>
+
+          <h2>Mentorship &amp;<br>Discipleship</h2>
+
+        </div>
+
+        <p>
+          Equipping the next generation of worshipers,
+          leaders, and believers through teaching and
+          personal walk-alongside.
+        </p>
+
+        <a class="ym-wd-cta" href="./about.html">
+          WATCH NOW
+        </a>
+
+      </div>
+    </article>
+
+
+    <!-- SLIDE 3: KINGDOM PARTNERSHIPS -->
+    <article class="ym-wd-slide" aria-hidden="true">
+
+      <img
+        class="ym-wd-image"
+        src="./assets/c3.jpeg"
+        alt="Monochrome worship gathering with a congregation"
+        loading="lazy"
+      >
+
+      <div class="ym-wd-shade" aria-hidden="true"></div>
+
+      <div class="ym-wd-kicker">What We Do</div>
+
+      <div class="ym-wd-copy">
+
+        <div class="ym-wd-title-row">
+
+          <span class="ym-wd-icon" aria-hidden="true">
+            <svg viewBox="0 0 82 100">
+
+              <defs>
+                <linearGradient
+                  id="ymFlameOuter"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop offset="0" stop-color="#ffb34e"/>
+                  <stop offset=".55" stop-color="#f56b19"/>
+                  <stop offset="1" stop-color="#bd3515"/>
+                </linearGradient>
+              </defs>
+
+              <path
+                d="M44 4 C48 23 29 29 39 46 C24 40 23 29 26 20 C9 39 3 53 8 70 C13 88 27 97 43 95 C63 93 76 77 74 59 C73 45 63 34 59 22 C55 35 51 39 48 41 C52 25 51 14 44 4 Z"
+                fill="url(#ymFlameOuter)"
+              />
+
+              <path
+                d="M43 53 C47 62 37 67 40 76 C32 73 30 66 32 60 C23 70 25 83 36 88 C47 94 59 84 58 73 C58 64 50 60 49 52 C47 58 45 60 43 61 Z"
+                fill="#ffda4d"
+              />
+
+            </svg>
+          </span>
+
+          <h2>Kingdom<br>Partnerships</h2>
+
+        </div>
+
+        <p>
+          Standing with churches, ministries, and events
+          that are hungry for revival and lasting impact.
+        </p>
+
+        <a class="ym-wd-cta" href="./contact.html">
+          WATCH NOW
+        </a>
+
+      </div>
+    </article>
+
+  </div>
+
+
+  <!-- LEFT / RIGHT ARROWS -->
+  <div class="ym-wd-controls" aria-label="Carousel controls">
+
+    <button
+      class="ym-wd-arrow ym-wd-prev"
+      type="button"
+      aria-label="Previous slide"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 18 9 12l6-6"/>
+      </svg>
+    </button>
+
+    <button
+      class="ym-wd-arrow ym-wd-next"
+      type="button"
+      aria-label="Next slide"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+
+  </div>
+
+
+  <!-- SLIDE INDICATORS -->
+  <div class="ym-wd-pagination" aria-label="Choose a slide">
+
+    <button
+      type="button"
+      class="is-active"
+      aria-label="Show slide 1"
+      aria-current="true"
+    ></button>
+
+    <button
+      type="button"
+      aria-label="Show slide 2"
+      aria-current="false"
+    ></button>
+
+    <button
+      type="button"
+      aria-label="Show slide 3"
+      aria-current="false"
+    ></button>
+
+  </div>
+
+  <span
+    class="ym-wd-sr-only"
+    data-ym-wd-status
+    aria-live="polite"
+  >
+    Slide 1 of 3: Worship &amp; Songwriting
+  </span>
+
+</section>
+
+
     <!-- =========================
      WHAT WE DO
 ========================= -->
-
+<!-- 
     <section id="whatwedo" class="what-we-do-section">
       <div class="what-we-do-container">
-        <!-- Heading -->
 
         <h2
           class="what-we-do-title"
@@ -438,7 +768,6 @@
           What We Do
         </h2>
 
-        <!-- Description -->
 
         <p
           class="what-we-do-description"
@@ -457,10 +786,8 @@
           our Provider.
         </p>
 
-        <!-- Services -->
 
         <div class="services-list">
-          <!-- Worship -->
 
           <div
             class="service-item"
@@ -494,7 +821,6 @@
             </a>
           </div>
 
-          <!-- Mentorship -->
 
           <div
             class="service-item"
@@ -523,7 +849,6 @@
             <a href="aboutus.html" class="service-button"> LEARN MORE </a>
           </div>
 
-          <!-- Kingdom -->
 
           <div
             class="service-item"
@@ -550,7 +875,6 @@
           </div>
         </div>
 
-        <!-- Bottom CTA -->
 
         <a
           href="contact.html"
@@ -564,7 +888,7 @@
           Invite us to your church
         </a>
       </div>
-    </section>
+    </section> -->
 
     <!-- =========================
      ABOUT US INTRO
@@ -842,7 +1166,7 @@
           data-aos-mirror="false"
         >
           <h1>
-            anthems season 1<span>.</span
+            anthems season 1<span></span
             ><img
               src="assets/Vintage Silver Studio Microphone.png"
               alt=""
@@ -1429,5 +1753,350 @@
     </script>
 
     <script src="script.js"></script>
+    <script>
+      /* =========================================================
+   YIREH MINISTRY - WHAT WE DO CAROUSEL
+   Previous / Next / Autoplay / Mobile Swipe
+========================================================= */
+
+(function () {
+  "use strict";
+
+  function initCarousel(root) {
+
+    const slides = Array.from(
+      root.querySelectorAll(".ym-wd-slide")
+    );
+
+    const prevButton = root.querySelector(".ym-wd-prev");
+    const nextButton = root.querySelector(".ym-wd-next");
+
+    const dots = Array.from(
+      root.querySelectorAll(".ym-wd-pagination button")
+    );
+
+    const status = root.querySelector("[data-ym-wd-status]");
+
+    if (!slides.length || !prevButton || !nextButton) {
+      return;
+    }
+
+    const slideNames = [
+      "Worship & Songwriting",
+      "Mentorship & Discipleship",
+      "Kingdom Partnerships"
+    ];
+
+    let currentIndex = Math.max(
+      0,
+      slides.findIndex(slide =>
+        slide.classList.contains("is-active")
+      )
+    );
+
+    let autoplayId = null;
+    let hoverPaused = false;
+    let focusPaused = false;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    const AUTOPLAY = true;
+    const AUTOPLAY_DELAY = 3000;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    /* =====================================================
+       SHOW SELECTED SLIDE
+    ===================================================== */
+
+    function showSlide(nextIndex, userInitiated = false) {
+
+      currentIndex =
+        (nextIndex + slides.length) % slides.length;
+
+      slides.forEach((slide, index) => {
+
+        const active = index === currentIndex;
+
+        slide.classList.toggle("is-active", active);
+
+        slide.setAttribute(
+          "aria-hidden",
+          String(!active)
+        );
+
+        // Remove inactive links from keyboard tab order.
+        slide.querySelectorAll("a, button").forEach(element => {
+
+          if (active) {
+            element.removeAttribute("tabindex");
+          } else {
+            element.setAttribute("tabindex", "-1");
+          }
+
+        });
+
+      });
+
+
+      /* UPDATE INDICATORS */
+
+      dots.forEach((dot, index) => {
+
+        const active = index === currentIndex;
+
+        dot.classList.toggle("is-active", active);
+
+        dot.setAttribute(
+          "aria-current",
+          String(active)
+        );
+
+      });
+
+
+      /* SCREEN READER STATUS */
+
+      if (status) {
+
+        status.textContent =
+          `Slide ${currentIndex + 1} of ${slides.length}: ` +
+          `${slideNames[currentIndex] || "What We Do"}`;
+
+      }
+
+
+      if (userInitiated) {
+        restartAutoplay();
+      }
+
+    }
+
+
+    /* =====================================================
+       AUTOPLAY
+    ===================================================== */
+
+    function stopAutoplay() {
+
+      if (autoplayId !== null) {
+
+        window.clearInterval(autoplayId);
+
+        autoplayId = null;
+
+      }
+
+    }
+
+
+    function startAutoplay() {
+
+      if (
+        !AUTOPLAY ||
+        reducedMotion ||
+        document.hidden ||
+        hoverPaused ||
+        focusPaused ||
+        autoplayId !== null
+      ) {
+        return;
+      }
+
+      autoplayId = window.setInterval(() => {
+
+        showSlide(currentIndex + 1);
+
+      }, AUTOPLAY_DELAY);
+
+    }
+
+
+    function restartAutoplay() {
+
+      stopAutoplay();
+
+      startAutoplay();
+
+    }
+
+
+    /* =====================================================
+       ARROW CONTROLS
+    ===================================================== */
+
+    prevButton.addEventListener("click", () => {
+
+      showSlide(currentIndex - 1, true);
+
+    });
+
+
+    nextButton.addEventListener("click", () => {
+
+      showSlide(currentIndex + 1, true);
+
+    });
+
+
+    /* =====================================================
+       DOT CONTROLS
+    ===================================================== */
+
+    dots.forEach((dot, index) => {
+
+      dot.addEventListener("click", () => {
+
+        showSlide(index, true);
+
+      });
+
+    });
+
+
+    /* =====================================================
+       PAUSE WHEN HOVERED
+    ===================================================== */
+
+    // root.addEventListener("mouseenter", () => {
+
+    //   hoverPaused = true;
+
+    //   stopAutoplay();
+
+    // });
+
+
+    // root.addEventListener("mouseleave", () => {
+
+    //   hoverPaused = false;
+
+    //   startAutoplay();
+
+    // });
+
+
+    /* =====================================================
+       PAUSE WHILE KEYBOARD-FOCUSED
+    ===================================================== */
+
+    root.addEventListener("focusin", () => {
+
+      focusPaused = true;
+
+      stopAutoplay();
+
+    });
+
+
+    root.addEventListener("focusout", event => {
+
+      if (!root.contains(event.relatedTarget)) {
+
+        focusPaused = false;
+
+        startAutoplay();
+
+      }
+
+    });
+
+
+    /* =====================================================
+       MOBILE SWIPE SUPPORT
+    ===================================================== */
+
+    root.addEventListener("touchstart", event => {
+
+      const touch = event.changedTouches[0];
+
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+
+    }, { passive: true });
+
+
+    root.addEventListener("touchend", event => {
+
+      const touch = event.changedTouches[0];
+
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      // Only treat a clearly horizontal swipe as a slide change.
+      if (
+        Math.abs(deltaX) > 45 &&
+        Math.abs(deltaX) > Math.abs(deltaY) * 1.2
+      ) {
+
+        showSlide(
+          currentIndex + (deltaX < 0 ? 1 : -1),
+          true
+        );
+
+      }
+
+    }, { passive: true });
+
+
+    /* =====================================================
+       STOP AUTOPLAY WHEN TAB IS HIDDEN
+    ===================================================== */
+
+    document.addEventListener("visibilitychange", () => {
+
+      if (document.hidden) {
+
+        stopAutoplay();
+
+      } else {
+
+        startAutoplay();
+
+      }
+
+    });
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    showSlide(currentIndex);
+
+    startAutoplay();
+
+  }
+
+
+  function initAll() {
+
+    document
+      .querySelectorAll("[data-ym-wd-carousel]")
+      .forEach(initCarousel);
+
+  }
+
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initAll,
+      { once: true }
+    );
+
+  } else {
+
+    initAll();
+
+  }
+
+})();
+    </script>
   </body>
 </html>

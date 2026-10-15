@@ -1,5 +1,6 @@
 /* =========================================================
-   YIREH MINISTRY INTRO LOADER
+   YIREH MINISTRY CINEMATIC INTRO LOADER
+   FAST TEXT + CENTER CIRCLE ZOOM REVEAL
 ========================================================= */
 
 html.ym-loading,
@@ -13,6 +14,8 @@ body.ym-loading {
 ========================================================= */
 
 .ym-loader {
+    --reveal-radius: 0%;
+
     position: fixed;
 
     inset: 0;
@@ -21,29 +24,60 @@ body.ym-loading {
     height: 100vh;
     height: 100dvh;
 
+    z-index: 999999;
+
     overflow: hidden;
 
     background: #ededed;
 
-    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     opacity: 1;
     visibility: visible;
 
     pointer-events: all;
 
+    /*
+       IMPORTANT:
+       The transparent hole starts in the center
+       and expands outward.
+    */
+    -webkit-mask-image:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 0%,
+            transparent var(--reveal-radius),
+            #000 calc(var(--reveal-radius) + 0.5%)
+        );
+
+    mask-image:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 0%,
+            transparent var(--reveal-radius),
+            #000 calc(var(--reveal-radius) + 0.5%)
+        );
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+
     will-change:
-        opacity,
-        filter,
-        background-color;
+        mask-image,
+        -webkit-mask-image,
+        opacity;
 }
 
 
 /* =========================================================
-   MOUNTAINS
+   BACKGROUND
 ========================================================= */
 
-.ym-loader-mountains {
+.ym-loader-bg {
     position: absolute;
 
     inset: 0;
@@ -54,17 +88,13 @@ body.ym-loading {
     overflow: hidden;
 
     z-index: 1;
-
-    opacity: 1;
-
-    pointer-events: none;
 }
 
-.ym-loader-mountains img {
+
+.ym-loader-bg img {
     position: absolute;
 
-    left: 0;
-    top: 0;
+    inset: 0;
 
     width: 100%;
     height: 100%;
@@ -72,52 +102,48 @@ body.ym-loading {
     display: block;
 
     object-fit: cover;
+
     object-position: center bottom;
 
-    /* transform: translateY(-100%); */
+    transform: scale(1.08);
 
-    will-change:
-        transform,
-        opacity;
+    will-change: transform;
+
+    opacity: .4;
+    filter:
+        saturate(0.95)
+        contrast(0.95);
 }
 
 
 /* =========================================================
-   WHITE LAYER
+   OVERLAY
 ========================================================= */
 
-.ym-loader-wash {
+.ym-loader-overlay {
     position: absolute;
 
     inset: 0;
 
     z-index: 2;
 
-    width: 100%;
-    height: 100%;
-
-    background: #edededc3;
-
-    opacity: 1;
+    background:
+        rgba(237, 237, 237, 0.58);
 
     pointer-events: none;
-
-    will-change:
-        transform,
-        opacity;
 }
 
 
 /* =========================================================
-   LOADER CONTENT
+   CONTENT
 ========================================================= */
 
 .ym-loader-content {
-    position: absolute;
-
-    inset: 0;
+    position: relative;
 
     z-index: 5;
+
+    width: 100%;
 
     display: flex;
 
@@ -128,52 +154,9 @@ body.ym-loading {
 
     text-align: center;
 
-    padding: 20px;
+    padding: 25px;
 
     pointer-events: none;
-}
-
-
-/* =========================================================
-   LOADER LOGO
-========================================================= */
-
-.ym-loader-logo {
-    width: 170px;
-    height: 170px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 28px;
-
-    opacity: 0;
-
-    transform: scale(0.84);
-
-    will-change:
-        transform,
-        opacity;
-}
-
-.ym-loader-logo img {
-    width: 145px;
-    height: 145px;
-
-    display: block;
-
-    object-fit: contain;
-
-    opacity: 0;
-
-    transform: scale(0.75);
-
-    will-change:
-        transform,
-        opacity,
-        filter;
 }
 
 
@@ -189,7 +172,8 @@ body.ym-loading {
         Georgia,
         serif;
 
-    font-size: clamp(30px, 3.2vw, 50px);
+    font-size:
+        clamp(28px, 3.8vw, 50px);
 
     font-weight: 500;
 
@@ -197,32 +181,19 @@ body.ym-loading {
 
     line-height: 1;
 
-    letter-spacing: 0.93px;
-
-    margin-bottom: 18px;
-
-    white-space: nowrap;
-
-    will-change:
-        opacity;
-}
-
-
-/* Individual letters */
-.ym-loader-welcome span {
-    display: inline-block;
+    letter-spacing: 0.8px;
 
     opacity: 0;
 
-    transform: scale(2.5);
+    transform:
+        translateY(24px)
+        scale(0.82);
 
-    transform-origin: center center;
-
-    filter: blur(7px);
+    filter: blur(3px);
 
     will-change:
-        transform,
         opacity,
+        transform,
         filter;
 }
 
@@ -232,6 +203,8 @@ body.ym-loading {
 ========================================================= */
 
 .ym-loader-title {
+    margin-top: 12px;
+
     color: #f56622;
 
     font-family:
@@ -239,116 +212,48 @@ body.ym-loading {
         Georgia,
         serif;
 
-    font-size: clamp(52px, 7vw, 115px);
+    font-size:
+        clamp(48px, 7vw, 108px);
 
     font-weight: 400;
 
-    line-height: 1;
+    line-height: 0.95;
 
     letter-spacing: -3px;
 
     white-space: nowrap;
 
-    will-change:
-        opacity;
-}
-
-
-/* Individual letters */
-.ym-loader-title span {
-    display: inline-block;
-
     opacity: 0;
 
-    transform: scale(2.5);
+    transform:
+        translateY(30px)
+        scale(0.80);
 
-    transform-origin: center center;
-
-    filter: blur(8px);
+    filter: blur(4px);
 
     will-change:
-        transform,
         opacity,
+        transform,
         filter;
 }
 
 
-/* Word space */
-.ym-loader-title .ym-loader-space {
-    width: 0.25em;
-
-    opacity: 1;
-
-    transform: none;
-
-    filter: none;
-}
-
-
 /* =========================================================
-   HEADER INITIAL STATE
+   TABLET
 ========================================================= */
 
-body.ym-loading .site-header .logo {
-    opacity: 0;
-}
+@media (max-width: 900px) {
 
-body.ym-loading .site-header .nav-links {
-    opacity: 0;
+    .ym-loader-welcome {
+        font-size: 29px;
+    }
 
-    transform:
-        translateY(-18px);
-}
+    .ym-loader-title {
+        font-size: 9vw;
 
+        letter-spacing: -2px;
+    }
 
-/* =========================================================
-   HOMEPAGE INITIAL STATE
-========================================================= */
-
-/* Homepage mountain is controlled by GSAP */
-body.ym-loading .home-bg {
-    opacity: 0;
-}
-
-
-/* Promise */
-body.ym-loading .home-promise {
-    opacity: 0;
-
-    transform:
-        translateY(25px);
-}
-
-
-/* Main message */
-body.ym-loading .home-message {
-    opacity: 1;
-    transform: none;
-}
-
-body.ym-loading .home-message h1 {
-    opacity: 0;
-    transform: translateY(25px);
-}
-
-body.ym-loading .home-description {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-body.ym-loading .home-founders {
-    opacity: 0;
-    transform: translateY(18px);
-}
-
-body.ym-loading .home-story-btn {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-body.ym-loading .home-foreground {
-    opacity: 0;
-    transform: none;
 }
 
 
@@ -356,77 +261,43 @@ body.ym-loading .home-foreground {
    MOBILE
 ========================================================= */
 
-@media (max-width: 900px) {
-
-    .ym-loader-logo {
-        width: 135px;
-        height: 135px;
-    }
-
-    .ym-loader-logo img {
-        width: 115px;
-        height: 115px;
-    }
-
-    .ym-loader-welcome {
-        font-size: 28px;
-    }
-
-    .ym-loader-title {
-        font-size: 9vw;
-    }
-}
-
-
 @media (max-width: 600px) {
 
     .ym-loader-content {
         padding: 20px;
     }
 
-    .ym-loader-logo {
-        width: 115px;
-        height: 115px;
-
-        margin-bottom: 23px;
-    }
-
-    .ym-loader-logo img {
-        width: 98px;
-        height: 98px;
-    }
-
     .ym-loader-welcome {
         font-size: 24px;
+
+        letter-spacing: 0.4px;
     }
 
     .ym-loader-title {
-        font-size: 10vw;
+        margin-top: 10px;
+
+        font-size: 11vw;
 
         letter-spacing: -1px;
     }
+
 }
 
 
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media (max-width: 400px) {
-
-    .ym-loader-logo {
-        width: 100px;
-        height: 100px;
-    }
-
-    .ym-loader-logo img {
-        width: 84px;
-        height: 84px;
-    }
 
     .ym-loader-welcome {
         font-size: 22px;
     }
 
     .ym-loader-title {
-        font-size: 10.2vw;
+        font-size: 11.5vw;
     }
+
 }
 
 
@@ -440,24 +311,9 @@ body.ym-loading .home-foreground {
         display: none;
     }
 
-    body.ym-loading .site-header .logo,
-    body.ym-loading .site-header .nav-links,
-    body.ym-loading .home-bg,
-    body.ym-loading .home-promise,
-    body.ym-loading .home-message,
-    body.ym-loading .home-message h1,
-    body.ym-loading .home-description,
-    body.ym-loading .home-founders,
-    body.ym-loading .home-story-btn,
-    body.ym-loading .home-foreground {
-        opacity: 1;
-
-        transform: none;
-    }
-
     html.ym-loading,
     body.ym-loading {
         overflow: auto !important;
     }
-}
 
+}

@@ -65,14 +65,14 @@ select {
    HEADER / NAVBAR
 ================================ */
 
-.site-header{width:100%;height:100px;background:#ededed;position: sticky;top: 0;z-index: 999;}
+.site-header{width:100%;height:100px;background:#010101;position: sticky;top: 0;z-index: 999;}
 .navbar{width:100%;max-width:1312px;height:100px;margin:0 auto;display:flex;align-items:center}
 
 .logo{width:156px;height:60px;display:block;flex-shrink:0}
 .logo img{display:block;width:156px;height:60px;object-fit:contain}
 
 .nav-links{margin-left:auto;height:100%;display:flex;align-items:center;gap:57px}
-.nav-links a{display:inline-flex;align-items:center;height:100%;color:#333;text-decoration:none;white-space:nowrap;font-family:"Gowun Batang",serif;font-size:18px;font-weight:400;letter-spacing:1.15px;transition:color .25s ease,opacity .25s ease}
+.nav-links a{display:inline-flex;align-items:center;height:100%;color:#ffffff;text-decoration:none;white-space:nowrap;font-family:"Gowun Batang",serif;font-size:18px;font-weight:400;letter-spacing:1.15px;transition:color .25s ease,opacity .25s ease}
 .nav-links a:hover{color:#ff641f}
 .nav-links .active{color: #ff641f;}
 .menu-toggle{display:none;width:42px;height:42px;padding:0;border:none;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px}
@@ -1258,3 +1258,621 @@ select {
   }
 
 }
+
+
+
+
+/* =========================================================
+   YIREH MINISTRY - NEW WHAT WE DO CAROUSEL
+   All classes are isolated to prevent conflicts.
+========================================================= */
+
+.ym-wd-carousel {
+    --ym-wd-orange: #f56622;
+    --ym-wd-blue: #146cf5;
+  
+    position: relative;
+    isolation: isolate;
+  
+    width: 100%;
+    height: min(100svh, 1000px);
+    min-height: 720px;
+  
+    overflow: hidden;
+    background: #05070d;
+    color: #fff;
+  
+    font-family: Inter, Arial, sans-serif;
+  }
+  
+  .ym-wd-carousel *,
+  .ym-wd-carousel *::before,
+  .ym-wd-carousel *::after {
+    box-sizing: border-box;
+  }
+  
+  .ym-wd-carousel .ym-wd-slides,
+  .ym-wd-carousel .ym-wd-slide {
+    position: absolute;
+    inset: 0;
+  
+    width: 100%;
+    height: 100%;
+  }
+  
+  .ym-wd-carousel .ym-wd-slide {
+    overflow: hidden;
+  
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 0;
+  
+    background: #05070d;
+  
+    transition:
+      opacity 780ms cubic-bezier(.22, .61, .36, 1),
+      visibility 780ms;
+  }
+  
+  .ym-wd-carousel .ym-wd-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+  }
+  
+  
+  /* BACKGROUND IMAGE */
+  
+  .ym-wd-carousel .ym-wd-image {
+    position: absolute;
+    inset: 0;
+  
+    display: block;
+  
+    width: 100%;
+    height: 100%;
+  
+    object-fit: cover;
+    object-position: top;
+  
+    transform: scale(1.035);
+  
+    transition: transform 2800ms ease-out;
+  }
+  
+  .ym-wd-carousel .ym-wd-slide.is-active .ym-wd-image {
+    transform: scale(1);
+  }
+  
+  
+  /* DARK GRADIENT */
+  
+  .ym-wd-carousel .ym-wd-shade {
+    position: absolute;
+    inset: 0;
+  
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, .96) 0%,
+        rgba(0, 0, 0, .88) 14%,
+        rgba(0, 0, 0, .70) 29%,
+        rgba(0, 0, 0, .40) 43%,
+        rgba(0, 0, 0, .13) 62%,
+        rgba(0, 0, 0, .08) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, .24) 0%,
+        rgba(0, 0, 0, 0) 42%,
+        rgba(0, 0, 0, .12) 100%
+      );
+  
+    pointer-events: none;
+  }
+  
+  
+  /* WHAT WE DO LABEL */
+  
+  .ym-wd-carousel .ym-wd-kicker {
+    position: absolute;
+  
+    top: 11.5%;
+    left: 9.7%;
+    z-index: 2;
+  
+    margin: 0;
+  
+    color: var(--ym-wd-orange);
+  
+    font-family:
+      "Cormorant Garamond",
+      Georgia,
+      serif;
+  
+    font-size: clamp(34px, 3.25vw, 48px);
+  
+    font-weight: 600;
+    font-style: italic;
+  
+    letter-spacing: -.7px;
+    line-height: 1;
+  }
+  
+  
+  /* TEXT BLOCK */
+  
+  .ym-wd-carousel .ym-wd-copy {
+    position: absolute;
+  
+    z-index: 2;
+  
+    top: 39.8%;
+    left: 9.6%;
+  
+    width: min(450px, 37.5vw);
+    max-width: calc(100% - 130px);
+  
+    color: #fff;
+  }
+  
+  
+  /* ICON + HEADING */
+  
+  .ym-wd-carousel .ym-wd-title-row {
+    display: flex;
+    align-items: center;
+  
+    gap: 16px;
+    min-height: 100px;
+  }
+  
+  .ym-wd-carousel .ym-wd-icon {
+    flex: 0 0 90px;
+  
+    width: 90px;
+    height: 94px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ym-wd-carousel .ym-wd-icon svg {
+    display: block;
+  
+    width: 100%;
+    height: 100%;
+  
+    overflow: visible;
+  }
+  
+  .ym-wd-carousel .ym-wd-title-row h2 {
+    margin: 0;
+  
+    color: #fff;
+  
+    font-family:
+      "Cormorant Garamond",
+      Georgia,
+      serif;
+  
+    font-size: clamp(41px, 3.85vw, 57px);
+  
+    line-height: 1.04;
+    letter-spacing: -1.2px;
+  
+    font-weight: 600;
+    font-style: italic;
+  
+    text-wrap: balance;
+  }
+  
+  
+  /* DESCRIPTION */
+  
+  .ym-wd-carousel .ym-wd-copy p {
+    max-width: 440px;
+  
+    margin: 17px 0 30px;
+  
+    color: rgba(255, 255, 255, .97);
+  
+    font-size: 16px;
+    font-weight: 400;
+  
+    line-height: 1.23;
+    letter-spacing: -.15px;
+  }
+  
+  
+  /* WATCH NOW BUTTON */
+  
+  .ym-wd-carousel .ym-wd-cta {
+    display: inline-flex;
+  
+    min-width: 209px;
+    height: 48px;
+  
+    align-items: center;
+    justify-content: center;
+  
+    padding: 0 28px;
+  
+    border: 1px solid transparent;
+    border-radius: 18px;
+  
+    background: var(--ym-wd-blue);
+    color: #fff;
+  
+    text-decoration: none;
+    text-align: center;
+  
+    font-family: Inter, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  
+    letter-spacing: .25px;
+    line-height: 1;
+  
+    transition:
+      background-color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+  
+  .ym-wd-carousel .ym-wd-cta:hover {
+    background: #075bd6;
+  
+    transform: translateY(-2px);
+  
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .2);
+  }
+  
+  
+  /* KEYBOARD FOCUS */
+  
+  .ym-wd-carousel .ym-wd-cta:focus-visible,
+  .ym-wd-carousel .ym-wd-arrow:focus-visible,
+  .ym-wd-carousel .ym-wd-pagination button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+  }
+  
+  
+  /* LEFT / RIGHT ARROWS */
+  
+  .ym-wd-carousel .ym-wd-controls {
+    position: absolute;
+  
+    z-index: 5;
+  
+    top: 50%;
+    left: 0;
+    right: 0;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 0 25px;
+  
+    transform: translateY(-50%);
+  
+    pointer-events: none;
+  }
+  
+  .ym-wd-carousel .ym-wd-arrow {
+    display: inline-flex;
+  
+    width: 48px;
+    height: 48px;
+  
+    align-items: center;
+    justify-content: center;
+  
+    padding: 0;
+  
+    border: 1px solid rgba(255, 255, 255, .60);
+    border-radius: 50%;
+  
+    background: rgba(0, 0, 0, .26);
+    color: #fff;
+  
+    cursor: pointer;
+    pointer-events: auto;
+  
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+  
+  .ym-wd-carousel .ym-wd-arrow:hover {
+    background: var(--ym-wd-blue);
+    border-color: var(--ym-wd-blue);
+  
+    transform: scale(1.06);
+  }
+  
+  .ym-wd-carousel .ym-wd-arrow svg {
+    width: 24px;
+    height: 24px;
+  
+    fill: none;
+    stroke: currentColor;
+  
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  
+  /* SLIDE INDICATORS */
+  
+  .ym-wd-carousel .ym-wd-pagination {
+    position: absolute;
+  
+    z-index: 5;
+  
+    left: 9.7%;
+    bottom: 5.5%;
+  
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .ym-wd-carousel .ym-wd-pagination button {
+    display: block;
+  
+    width: 24px;
+    height: 3px;
+  
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+  
+    background: rgba(255, 255, 255, .42);
+  
+    cursor: pointer;
+  
+    transition:
+      width 200ms ease,
+      background-color 200ms ease;
+  }
+  
+  .ym-wd-carousel .ym-wd-pagination button.is-active {
+    width: 42px;
+  
+    background: var(--ym-wd-orange);
+  }
+  
+  
+  /* SCREEN READER TEXT */
+  
+  .ym-wd-carousel .ym-wd-sr-only {
+    position: absolute !important;
+  
+    width: 1px !important;
+    height: 1px !important;
+  
+    padding: 0 !important;
+    margin: -1px !important;
+  
+    overflow: hidden !important;
+  
+    clip: rect(0, 0, 0, 0) !important;
+  
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  
+  /* =========================================================
+     TABLET
+  ========================================================= */
+  
+  @media (max-width: 1024px) {
+  
+    .ym-wd-carousel {
+      min-height: 680px;
+    }
+  
+    .ym-wd-carousel .ym-wd-kicker {
+      left: 8%;
+      top: 10%;
+  
+      font-size: clamp(34px, 4.5vw, 44px);
+    }
+  
+    .ym-wd-carousel .ym-wd-copy {
+      left: 7.8%;
+      top: 38.5%;
+  
+      width: min(440px, 51vw);
+      max-width: calc(100% - 110px);
+    }
+  
+    .ym-wd-carousel .ym-wd-title-row {
+      gap: 12px;
+    }
+  
+    .ym-wd-carousel .ym-wd-icon {
+      flex-basis: 76px;
+  
+      width: 76px;
+      height: 82px;
+    }
+  
+    .ym-wd-carousel .ym-wd-title-row h2 {
+      font-size: clamp(40px, 5vw, 52px);
+    }
+  
+    .ym-wd-carousel .ym-wd-controls {
+      padding: 0 16px;
+    }
+  }
+  
+  
+  /* =========================================================
+     MOBILE
+  ========================================================= */
+  
+  @media (max-width: 640px) {
+  
+    .ym-wd-carousel {
+      height: min(820px, 100svh);
+      min-height: min(690px, 100svh);
+    }
+  
+    .ym-wd-carousel .ym-wd-image {
+      object-position: 63% center;
+    }
+  
+    .ym-wd-carousel .ym-wd-shade {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 0, 0, .90) 0%,
+          rgba(0, 0, 0, .72) 38%,
+          rgba(0, 0, 0, .25) 75%,
+          rgba(0, 0, 0, .15) 100%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(0, 0, 0, .78) 0%,
+          rgba(0, 0, 0, .40) 43%,
+          rgba(0, 0, 0, .12) 100%
+        );
+    }
+  
+    .ym-wd-carousel .ym-wd-kicker {
+      top: 9%;
+      left: 7%;
+  
+      font-size: 34px;
+    }
+  
+    .ym-wd-carousel .ym-wd-copy {
+      top: auto;
+      bottom: 14%;
+  
+      left: 7%;
+  
+      width: 86%;
+      max-width: 86%;
+    }
+  
+    .ym-wd-carousel .ym-wd-title-row {
+      gap: 10px;
+  
+      min-height: 0;
+  
+      align-items: center;
+    }
+  
+    .ym-wd-carousel .ym-wd-icon {
+      flex: 0 0 58px;
+  
+      width: 58px;
+      height: 66px;
+    }
+  
+    .ym-wd-carousel .ym-wd-title-row h2 {
+      font-size: clamp(34px, 8vw, 44px);
+  
+      line-height: 1.02;
+      letter-spacing: -.8px;
+    }
+  
+    .ym-wd-carousel .ym-wd-copy p {
+      margin: 15px 0 22px;
+  
+      max-width: 400px;
+  
+      font-size: 14px;
+      line-height: 1.35;
+    }
+  
+    .ym-wd-carousel .ym-wd-cta {
+      min-width: 176px;
+      height: 45px;
+  
+      border-radius: 15px;
+    }
+  
+    .ym-wd-carousel .ym-wd-controls {
+      top: auto;
+  
+      right: 6%;
+      bottom: 4.5%;
+      left: auto;
+  
+      gap: 9px;
+      padding: 0;
+  
+      transform: none;
+  
+      justify-content: flex-end;
+    }
+  
+    .ym-wd-carousel .ym-wd-arrow {
+      width: 42px;
+      height: 42px;
+    }
+  
+    .ym-wd-carousel .ym-wd-pagination {
+      left: 7%;
+      bottom: 6.5%;
+    }
+  }
+  
+  
+  /* VERY SMALL MOBILE */
+  
+  @media (max-width: 380px) {
+  
+    .ym-wd-carousel {
+      min-height: 650px;
+    }
+  
+    .ym-wd-carousel .ym-wd-copy {
+      bottom: 14%;
+    }
+  
+    .ym-wd-carousel .ym-wd-icon {
+      flex-basis: 48px;
+  
+      width: 48px;
+      height: 56px;
+    }
+  
+    .ym-wd-carousel .ym-wd-title-row h2 {
+      font-size: 32px;
+    }
+  
+    .ym-wd-carousel .ym-wd-copy p {
+      font-size: 13px;
+    }
+  }
+  
+  
+  /* REDUCED MOTION */
+  
+  @media (prefers-reduced-motion: reduce) {
+  
+    .ym-wd-carousel .ym-wd-slide,
+    .ym-wd-carousel .ym-wd-image,
+    .ym-wd-carousel .ym-wd-arrow,
+    .ym-wd-carousel .ym-wd-pagination button,
+    .ym-wd-carousel .ym-wd-cta {
+      transition: none !important;
+    }
+  
+  }
