@@ -1876,3 +1876,1277 @@ select {
     }
   
   }
+
+
+  /* =========================================================
+   YIREH MINISTRY - HOMEPAGE HERO CAROUSEL
+========================================================= */
+
+.ymhc-hero {
+  --ymhc-orange: #f04b25;
+  --ymhc-blue: #146cf5;
+  --ymhc-header-height: 86px;
+
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: calc(100vh - var(--ymhc-header-height));
+  height: calc(100svh - var(--ymhc-header-height));
+
+  min-height: 620px;
+  max-height: 920px;
+
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+
+  font-family: Inter, Arial, sans-serif;
+}
+
+.ymhc-hero *,
+.ymhc-hero *::before,
+.ymhc-hero *::after {
+  box-sizing: border-box;
+}
+
+.ymhc-track {
+  position: absolute;
+  inset: 0;
+}
+
+.ymhc-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  background: #000;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 650ms ease,
+    visibility 650ms;
+}
+
+.ymhc-slide.is-active {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ymhc-slide.is-hidden {
+  z-index: 0;
+}
+
+
+/* =========================================================
+   SLIDE 1: CENTRAL ARTWORK
+========================================================= */
+
+.ymhc-main-art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  height: 100%;
+  width: auto;
+  max-width: 96vw;
+
+  display: block;
+  object-fit: contain;
+
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+
+  will-change: transform;
+}
+
+.ymhc-slide--provision.is-active .ymhc-main-art {
+  animation: ymhc-main-zoom 3s ease-out both;
+}
+
+@keyframes ymhc-main-zoom {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.045);
+  }
+}
+
+
+/* FIRST SLIDE: SIDE COPY */
+
+.ymhc-provision-left {
+  position: absolute;
+  z-index: 4;
+
+  top: 33%;
+  left: 3.3%;
+
+  width: min(265px, 21vw);
+}
+
+.ymhc-provision-left p,
+.ymhc-provision-right p {
+  margin: 0;
+
+  color: #fff;
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(9px, .78vw, 12px);
+
+  font-weight: 500;
+  line-height: 1.62;
+
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.ymhc-orange-line {
+  display: block;
+
+  width: 34px;
+  height: 2px;
+
+  margin-top: 18px;
+
+  background: var(--ymhc-orange);
+}
+
+.ymhc-provision-right {
+  position: absolute;
+  z-index: 4;
+
+  top: 35%;
+  right: 4.1%;
+
+  width: min(155px, 12vw);
+}
+
+
+/* STORY CTA */
+
+.ymhc-story-link {
+  position: absolute;
+  z-index: 5;
+
+  top: 72%;
+  left: 3.3%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+
+  width: min(360px, 25vw);
+  min-height: 72px;
+
+  padding: 15px 25px;
+
+  color: #fff;
+  background: transparent;
+
+  border: 1px solid rgba(255, 255, 255, .90);
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(15px, 1.4vw, 22px);
+
+  font-weight: 500;
+  letter-spacing: .025em;
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.ymhc-story-link svg {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 20px;
+
+  color: var(--ymhc-orange);
+}
+
+.ymhc-story-link:hover {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+}
+
+
+/* =========================================================
+   SLIDES 2, 3, 4: FULL BACKGROUND PHOTOS
+========================================================= */
+
+.ymhc-photo {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: right top;
+
+  transform: scale(1);
+}
+
+.ymhc-slide--feature.is-active .ymhc-photo {
+  animation: ymhc-photo-zoom 3s ease-out both;
+}
+
+@keyframes ymhc-photo-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.045);
+  }
+}
+
+
+/* DARK LEFT GRADIENT LIKE THE REFERENCE */
+
+.ymhc-feature-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, .96) 0%,
+      rgba(0, 0, 0, .86) 16%,
+      rgba(0, 0, 0, .70) 29%,
+      rgba(0, 0, 0, .42) 43%,
+      rgba(0, 0, 0, .13) 63%,
+      rgba(0, 0, 0, .04) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, .25),
+      transparent 45%,
+      rgba(0, 0, 0, .10)
+    );
+}
+
+
+/* KICKER */
+
+.ymhc-kicker {
+  position: absolute;
+  z-index: 3;
+
+  top: 10.5%;
+  left: 9.7%;
+
+  color: var(--ymhc-orange);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(34px, 3.3vw, 48px);
+
+  font-weight: 600;
+  font-style: italic;
+
+  letter-spacing: -.7px;
+  line-height: 1;
+}
+
+
+/* SERVICE CONTENT */
+
+.ymhc-feature-copy {
+  position: absolute;
+  z-index: 3;
+
+  top: 39.5%;
+  left: 9.5%;
+
+  width: min(450px, 38vw);
+  max-width: calc(100% - 110px);
+
+  color: #fff;
+}
+
+.ymhc-heading-row {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+  min-height: 95px;
+}
+
+.ymhc-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 91px;
+
+  width: 91px;
+  height: 90px;
+}
+
+.ymhc-feature-icon svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+}
+
+.ymhc-heading-row h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(40px, 3.85vw, 57px);
+
+  font-weight: 600;
+  font-style: italic;
+
+  line-height: 1.04;
+  letter-spacing: -1.3px;
+}
+
+.ymhc-feature-copy p {
+  max-width: 445px;
+
+  margin: 16px 0 29px;
+
+  color: rgba(255, 255, 255, .98);
+
+  font-size: 15px;
+  font-weight: 400;
+
+  line-height: 1.32;
+  letter-spacing: -.1px;
+}
+
+
+/* WATCH NOW BUTTON */
+
+.ymhc-watch-link {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 209px;
+  height: 48px;
+
+  padding: 0 25px;
+
+  border: 1px solid transparent;
+  border-radius: 18px;
+
+  color: #fff;
+  background: var(--ymhc-blue);
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: .25px;
+
+  text-decoration: none;
+
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.ymhc-watch-link:hover {
+  background: #075bd6;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SLIDE TEXT REVEAL
+========================================================= */
+
+.ymhc-slide.is-active .ymhc-animated {
+  animation: ymhc-text-in 500ms ease both;
+}
+
+@keyframes ymhc-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ymhc-slide.is-active .ymhc-feature-copy {
+  animation-delay: 100ms;
+}
+
+.ymhc-slide.is-active .ymhc-kicker {
+  animation-delay: 30ms;
+}
+
+.ymhc-slide.is-active .ymhc-provision-right {
+  animation-delay: 100ms;
+}
+
+
+/* =========================================================
+   ARROW CONTROLS
+========================================================= */
+
+.ymhc-controls {
+  position: absolute;
+  z-index: 10;
+
+  right: 24px;
+  bottom: 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.ymhc-arrow {
+  display: inline-flex;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, .34);
+  color: #fff;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.ymhc-arrow svg {
+  width: 23px;
+  height: 23px;
+
+  fill: none;
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ymhc-arrow:hover {
+  background: var(--ymhc-orange);
+  border-color: var(--ymhc-orange);
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.ymhc-dots {
+  position: absolute;
+  z-index: 10;
+
+  left: 50%;
+  bottom: 39px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  transform: translateX(-50%);
+}
+
+.ymhc-dots button {
+  width: 21px;
+  height: 3px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, .43);
+
+  cursor: pointer;
+
+  transition:
+    width 200ms ease,
+    background 200ms ease;
+}
+
+.ymhc-dots button.is-active {
+  width: 38px;
+  background: var(--ymhc-orange);
+}
+
+
+/* ACCESSIBILITY */
+
+.ymhc-sr-only {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+
+  clip: rect(0, 0, 0, 0) !important;
+
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.ymhc-hero a:focus-visible,
+.ymhc-hero button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+
+  .ymhc-hero {
+    --ymhc-header-height: 80px;
+  }
+
+  .ymhc-provision-left {
+    left: 3%;
+    width: 23vw;
+  }
+
+  .ymhc-provision-right {
+    right: 3%;
+    width: 12vw;
+  }
+
+  .ymhc-feature-copy {
+    left: 7.5%;
+    width: 48vw;
+  }
+
+  .ymhc-kicker {
+    left: 7.5%;
+  }
+
+  .ymhc-feature-icon {
+    flex-basis: 76px;
+    width: 76px;
+    height: 80px;
+  }
+
+  .ymhc-heading-row h2 {
+    font-size: clamp(38px, 4.8vw, 51px);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .ymhc-hero {
+    --ymhc-header-height: 72px;
+
+    height: calc(100svh - var(--ymhc-header-height));
+    min-height: 620px;
+    max-height: none;
+  }
+
+  /* Main hero artwork moves to the upper area. */
+  .ymhc-main-art {
+    top: 2%;
+
+    left: 50%;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+
+    transform: translateX(-50%);
+    animation: none !important;
+  }
+
+  .ymhc-provision-left {
+    top: auto;
+    bottom: 18%;
+
+    left: 6%;
+    width: 88%;
+  }
+
+  .ymhc-provision-left p {
+    max-width: 390px;
+
+    font-size: 10px;
+    line-height: 1.5;
+
+    letter-spacing: .11em;
+  }
+
+  .ymhc-provision-left .ymhc-orange-line {
+    margin-top: 10px;
+  }
+
+  /* The right-side caption is hidden to avoid crowding. */
+  .ymhc-provision-right {
+    display: none;
+  }
+
+  .ymhc-story-link {
+    top: auto;
+    bottom: 5.5%;
+
+    left: 6%;
+
+    width: min(310px, 85%);
+    min-height: 54px;
+
+    padding: 12px 17px;
+
+    font-size: 17px;
+  }
+
+  .ymhc-story-link svg {
+    width: 28px;
+  }
+
+  .ymhc-photo {
+    object-position: center 25%;
+  }
+
+  .ymhc-feature-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, .91) 0%,
+        rgba(0, 0, 0, .75) 35%,
+        rgba(0, 0, 0, .28) 75%,
+        rgba(0, 0, 0, .12) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, .84) 0%,
+        rgba(0, 0, 0, .38) 49%,
+        rgba(0, 0, 0, .10) 100%
+      );
+  }
+
+  .ymhc-kicker {
+    top: 7.5%;
+    left: 6%;
+
+    font-size: 34px;
+  }
+
+  .ymhc-feature-copy {
+    top: auto;
+    bottom: 14%;
+
+    left: 6%;
+
+    width: 88%;
+    max-width: 88%;
+  }
+
+  .ymhc-heading-row {
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .ymhc-feature-icon {
+    flex: 0 0 57px;
+
+    width: 57px;
+    height: 63px;
+  }
+
+  .ymhc-heading-row h2 {
+    font-size: clamp(32px, 8vw, 43px);
+    line-height: 1.02;
+    letter-spacing: -.8px;
+  }
+
+  .ymhc-feature-copy p {
+    margin: 14px 0 21px;
+
+    max-width: 430px;
+
+    font-size: 14px;
+    line-height: 1.34;
+  }
+
+  .ymhc-watch-link {
+    min-width: 176px;
+    height: 44px;
+    border-radius: 15px;
+  }
+
+  .ymhc-controls {
+    right: 5%;
+    bottom: 3.5%;
+  }
+
+  .ymhc-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ymhc-dots {
+    left: 6%;
+    bottom: 5%;
+
+    transform: none;
+  }
+
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+  .ymhc-hero {
+    min-height: 620px;
+  }
+
+  .ymhc-provision-left p {
+    font-size: 9px;
+  }
+
+  .ymhc-feature-icon {
+    flex-basis: 48px;
+
+    width: 48px;
+    height: 54px;
+  }
+
+  .ymhc-heading-row h2 {
+    font-size: 31px;
+  }
+
+  .ymhc-feature-copy p {
+    font-size: 13px;
+  }
+
+}
+
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ymhc-slide,
+  .ymhc-main-art,
+  .ymhc-photo,
+  .ymhc-arrow,
+  .ymhc-dots button,
+  .ymhc-watch-link,
+  .ymhc-story-link {
+    transition: none !important;
+    animation: none !important;
+  }
+
+}
+
+/* =========================================================
+   YIREH HERO CAROUSEL — MOBILE RESPONSIVE FIX
+   Add this at the VERY END of what-we-do-carousel.css
+========================================================= */
+
+@media (max-width: 640px) {
+
+  /* Fit the carousel inside the mobile viewport */
+  .ymhc-hero {
+    --ymhc-header-height: 78px;
+
+    width: 100%;
+    height: calc(100svh - var(--ymhc-header-height));
+
+    min-height: 500px;
+    max-height: none;
+
+    overflow: hidden;
+  }
+
+  .ymhc-slide {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+
+  /* =========================================
+     SLIDE 1 — GOD HIMSELF WILL PROVIDE
+  ========================================= */
+
+  .ymhc-main-art {
+    top: 3% !important;
+    left: 50% !important;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+
+    object-fit: contain;
+    object-position: top center;
+
+    transform: translateX(-50%) !important;
+    animation: none !important;
+  }
+
+  .ymhc-provision-left {
+    top: auto;
+    bottom: 19%;
+
+    left: 6%;
+    right: 6%;
+
+    width: auto;
+    max-width: none;
+  }
+
+  .ymhc-provision-left p {
+    max-width: 100%;
+    margin: 0;
+
+    font-size: clamp(9px, 2.7vw, 11px);
+    line-height: 1.45;
+
+    letter-spacing: 0.09em;
+  }
+
+  .ymhc-provision-left .ymhc-orange-line {
+    width: 30px;
+    margin-top: 10px;
+  }
+
+  /* The right-side caption is hidden on narrow screens */
+  .ymhc-provision-right {
+    display: none;
+  }
+
+  /* Keep the Story button completely inside the slide */
+  .ymhc-story-link {
+    top: auto;
+    bottom: 3.5%;
+
+    left: 6%;
+
+    width: min(310px, 88%);
+    min-height: 50px;
+
+    gap: 12px;
+    padding: 11px 15px;
+
+    font-size: clamp(14px, 4vw, 17px);
+  }
+
+  .ymhc-story-link svg {
+    flex: 0 0 25px;
+    width: 25px;
+    height: 18px;
+  }
+
+
+  /* =========================================
+     SLIDES 2–4 — BACKGROUND IMAGE CROPPING
+  ========================================= */
+
+  .ymhc-photo {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+  /* Worship speaker: shift focus toward the person */
+  .ymhc-slide:nth-child(2) .ymhc-photo {
+    object-position: 70% center;
+  }
+
+  /* Mentorship speaker: keep more of the speaker visible */
+  .ymhc-slide:nth-child(3) .ymhc-photo {
+    object-position: 70% center;
+  }
+
+  /* Kingdom Partnerships: keep the stage and congregation */
+  .ymhc-slide:nth-child(4) .ymhc-photo {
+    object-position: center center;
+  }
+
+
+  /* =========================================
+     FEATURE SLIDE — HEADING
+  ========================================= */
+
+  .ymhc-kicker {
+    top: 6%;
+    left: 6%;
+
+    font-size: clamp(29px, 8vw, 35px);
+  }
+
+  .ymhc-feature-copy {
+    top: auto;
+    bottom: 12%;
+
+    left: 6%;
+    right: 6%;
+
+    width: auto;
+    max-width: none;
+  }
+
+  .ymhc-heading-row {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .ymhc-feature-icon {
+    flex: 0 0 54px;
+
+    width: 54px;
+    height: 60px;
+  }
+
+  .ymhc-heading-row h2 {
+    font-size: clamp(30px, 7.7vw, 39px);
+    line-height: 1.03;
+
+    letter-spacing: -0.6px;
+  }
+
+  .ymhc-feature-copy p {
+    max-width: 100%;
+    margin: 13px 0 19px;
+
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .ymhc-watch-link {
+    min-width: 170px;
+    height: 43px;
+
+    padding: 0 20px;
+    border-radius: 14px;
+  }
+
+
+  /* =========================================
+     ARROWS AND DOTS
+  ========================================= */
+
+  .ymhc-controls {
+    top: auto;
+    right: 5%;
+    bottom: 3.2%;
+    left: auto;
+
+    display: flex;
+    gap: 8px;
+
+    padding: 0;
+    transform: none;
+  }
+
+  .ymhc-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ymhc-arrow svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .ymhc-dots {
+    left: 6%;
+    bottom: 4.6%;
+
+    gap: 6px;
+    transform: none;
+  }
+
+  .ymhc-dots button {
+    width: 16px;
+  }
+
+  .ymhc-dots button.is-active {
+    width: 29px;
+  }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .ymhc-hero {
+    min-height: 500px;
+  }
+
+  .ymhc-provision-left {
+    bottom: 19%;
+  }
+
+  .ymhc-provision-left p {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .ymhc-story-link {
+    min-height: 46px;
+    font-size: 14px;
+  }
+
+  .ymhc-feature-copy {
+    bottom: 13%;
+  }
+
+  .ymhc-feature-icon {
+    flex-basis: 46px;
+
+    width: 46px;
+    height: 52px;
+  }
+
+  .ymhc-heading-row h2 {
+    font-size: 29px;
+  }
+
+  .ymhc-feature-copy p {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   SHORT MOBILE VIEWPORTS
+========================================================= */
+
+@media (max-width: 640px) and (max-height: 650px) {
+
+  .ymhc-hero {
+    min-height: 0;
+  }
+
+  .ymhc-provision-left {
+    bottom: 18%;
+  }
+
+  .ymhc-provision-left p {
+    font-size: 9px;
+  }
+
+  .ymhc-story-link {
+    bottom: 3%;
+    min-height: 44px;
+  }
+
+  .ymhc-feature-copy {
+    bottom: 11%;
+  }
+
+  .ymhc-kicker {
+    top: 5%;
+  }
+
+}
+
+/* =========================================================
+   FIX ONLY SLIDE 1 — GOD HIMSELF WILL PROVIDE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  /* Fit the complete artwork inside the mobile slide */
+  .ymhc-hero .ymhc-slide--provision .ymhc-main-art {
+    position: absolute !important;
+
+    top: 15% !important;
+    left: 50% !important;
+
+    width: 94% !important;
+    height: auto !important;
+
+    max-width: none !important;
+    max-height: 44% !important;
+
+    object-fit: contain !important;
+    object-position: top center !important;
+
+    transform: translateX(-50%) !important;
+
+    animation: none !important;
+  }
+
+  /* Description — keep inside the visible slide */
+  .ymhc-hero .ymhc-slide--provision .ymhc-provision-left {
+    position: absolute !important;
+
+    top: auto !important;
+    bottom: 16% !important;
+
+    left: 6% !important;
+    right: 6% !important;
+
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-provision-left p {
+    margin: 0 !important;
+
+    font-size: clamp(9px, 2.6vw, 10px) !important;
+    line-height: 1.4 !important;
+
+    letter-spacing: 0.07em !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-orange-line {
+    margin-top: 9px !important;
+  }
+
+  /* Story button — reserve room for carousel arrows */
+  .ymhc-hero .ymhc-slide--provision .ymhc-story-link {
+    position: absolute !important;
+
+    top: auto !important;
+    bottom: 10% !important;
+
+    left: 6% !important;
+
+    width: min(230px, 64%) !important;
+    max-width: 64% !important;
+
+    min-height: 48px !important;
+
+    padding: 10px 13px !important;
+    gap: 8px !important;
+
+    font-size: 14px !important;
+
+    z-index: 11 !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-story-link svg {
+    flex: 0 0 23px !important;
+
+    width: 23px !important;
+    height: 18px !important;
+  }
+
+  /* Keep the arrows clear of the Story button */
+  .ymhc-hero:has(.ymhc-slide--provision.is-active) .ymhc-controls {
+    right: 5% !important;
+    bottom: 3% !important;
+
+    top: auto !important;
+    left: auto !important;
+
+    z-index: 12 !important;
+  }
+
+  /* Move only Slide 1 indicators to the top */
+  /* .ymhc-hero:has(.ymhc-slide--provision.is-active) .ymhc-dots {
+    top: 3% !important;
+    right: 5% !important;
+
+    left: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+    z-index: 12 !important;
+  } */
+}
+
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-main-art {
+    width: 92% !important;
+    max-height: 42% !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-provision-left {
+    bottom: 28% !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-provision-left p {
+    font-size: 9px !important;
+  }
+
+  .ymhc-hero .ymhc-slide--provision .ymhc-story-link {
+    width: 62% !important;
+    max-width: 62% !important;
+
+    font-size: 13px !important;
+  }
+}
