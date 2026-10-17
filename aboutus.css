@@ -1965,7 +1965,7 @@ select {
   will-change: transform;
 }
 
-.ymhc-slide--provision.is-active .ymhc-main-art {
+.ymhc-slide--provision.is-active.ymhc-intro-zoom .ymhc-main-art {
   animation: ymhc-main-zoom 3s ease-out both;
 }
 
@@ -3051,7 +3051,7 @@ select {
     position: absolute !important;
 
     top: auto !important;
-    bottom: 16% !important;
+    bottom: 26% !important;
 
     left: 6% !important;
     right: 6% !important;
@@ -3078,7 +3078,7 @@ select {
     position: absolute !important;
 
     top: auto !important;
-    bottom: 10% !important;
+    bottom: 12% !important;
 
     left: 6% !important;
 
@@ -3148,5 +3148,66 @@ select {
     max-width: 62% !important;
 
     font-size: 13px !important;
+  }
+}
+
+
+/* Hide Owl Carousel pagination dots */
+.ym-gallery-grid .owl-dots {
+  display: none !important;
+}
+
+/* Keep navigation arrows visible */
+.ym-gallery-grid .owl-nav {
+  display: flex !important;
+}
+
+
+/* MOBILE NAVBAR FIX */
+@media (max-width: 768px) {
+  .site-header .nav-links.active {
+    /* position: fixed !important;
+    top: 78px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 100% !important;
+    height: auto !important;
+    min-height: calc(100vh - 78px) !important;
+    min-height: calc(100dvh - 78px) !important; */
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    background: #080808 !important;
+    /* padding: 18px 24px 30px !important; */
+
+    overflow-y: auto;
+    z-index: 99999 !important;
+    box-sizing: border-box;
+  }
+
+  .site-header .nav-links.active a {
+    color: #f5f0e8 !important;
+    /* padding: 17px 4px !important; */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+  }
+
+  .site-header .nav-links.active a:hover,
+  .site-header .nav-links.active a.active {
+    color: #ff5a1f !important;
+  }
+}
+
+/* Prevent the old navbar colour from flashing */
+@media (max-width: 768px) {
+  .site-header .nav-links {
+    background-color: #080808 !important;
+  }
+
+  .site-header .nav-links.active {
+    background-color: #080808 !important;
   }
 }

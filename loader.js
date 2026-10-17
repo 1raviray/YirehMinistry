@@ -1,112 +1,100 @@
 /* =========================================================
-   YIREH MINISTRY
-   FAST CINEMATIC INTRO LOADER
+   YIREH MINISTRY — CINEMATIC INTRO LOADER
 
-   FLOW:
+   DESIGN:
+   1. Dark grayscale background
+   2. Orange Y logo at the top
+   3. "Welcome to" fades up
+   4. "Yireh Ministry" fades up
+   5. Short hold
+   6. Text fades out
+   7. Center circle expands outward
+   8. Homepage is revealed
 
-   Background
-       ↓
-   Welcome To → fast fade + zoom in
-       ↓
-   Yireh Ministry → fast fade + zoom in
-       ↓
-   Center circle appears
-       ↓
-   Circle rapidly EXPANDS
-       ↓
-   Homepage revealed
+   TEXT ANIMATION:
+   Simple fade-up only.
+   No zoom, no blur, no character animation.
 ========================================================= */
 
 (function () {
-
     "use strict";
 
 
     /* =====================================================
-       LOADER
+       1. LOADER ELEMENTS
     ===================================================== */
 
-    const loader =
-        document.getElementById(
-            "ymLoader"
-        );
+    const loader = document.getElementById("ymLoader");
 
-    const background =
-        document.getElementById(
-            "ymLoaderBackground"
-        );
+    const background = document.getElementById(
+        "ymLoaderBackground"
+    );
 
-    const welcome =
-        document.getElementById(
-            "ymLoaderWelcome"
-        );
+    const welcome = document.getElementById(
+        "ymLoaderWelcome"
+    );
 
-    const title =
-        document.getElementById(
-            "ymLoaderTitle"
-        );
+    const title = document.getElementById(
+        "ymLoaderTitle"
+    );
 
 
     /* =====================================================
-       HOMEPAGE ELEMENTS
+       2. HOMEPAGE ELEMENTS
     ===================================================== */
 
-    const headerLogo =
-        document.querySelector(
-            ".site-header .logo"
-        );
+    const headerLogo = document.querySelector(
+        ".site-header .logo"
+    );
 
-    const navLinks =
-        document.querySelector(
-            ".site-header .nav-links"
-        );
+    const navLinks = document.querySelector(
+        ".site-header .nav-links"
+    );
 
-    const homeBackground =
-        document.querySelector(
-            ".home-bg"
-        );
+    const homeBackground = document.querySelector(
+        ".home-bg"
+    );
 
-    const homePromise =
-        document.querySelector(
-            ".home-promise"
-        );
+    const homePromise = document.querySelector(
+        ".home-promise"
+    );
 
-    const homeMessage =
-        document.querySelector(
-            ".home-message"
-        );
+    const homeMessage = document.querySelector(
+        ".home-message"
+    );
 
-    const homeHeading =
-        document.querySelector(
-            ".home-message h1"
-        );
+    const homeHeading = document.querySelector(
+        ".home-message h1"
+    );
 
-    const homeDescription =
-        document.querySelector(
-            ".home-description"
-        );
+    const homeDescription = document.querySelector(
+        ".home-description"
+    );
 
-    const homeFounders =
-        document.querySelector(
-            ".home-founders"
-        );
+    const homeFounders = document.querySelector(
+        ".home-founders"
+    );
 
-    const homeStoryButton =
-        document.querySelector(
-            ".home-story-btn"
-        );
+    const homeStoryButton = document.querySelector(
+        ".home-story-btn"
+    );
 
-    const homeForeground =
-        document.querySelector(
-            ".home-foreground"
-        );
+    const homeForeground = document.querySelector(
+        ".home-foreground"
+    );
+
+    const homeHeroCarousel = document.querySelector(
+        ".ymhc-hero"
+    );
 
 
     /* =====================================================
-       FINISH
+       3. FINISH INTRO
     ===================================================== */
 
     let finished = false;
+    let emergencyTimer = null;
+    let introTimeline = null;
 
 
     function finishIntro() {
@@ -118,107 +106,91 @@
         finished = true;
 
 
-        if (headerLogo) {
+        /* Clear emergency fallback */
 
-            headerLogo.style.opacity = "1";
-
+        if (emergencyTimer !== null) {
+            clearTimeout(emergencyTimer);
+            emergencyTimer = null;
         }
 
+
+        /* Reveal header logo */
+
+        if (headerLogo) {
+            headerLogo.style.opacity = "1";
+            headerLogo.style.transform = "none";
+        }
+
+
+        /* Reveal navigation */
 
         if (navLinks) {
-
             navLinks.style.opacity = "1";
-
-            navLinks.style.transform =
-                "none";
-
+            navLinks.style.transform = "none";
         }
 
+
+        /* Original homepage background */
 
         if (homeBackground) {
-
-            homeBackground.style.opacity =
-                "0.4";
-
+            homeBackground.style.opacity = "0.4";
+            homeBackground.style.transform = "none";
         }
 
+
+        /* Original homepage content */
 
         if (homePromise) {
-
             homePromise.style.opacity = "1";
-
-            homePromise.style.transform =
-                "none";
-
+            homePromise.style.transform = "none";
         }
-
 
         if (homeMessage) {
-
             homeMessage.style.opacity = "1";
-
-            homeMessage.style.transform =
-                "none";
-
+            homeMessage.style.transform = "none";
         }
-
 
         if (homeHeading) {
-
             homeHeading.style.opacity = "1";
-
-            homeHeading.style.transform =
-                "none";
-
+            homeHeading.style.transform = "none";
         }
-
 
         if (homeDescription) {
-
             homeDescription.style.opacity = "1";
-
-            homeDescription.style.transform =
-                "none";
-
+            homeDescription.style.transform = "none";
         }
-
 
         if (homeFounders) {
-
             homeFounders.style.opacity = "1";
-
-            homeFounders.style.transform =
-                "none";
-
+            homeFounders.style.transform = "none";
         }
-
 
         if (homeStoryButton) {
-
             homeStoryButton.style.opacity = "1";
-
-            homeStoryButton.style.transform =
-                "none";
-
+            homeStoryButton.style.transform = "none";
         }
-
 
         if (homeForeground) {
-
             homeForeground.style.opacity = "1";
-
-            homeForeground.style.transform =
-                "none";
-
+            homeForeground.style.transform = "none";
         }
 
+
+        /* New homepage hero carousel */
+
+        if (homeHeroCarousel) {
+            homeHeroCarousel.style.opacity = "1";
+        }
+
+
+        /* Remove loader */
 
         if (loader) {
-
             loader.remove();
-
         }
 
+
+        /* Restore scrolling */
 
         document.documentElement.classList.remove(
             "ym-loading"
@@ -227,12 +199,15 @@
         document.body.classList.remove(
             "ym-loading"
         );
-
+        /* Notify the hero carousel that the loader has finished */
+document.dispatchEvent(
+    new Event("ym:intro-finished")
+);
     }
 
 
     /* =====================================================
-       SAFETY
+       4. SAFETY CHECK
     ===================================================== */
 
     if (
@@ -241,16 +216,13 @@
         !welcome ||
         !title
     ) {
-
         finishIntro();
-
         return;
-
     }
 
 
     /* =====================================================
-       LOCK SCROLL
+       5. LOCK SCROLL DURING INTRO
     ===================================================== */
 
     document.documentElement.classList.add(
@@ -263,22 +235,17 @@
 
 
     /* =====================================================
-       GSAP CHECK
+       6. GSAP AVAILABILITY
     ===================================================== */
 
-    if (
-        typeof gsap === "undefined"
-    ) {
-
+    if (typeof gsap === "undefined") {
         finishIntro();
-
         return;
-
     }
 
 
     /* =====================================================
-       REDUCED MOTION
+       7. REDUCED MOTION SUPPORT
     ===================================================== */
 
     if (
@@ -287,454 +254,332 @@
             "(prefers-reduced-motion: reduce)"
         ).matches
     ) {
-
         finishIntro();
-
         return;
-
     }
 
 
     /* =====================================================
-       INITIAL STATES
+       8. INITIAL STATES
+
+       Background: static
+       Welcome: invisible and slightly below
+       Title: invisible and slightly below
+
+       No scale animation.
+       No blur animation.
     ===================================================== */
 
-    gsap.set(
-        loader,
-        {
-            "--reveal-radius": "0%"
-        }
-    );
+    gsap.set(loader, {
+        "--reveal-radius": "0%"
+    });
 
 
-    gsap.set(
-        background,
-        {
-            scale: 1.08
-        }
-    );
+    gsap.set(background, {
+        scale: 1
+    });
 
 
-    gsap.set(
-        welcome,
-        {
-            opacity: 0,
-            y: 24,
-            scale: 0.82,
-            filter: "blur(3px)"
-        }
-    );
+    gsap.set(welcome, {
+        opacity: 0,
+        y: 22,
+        scale: 1,
+        filter: "blur(0px)"
+    });
 
 
-    gsap.set(
-        title,
-        {
-            opacity: 0,
-            y: 30,
-            scale: 0.80,
-            filter: "blur(4px)"
-        }
-    );
+    gsap.set(title, {
+        opacity: 0,
+        y: 26,
+        scale: 1,
+        filter: "blur(0px)"
+    });
 
 
     /* =====================================================
-       MASTER TIMELINE
+       9. MASTER TIMELINE
     ===================================================== */
 
-    const tl =
-        gsap.timeline();
-
-
-    /* =====================================================
-       1. BACKGROUND ZOOM-IN
-    ===================================================== */
-
-    tl.to(
-        background,
-        {
-            scale: 1,
-
-            duration: 1.65,
-
-            ease:
-                "power2.out"
+    introTimeline = gsap.timeline({
+        defaults: {
+            overwrite: "auto"
         }
-    );
+    });
 
 
     /* =====================================================
-       2. WELCOME TO
-       FAST FADE + ZOOM-IN
+       10. WELCOME TO — SIMPLE FADE-UP
     ===================================================== */
 
-    tl.to(
-        welcome,
-        {
+    introTimeline.to(welcome, {
+        opacity: 1,
+        y: 0,
+
+        duration: 0.75,
+
+        ease: "power2.out"
+    });
+
+
+    /* =====================================================
+       11. YIREH MINISTRY — SIMPLE FADE-UP
+    ===================================================== */
+
+    introTimeline.to(title, {
+        opacity: 1,
+        y: 0,
+
+        duration: 0.85,
+
+        ease: "power2.out"
+    }, "-=0.16");
+
+
+    /* =====================================================
+       12. SHORT HOLD
+
+       Keep the text visible briefly.
+       No long delay.
+    ===================================================== */
+
+    introTimeline.to({}, {
+        duration: 0.65
+    });
+
+
+    /* =====================================================
+       13. TEXT FADES OUT
+
+       Fade only.
+       No zoom-out.
+       No upward exit movement.
+    ===================================================== */
+
+    introTimeline.to(welcome, {
+        opacity: 0,
+
+        duration: 0.30,
+
+        ease: "power1.out"
+    });
+
+
+    introTimeline.to(title, {
+        opacity: 0,
+
+        duration: 1.25,
+
+        ease: "power1.out"
+    }, "<");
+
+
+    /* =====================================================
+       14. PREPARE HOMEPAGE CONTENT
+
+       The homepage remains underneath the loader.
+       Make original homepage elements visible before
+       the circular mask reveals them.
+    ===================================================== */
+
+    const homepageElements = [
+        homeBackground,
+        homePromise,
+        homeMessage,
+        homeHeading,
+        homeDescription,
+        homeFounders,
+        homeStoryButton,
+        homeForeground
+    ].filter(Boolean);
+
+
+    if (homepageElements.length) {
+        introTimeline.set(homepageElements, {
             opacity: 1,
-
             y: 0,
-
-            scale: 1,
-
-            filter: "blur(0px)",
-
-            duration: 0.38,
-
-            ease:
-                "power3.out"
-        },
-        "-=1.35"
-    );
-
-
-    /* =====================================================
-       3. YIREH MINISTRY
-       FAST FADE + ZOOM-IN
-    ===================================================== */
-
-    tl.to(
-        title,
-        {
-            opacity: 1,
-
-            y: 0,
-
-            scale: 1,
-
-            filter: "blur(0px)",
-
-            duration: 0.42,
-
-            ease:
-                "power3.out"
-        },
-        "-=0.20"
-    );
-
-
-    /* =====================================================
-       4. VERY SHORT HOLD
-    ===================================================== */
-
-    tl.to(
-        {},
-        {
-            duration: 0.15
-        }
-    );
-
-
-    /* =====================================================
-       5. TEXT QUICK EXIT
-    ===================================================== */
-
-    tl.to(
-        welcome,
-        {
-            opacity: 0,
-
-            y: -10,
-
-            scale: 1.02,
-
-            duration: 0.18,
-
-            ease:
-                "power2.in"
-        }
-    );
-
-
-    tl.to(
-        title,
-        {
-            opacity: 0,
-
-            y: -12,
-
-            scale: 1.03,
-
-            duration: 0.20,
-
-            ease:
-                "power2.in"
-        },
-        "<0.02"
-    );
-
-
-    /* =====================================================
-       6. PREPARE HOMEPAGE
-       Homepage is already underneath the loader.
-    ===================================================== */
-
-    tl.set(
-        [
-            homeBackground,
-            homePromise,
-            homeMessage,
-            homeHeading,
-            homeDescription,
-            homeFounders,
-            homeStoryButton,
-            homeForeground
-        ].filter(Boolean),
-        {
-            opacity: 1,
-
-            y: 0,
-
             x: 0
-        }
-    );
+        });
+    }
 
 
     /* =====================================================
-       7. CENTER CIRCLE → RAPID ZOOM IN
+       15. CENTER CIRCLE REVEAL
 
-       IMPORTANT:
+       The transparent circular area starts small
+       in the center and expands outward.
 
-       This is NOT a shrinking loader.
-
-       A transparent circular hole starts
-       in the CENTER and EXPANDS outward.
-
-       0% → small hole
-       50% → large hole
-       100%+ → full screen reveal
+       The loader does not shrink.
+       The circle reveals the homepage underneath.
     ===================================================== */
 
-    tl.to(
-        loader,
-        {
-            "--reveal-radius": "160%",
+    introTimeline.to(loader, {
+        "--reveal-radius": "160%",
 
-            duration: 0.72,
+        duration: 0.72,
 
-            ease:
-                "power4.inOut"
-        },
-        "-=0.02"
-    );
+        ease: "power3.inOut"
+    }, "-=0.02");
 
 
     /* =====================================================
-       8. REVEAL HOMEPAGE
+       16. ORIGINAL HOMEPAGE BACKGROUND
     ===================================================== */
 
     if (homeBackground) {
+        introTimeline.to(homeBackground, {
+            opacity: 0.4,
 
-        tl.to(
-            homeBackground,
-            {
-                opacity: 0.4,
+            duration: 0.35,
 
-                duration: 0.35,
-
-                ease:
-                    "power2.out"
-            },
-            "<0.35"
-        );
-
-    }
-
-
-    if (homeForeground) {
-
-        tl.to(
-            homeForeground,
-            {
-                opacity: 1,
-
-                duration: 0.3,
-
-                ease:
-                    "power2.out"
-            },
-            "<"
-        );
-
+            ease: "power2.out"
+        }, "<0.35");
     }
 
 
     /* =====================================================
-       9. HEADER
+       17. ORIGINAL FOREGROUND IMAGE
+    ===================================================== */
+
+    if (homeForeground) {
+        introTimeline.to(homeForeground, {
+            opacity: 1,
+
+            duration: 0.30,
+
+            ease: "power2.out"
+        }, "<");
+    }
+
+
+    /* =====================================================
+       18. HEADER LOGO
     ===================================================== */
 
     if (headerLogo) {
+        introTimeline.to(headerLogo, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            headerLogo,
-            {
-                opacity: 1,
+            duration: 0.22,
 
-                duration: 0.22,
-
-                ease:
-                    "power2.out"
-            },
-            "<0.10"
-        );
-
-    }
-
-
-    if (navLinks) {
-
-        tl.to(
-            navLinks,
-            {
-                opacity: 1,
-
-                y: 0,
-
-                duration: 0.25,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.04"
-        );
-
+            ease: "power2.out"
+        }, "<0.10");
     }
 
 
     /* =====================================================
-       10. HOMEPAGE CONTENT
+       19. NAVIGATION
+    ===================================================== */
+
+    if (navLinks) {
+        introTimeline.to(navLinks, {
+            opacity: 1,
+            y: 0,
+
+            duration: 0.25,
+
+            ease: "power2.out"
+        }, "<0.04");
+    }
+
+
+    /* =====================================================
+       20. HOMEPAGE PROMISE
     ===================================================== */
 
     if (homePromise) {
+        introTimeline.to(homePromise, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            homePromise,
-            {
-                opacity: 1,
+            duration: 0.25,
 
-                y: 0,
-
-                duration: 0.25,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.03"
-        );
-
+            ease: "power2.out"
+        }, "<0.03");
     }
 
 
-    if (homeMessage) {
-
-        tl.set(
-            homeMessage,
-            {
-                opacity: 1,
-
-                y: 0
-            }
-        );
-
-    }
-
+    /* =====================================================
+       21. HOMEPAGE HEADING
+    ===================================================== */
 
     if (homeHeading) {
+        introTimeline.to(homeHeading, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            homeHeading,
-            {
-                opacity: 1,
+            duration: 0.25,
 
-                y: 0,
-
-                duration: 0.25,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.02"
-        );
-
+            ease: "power2.out"
+        }, "<0.02");
     }
 
+
+    /* =====================================================
+       22. HOMEPAGE DESCRIPTION
+    ===================================================== */
 
     if (homeDescription) {
+        introTimeline.to(homeDescription, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            homeDescription,
-            {
-                opacity: 1,
+            duration: 0.25,
 
-                y: 0,
-
-                duration: 0.25,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.02"
-        );
-
+            ease: "power2.out"
+        }, "<0.02");
     }
 
+
+    /* =====================================================
+       23. FOUNDERS TEXT
+    ===================================================== */
 
     if (homeFounders) {
+        introTimeline.to(homeFounders, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            homeFounders,
-            {
-                opacity: 1,
+            duration: 0.22,
 
-                y: 0,
-
-                duration: 0.22,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.02"
-        );
-
+            ease: "power2.out"
+        }, "<0.02");
     }
 
+
+    /* =====================================================
+       24. STORY BUTTON
+    ===================================================== */
 
     if (homeStoryButton) {
+        introTimeline.to(homeStoryButton, {
+            opacity: 1,
+            y: 0,
 
-        tl.to(
-            homeStoryButton,
-            {
-                opacity: 1,
+            duration: 0.25,
 
-                y: 0,
-
-                duration: 0.25,
-
-                ease:
-                    "power3.out"
-            },
-            "<0.02"
-        );
-
+            ease: "power2.out"
+        }, "<0.02");
     }
 
 
     /* =====================================================
-       11. FINISH
+       25. FINISH INTRO
     ===================================================== */
 
-    tl.call(
-        finishIntro
-    );
+    introTimeline.call(finishIntro);
 
 
     /* =====================================================
-       EMERGENCY FALLBACK
+       26. EMERGENCY FALLBACK
+
+       If animation fails or gets interrupted,
+       the website will still become usable.
     ===================================================== */
 
-    setTimeout(
-        finishIntro,
-        5000
-    );
+    emergencyTimer = window.setTimeout(function () {
+        finishIntro();
+    }, 7000);
 
 
 })();
