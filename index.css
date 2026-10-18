@@ -3209,6 +3209,9 @@
     .home-songs-coming-banner {
         margin-top: 24px;
     }
+    .home-songs-coming-banner img{
+        border-radius: 14px;
+    }
 }
 
 
