@@ -207,12 +207,12 @@ body.ym-loading {
 
     color: #f0e2c7;
 
-    font-family: "Ms Madi", cursive;
+    font-family: "Montserrat", sans-serif;
 
-    font-size: clamp(55px, 3.8vw, 50px);
+    font-size: clamp(45px, 3.8vw, 50px);
 
     font-weight: 400;
-    font-style: italic;
+    /* font-style: italic; */
 
     letter-spacing: -3%;
     line-height: 1.1;
@@ -238,7 +238,7 @@ body.ym-loading {
 
     color: #f0e2c7;
 
-    font-family: "Milonga", serif;
+    font-family: "Montserrat", sans-serif;
 
     font-size: clamp(140px, 8.2vw, 130px);
 

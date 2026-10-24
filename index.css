@@ -629,14 +629,12 @@
     color:#242424;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size:68.8px;
+    font-size:55px;
     font-weight:700;
 
-    font-style:italic;
+    /* font-style:italic; */
 
     line-height:1;
 
@@ -912,12 +910,12 @@
 .home-events-eyebrow {
     margin: 0 0 18px;
     color: #f56622;
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 32px;
     font-weight: 700;
-    font-style: italic;
+    /* font-style: italic; */
     line-height: 1;
-    letter-spacing: 2.93px;
+    /* letter-spacing: 2.93px; */
 }
 
 .home-events-heading h2 {
@@ -1926,15 +1924,13 @@
     color:#f2763d;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
     font-size:32px;
     font-weight:600;
 
-    font-style:italic;
-    letter-spacing: 1.2px;
+    /* font-style:italic; */
+    /* letter-spacing: 1.2px; */
     line-height:1;
 }
 
