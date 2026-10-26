@@ -35,14 +35,12 @@
     color: #303030;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 700;
 
-    font-style: italic;
+    font-style: normal;
     letter-spacing: -1.66px;
     line-height: 1;
 }
@@ -109,7 +107,7 @@
     }
 
     .give-eyebrow {
-        font-size: 35px;
+        font-size: 28px;
     }
 
     .give-heading h1 {
@@ -140,7 +138,7 @@
     }
 
     .give-eyebrow {
-        font-size: 31px;
+        font-size: 24px;
     }
 
     .give-heading h1 {
@@ -181,7 +179,7 @@
     .give-eyebrow {
         margin-bottom: 7px;
 
-        font-size: 29px;
+        font-size: 21px;
     }
 
     .give-heading h1 {
@@ -212,7 +210,7 @@
     }
 
     .give-eyebrow {
-        font-size: 26px;
+        font-size: 18px;
     }
 
     .give-heading h1 {
@@ -258,18 +256,14 @@
     color: #f26622;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
     font-size: 33px;
     font-weight: 700;
 
-    font-style: italic;
-
     line-height: 1;
 
-    letter-spacing: -2.47px;
+    letter-spacing: -1px;
 }
 
 
@@ -394,7 +388,7 @@
     }
 
     .sponsorship-title {
-        font-size: 28px;
+        font-size: 21px;
         letter-spacing: -0.8px;
     }
 
@@ -423,7 +417,7 @@
 @media (max-width: 400px) {
 
     .sponsorship-title {
-        font-size: 25px;
+        font-size: 18px;
     }
 
     .sponsorship-list {
@@ -472,18 +466,16 @@
     color: #f26622;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
     font-size: 33px;
     font-weight: 700;
 
-    font-style: italic;
+    font-style: normal;
 
     line-height: 1;
 
-    letter-spacing: -2.47px;
+    letter-spacing: -1px;
 }
 
 
@@ -530,18 +522,16 @@
     color: #f26622;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 33px;
+    font-size: 26px;
     font-weight: 600;
 
-    font-style: italic;
+    font-style: normal;
 
     line-height: 1;
 
-    letter-spacing: -2.47px;
+    letter-spacing: -1px;
 }
 
 
@@ -722,7 +712,7 @@
     }
 
     .ways-give-title {
-        font-size: 30px;
+        font-size: 24px;
     }
 
     .giving-cards {
@@ -735,7 +725,7 @@
     }
 
     .giving-card h3 {
-        font-size: 28px;
+        font-size: 23px;
     }
 
     .giving-card p {
@@ -762,7 +752,7 @@
 @media (max-width: 400px) {
 
     .ways-give-title {
-        font-size: 27px;
+        font-size: 21px;
     }
 
     .giving-card {
@@ -770,7 +760,7 @@
     }
 
     .giving-card h3 {
-        font-size: 25px;
+        font-size: 20px;
     }
 
     .giving-card p {
@@ -811,12 +801,12 @@
     margin:0;
     text-align:center;
     color:#f26622;
-    font-family:"Cormorant Garamond",Georgia,serif;
+    font-family:"Montserrat", sans-serif;
     font-size:33px;
     font-weight:700;
-    font-style:italic;
+    font-style:normal;
     line-height:1;
-    letter-spacing:-2.47px;
+    letter-spacing:-1px;
 }
 
 
@@ -1005,7 +995,7 @@
     }
 
     .why-matters-title{
-        font-size:28px;
+        font-size:24px;
         letter-spacing:-.8px;
     }
 
@@ -1045,7 +1035,7 @@
 @media(max-width:400px){
 
     .why-matters-title{
-        font-size:25px;
+        font-size:20px;
     }
 
     .why-matters-list{

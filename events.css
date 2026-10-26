@@ -34,15 +34,13 @@
     color: #252525;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 700;
 
-    font-style: italic;
-    letter-spacing: -1.66px;
+    font-style: normal;
+    letter-spacing: -1px;
     line-height: 1;
 }
 
@@ -266,18 +264,16 @@
     color: #f26722;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 53.29px;
+    font-size: 38px;
     font-weight: 700;
 
-    font-style: italic;
+    font-style: normal;
 
     line-height: 1;
 
-    letter-spacing: -2.4px;
+    letter-spacing: -1px;
 }
 
 .anthem-card p {
@@ -327,7 +323,7 @@
     }
 
     .events-heading span {
-        font-size: 35px;
+        font-size: 28px;
     }
 
     .events-heading h1 {
@@ -347,7 +343,7 @@
     }
 
     .anthem-card h2 {
-        font-size: 42px;
+        font-size: 34px;
     }
 
     .anthem-card p {
@@ -376,7 +372,7 @@
     }
 
     .events-heading span {
-        font-size: 31px;
+        font-size: 23px;
     }
 
     .events-heading h1 {
@@ -401,7 +397,7 @@
     }
 
     .anthem-card h2 {
-        font-size: 38px;
+        font-size: 33px;
     }
 
     .anthem-card p {
@@ -435,7 +431,7 @@
     }
 
     .events-heading span {
-        font-size: 28px;
+        font-size: 20px;
     }
 
     .events-heading h1 {
@@ -484,7 +480,7 @@
 
     .anthem-card h2 {
         margin-bottom: 13px;
-        font-size: 34px;
+        font-size: 28px;
     }
 
     .anthem-card p {
@@ -506,7 +502,7 @@
 @media (max-width: 400px) {
 
     .events-heading span {
-        font-size: 25px;
+        font-size: 18px;
     }
 
     .events-heading h1 {
@@ -529,7 +525,7 @@
     }
 
     .anthem-card h2 {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .anthem-card p {
@@ -612,7 +608,7 @@
     font-size: 12px;
     font-weight: 600;
   
-    font-style: italic;
+    font-style: normal;
   
     letter-spacing: 1.2px;
   

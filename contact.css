@@ -29,15 +29,13 @@
     color: #242424;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 38px;
+    font-size: 28px;
 
     font-weight: 700;
 
-    font-style: italic;
+    font-style: normal;
 
     line-height: 1;
 
@@ -109,7 +107,7 @@
     }
 
     .contact-intro-eyebrow {
-        font-size: 39px;
+        font-size: 28px;
     }
 
     .contact-intro-title {
@@ -140,7 +138,7 @@
     .contact-intro-eyebrow {
         margin-bottom: 16px;
 
-        font-size: 36px;
+        font-size: 24px;
     }
 
     .contact-intro-title {
@@ -177,7 +175,7 @@
     .contact-intro-eyebrow {
         margin-bottom: 13px;
 
-        font-size: 31px;
+        font-size: 22px;
 
         letter-spacing: -0.4px;
     }
@@ -218,7 +216,7 @@
     }
 
     .contact-intro-eyebrow {
-        font-size: 28px;
+        font-size: 18px;
     }
 
     .contact-intro-title {

@@ -1391,15 +1391,13 @@
     color: #f2763d;
 
     font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    "Montserrat", sans-serif;
 
-    font-size: 66.69px;
+    font-size: 40.69px;
 
     font-weight: 700;
 
-    font-style: italic;
+    /* font-style: italic; */
 
     line-height: 0.95;
 
@@ -1676,7 +1674,7 @@
     }
 
     .anthems-hero-left h1 {
-        font-size: 64px;
+        font-size: 46px;
     }
 
     .anthems-hero-right h2 {
@@ -1736,7 +1734,7 @@
     }
 
     .anthems-hero-left h1 {
-        font-size: 61px;
+        font-size: 42px;
 
         white-space: normal;
     }
@@ -1799,7 +1797,7 @@
     }
 
     .anthems-hero-left h1 {
-        font-size: 48px;
+        font-size: 34px;
 
         letter-spacing: -2px;
     }
@@ -1859,7 +1857,7 @@
     }
 
     .anthems-hero-left h1 {
-        font-size: 42px;
+        font-size: 30px;
     }
 
     .anthems-hero-eyebrow {
