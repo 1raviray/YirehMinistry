@@ -320,7 +320,7 @@ select {
 .what-we-do-section{width:100%;background:#ededed;padding-top:3px;padding-bottom:60px}
 .what-we-do-container{width:1068px;max-width:calc(100% - 70px);margin:0 auto}
 
-.what-we-do-title{margin:0;text-align:center;color:#222;font-family:"Cormorant Garamond",Georgia,serif;font-size:68px;font-weight:700;font-style:italic;line-height:1;letter-spacing:-3px}
+.what-we-do-title{margin:0;text-align:center;color:#222;font-family:"Montserrat", sans-serif;font-size:52px;font-weight:700;font-style:normal;line-height:1;letter-spacing:-3px}
 
 .what-we-do-description{margin:27px auto 65px;max-width:800px;text-align:center;color:#353535;font-family:"Gowun Batang",serif;font-size:20px;font-weight:400;line-height:1.05;letter-spacing:0}
 
@@ -375,7 +375,7 @@ select {
 
 @media(max-width:1100px){
   .what-we-do-container{width:calc(100% - 60px);max-width:1068px}
-  .what-we-do-title{font-size:56px}
+  .what-we-do-title{font-size:50px}
   .what-we-do-description{font-size:21px}
   .service-item{grid-template-columns:300px 1fr 115px;column-gap:22px}
   .service-image{width:300px;height:169px}
@@ -387,7 +387,7 @@ select {
 @media(max-width:800px){
   .what-we-do-section{padding-top:50px;padding-bottom:100px}
   .what-we-do-container{width:calc(100% - 40px)}
-  .what-we-do-title{font-size:48px}
+  .what-we-do-title{font-size:46px}
   .what-we-do-description{max-width:600px;margin-top:20px;margin-bottom:45px;font-size:19px;line-height:1.15}
   .service-item{grid-template-columns:250px 1fr;column-gap:20px;min-height:auto;padding:22px 0}
   .service-image{width:250px;height:141px}
@@ -401,7 +401,7 @@ select {
 @media(max-width:600px){
   .what-we-do-section{padding-top:40px;padding-bottom:65px}
   .what-we-do-container{width:100%;padding-left:20px;padding-right:20px}
-  .what-we-do-title{font-size:40px}
+  .what-we-do-title{font-size:36px}
   .what-we-do-description{margin-top:18px;margin-bottom:30px;font-size:17px;line-height:1.2}
   .service-item{display:flex;flex-direction:column;gap:16px;padding:20px 0}
   .service-image{width:100%;height:auto;aspect-ratio:334/188;border-radius:10px}
@@ -413,7 +413,7 @@ select {
 }
 
 @media(max-width:400px){
-  .what-we-do-title{font-size:36px}
+  .what-we-do-title{font-size:30px}
   .what-we-do-description{font-size:16px}
   .service-info h3{font-size:21px}
   .service-info p{font-size:13px}

@@ -3,9 +3,16 @@
    DARK BACKGROUND + SIMPLE FADE-UP + CIRCLE REVEAL
 ========================================================= */
 
+/* Keep the scrollbar gutter consistent during page load */
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+/* Lock the page visually without hiding its scrollbar */
 html.ym-loading,
 body.ym-loading {
-    overflow: hidden !important;
+    overflow: auto !important;
 }
 
 
